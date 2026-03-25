@@ -680,52 +680,52 @@
     {
       "date": "2026-03-25",
       "investigated": "Market scan: new 52w low candidates, sector ETF VIX spike recovery, guidance cut signal, fallen angel signal, insider cluster scan",
-      "findings": "1. 52w LOW SCAN: Added ADBE, SBAC, DPZ, OTIS, BSX, CPB to watchlist - all approaching first-ever 52w low in 2y. OTIS/BSX: if cross 52w low this week, Q1 earnings April 22-23 qualifies them for catalys"
+      "findings": "Identified communication services underperformance following VIX spikes and six large-caps approaching first-ever 52-week lows."
     },
     {
       "date": "2026-03-25",
       "investigated": "First-touch 52w low methodology audit, BSX/OTIS pre-registration, insider scan for CEO/CFO buys, RCKT PDUFA monitoring",
-      "findings": "KEY FINDING: Most watchlist 52w low candidates (ADBE 10 crossings, DPZ 8, SBAC 12, CPB 40, BSX 10, OTIS 9) are NOT first-touch events - they have been in sustained downtrends with repeated crossings. "
+      "findings": "Built improved scanner for true first-touch 52-week lows and found most recent candidates are sustained downtrends, not genuine signals."
     },
     {
       "date": "2026-03-25",
       "investigated": "CEO/CFO insider signal regime analysis from background agent results",
-      "findings": "Background agent confirmed: POOL cluster is Directors+SVP only (CEO selling, CFO selling). Found AMRZ (Amrize Ltd, $30.7B) - CEO+CFO both bought $3.7M in March 6-10, but 5d return was -5.7% (FAILED). "
+      "findings": "Analyzed CEO/CFO insider buying clusters and found 75% of recent clusters failed in elevated VIX environment."
     },
     {
       "date": "2026-03-25",
       "investigated": "52w low first-touch scan, RCKT PDUFA assessment, trade script verification, CEO/CFO signal check",
-      "findings": "1. RCKT PDUFA (March 27-30): DISQUALIFIED from d302c84b. RCKT is multi-pipeline (Danon disease, PKP2-ACM, BAG3-DCM programs active). Prior CRL was CMC-only (not clinical/efficacy). Do NOT trade RCKT o"
+      "findings": "Confirmed Rocket disqualification for multi-pipeline status and identified two tech stocks approaching first-touch 52-week lows."
     },
     {
       "date": "2026-03-25",
       "investigated": "Verified trade scripts for March 26-27 week; investigated first_ig_credit_upgrade OOS validation with VST and PR; checked new insider clusters; ran analyst upgrade backtest; fixed april_catalyst_scan bug",
-      "findings": "1. ALL TRADE SCRIPTS VERIFIED: SYK (March 26 9:30), GO close (March 26 3:55), KHC (March 27 9:30), MKC/NKE/CAG (March 31-April 1), VGNT auto-triggers April 1 16:00, REPL (April 10). 2. FIRST IG UPGRAD"
+      "findings": "Validated first-time credit upgrade signal on additional events with mixed results: some priced in while others show strong positive drift."
     },
     {
       "date": "2026-03-25",
       "investigated": "Trade health check, 52w low scan for new catalysts, AMT script fix, trade_loop automation, CCI fundamental research",
-      "findings": "1. ALL ACTIVE TRADES HEALTHY: GO +5.3%, HD +0.3%, ABT +1.4%, BAX flat. All well above stop losses. 2. FIRST-TOUCH SCAN: TDG at 0.89% above 52w low (0 crossings), AMT at 1.1% above (0 crossings). 3. AM"
+      "findings": "Deployed trade loop automation running every 2 minutes and verified five active positions healthy above stop losses."
     },
     {
       "date": "2026-03-25",
       "investigated": "Regime analysis of 52w low momentum short signal. Scanned for first-touch 52w lows (ADBE, SBAC, DPZ, OTIS, BSX, CPB, MKC, SYK all at 52w lows). Verified VIX=27, SPY trends, checked upcoming trade setups.",
-      "findings": "MAJOR FINDING: 52w low momentum short is REGIME-DEPENDENT. The entire signal comes from systemic selloffs.\n    \nSystemic (SPY down >0.5% AND >=5 stocks at 52w lows): N=781 events, 5d=-1.91% abnormal, "
+      "findings": "Discovered 52-week low momentum signal only works during systemic selloffs (1.91% abnormal return) but has zero edge in isolation."
     },
     {
       "date": "2026-03-25",
       "investigated": "Dividend cut short signal \u2014 large-cap S&P500 stocks 2015-2024",
-      "findings": "n=81 events found (>25% dividend cut or suspension, >B market cap). Avg abnormal returns: 1d=+0.25%, 3d=+0.62%, 5d=+1.15%, 10d=+1.04% \u2014 ALL WRONG DIRECTION for short. Direction rate for short (pct neg"
+      "findings": "Tested dividend cut signal on 81 large-cap events and confirmed it's directionally wrong: stocks don't continue falling after cuts."
     },
     {
       "date": "2026-03-25",
       "investigated": "Scanner improvements, dividend cut signal research, new catalyst short setups",
-      "findings": "1. EXPANDED systemic_52w_low_scanner.py to use full 411-stock SP500 universe (was 112). March 18 systemic day now shows 23 first-touch stocks vs 6 before. April 2 Liberation Day will have much better "
+      "findings": "Expanded 52-week low scanner to full S&P 500 universe and created automated Liberation Day runbook for April 2 tariff event."
     },
     {
       "date": "2026-03-25",
       "investigated": "Liberation Day preparation, new 52w low catalyst short candidates (DPZ, SBAC, TAP, ADBE), trade infrastructure verification",
-      "findings": "1. TRADE VERIFICATION COMPLETE: All March 26-27 trades properly scripted and auto-triggered via trade_loop. GO closes March 26 ~2:31 PM (deadline); SYK activates March 26 9:30 AM (trigger); KHC activa"
+      "findings": "Completed trade verification for March 26-27 execution and pre-registered Adobe as primary short candidate for April 2 Liberation Day event."
     }
   ]
 }
