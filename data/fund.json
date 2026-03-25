@@ -1,0 +1,83 @@
+{
+  "nav_history": [
+    {
+      "date": "2026-03-13",
+      "equity": 100000.0,
+      "cash": 0.0,
+      "position_count": 0
+    },
+    {
+      "date": "2026-03-14",
+      "equity": 100000.0,
+      "cash": 0.0,
+      "position_count": 0
+    },
+    {
+      "date": "2026-03-17",
+      "equity": 100000.0,
+      "cash": 0.0,
+      "position_count": 0
+    },
+    {
+      "date": "2026-03-18",
+      "equity": 100000.0,
+      "cash": 0.0,
+      "position_count": 0
+    },
+    {
+      "date": "2026-03-19",
+      "equity": 100000.0,
+      "cash": 0.0,
+      "position_count": 0
+    },
+    {
+      "date": "2026-03-20",
+      "equity": 100000.0,
+      "cash": 0.0,
+      "position_count": 0
+    },
+    {
+      "date": "2026-03-21",
+      "equity": 100000.0,
+      "cash": 0.0,
+      "position_count": 0
+    },
+    {
+      "date": "2026-03-24",
+      "equity": 100276.1,
+      "cash": 109879.44,
+      "position_count": 4
+    },
+    {
+      "date": "2026-03-25",
+      "equity": 100134.19,
+      "cash": 109879.44,
+      "position_count": 4
+    }
+  ],
+  "current": {
+    "equity": 100134.19,
+    "cash": 109879.44,
+    "buying_power": 180022.32
+  },
+  "performance": {
+    "total_trades": 1,
+    "winning_trades": 1,
+    "losing_trades": 0,
+    "win_rate_pct": 100.0,
+    "avg_win_pct": -0.28,
+    "avg_loss_pct": 0,
+    "direction_accuracy": "1/1",
+    "total_return_pct": 0.13,
+    "max_drawdown_pct": 0.14
+  },
+  "risk": {
+    "drawdown_pct": 0.5,
+    "drawdown_limit_pct": 15.0,
+    "safe_to_trade": true,
+    "max_position_pct": 5.0,
+    "stop_loss_pct": 10.0,
+    "max_concurrent": 5,
+    "active_positions": 4
+  }
+}

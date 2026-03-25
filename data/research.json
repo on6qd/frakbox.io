@@ -1,0 +1,731 @@
+{
+  "summary": {
+    "total_hypotheses": 40,
+    "pending": 30,
+    "active": 4,
+    "completed": 1,
+    "invalidated": 0,
+    "direction_accuracy": "1/1",
+    "patterns_discovered": 1,
+    "reliable_patterns": [],
+    "by_event_type": {
+      "sp500_52w_low_momentum_short": {
+        "accuracy": "1/1",
+        "avg_confidence": 7.0
+      }
+    }
+  },
+  "knowledge": {
+    "signals": [
+      {
+        "name": "insider_buying_cluster_5d",
+        "status": "strong",
+        "magnitude_pct": 3.44
+      },
+      {
+        "name": "insider_buying_cluster_cluster_size",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "insider_buying_cluster",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "insider_buying_cluster_3plus",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "insider_buying_cluster_largecap",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "fda_crl_clinical_post_crash_drift",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "fda_crl_clinical_short",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "fda_clinical_rejection_short",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "fda_crl_clinical_short_DEPRECATED",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "clinical_trial_failure_recent_2026",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "sp500_index_addition",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "vwap_breakout_momentum",
+        "status": "preliminary - needs larger universe and regime filtering before hypothesis",
+        "magnitude_pct": null
+      },
+      {
+        "name": "ceo_performance_failure_departure_short",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "ceo_performance_departure",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "insider_cluster_6_to_9",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "insider_buying_cluster_n6to9",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "ceo_performance_failure_departure",
+        "status": "borderline_unverified_window_closed",
+        "magnitude_pct": null
+      },
+      {
+        "name": "insider_buying_cluster_n6_9",
+        "status": "missed_window_negative_outcome",
+        "magnitude_pct": null
+      },
+      {
+        "name": "clinical_efficacy_failure_reversal_criterion",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "insider_buying_cluster_regime_change",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "insider_buying_cluster_3way_interaction",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "edgar_ceo_departure_scanner_false_positives",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "insider_selling_cluster",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "index_seasonal",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "spinoff_announcement_long_parent",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "spinco_institutional_selling_short",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "edgar_efts_display_names_fix",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "strategic_alternatives_announcement",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "follow_on_ig_upgrade_timing",
+        "status": "UNDERPOWERED. Need n>=10 to test formally. Promising signal direction.",
+        "magnitude_pct": null
+      },
+      {
+        "name": "credit_upgrade_exclusions",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "politician_purchase_all_disclosure",
+        "status": "dead_end",
+        "magnitude_pct": null
+      },
+      {
+        "name": "politician_timothy_moore_purchase",
+        "status": "strong preliminary - awaiting full history OOS",
+        "magnitude_pct": null
+      },
+      {
+        "name": "politician_mullin_senate_purchase",
+        "status": "preliminary - needs investigation",
+        "magnitude_pct": null
+      },
+      {
+        "name": "politician_purchase_disclosure_large",
+        "status": "dead_end - regime_specific",
+        "magnitude_pct": null
+      },
+      {
+        "name": "sec_wells_notice_short",
+        "status": "DEAD END - pooled N=27 passes MT but OOS split fails (only 13-14 events/period, signal disappears). Heterogeneity (fraud vs procedural Wells Notices) makes signal unreliable. Confirmed dead end 2026-03-23.",
+        "magnitude_pct": null
+      },
+      {
+        "name": "sp500_52w_low_catalyst_short",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "sp500_index_removal_short",
+        "status": "disproven",
+        "magnitude_pct": 2.4
+      },
+      {
+        "name": "pead_earnings_beat_gte10pct",
+        "status": "moderate",
+        "magnitude_pct": 1.54
+      },
+      {
+        "name": "goss_phase3_miss_recovery_pattern",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "pdufa_calendar_q2_2026_screening",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "mkc_q1_2026_earnings_setup",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "nke_q3fy2026_earnings_setup",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "vix_spike_above_30_spy_recovery",
+        "status": "READY_TO_PREREGISTER. Passes multiple testing (2 horizons). Validation 20d shows strongest results. Currently monitoring for VIX>30 close to fire signal.",
+        "magnitude_pct": null
+      },
+      {
+        "name": "cag_q3fy2026_earnings_setup",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "nasdaq_100_reconstitution_addition",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "repl_april10_pdufa_setup",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "xlc_underperforms_after_vix_spike",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "fallen_angel_ig_to_hy_short",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "sp500_52w_low_momentum_short",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "insider_buying_cluster_ceo_cfo",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "clinical_efficacy_failure_short",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "first_ig_credit_upgrade",
+        "status": "NEEDS_MORE_DATA - n=2 true positive, n=1 true negative (with clear exception). Need 5+ events.",
+        "magnitude_pct": null
+      },
+      {
+        "name": "cci_repeat_52w_low_catalyst_short",
+        "status": "unknown",
+        "magnitude_pct": null
+      },
+      {
+        "name": "sp500_52w_low_systemic_short",
+        "status": "strong",
+        "magnitude_pct": -1.91
+      },
+      {
+        "name": "capr_pdufa_aug2026",
+        "status": "unknown",
+        "magnitude_pct": null
+      }
+    ],
+    "dead_ends": [
+      {
+        "name": "earnings_surprise_pead_megacap",
+        "reason": "Tested PEAD on 33 S&P 500 large-cap events (2020-2024): NVDA, AAPL, MSFT, GOOGL, META (tech), GS, MS (financials). Discovery set (2021-2022): avg 1d abnormal +1.05%, positive rate 45% (below random!), 1d\u21925d drift = -0.94% (mean reversion, not drift). Financial sector (GS/MS, 2020-2021): avg 1d = +0.40%, 1d\u21925d drift = -1.50%. No statistical significance at any horizon. Does not pass multiple testing correction. Below min_abnormal_return_pct threshold (1.5%). PEAD literature concentrated in small/mid-cap. Mega-caps are too efficiently priced \u2014 institutions arbitrage away within hours. EXCEPTION: The 2023-2024 period shows large returns for NVDA and META, but these are thematic regime changes (AI adoption, profitability turnarounds), not general PEAD. Do NOT pursue general PEAD for mega-cap S&P 500 companies."
+      },
+      {
+        "name": "sp500_deletion_short",
+        "reason": "Tested S&P 500 deletion effect (SHORT when stock removed from index), N=21 events (2021-2026).\nOverall results: 1d avg=-0.44% (pos%=52%, p=0.59 - random), 3d avg=-1.99% (pos%=19%, p=0.0078 - significant),\n5d avg=-1.23% (pos%=48%, p=0.27 - not significant). Technically passes multiple testing overall (3d at p<0.01 Bonferroni).\nBUT: OUT-OF-SAMPLE VALIDATION FAILS. Validation set (2024-2026, N=13): 1d avg=+0.27% (POSITIVE!), 3d avg=-2.14%\n(p=0.015, does NOT pass Bonferroni p<0.01 threshold). The 1d return is +0.27% in validation (opposite direction!).\nMany stocks RISE on day 1 after deletion (RHI +1.15%, BWA +2.80%, FMC +3.38%). Critical issue: SEVERE SELECTION BIAS -\nstocks are removed because they've already been declining fundamentally. Cannot separate deletion effect from fundamental\ndeterioration. Pattern at 3d likely reflects continued fundamental selling, not index rebalancing mechanics. The \n'forced selling' by index funds appears to be offset by contrarian buyers on D+1, with the net effect nearly flat.\nDO NOT pursue deletion SHORT hypothesis. The addition effect is clearly alive; the deletion SHORT is not actionable."
+      },
+      {
+        "name": "fda_crl_generic_short",
+        "reason": "Tested generic 'SHORT small biotech after any CRL' hypothesis. N=8 measured (4 delisted = survivorship bias).\nResults: 1d avg=-25.24% (median=-2.84%), 5d avg=-28.51%, positive_rate_1d=50%. Does NOT pass multiple testing (no horizons significant at p<0.05, though p=0.12 at 1d with N=8). \nCRITICAL ISSUES: (1) CMC-only CRLs show POSITIVE 1d returns (AXSM +4.8%, SRRK +4.1%) - wrongly shorting these would lose money. (2) Clinical CRLs have EXTREME variance - OTLK -81% but ITRM +18%, NERV +1.2%. (3) 33% data failure from delistings = survivorship bias. \nDO NOT pursue generic CRL short. The effect is real but too heterogeneous. Need CONDITIONAL sub-hypothesis: (single-asset company) + (clinical deficiency CRL) + (pre-announcement run-up, suggesting market expected approval). That specific sub-case might be consistently very negative, but requires 15+ events with that profile."
+      },
+      {
+        "name": "earnings_surprise_pead_midcap",
+        "reason": "Mid-cap PEAD ($5-30B market cap, >10% EPS beats) does not exist. N=19 events across WING/TREX/IBP/OLLI/FIVE: 1d avg=+0.01%, 20d avg=+1.27%, all p-values 0.67-0.99, 50% positive rate at 20d = essentially random. Per-symbol: IBP +11.99% vs OLLI -12.94% \u2014 no consistent direction. Confirms academic finding that PEAD is primarily a microcap phenomenon. Mean reversion and noise dominate at mid-cap due to better analyst coverage and institutional ownership."
+      },
+      {
+        "name": "dividend_capture_preex_runup",
+        "reason": "Pre-ex-dividend run-up for high-yield S&P 500 stocks (VZ/MO/T/PM/KMI, 2021-2024) does NOT produce a tradeable signal. Tested 3 windows: 5-day (3d p=0.122), 20-day (20d p=0.158), 4-day pre-ex (3d p=0.223). None pass multiple testing. OOS validation: discovery 0.60% vs validation 0.21% \u2014 shrinking effect. Per-symbol inconsistency: VZ +1.29%, T +0.88% vs MO -0.19%, KMI -0.22% (3d abnormal). Effect is real academically (Hartzmark & Solomon 2013: +41 bps/month) but ~0.4% average is below our 1.5% minimum threshold and transaction costs would eliminate it. Not actionable."
+      },
+      {
+        "name": "clinical_trial_failure_undifferentiated",
+        "reason": "Phase 2/3 trial failures are too heterogeneous without filtering: 67% continuation, 33% reversal. Does not pass multiple testing (pos_rate=33%, avg_3d=-11.78%). Need discriminating factor: company cash runway, pipeline depth, drug credibility. Continuation cases: company wound down, drug clearly worthless. Reversal cases: company has other programs, cash to retry, partner support."
+      },
+      {
+        "name": "ceo_cfo_sudden_departure",
+        "reason": "Backtested N=10 mid-cap CEO/CFO sudden departure events (2022-2024). avg_abnormal_3d=+0.19%, positive_rate_3d=40%, passes_multiple_testing=False. Signal too noisy for 3-5 day hold. Events are idiosyncratic - LCID CFO departure (Dec 2023) showed +12.8% 3d reversal; FRPT CFO departure showed +11.2% 3d reversal. No discriminating factor found to separate continuation from reversal cases. Academic literature shows this as a 1-3 month signal, not 3-5 day. Would need 30+ day hold and different strategy. Not tradeable at our 3-5 day horizon with current methodology."
+      },
+      {
+        "name": "reverse_stock_split_announcement",
+        "reason": "Attempted to backtest reverse split announcement signal. N=3 (CLOV, NKLA, MVIS) shows avg_abnormal_1d=+3.2% (POSITIVE, unexpected), avg_abnormal_3d=-1.57%, positive_rate_3d=33%. Signal does not exist in 3-5 day post-announcement window. Main problems: (1) Most qualifying NASDAQ-compliance reverse splits involve micro-cap companies (<M market cap) with poor liquidity and high borrow costs. (2) Post-2023 NASDAQ rules require only 2 business days notice so announcement and effective date are simultaneous. (3) Signal is 12-month drift per academic literature (Desai & Jain 1997), not 3-5 day. (4) The 1d reaction is slightly positive (artificial demand from share consolidation). Not tradeable at 3-5 day horizon."
+      },
+      {
+        "name": "sec_wells_notice",
+        "reason": "Wells Notice disclosures (SEC 8-K): Tested 22 events (2020-2024). 1d avg=-1.95% (p=0.0196), 3d avg=-2.05% (p=0.1934). Only 1 horizon passes at p<0.05 - fails Bonferroni requirement (need p<0.01). 1d positive rate 31.8% (68.2% negative) shows directional tendency but SNR=0.55 is too low. High variance: stdev 3.62% at 1d. COIN May 2023 is outlier (+18% 3d) due to crypto industry dynamics. Large-cap sub-sample (N=16, ex-COIN): 1d p=0.04, 3d p=0.09 - still fails multiple testing. Core issue: Wells Notices are heterogeneous (fraud vs procedural) and the procedural ones (NDAQ, XYL, HAYW) show near-zero reaction. Would need N=50+ to sub-classify reliably. NOT WORTH PURSUING without access to legal case classification."
+      },
+      {
+        "name": "activist_investor_13d_filing",
+        "reason": "Activist investor SC 13D filing date as signal: Tested Starboard Value initial 13D filings (N=24, 2020-2024). 1d avg=+0.26%, 3d avg=+0.30%, 5d avg=-0.17%. Positive rate 45.8% (below 50%). Does not pass multiple testing. MECHANISM FAILURE: SC 13D filings have a 10-day filing window after crossing 5% threshold. News of activist accumulation typically leaks before the official filing date, so the filing date is NOT the information event. The market reprices on news discovery (often during accumulation) rather than at filing. Brav et al (2008) found +7% for 2001-2006 data - this effect has DECAYED completely in 2020-2024. Could potentially recover signal using news discovery dates (first media coverage) rather than filing dates, but would require Bloomberg/Refinitiv news database. Causal mechanism still valid but signal access requires news data we do not have."
+      },
+      {
+        "name": "earnings_restatement",
+        "reason": "Large-cap 8-K Item 4.02 filings show avg 1d abnormal return of -0.30% (heterogeneous, 67% positive rate). Three fundamental problems: (1) 8-K filing date is NOT the announcement date for most events - market often learns via earnings calls, press releases, or trading halts before the 8-K is filed; (2) Direction is ambiguous - some restatements are upward revisions (RGEN, LZ, TRU all went UP); (3) 2021 SPAC warrant restatements contaminate the dataset. PRCH showed -16% on actual-announcement-day but this is exceptional. N=12 large-cap events, passes_multiple_testing=False. Signal is not reliable enough to trade."
+      },
+      {
+        "name": "large_buyback_announcement",
+        "reason": "Large buyback announcements (>5% market cap) as a signal have been eroded by market efficiency post-2007. Academic literature (multiple studies 2020-2024) confirms long-horizon abnormal returns are near zero for US large/mid-caps. Short-term 3d CAR is ~1.4-1.6% but barely clears transaction costs and is not confirmed for US market 2020-2024. Counter-evidence: Salesforce first-ever B buyback (Aug 2022) caused -10% reaction because investors read it as low-growth signal. The general signal is dead. A narrower sub-hypothesis may have merit: first-ever programs at small-caps (<B mcap) buying back >10% of float. Not yet tested."
+      },
+      {
+        "name": "fallen_angel_credit_downgrade",
+        "reason": "IG-to-junk credit downgrades tested as short signal (3-5d hold). DEAD END for 3 reasons: (1) Insufficient clean events: most fallen angel events cluster in 2020 COVID crisis making it impossible to isolate the downgrade effect from market-wide selloff. Only 4-5 clean non-crisis events identifiable in 2018-2024 (KHC 2019, GE 2021, DISH 2019, VFC 2023). Insufficient for OOS split (need min 6). (2) Pre-anticipation: fallen angel downgrades are typically preceded by months of credit watch periods. Stock market prices in the downgrade well before the announcement. GE Oct 2018 downgrade day saw +7% stock return (relief rally, not crash). VFC Nov 2023 downgrade day coincided with earnings beat, up +10%. (3) Wrong mechanism for equity alpha: credit downgrades affect bond prices directly. The equity effect requires forced selling by IG-only bond funds (which does not affect stock price directly) and higher cost of capital repricing (too slow for 3-5d hold). Literature: Kliger & Sarig (2000) found credit rating changes affect bond markets more than equity markets. Equity abnormal returns on rating change day are near zero."
+      },
+      {
+        "name": "profit_warning_preannouncement",
+        "reason": "Companies issuing intra-quarter profit warnings / negative guidance revisions via 8-K Item 7.01. Tested 6 events 2019-2022 (SNAP, AMD, AAPL, FDX, TGT, WMT). Results: 1d avg abnormal=-0.86%, 3d avg=-7.84% (driven by SNAP outlier), p=0.311-0.629. FAILS multiple testing. Heterogeneous outcomes: SNAP shows -41.2% 3d continuation (extreme -43% initial crash), but AAPL, TGT, FDX show near-zero or POSITIVE 3d abnormal. Core problem: mega-cap profit warnings attract fast-reacting institutional buyers (buy-the-dip); only micro/small-cap warnings with >30% initial crash might show continuation. But those events are hard to find systematically via EDGAR. Decision: dead end for systematic trading. The d302c84b hypothesis already captures the best version of this pattern (biotech-specific, very large crashes)."
+      },
+      {
+        "name": "dividend_cut_suspension",
+        "reason": "Dividend cuts/suspensions at historically reliable dividend payers tested as short signal. Tested 8 non-COVID events 2018-2024 (GE, INTC, WBA, VFC, KHC, PCG, CTL, MPW). Results: 1d avg abnormal=-1.09% (p=0.55), 3d avg=-7.92% (p=0.147). Fails multiple testing. High variance: MPW +8.4% (investors interpreted cut as positive for balance sheet), VFC +6.5% 3d (recovery), KHC 3d movement driven by concurrent $15B goodwill writedown not dividend. PCG driven by bankruptcy context, not dividend. Core issue: dividend cuts are almost always concurrent with other negative news (earnings misses, restructuring) making it impossible to isolate dividend effect. Also many are pre-anticipated (stock already in decline). Income-focused REIT/utility stocks (MPW) have different investor base that views dividend cut as discipline signal. NOT actionable as standalone signal."
+      },
+      {
+        "name": "ipo_lockup_expiry",
+        "reason": "Tested 23 major tech IPO lockup expirations (2019-2022). Strategy: SHORT at close on expiry date, measure 1-5d abnormal returns vs QQQ benchmark. Results: 1d avg=-1.87% p=0.19, 3d avg=-2.53% p=0.18, 5d avg=-0.63% p=0.77. Does NOT pass multiple testing. Stdev=8.72% vs avg=-2.53% (noise >> signal). Bootstrap 3d CI [-6.10%, 0.81%] includes zero. Root cause: lockup dates are public and widely anticipated, so market pre-prices the supply. High variance driven by market regime differences between events. Pre-expiry entry (SHORT 2d before) also failed: 5d p=0.012 passes but only 1 horizon, stdev=11.7%. RIVN was -30.8% outlier -- without it, 5d avg ~-5.5% but even less significant. CONCLUSION: Lockup expirations as a systematic SHORT signal do not meet our standards for large, liquid IPOs. May work for less-anticipated small-cap lockups but finding those events programmatically is not tractable."
+      },
+      {
+        "name": "spac_demerger_announcement",
+        "reason": "SPAC merger announcement day effect (De-SPAC announcement): tested 5 events 2020-2021. 1d avg abnormal=-0.38% (p=0.92), 1d positive rate=40%. Direction entirely heterogeneous: IPOB +12.4%, CCIV -8.0% (buy-rumor-sell-news, leaked weeks before), DCRB -6.7%, PSTH -2.0%, GGPI +2.3%. Fails multiple testing. Key problems: (1) LEAK contamination - many SPAC targets were widely rumored before official announcement (CCIV pre-ran +400% before Feb 22 announcement). (2) REGIME contamination - Q4 2020/Q1 2021 SPAC bubble: mean SPAC price day after announcement was $15.77 (from $10 base), but by Q2 2021 fell back to ~$10 with no consistent jumps (Kiesel 2023, European Financial Management). (3) Survivorship/delistment: 3 of 8 events (VTIQ, SHLL, AJAX) unmeasurable due to delisting. (4) No sub-filter improves signal: long SPAC (momentum) or short SPAC (dilution realization) both fail. Academic finding: SPACs that closed in Q4 2020/Q1 2021 had mean price of $9.01 by Dec 2021 (-43% from announcement high). The announcement DAY return is not a tradeable signal - neither direction is consistent."
+      },
+      {
+        "name": "stock_split_announcement",
+        "reason": "Stock split announcement effect: tested 11 events 2020-2024. 1d avg=-0.84%, pos_rate=36.4% (NEGATIVE). 3d avg=+2.06%, pos_rate=54.5%, p=0.27. Fails multiple testing. Main issues: (1) Almost all large-cap split announcements are confounded with quarterly earnings - the earnings surprise effect dominates any split signal (NVDA 2024 +11.6% 3d was earnings-driven, DECK -7.9% 1d was earnings miss). (2) The few standalone splits (PANW, TSCO) showed -2.4% and -0.4% at 1d. (3) Even TSLA Aug 2020 (+4.4% 1d) may have been momentum-driven rather than split-driven. (4) Literature finding of +2.5% abnormal return for split announcements likely applies to non-confounded mid-cap events; for large-caps with simultaneous earnings, earnings dominate. Alternative path: test mid-cap standalone stock splits (split announcement NOT on earnings day, market cap $500M-$5B). These would be harder to find but less confounded."
+      },
+      {
+        "name": "vwap_overextension_disposition_effect_short",
+        "reason": "Tested 20 large-cap stocks 2018-2023 (n=489 events). Hypothesis: stocks trading >15% above 1-year rolling VWAP face selling pressure from investors with unrealized gains (disposition effect). REJECTED: Stocks above VWAP 15% consistently OUTPERFORM over all horizons 1-20 days (abnormal +0.64% to +0.86%, all p<0.01). Low-volume filter (n=363) also shows positive returns, contradicting the specific mechanism. High-volume breakouts show strongest momentum (+0.87% to +1.19%). Signal is the opposite direction \u2014 momentum, not mean reversion. OOS 2024 (n=120) confirms. See tools/vwap_deviation_signal.py."
+      },
+      {
+        "name": "volume_disposition_effect",
+        "reason": "Tested March 21 2026. Hypothesis: stocks rising on LOW volume have more unrealized gains among existing investors -> selling pressure -> bearish. HIGH volume rise -> more turnover -> new holders -> less selling -> bullish. Results: Directional intuition PARTIALLY REVERSED. High-turnover (volume >1.2x normal during 60d rise) underperforms at 5d (-0.04% to -0.54%) but OUTPERFORMS at 20d (+1.83%). Low-turnover rises show +0.22% to +1.22% across horizons. FAILS multiple testing correction: only 1 horizon significant at p<0.05 for each group (need 2+ or 1 at p<0.01). Signal cannot be distinguished from noise. The MOMENTUM effect (stocks already rising 10%+ tend to keep rising) dominates any disposition selling pressure. Volume during the rise adds no meaningful predictive power on top of price momentum. For a precise cost-basis computation (MVRV ratio), tick-level data or intraday order flow data is required \u2014 not available with yfinance daily OHLCV. Recommendation: Do not pursue as standalone signal. Might be usable as a weak confirmation signal but evidence insufficient."
+      },
+      {
+        "name": "vwap_momentum_breakout",
+        "reason": "DEEPER TEST March 21 2026: Previous session (small universe) found +0.64-1.19% at 1d for stocks >15% above 252d VWAP. Re-tested with 100-stock universe, N=14,412 observations (2014-2024), monthly sampling. Results: 1d abnormal = -0.08% (p<0.0001, NEGATIVE and significant), 3d = ~0%, 5d = +0.05 to +0.19%, 10d = +0.25 to +0.52%. Higher thresholds (20-30%) do not improve signal meaningfully. Calm VIX filter makes results WORSE (more negative at 1-5d). With N=14,412 the signal-to-noise ratio is clear: the short-term VWAP breakout momentum does NOT exist. What does exist: slight mean reversion at 1d (statistically significant but economically tiny at -0.08%). The 10d drift of +0.25-0.52% is real but far too small to trade profitably after costs (min threshold 1.5%). CONCLUSION: Do not pursue VWAP breakout as a standalone trading signal. Previous session finding was small-sample noise."
+      },
+      {
+        "name": "volume_profile_percent_in_profit",
+        "reason": "Tested March 21 2026. Hypothesis: stocks with high % of past-year volume below current price (many holders in profit) face selling pressure -> lower forward returns. Method: computed percent_in_profit using daily OHLCV volume profile over 252-day lookback. Universe: 50 large-cap S&P 500 stocks, 2021-2023. Results: HIGH PIP (>75%, N=18761): mean abnormal return=+0.05%, pos%=50.3%, p=0.016 (positive direction, NOT negative as predicted). LOW PIP (<35%, N=8972): mean=+0.07%, pos%=50.5%. High vs Low PIP difference: -0.01%, p=0.73 (no significant difference). Multi-horizon: 1d=0%, 5d=+0.09%, 20d=+0.36% - all POSITIVE (momentum, not reversal). The disposition effect does NOT aggregate to produce market-level selling pressure in large-cap stocks. This is the 4th test of related signals (VWAP overextension, volume-disposition, VWAP momentum, volume profile PIP) - all dead ends. The mechanism (individual investor disposition effect) exists at micro level but is dominated by momentum forces and institutional investor behavior at market level. NOT worth further testing for large-cap stocks."
+      },
+      {
+        "name": "earnings_guidance_cut_large_cap",
+        "reason": "Tested March 21 2026. N=9 large/mid-cap events (AAPL, FDX, TGT, WMT, MU, SNAP, NKE, INTC), 2018-2024. Results: avg_1d=-0.71% (pos_rate=56%), avg_5d=+0.11% - essentially random. passes_multiple_testing=False. HIGH HETEROGENEITY: blue chips (WMT +5.6%, TGT +2.5%, FDX +1.8% at 1d) BOUNCE after guidance cuts (buy-the-dip dynamic, quality floor). Growth/weaker companies (SNAP -11.0%) continue falling. Entry at next-day open captures post-gap drift which is mostly positive for blue chips. KEY INSIGHT: Mega-cap guidance cuts are ALREADY in the price before open - market efficiently prices the cut within the after-hours session. No tradeable drift. Potential sub-hypothesis: SHORT guidance cuts for high-growth stocks (EV/EBITDA >30) where the valuation depends on future earnings - SNAP-like situations. But N is very small and SNAP was an extreme outlier (-43% vs -11% benchmark-adjusted). DEAD END for general guidance cut signal. Similar finding to profit_warning_preannouncement dead end from earlier session."
+      },
+      {
+        "name": "ceo_relief_rally_short",
+        "reason": "CEO relief rally (market celebrates bad CEO removal) \u2192 SHORT at next-day open does NOT work. N=12 expanded test shows avg 10d = -1.34%, p=0.5693. Original N=8 result (-5.47% at 10d) was small-sample noise. Individual events highly variable: DG +13.73%, KSS +8.92%, SBUX 2024 +0.39%, GE +4.57% vs PTON -19.64%, WFC -6.80%. No consistent pattern."
+      },
+      {
+        "name": "volume_disposition_effect_v4",
+        "reason": "Steer.md question (March 2026 session): tested 4 variations of volume/cost basis disposition effect signal. All dead ends. (1) Volume-adjusted VWAP deviation: p_5d=0.027 fails multiple testing. (2) VWAP breakout LONG 100-stock universe N=14,412: real 1d=-0.08% mean reversion. (3) PIP profile cost basis HIGH vs LOW: difference=-0.01% p=0.73. (4) CEO relief rally as disposition-effect proxy: dead end. The core concept \u2014 stocks with large unrealized gains facing more selling pressure \u2014 is NOT measurable/exploitable at the large-cap level in practice. Institutional momentum dominates."
+      },
+      {
+        "name": "small_cap_first_buyback",
+        "reason": "Tested N=8 clean first-ever buyback events (2018-2024). No horizon passed p<0.05. Bootstrap CI includes zero at all horizons. Structural issues: (1) earnings contamination on same day makes clean isolation hard, (2) sample size capped ~15-20 due to rarity, well below N=32 power requirement, (3) heterogeneous motives (financial strength vs price support). Ikenberry et al 1995 covers ALL repurchases and shows 3% short-run effect, but that evidence does not hold for isolated first-ever small-cap events. Possible follow-on: broader open-market repurchase signal in small-cap value stocks (not first-ever) could reach N=50+ for testing."
+      },
+      {
+        "name": "vwap_breakout_momentum",
+        "reason": "VWAP_252 breakout signal (Close/VWAP >= 1.15): tested N=489 events across 20 large-cap stocks (2018-2023) with OOS 2024 confirmation. Best abnormal return was +1.19% at 20d, which is below the min_abnormal_return_pct threshold of 1.5%. Signal direction is correct (momentum, not mean-reversion as hypothesized) but magnitude is too small to trade. Regime filtering (calm VIX) and high-volume filter both tested; neither brings any horizon above 1.5% abnormal. Conclusion: signal is real but not large enough to be tradeable within current methodology constraints. No hypothesis formed."
+      },
+      {
+        "name": "ceo_performance_failure_departure_smci_2026",
+        "reason": "SMCI 2026-03-20 was a FALSE POSITIVE for hypothesis 5dbcfb37 (CEO departure short). The -27% overnight + -8.6% intraday crash was caused by a federal criminal indictment (Operation Gatekeeper) against co-founder/board-member Wally Liaw for smuggling $2.5B in Nvidia chips to China. The CEO (Charles Liang) did NOT depart. The EDGAR scanner flagged it because Item 5.02 8-K mentioned board member resignation which contains boilerplate CEO language. This is a board-member departure, not a CEO performance failure. Do NOT use as evidence for hypothesis 5dbcfb37. Criminal-indictment-driven crashes may represent a different, separate hypothesis. Scanner improvement needed: verify departing officer role is specifically CEO/President, not just any officer or director."
+      },
+      {
+        "name": "ipo_lockup_expiry_short",
+        "reason": "Short strategy at IPO lockup expiry (180d after IPO). Tested N=23 major tech/growth IPOs 2019-2022 vs QQQ benchmark. Results: 3d avg=-2.53%, p=0.18 (fails MT); bootstrap CI [-6.1%, +0.8%] includes zero; stdev=8.72%; wilcoxon p=0.34. Pre-expiry entry (SHORT 2d before): 5d p=0.012 but single horizon, stdev=11.7%, driven by RIVN outlier (-30.8%). ROOT CAUSE: lockup dates are publicly announced and widely tracked by institutional desks; market front-runs the anticipated selling. Verdict: does not pass multiple testing. Methodology note: stdev >> avg means this is noise-dominated, not signal-dominated."
+      },
+      {
+        "name": "secondary_equity_offering_dilution_short",
+        "reason": "SEO dilution short signal investigated using EDGAR 424B4 filings 2020-2024 (N=142 large-cap events, >B market cap, true secondaries after filtering IPOs).\n\nMETHODOLOGY: Used 424B4 filing date as pricing proxy. Entry at close after pricing (intraday timing). Benchmarked vs SPY.\n\nFULL DATASET RESULTS (N=142):\n- 1d: avg=-0.24%, median=-0.66%, neg_rate=58%, wilcoxon_p=0.11\n- 3d: avg=-0.13%, neg_rate=51%, p=0.87\n- 5d: avg=+0.27%, neg_rate=54%, p=0.83\n- passes_multiple_testing: False\n\nCALM REGIME ONLY (VIX<20, N=81):\n- 1d: avg=-0.84%, median=-0.63%, neg_rate=58%, wilcoxon_p=0.058\n- 5d: avg=-1.88%, median=-1.23%, neg_rate=54%, t-test p=0.049, wilcoxon_p=0.14\n- 10d: avg=-2.74%, median=-1.19%, neg_rate=57%, t-test p=0.019, wilcoxon_p=0.096\n- passes_multiple_testing: True (by t-test only)\n- avg_estimated_cost: 0.31%\n\nCRITICAL FAILURE REASONS:\n1. Consistency: 54-58% negative \u2014 below minimum 60% threshold (methodology.json)\n2. Wilcoxon robustness: non-significant at all horizons (p>0.05) \u2014 signal is mean-driven by outliers, not median\n3. Timing problem: 424B4 filing date lags true announcement by 0-7 days (median 3 days) \u2014 measurement is noisy\n4. Look-ahead in regime conditioning: calm VIX filter drops 43% of events, introducing selection bias\n5. Post-pricing drift (after deal priced) is NOT the announcement effect \u2014 literature documents the announcement-day drop, not post-pricing continuation\n\nACADEMIC LITERATURE SUMMARY:\n- Asquith & Mullins (1986), Masulis & Korwar (1986): -3% avg on ANNOUNCEMENT day\n- Post-announcement drift documented in academic literature but requires exact announcement date\n- 424B4 is the pricing prospectus filed 0-7 days AFTER announcement \u2014 wrong date for the primary signal\n\nNEXT STEPS (if pursuing):\n1. Need exact announcement dates \u2014 use 8-K item 8.01 filings as proxy (varies by company)\n2. OR use a commercial data provider (CRSP SEO dataset) with proper announcement dates\n3. The signal exists on ANNOUNCEMENT DAY but requires same-day identification (not detectable from EDGAR alone without event-day real-time scanning)\n4. Consider focusing only on 'bought deals' (same-day announcement and pricing) where 424B4 filing = announcement"
+      },
+      {
+        "name": "seo_bought_deal_short",
+        "reason": "SEO bought-deal short signal: tested N=33 large-cap (>500M) same-day 8-K+424B4 events 2022-2024. Results: 5d avg=-4.38% abnormal, p=0.045 (t-test), wilcoxon_p=0.054 (NON-significant), CI barely excludes zero. FAILS multiple testing: only 1/5 horizons significant. High negative skewness (-2.14): 3 extreme outliers (TRON -48%, NNE -33%, TEM -32%) drive results. Without top 3 outliers, 5d avg=-1.04% (barely above noise). Market cap filter applied at current cap not offering date - potential survivorship bias. The 424B4 approach to identify bought deals also has selection issues: same-day gap picks up company-specific disasters rather than a clean dilution signal. Literature confirms the signal exists on announcement day but requires real-time 8-K monitoring with exact announcement time, not a 1-day lag proxy. Requires commercial data (Bloomberg, Refinitiv) for reliable implementation."
+      },
+      {
+        "name": "large_cap_acquisition_acquirer_short",
+        "reason": "M&A acquirer short signal: tested N=20 large-cap acquirers 2022-2024. General sample: 1d avg=-0.54%, p=0.098, fails multiple testing. Pharma-only subsample (N=14): 1d avg=-0.80%, 79% negative, CI excludes zero, but p=0.053 (borderline) and signal evaporates by 3d (avg=-0.33%). The 1-day effect is economically too small (-0.80%) to exceed transaction costs + 1.5% minimum threshold after round-trip costs. Key finding: M&A reaction is sector-dependent. Tech acquisitions (MSFT+1.3%, AVGO+1.3%, LLY+1.8%) viewed positively; pharma acquisitions (AMGN-4.2%, PFE-2.0%, ABBV-1.7%) viewed negatively. But pharma sub-sample too small (N=14) and effect disappears by day 3. Signal is arbitraged intraday, not persistent."
+      },
+      {
+        "name": "ipo_lockup_expiration_short",
+        "reason": "Tested 13 high-profile IPO lockup expirations (2019-2022). 3d avg=-1.87% pos_rate=46.2% p=0.385. RIVN (-23.93%) is extreme outlier driven by EV sector crash May 2022. Without RIVN: avg_3d=-0.66%. Direction inconsistent. High-profile IPO lockup expirations are widely anticipated and efficiently priced. Academic effect (Field & Hanka 2001: -1.5%) concentrated in smaller IPOs with less investor awareness of the lockup date. Not testable at scale with free data."
+      },
+      {
+        "name": "reverse_stock_split_short",
+        "reason": "Tested 10 reverse split events (AMC/BBBY/CLOV/KPLT/WKHS/GOEV/RIDE/MVST/TTCF/BBIG 2022-2023). 1d avg=-2.88% p=0.119, 3d avg=-2.18% p=0.572. Direction inconsistent (50% positive at 3d). High variance driven by meme stock dynamics. RIDE, GOEV reverse after split due to retail buying. Reverse splits signal distress but many are in heavily-retail-influenced stocks where dynamics are unpredictable. Not statistically significant."
+      },
+      {
+        "name": "dividend_initiation",
+        "reason": "First-ever dividend initiation signal tested (N=14, 2020-2024). Discovery period (2020-2021, N=7): 3d avg=+5.78%, 100% positive rate, p=0.025 -- STRONG. Validation period (2022-2024, N=7): 3d avg=+1.15%, pos_rate=71.4%, p=0.26 -- WEAK. Fails multiple testing. Root cause: (1) Discovery period confounded by concurrent earnings -- MTDR Feb 22, 2021 was day before Q4 earnings (Feb 23); AA Oct 14, 2021 may also have had guidance with dividend. (2) Small N (7 per period) means 1-2 outliers drive statistical test. (3) Literature signal (Asquith & Mullins 1983) was for broader market; in 2022-2024 era, large-cap dividend initiations are fully anticipated (TMUS, ATKR, HUBG all near-zero 1d reactions). Conclusion: Dividend initiation signal has DECAYED for large-cap stocks. Remaining edge may be for small-cap surprise initiations but sample too small and liquidity concerns make it untradeable at our K scale."
+      },
+      {
+        "name": "pre_earnings_runup_beater",
+        "reason": "Pre-earnings run-up for consistent EPS beaters: DEAD END for large-cap S&P 500. Measured 44-stock universe 2021-2025 (874 events). 5d abnormal: avg=+0.23%, pos_rate=44.9%, Wilcoxon p=0.082. FAILS: (1) Below 0.5% direction threshold, (2) Bonferroni-corrected p threshold (tested 3 windows), (3) Beater classification adds zero value vs all-stocks baseline (p_diff=0.35), (4) 2021 shows OPPOSITE direction for beaters (-1.12%, p=0.005). The general 5d pre-earnings drift (all stocks) also fails: p=0.021, marginal, no direction signal. Conclusion: large-cap S&P 500 is too efficient for pre-earnings drift to be tradeable. Possible follow-up: test on mid-cap or small-cap universe (<B) where information diffusion is slower."
+      },
+      {
+        "name": "pre_earnings_runup_midcap",
+        "reason": "Mid-cap S&P 400 / Russell mid-cap consistent EPS beaters show pre-earnings drift of +0.50% at 5d (p=0.007, N=407 events). Statistically significant (p<0.05 at 2d, 3d, 5d) but below 1.5% minimum abnormal return threshold. Net return after 0.1% round-trip costs = +0.40% -- insufficient for hypothesis formation. Universe: 45 mid-cap stocks ($5B-$30B market cap), 2021-2026. Missers show +0.91% but N=39 only (p=0.18, not significant). CONFIRMED dead end for pre-earnings runup across both large-cap (-) and mid-cap (+0.50% but too small). Frazzini & Lamont (2007) effect has decayed to below tradeable threshold. The effect MAY exist for micro-cap (<$1B) stocks with fewer analysts but that market cap is below our tradeable threshold."
+      },
+      {
+        "name": "small_cap_buyback_announcement",
+        "reason": "2022-2024 EDGAR 8-K buyback program announcements for small-cap (<2B) stocks. 2023 (N=91): 1d=+0.14% p=0.797, fails MT. 2024 (N=47): 1d=+0.42% p=0.845, fails MT. 2022 (N=49): 1d=+2.71% p=0.020 PASSES MT but 5d not significant and 2022 bear market is a unique regime (general negative sentiment amplified buyback signaling). Signal does not replicate across 3 years. DEAD END for systematic trading."
+      },
+      {
+        "name": "analyst_initiation_buy",
+        "reason": "Tested bullish initiations (Buy/Outperform/Overweight) from 30+ major banks across 40 S&P 500 large-caps, 2021-2025, 180 events. Avg abnormal returns were +0.020% (1d), -0.070% (3d), +0.130% (5d), -0.020% (10d), +0.230% (20d). All Wilcoxon p-values >> 0.05 (range 0.39-0.95). Positive rates 48-53% (coin flip). Bootstrap CI at 5d: [-0.33%, +0.59%], does not exclude zero. Passes multiple testing: False. Effect size far below 1.5% minimum at every horizon. Signal has zero predictive power on a next-open entry. Consistent with efficient-market absorption of analyst opinion pre-open."
+      },
+      {
+        "name": "analyst_downgrade_short",
+        "reason": "Tested analyst downgrades (Bullish->Hold/Neutral) from major banks across 40 S&P 500 large-caps, 2021-2025, N=425 events. Signal IS real: avg_abnormal_3d=-0.64%, negative_rate=59.3%, wilcoxon_p<0.0001, bootstrap CI [-0.925%,-0.350%] excludes zero. Passes multiple testing. However: avg round-trip transaction cost=0.367% (volume-based, large-cap), leaving net expected return of only ~0.27% \u2014 well below 1.0% minimum net return threshold. Dead end due to insufficient edge after realistic execution costs, not due to absence of signal. Note: if data source improves (pre-market data, access to analyst notes before open), this signal may become tradeable."
+      },
+      {
+        "name": "sp500_52w_low_bounce",
+        "reason": "52-week low first-touch for large-cap S&P 500 stocks does NOT generate positive returns (bounces). Tested 209 events 2021-2025. Results: 1d avg=-1.28% (76% negative), 5d avg=-1.68% (62% negative). The signal is REVERSED from hypothesis. Signal is a SHORT, not LONG. Momentum continuation dominates mean reversion for large-cap stocks. This is consistent with George & Hwang (2004): 52-week price levels act as momentum anchors, not mean-reversion triggers."
+      },
+      {
+        "name": "short_interest_daily_spike",
+        "reason": "FINRA REGSHO daily short volume spike (>2-sigma in 20-day rolling window) shows no predictive signal for large-cap stocks. Discovery 2022 (N=310): avg_abnormal_5d=+0.05%, p=0.84; avg_abnormal_20d=+0.76%, p=0.13. OOS 2023 (N=355): avg_abnormal_5d=-0.21%, p=0.31; avg_abnormal_10d=-0.39%, p=0.17. Root cause: FINRA consolidated tape includes market-maker and ETF arbitrage shorts which dwarf informed short-selling volume for large-caps. Even high z-score events (>3.0 sigma, N=65) show only -0.40% at 5d (not statistically significant). ALTERNATIVE TESTED: consecutive spike days (gap<=3d) show +0.41% at 5d - wrong direction entirely. Dead end. FINRA REGSHO daily data not useful for predicting individual stock returns at 5-20d horizons for large-caps."
+      },
+      {
+        "name": "insider_selling_cluster_large_n",
+        "reason": "n>=6 insider selling cluster (30-day window, K+ each) failed OOS in 2022 bear market: 10d=-0.20% p=0.44, fails multiple testing. Discovery 2021 signal (10d=-1.80% p=0.002) did not replicate. Root cause: 2021 signal may be confounded by bull market peak insiders selling into strength before 2022 crash. Not a reliable short signal across regimes. All n>=3 selling cluster shows 10d=-1.57% in 2022 but this is also regime-dependent (weakens to 10d=-0.92% in 2023-24 bull market)."
+      },
+      {
+        "name": "insider_selling_cluster_largecap",
+        "reason": "Re-tested insider selling clusters (2+ insiders, same month, >50K each, Officer/Director) filtered to large-cap >5B companies (207 tickers, 1968 de-duped events 2020-2024). 80-event random sample backtest: avg abnormal 20d = +0.01%, positive rate 48%, p=0.53 (non-significant). Large-cap filter does NOT rescue the selling signal. At large companies, cluster selling is still dominated by 10b5-1 plans and compensation-driven sales. No directional edge found. Task f5857b08 complete."
+      },
+      {
+        "name": "insider_cluster_near_52w_low",
+        "reason": "Tested whether insider buying cluster (n>=3) near 52-week low (within 5%) produces stronger returns than clusters not near 52w low. Result: NO amplification. Near-52w-low clusters: avg 5d abnormal=+3.33% (n=40, pos=70%). Not near: avg=+4.63% (n=199, pos=68%). T-test p=0.495, Mann-Whitney p=0.685. The two signals (insider=bullish, 52w-low-momentum=bearish) cancel each other rather than stack. Stocks at 52w lows tend to continue down even with insider support. The 0-2% proximity bin showed N=9, avg=+8.52% but this is driven by 2 outliers (ANNX +39%, IMNM +42%) and has insufficient power. Dataset: largecap_filtered_2324 (2023-2024, N=272 clusters, N=239 valid). POOL Corp (POOL) at 52w low with 3 insiders buying March 2026 is an AMBIGUOUS signal: do not trade based on conflicting signals."
+      },
+      {
+        "name": "russell_2000_reconstitution",
+        "reason": "Russell 2000 reconstitution additions show no significant abnormal return at announcement. Primary issue: data access - FTSE Russell does not publish free machine-readable constituent change lists. Backtest of 7 verified events shows avg_abnormal_1d=-0.25%, p=0.29, fails multiple testing. Dataset conflates R1000->R2000 demotions (negative pressure: R1000 fund sells > R2000 fund buys due to AUM asymmetry) with true additions from below. Without paid CRSP/Bloomberg data, cannot separate these. Academic mechanism is valid but untestable at current data access level. Do not pursue without paid data subscription."
+      },
+      {
+        "name": "sp500_52w_high_momentum_long",
+        "reason": "Tested 52-week high breakout momentum (first-touch new 52w high, debounced 45 days) for 30 large-cap S&P 500 stocks, 2021-2024. N=100 sampled events. Results: 1d avg=+0.01% p=0.848, 3d avg=-0.08% p=0.555, 5d avg=-0.27% p=0.337. All horizons fail multiple testing. 50/50 positive rate at all horizons. Signal is pure noise for large-cap stocks - consistent with efficient market hypothesis. Momentum is already priced in before the 52w high breach. Dead end."
+      },
+      {
+        "name": "accelerated_share_repurchase_short",
+        "reason": "Tested accelerated share repurchase (ASR) announcement as SHORT signal. Academic hypothesis: bank delta-hedging creates systematic selling pressure over 5-10 days. N=79 EDGAR 8-K ASR announcements 2020-2024 (excluding concurrent earnings). Results: 1d avg=+0.67% p=0.185, 3d avg=+0.49% p=0.511, 5d avg=+0.40% p=0.648, 10d avg=+0.05% p=0.858. All positive (WRONG direction) but not significant. Fails multiple testing. Conclusion: delta-hedging pressure is either too small, already priced in, or the market interprets ASR as a positive signal (management confidence). Dead end. Data limitation: EDGAR full-text search found only 80 events, may miss ASRs announced in press releases without 8-K filing."
+      },
+      {
+        "name": "earnings_surprise_large_beat_drift",
+        "reason": "Large EPS beats (>10% surprise, |eps_est|>=0.20) for S&P 500 large-cap stocks show negative abnormal drift -0.55% at 5d (p=0.009, n=391, 2021-2025). However, this FAILS temporal split validation: discovery 2021-2023 shows -0.75% (p=0.0054), but validation 2024-2025 shows -0.16% (p=0.62). Signal is regime-specific: existed in rising rates / market rotation period (2021-2023) but collapsed in AI bull market (2024-2025). Cannot trade as current signal without regime conditioning. Root cause: in rising rate environments, large beats are sell-the-news (overpriced growth stocks). In momentum bull markets, beats are rewarded or neutral. No actionable edge without regime forecasting."
+      },
+      {
+        "name": "earnings_surprise_tech_beat_sell_news_short",
+        "reason": "Tech large beats (>10% EPS surprise, XLK sector) -> short 5d drift. Background analysis: n=107, 5d=-1.17%, positive_rate=36.4%, p=0.0185. FAILS all gates: (1) Single horizon only with p=0.0185 exceeds Bonferroni-corrected threshold of p<0.01 required for single-horizon significance. (2) Magnitude -1.17% is below 1.5% minimum abnormal return threshold. (3) Temporal validation on FAANG+NVDA large beats shows no replication: discovery 2021-2023 has 5d p=0.33 (insignificant), validation 2023-2025 reverses direction to +0.41% (p=0.63). The background analysis result likely reflects (a) regime-specific signal from 2021-2023 rising-rates period that collapsed in AI bull market (consistent with earnings_surprise_large_beat_drift dead end), (b) broader heterogeneous universe mixing mega-cap and mid-cap tech with different dynamics. My targeted FAANG+NVDA+AMZN+GOOGL backtest (n=56 events, 2021-2024) shows full-period 5d abnormal=-0.26% (p=0.60) -- no signal. The 'sell the news' narrative for high-expectation tech stocks is a post-hoc story that does not hold up to rigorous backtesting with proper temporal validation. See related dead end: earnings_surprise_large_beat_drift (2026-03-23)."
+      },
+      {
+        "name": "earnings_miss_relief_rally_long",
+        "reason": "Earnings misses -> long 5d drift (relief rally hypothesis). Background analysis: n=177, 5d=+0.56% (borderline direction threshold). MY backtest of 29 large-cap miss events (2021-2023): 5d abnormal=-0.07% (p=0.94) -- essentially zero signal. Extremely high heterogeneity in per-event returns: range from -12.58% (NFLX Q1 2022 catastrophic miss) to +9.25% (Ford Q2 2022). No consistent direction at any horizon (all p > 0.36). The 'relief rally' mechanism breaks down because misses are not homogeneous: (a) structural/secular misses (subscriber losses, market share losses) signal continued deterioration and get SOLD further; (b) cyclical/cost-driven misses (WMT inventory, TGT margins) in a rising-rate period also had macro headwinds overwhelming any relief bounce; (c) guidance cuts on the miss call amplify negative drift. The 0.56% signal in the background analysis is likely noise or a regime artifact from the specific 2021-2025 sample mix. Even if the effect existed, it requires identifying which type of miss you're trading -- which makes it untradeable as a mechanical signal. FAILED: magnitude below threshold, no statistical significance in direct backtest, high heterogeneity."
+      },
+      {
+        "name": "fda_nda_bla_approval_drift",
+        "reason": "Tested post-FDA approval drift for small/mid biotech NDA/BLA approvals 2020-2024. N=12 testable events (many others delisted after acquisition). Results: 5d avg=+4.84% abnormal, p=0.164; 10d avg=+6.22%, p=0.091. Does not pass multiple testing threshold. Key issues: (1) survivorship bias - approved stocks often acquired and delisted within 1-2 years, skewing sample; (2) high variance (stdev=14.55%), driven by outliers like IOVA (+43% at 5d) and AQST (-11% at 5d); (3) correlation pre-runup vs post-drift = +0.45, suggesting anticipated approvals drift MORE post-approval (contradicts sell-the-news hypothesis); (4) insufficient N for temporal validation split. Dead end unless more events can be found from non-delisted companies."
+      },
+      {
+        "name": "insider_cluster_near_earnings_boost",
+        "reason": "Tested whether insider buying clusters within 30 days of next earnings release show stronger abnormal returns than clusters >30 days from earnings. N=17 near (0-30d) vs N=106 far (>30d), t-test p=0.87. No signal. Key limitation: yfinance earnings_dates only provides UPCOMING earnings, not historical, so for 2021-2024 clusters the matched earnings dates are 2026 (showing many years in future). True historical earnings dates would be needed to test properly. Additionally, positive_rate was 47% for near vs 46% for far - essentially identical."
+      },
+      {
+        "name": "spinoff_announcement_long_parent",
+        "reason": "EDGAR 8-K filing dates lag actual press release/announcement dates by days to weeks. When using correct announcement dates (verified via web research for IBM 10/08, GE 11/09, MMM 7/26), the return is concentrated in the OVERNIGHT GAP (close-of-announcement-day to next-day open, avg +5.5% for focus-increasing events). By the time we enter at market open, the entire return is already priced in. Backtest with EDGAR dates (n=18 firm phrase events): avg abnormal 1d=+0.13%, p=0.79 \u2014 essentially noise. Backtest with curated correct dates (n=13): avg 1d=+0.23%, p=0.75 \u2014 still noise because we enter at open post-gap. Gap decomposition: avg overnight gap = +0.01%, avg intraday = +0.62% (high variance). DATA FIX NEEDED: Press release dates from Bloomberg/Refinitiv API. ALTERNATIVE: Test SpinCo institutional selling pressure as SHORT signal in first 30-90 days after SpinCo begins trading (different, potentially testable strategy). SIGNAL IS REAL (IBM +5.1%, GE +2.98%, MMM +6.12% abnormal on announcement day close-to-close), but not tradeable at next-day open with our current data access."
+      },
+      {
+        "name": "finra_short_volume_spike",
+        "reason": "FINRA REGSHO daily short volume ratio (SVR) spike detection tested on 30 large-cap S&P 500 stocks (2023-H2). N=111 spike events (z > 2.0 above 20d rolling mean). Results: mean next-day abnormal = -0.009%, % negative = 49.5%, p=0.9639. High spikes only (z>3, n=10): mean = -0.387% (too few events for significance). Academic paper (Boehmer et al 2008 JFE 'Which Shorts Are Informed?') found short volume IS predictive, but effect is concentrated in SMALLER stocks where shorts have informational advantage. Large-cap short sellers are mostly HFT/hedging, not informed directional bets. Conclusion: test on micro/small-cap universe might show different results, but those stocks have execution risk and liquidity issues. Dead end for large-cap focus."
+      },
+      {
+        "name": "guidance_raise_announcement",
+        "reason": "Guidance raise 8-K filings (phrase: raises full-year guidance, N=52, 2021-2024) show no signal: avg 1d abnormal=+0.32% (p=0.59), 3d=+0.41% (p=0.95), 5d=+0.07% (p=0.73). passes_multiple_testing=False. Root cause: guidance raises are almost always at quarterly earnings release dates, so the signal is fully confounded by the earnings beat effect. There is no independent mid-quarter guidance raise signal separable from EDGAR 8-K free-text search alone. A cleaner test would require identifying guidance raises OUTSIDE earnings season which needs a specialized dataset."
+      },
+      {
+        "name": "pre_earnings_drift_consistent_beaters",
+        "reason": "Tested pre-earnings drift for consistent EPS beaters (3+ consecutive beats) on 30 large-cap S&P 500 stocks, 2020-2024. N=325 beater events across 29 tickers. RESULTS: 1d avg_abnormal=+0.08% (p=0.339, wilcoxon_p=0.584), 3d avg_abnormal=+0.23% (p=0.095, wilcoxon_p=0.206), 5d avg_abnormal=+0.06% (p=0.798, wilcoxon_p=0.941). None significant. passes_multiple_testing=False (0 of 5 horizons at p<0.05). Bootstrap 95% CI at 5d: [-0.38%, +0.51%] \u2014 CI includes zero. CONTROL GROUP (N=147, mixed EPS history): 5d avg=+0.57% \u2014 HIGHER than beaters, confirming no differential signal. Two-sample t-test (beater vs control) at 1d: p=0.674, at 3d: p=0.337, at 5d: p=0.242. Mann-Whitney at 1d: p=0.161. No statistically or economically significant differential. MECHANISM FAILURE: The signal is efficiently priced for large-caps. Institutional desks and quants have been running this exact strategy for 20+ years \u2014 any predictable pre-earnings drift in mega-caps is arbitraged away instantly. NOISE LEVEL: stdev_5d=4.06% dwarfs avg=0.06%, requiring N~36,000 to detect a 0.06% effect. The 3d p=0.095 (borderline) reflects noise + high skewness (1.04), not a real signal. Recommended N for 80% power: 2,473 (1d), 898 (3d), 35,939 (5d) \u2014 far beyond achievable. DO NOT pursue this signal for large-cap S&P 500. May exist in small/micro-cap where it is less efficiently priced, but that population has data quality and survivorship bias issues."
+      },
+      {
+        "name": "strategic_alternatives_announcement",
+        "reason": "Strategic alternatives 8-K announcements show no tradeable signal at announcement. Backtest of 7 large-cap (>100M) first announcements from 2024: avg abnormal 1d=-2.93%, p=0.30, fails multiple testing. Core problem is high heterogeneity: distress-driven announcements (CVGI, DNUT) are negative signals while acquisition-auction announcements (HRI, FDP, B) are positive. Applying 52w-high ratio filter (>0.70) reduces to n=5, still fails statistical tests. Even filtered set shows 1d negative reaction (20% positive rate), with weak 5d drift (+1.3%) that is not tradeable. Base rate: 43% of >100M announcements ultimately lead to acquisition (3/7). Cannot distinguish at announcement time. Pivot suggestion: (1) Merger arbitrage after deal announcement, or (2) Track investment bank retention 8-K language as stronger signal."
+      },
+      {
+        "name": "dividend_resumption",
+        "reason": "Tested 9 EDGAR-confirmed dividend resumption events (8-K filings with 'reinstated' or 'resumed dividend' language) from 2020-2024. Found no consistent signal: 1d abnormal return avg=-1.37% (pos_rate=22.2%), 3d avg=-0.75%, 5d avg=-3.51% with large variance. All p-values >0.30, passes_multiple_testing=False. Key issue: The 2020 event cluster (OHI, DKS, FL, YUMC, CHH) occurred during COVID recovery when companies resumed dividends after pandemic cuts -- but this was a period of enormous concurrent news flow. IVT (-20.4% 5d) and OHI (-13.1% 5d) dragged down averages significantly. The signal is inconsistent and underpowered (only 9 qualifying large-cap events found in EDGAR 2019-2024). Note: dividend_initiation was already a dead end (see prior research). Dividend resumption similarly shows no effect."
+      },
+      {
+        "name": "russell_reconstitution",
+        "reason": "Tested R1000->R2000 demotion announcement day effect. Cleaned 24-event dataset to 7 verified events. Avg abnormal 1d = -0.25% (fails 0.5% direction threshold), p=0.29, passes_multiple_testing=False. Root cause: free data sources cannot systematically identify Russell 2000 constituent changes. FTSE Russell does not publish machine-readable addition/deletion lists for free; EDGAR 8-K self-announcements only yield ~5-15 events/year (too few); market cap analysis of candidates produces many false positives. Academic mechanism (Chang et al 2015) is valid but data access blocks this signal. Would need paid CRSP or Bloomberg constituent data to run clean backtest. 6 of 24 dataset entries were factually wrong (stocks well above R1000/R2000 breakpoint)."
+      },
+      {
+        "name": "merger_hsr_clearance",
+        "reason": "HSR early termination 8-K events (antitrust clearance) do not produce measurable abnormal returns for M&A targets. Backtest: N=199 likely targets 2019-2024, avg_1d=-0.02% (p=0.96), no horizon passes multiple testing. Reasons: (1) clearance is confirmatory, not discovery - market already prices completion probability at announcement; (2) EDGAR 8-K filter contaminated by acquirer filings even after 15% pre-event return filter; (3) actual target identification from EDGAR EFTS requires deal price data not freely available. HSR clearance resolves <20% of remaining deal risk; the spread compression at clearance is too small vs transaction costs. Better approach for merger arb: buy at ANNOUNCEMENT date and hold (well-studied), not at clearance milestone."
+      },
+      {
+        "name": "dividend_cut_announcement_short",
+        "reason": "N=8 large-cap post-2021 dividend cut/suspension announcements. 5d avg abnormal: -0.47% (p=0.844). 25% positive at 1d and 3d, but 50/50 at 5d. Does NOT pass multiple testing. High variance: EL -7.26% (strong), CBRL -8.39% (strong), but SPR +13.84% (acquired by Boeing, confounder), CE +1.12% (one-time), WBA near flat. Signal overwhelmed by idiosyncratic factors. COVID-era events not included (would be contaminated by macro). Conclusion: Dividend cut is already priced in to large extent; 5d drift is noise. If pursuing further: filter to FIRST EVER dividend cut for that stock + no ongoing M&A."
+      },
+      {
+        "name": "merger_arbitrage_announcement_drift",
+        "reason": "Expanded from N=11 to N=20 with verified completed all-cash deals >$1B market cap (2021-2024). Signal collapsed: 5d avg abnormal = +0.19%, positive_rate = 45%, p=0.78. Bootstrap CI [-1.04, +1.55] crosses zero. passes_multiple_testing=False. The original N=11 result (+2.36%, 73%, p=0.042) was a false positive from survivorship/selection bias \u2014 the original sample contained all headline deals with 25-40% announcement day jumps (ZNGA, ATVI, COUP). Adding 13 more typical all-cash deals (CTXS, MNDT, TWTR, ZEN, PING, AVLR, KNBE, FORG, DCT, XM, SPLK, KRTX, MIME) collapsed the signal. Sub-segment analysis (quick-close <6m vs antitrust-delayed >12m) also negative. The signal does not exist at 5d. A separate 'arb spread compression' hypothesis (buy when trading at >5% discount to deal price) was NOT tested and remains open."
+      },
+      {
+        "name": "second_agency_ig_upgrade",
+        "reason": "Tested whether second-agency IG upgrades (company already has one IG rating from another agency, gets second IG rating 6+ months later) are tradeable. N=4 events found (KHC Mar 2022, M May 2022, F Oct 2023, KHC Fitch May 2022): 3d avg = -0.11%, 50% positive rate. Mechanism fails: Bloomberg Barclays Aggregate only requires ONE IG rating for inclusion, so second agency upgrade triggers NO new mandatory bond fund buying. ICE BofA IG index uses average of ratings \u2014 marginal. Second-agency upgrades typically cluster within 55-90 days of first, so market fully anticipates. True long-gap second-agency events are extremely rare. Hypothesis f86dcb4e (first_ig_credit_upgrade) correctly excludes follow-on upgrades. No new hypothesis warranted."
+      },
+      {
+        "name": "sec_wells_notice_short",
+        "reason": "Wells Notice 8-K disclosure SHORT signal confirmed dead end after exhaustive search. Summary: N=27 pooled (2015-2024) passes multiple testing marginally (1d p=0.018, 3d p=0.013) but OOS temporal split fails (needs N=28/period, only has 19/8). Extended search: (1) EDGAR 2010-2014 yielded 7 qualified large-cap events - pre-2015 data shows NO signal. (2) EDGAR 2015-2022 yielded 12 new candidates (BK, JOE, RPM, AON, PRKS, FICO, GE, BHC, FAF, COIN, NDAQ, SWI): avg 1d=-1.03%, pos_rate=45.5%, p=0.146 - FAILS multiple testing, direction inconsistent (6/11 positive = worse than random). Root cause: Wells Notice disclosures are extremely heterogeneous. BHC (-5.9%) vs NDAQ (+1.5%) are structurally different events (financial fraud vs procedural). Without fraud/procedural classification, pooled signal is noise. Building such classification requires Bloomberg Law or SEC enforcement database (not free). Would need N=50+ fraud-only Wells Notices for a viable hypothesis. FINAL DECISION: Do not pursue further. Record in knowledge base as confirmed dead end."
+      },
+      {
+        "name": "profit_warning_continuation_short",
+        "reason": "Large-cap profit warnings (intra-quarter negative preannouncements) do NOT show continuation. Tested N=13 events (FDX, NKE, BBWI, TGT, WMT, F, SNAP, MU, INTC, STX, WDC, AAPL, GOOG 2019-2022). Entry at open day after warning (after-hours timing). Results: 1d avg=+0.13% neg_rate=38.5% p=0.898, 5d avg=+1.58% neg_rate=23.1% p=0.232 -- POSITIVE direction. Stocks BOUNCE after initial crash (bounced 77% of events at 5d). Pattern: contrarian value buyers step in after -15-25% initial crash. SNAP (-11% 5d) and STX (-6.2% 5d) are the only continuations. This matches guidance cut dead end (record 284c6c2f): large-caps bounce after bad news. Same root cause as guidance cut: oversold bounce + institutional accumulation into weakness. Do not pursue. Causal mechanism supports LONG after crash, not short continuation."
+      },
+      {
+        "name": "deal_collapse_target_short",
+        "reason": "Failed/cancelled acquisition deal - target company stock SHORT signal. Tested 5 events (KSU, FHN, SAVE, TGNA, ACI) 2021-2024. Results: 1d avg=-0.69%, positive_rate=20%, 5d avg=-1.56%. Fails multiple testing. Fundamental heterogeneity: FHN +7.22% 1d (TD withdrawal let FHN survive independently at better-than-feared standalone), ACI -5.81% (Kroger deal blocked, regulatory costs + uncertainty). The return sign depends on: (1) deal premium vs standalone value - high-premium deals crash more; (2) reason for collapse - regulatory vs acquirer withdrawal; (3) company financials - distressed targets (SAVE) crash more. Without ex-ante classification of deal-premium vs standalone-value, signal is untradeable systematically. Dead end."
+      },
+      {
+        "name": "earnings_miss_continuation_short",
+        "reason": "Earnings miss continuation SHORT signal tested N=22 large-cap events (2022-2024). Pooled result appears significant: 5d avg=-3.26%, pos_rate=36.4%, p=0.012, CI=[-5.5%,-1.0%], passes_MT=True. However, REGIME SPLIT reveals complete breakdown: 2022 bear market (N=8): 5d avg=-8.12%, 12.5% positive, p=0.003 - STRONG. 2023-2024 bull market (N=10): 5d avg=-0.71%, 50% positive, p=0.59 - NO SIGNAL. Root cause: in bear markets, misses trigger risk-off selling; in bull markets, misses are bought as dips. Signal is entirely regime-dependent on bear market. Cannot use without bear market filter. Bear market detection (VIX>30 or SPY 20-day MA declining) would reduce frequency to <3 qualifying events/year - insufficient for systematic trading."
+      },
+      {
+        "name": "sp500_52w_high_breakout_long",
+        "reason": "Tested 52-week HIGH breakout LONG signal on 45 large-cap S&P 500 stocks, 2021-2022 discovery period. 118 events detected. 5d avg abnormal=+0.69%, positive_rate=59.3%, p=0.027, but fails multiple testing correction (p < 0.05 at only 1 horizon). avg_abnormal below 1.5% threshold. Consistent with academic literature showing momentum effects have decayed for large-cap stocks. Signal direction is correct (new high = continuation) but magnitude too small to trade after costs. Dead end."
+      },
+      {
+        "name": "spinco_parent_announcement_long",
+        "reason": "Tested parent company LONG at spinoff announcement. N=8 events (IBM/JNJ/GE/XPO/BDX/MMM/APTV/GSK 2021-2022). 1d avg=-1.02%, 3d avg=-2.04%, 5d avg=-1.88%, positive_rate=25%. NEGATIVE returns, not positive as Chemmanur & Yan (2004) documented. FDX and GE were confounded by concurrent earnings and restructuring news. Even clean cases (IBM, JNJ) showed -2% to -1%. Mechanism: market had often pre-priced the value unlock, announcement triggers profit-taking. N too small for definitive conclusion but direction is wrong. Dead end."
+      },
+      {
+        "name": "politician_tiny_trades",
+        "reason": "91% of Rohit Khanna purchases are amount_min=1001 ($1-$15K bracket) - DCA noise. These trades show slight NEGATIVE abnormal returns (-0.07% 5d) and pollute the signal. Must filter to amount_min>1001 for any politician signal. Khanna has 1472 large-cap purchases but 1339 are tiny DCA trades. Once filtered, he shows flat returns (neither positive nor negative)."
+      },
+      {
+        "name": "politician_purchase_disclosure_signal",
+        "reason": "Full OOS analysis with 25,493 trades (2023-2026) shows signal FAILS proper validation:\n\n1. ALL purchases at disclosure (2023-2024 discovery): 1d p=0.025, 5d p=0.048 \u2014 MT passes,\n   BUT direction pct is 32-46% across all horizons (below 50% threshold). Not actionable.\n\n2. VALIDATION (2025+): MT fails (only 1d p=0.015 significant). Direction 39-47%.\n\n3. Large trades >$50K OOS: DISCOVERY fails completely (5d p=0.29). VALIDATION passes (1d p=0.006, \n   3d p=0.033) \u2014 BACKWARDS. Signal stronger in validation than discovery = regime-specific.\n\n4. Timothy Moore (R/H): Only 14 months of data (2025-only, new congressman from 2024 elections).\n   No pre-2025 trades. Cannot validate OOS. Strong 2025 signal likely regime-specific.\n\n5. Markwayne Mullin (R/Senate): Discovery 2023-2024 MT fails (5d p=0.197). Validation 2025 MT\n   passes \u2014 again backwards. 2025 was simply a better period for his trades.\n\n6. Michael McCaul (R/House): 527 discovery trades, weakly significant 5d (p=0.049) but direction\n   exactly 50% and 10d negative. Inconsistent, not reliable.\n\n7. Nancy Pelosi: N=26, MT fails, no consistent signal.\n\nKEY INSIGHT: The 2025 signal for politicians is driven by Trump tariff volatility. Politicians who\nown tariff-sensitive cyclicals (HOG, F, AAL, AAL) saw big swings due to announced/reversed tariffs.\nThis is NOT generalizable insider information \u2014 it's regime-specific macro exposure.\n\nCONCLUSION: Politician stock disclosures do not reliably predict abnormal returns at the direction\nand consistency level required for trading (>50% direction at >0.5% threshold, OOS MT validation).\nThe aggregate signal exists (MT passes in full dataset) but is too small and noisy to trade.\n\nCAVEAT: Would need data going back to 2012 (not just 2023) for truly robust multi-regime testing.\nCapitol Trades public data only goes back to early 2023. A signal that works across 2012-2022 \nAND 2023-2026 would be compelling. Cannot rule out with current data."
+      },
+      {
+        "name": "senator_spouse_purchase_2012_2020",
+        "reason": "Senate Stock Watcher 2012-2020 (8350 records). Spouse n=1085, Self n=434, Joint n=915. All p>0.10 across all horizons, direction 39-45%. STOCK Act lag kills edge."
+      },
+      {
+        "name": "politician_reporting_gap_segmentation",
+        "reason": "2023-2026 by disclosure speed. Fast(<=10d): p=0.50. Medium(11-30d): p=0.0004 BUT direction=47% below threshold. Slow(>30d): p=0.51."
+      },
+      {
+        "name": "pre_fomc_announcement_drift",
+        "reason": "Tested Lucca & Moench (2015) Pre-FOMC announcement drift on SPY 2000-2025 (n=207 events).\n    \nDiscovery (2000-2015): FOMC day +0.360% avg, p=0.005 - effect was REAL historically.\nValidation (2016-2025): FOMC day -0.099% avg, p=0.62 - REVERSED post-2016.\nDay before FOMC post-2018: +0.351% avg, p=0.077 - borderline, fails MT.\n\nMT result: FAILS - 0 tests at p<0.05, 0 at p<0.01.\nDirection >0.5%: only 28.8% in recent period (below 50% threshold).\n\nRoot cause: Effect was arbitraged away as it became widely known post-2015 Lucca & Moench publication. \nFed communication changes (press conferences, dot plot) also reduced uncertainty premium.\nThe classical FOMC day signal has completely reversed in the modern era.\n\nCannot trade: fails multiple testing correction, fails direction threshold, regime decay confirmed."
+      },
+      {
+        "name": "opex_week_spy_effect",
+        "reason": "Tested monthly options expiration week (3rd Friday week) effect on SPY returns 2000-2025 (n=312 OpEx weeks).\n\nResults:\n- Monthly OpEx weekly excess: -0.085% vs non-OpEx | p=0.59 (not significant)\n- OpEx daily excess: -0.018% | p=0.61 (not significant)\n- Post-2015: -0.284% weekly excess | p=0.21 (still not significant)\n- No consistent direction: OpEx weeks positive 55.4% of the time (near random)\n\nAny systematic OpEx effect on index returns has been arbitraged away by market makers and \nquantitative funds. Individual stock pinning near strikes is more plausible but requires \noptions data per ticker, not easily testable with daily price data."
+      },
+      {
+        "name": "sp500_index_removal_short",
+        "reason": "Full sample (N=43, 2020-2025): 5d abnormal -2.40%, direction 72%, p=0.0098, passes MT. BUT OOS validation FAILS: validation period (N=13, 2024-2025) shows 5d -1.45%, direction 54%, p=0.33. Signal is REGIME-DEPENDENT: strong in bear/volatile markets (2020-2023, discovery=80% direction), weak in bull markets (2024-2025). Root cause: forced index fund selling overwhelmed by opportunistic buying in bull markets. NOTE: LW removed March 23 2026 (VIX~26) could be live test case in current regime. Possibly tradeable in VIX>25 environments \u2014 needs regime-stratified backtest. Backtest saved in tools/sp500_removal_backtest_results.json. Do NOT trade without regime validation."
+      },
+      {
+        "name": "buyback_announcement_short_term",
+        "reason": "No short-term signal (3-20d). N=78 discovery events (S&P 500, 2021-2022): mean 5d abnormal=-0.34%, direction=48.7%, p=0.58. All horizons p>0.20. The Ikenberry (1995) 12% drift is a multi-year execution effect, not an announcement effect. Announcement alpha priced in within hours. Dead end for week-horizon trading."
+      },
+      {
+        "name": "dnli_clinical_efficacy_failure_short",
+        "reason": "DNLI PDUFA April 5 for tividenofusp alfa (MPS II). DISQUALIFIED: multi-pipeline company. Has DNL310 (MPS II), eclitasertib (Sanofi partnership Phase 2), BIIB122 (Biogen partnership Parkinson Phase 2b), and others. clinical_efficacy_failure_short requires single-pipeline companies where CRL = near-death existential event. DNLI has multiple partners and pipeline."
+      },
+      {
+        "name": "nasdaq_100_addition_reconstitution",
+        "reason": "Nasdaq 100 annual reconstitution (Dec, 5-7 stocks/yr) shows minimal tradeable signal. QQQ AUM ~300B vs S&P 5T. Additions already large-cap liquid Nasdaq stocks. Effect mostly disappeared per Greenwood & Sammon (2025 Journal of Finance). Backtest 2020-2024 N=27: only 2020 showed meaningful effect (COVID recovery noise). 2021-2024: near-zero abnormal returns. Not worth pursuing \u2014 S&P 500 addition signal is far superior."
+      },
+      {
+        "name": "high_pe_guidance_cut_short",
+        "reason": "Tested 2022-2023 growth stock guidance cuts with PE>30. N=12 events. avg_abnormal_5d=-0.57%, p=0.883, direction_short=58%. DEAD END. Results highly heterogeneous: ROKU +23%, DOCU +20% vs SNAP -14%, PYPL -13%. Large overnight gaps often lead to bounces (oversold recovery). Confirms earnings_guidance_cut_large_cap dead end extends to high-PE segment. Root cause: even high-PE stocks can see forced short-covering and value buyers after large gap-downs. Not systematically predictable."
+      },
+      {
+        "name": "analyst_upgrade_cluster_n3",
+        "reason": "UNDERPOWERED. Testing 53 large-cap stocks for 3+ major bank upgrades within 5 days yielded only 36 total clusters (9 discovery, 9 validation). Not enough statistical power. The 3+ from major banks within 5 days criterion is too restrictive. Would need full S&P 500 universe (500+ tickers) or relaxed criteria (2+ analysts, 7-day window) to get meaningful n. Abandon this specific test; revisit with broader universe if data access improves."
+      },
+      {
+        "name": "sp500_52w_low_isolated_short",
+        "reason": "Isolated 52w low first-touch events (SPY down <0.5% or <5 stocks at 52w low) have NO predictable edge. N=819, mean=+0.13% abnormal, direction=47.1%, p=0.53. The pooled sp500_52w_low_momentum_short signal (1.68%) was entirely driven by systemic events. On normal days, standalone first-touch crossings have zero short-side drift. DO NOT trade the momentum short unless systemic conditions confirmed (SPY down >0.5% AND >=5 S&P 500 stocks at 52w lows simultaneously)."
+      },
+      {
+        "name": "dividend_cut_short",
+        "reason": "Signal failed 5 check(s): passes_multiple_testing, direction>50pct, abnormal_return>0.5pct, return_after_costs>0, oos_direction>50pct. n=81, best_horizon=1d, avg_abnormal=0.250% (0.25 pct pts), p=0.2841, direction%=46.9%, passes_mt=False, oos_n=37, oos_neg_rate=45.9%. Universe: 205 S&P500 large-caps >$2B, 2015-01-01-2024-12-31."
+      }
+    ],
+    "signal_count": 55,
+    "dead_end_count": 84,
+    "literature_count": 25
+  },
+  "activity": {
+    "sessions_today": 10,
+    "tokens_today": 88404828,
+    "sessions_by_day": [
+      {
+        "date": "2026-03-25",
+        "sessions": 10,
+        "tokens": 88404828
+      },
+      {
+        "date": "2026-03-24",
+        "sessions": 11,
+        "tokens": 110574733
+      },
+      {
+        "date": "2026-03-23",
+        "sessions": 28,
+        "tokens": 244289668
+      },
+      {
+        "date": "2026-03-22",
+        "sessions": 24,
+        "tokens": 139879840
+      },
+      {
+        "date": "2026-03-21",
+        "sessions": 22,
+        "tokens": 161668738
+      },
+      {
+        "date": "2026-03-20",
+        "sessions": 1,
+        "tokens": 4414573
+      },
+      {
+        "date": "2026-03-19",
+        "sessions": 2,
+        "tokens": 19950301
+      }
+    ]
+  },
+  "journal": [
+    {
+      "date": "2026-03-25",
+      "investigated": "Market scan: new 52w low candidates, sector ETF VIX spike recovery, guidance cut signal, fallen angel signal, insider cluster scan",
+      "findings": "1. 52w LOW SCAN: Added ADBE, SBAC, DPZ, OTIS, BSX, CPB to watchlist - all approaching first-ever 52w low in 2y. OTIS/BSX: if cross 52w low this week, Q1 earnings April 22-23 qualifies them for catalyst_short (not just momentum). CPB (Campbell's) in extreme 45% downtrend since June 2025.\n2. SECTOR VIX SPIKE: After VIX first crosses 30, XLC (Communication Services) underperforms SPY by -1.68% over 10 days (p=0.018, N=39). All other sectors not significant. Recorded in knowledge base.\n3. GUIDANCE CUT (HIGH-PE): Tested 12 high-PE growth stocks (SNAP, NFLX, PTON, etc.). avg_abnormal_5d=-0.57%, p=0.883. DEAD END. Extreme heterogeneity: ROKU +23%, DOCU +20% vs SNAP -14%. Recorded as dead end.\n4. FALLEN ANGEL (IG\u2192HY): Tested 9 events. avg_abnormal_5d=-6.65%, p=0.582. INCONCLUSIVE due to COVID confound - March 2020 events (F, OXY, M) all occurred at market bottom where stocks bounced hard. Clean events (KHC 2019: -7.8%) support hypothesis. Recorded as inconclusive in knowledge base.\n5. INSIDER SCAN: No fresh large-cap clusters (filed within 5 days). POOL (3x, filed March 17) and IP (3x, filed March 12) too stale for optimal entry. MSTR excluded (Bitcoin proxy). GO already active.\n6. JAN SPINCO: 1 day data at .75 (flat vs .75 entry). Notably: 5 insiders BOUGHT JAN on first trading day - counterintuitive to our short thesis.\n7. CURRENT SHORTS PERFORMING: All 3 active shorts (HD +0.97%, ABT +2.13%, BAX +0.71% abnormal) beating SPY. Signal holding up."
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "First-touch 52w low methodology audit, BSX/OTIS pre-registration, insider scan for CEO/CFO buys, RCKT PDUFA monitoring",
+      "findings": "KEY FINDING: Most watchlist 52w low candidates (ADBE 10 crossings, DPZ 8, SBAC 12, CPB 40, BSX 10, OTIS 9) are NOT first-touch events - they have been in sustained downtrends with repeated crossings. The momentum signal for these stocks already fired months ago. Only SYK (March 23, 2 crossings) is a true recent first-touch. Built first_touch_52w_low_scanner.py to properly detect first-touch events using 252-day closing price rolling minimum with 45-day debounce. Pre-registered BSX and OTIS as catalyst_short (359e9e42 / dbedf16e, conf=6) with caveats - they are NOT first-touch but earnings catalyst (April 22) is primary driver. TDG has NEVER crossed 52w low in 2 years (crossing_count=0, 0.89% above, earnings May 5 = 41 days). For insider scan: POOL directors buying but CEO/CFO selling. CSGP CEO bought $2.5M March 2 (missed, +3.51% 5d). HOG CEO bought March 9 (missed, -6.07% 5d). VIX at 26.95 (below 30 trigger). RCKT at $4.27 (no FDA decision yet)."
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "CEO/CFO insider signal regime analysis from background agent results",
+      "findings": "Background agent confirmed: POOL cluster is Directors+SVP only (CEO selling, CFO selling). Found AMRZ (Amrize Ltd, $30.7B) - CEO+CFO both bought $3.7M in March 6-10, but 5d return was -5.7% (FAILED). WD CEO bought $474K March 3 at $47.46, stock now at $43.98 (-7.4%). Pattern: 3 of 4 missed CEO/CFO cluster signals FAILED in current market (HOG -6.07%, AMRZ -5.7%, WD -2.0%). Only CSGP worked (+3.51%). Current GO long position will serve as live test of signal in VIX>25 regime."
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "52w low first-touch scan, RCKT PDUFA assessment, trade script verification, CEO/CFO signal check",
+      "findings": "1. RCKT PDUFA (March 27-30): DISQUALIFIED from d302c84b. RCKT is multi-pipeline (Danon disease, PKP2-ACM, BAG3-DCM programs active). Prior CRL was CMC-only (not clinical/efficacy). Do NOT trade RCKT on any CRL. Knowledge base updated. 2. S&P 500 first-touch scan (164 stocks): Only 2 candidates within 3% of first-ever 52w low: TDG ($65.7B, 0.89% above, barrier $1,152.50) and AMT ($79.8B, 1.10% above, barrier $168.51). Both pre-registered (e25f0c6f, db974b61) with activation scripts. 3. Script verification: close_go_trade.py dry-run shows +5.16% raw / +8.32% abnormal vs SPY. activate_syk_trade.py ready for March 26 9:30AM. 4. Insider cluster scan: No new qualifying CEO/CFO clusters in last 72 hours. VIX Tier 3 (26.95) \u2014 only n=6-9 clusters tradeable."
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "Verified trade scripts for March 26-27 week; investigated first_ig_credit_upgrade OOS validation with VST and PR; checked new insider clusters; ran analyst upgrade backtest; fixed april_catalyst_scan bug",
+      "findings": "1. ALL TRADE SCRIPTS VERIFIED: SYK (March 26 9:30), GO close (March 26 3:55), KHC (March 27 9:30), MKC/NKE/CAG (March 31-April 1), VGNT auto-triggers April 1 16:00, REPL (April 10). 2. FIRST IG UPGRADE: VST (Dec 2025 S&P first IG) showed -3.79% 3d abnormal - PRICED IN (stock up 30%+ in 90d prior). PR (March 17 2026 S&P first IG) showed +5.97% 3d abnormal - strong positive. WDC is return-to-IG (excluded). VRT remains only clean positive. n=2 true positive, n=1 true negative. Signal needs 2+ more events. Added disqualification: exclude if stock up >25% in prior 90d. 3. ANALYST UPGRADE CLUSTER: Only 36 clusters in 53 large-caps (n=9 discovery). Too underpowered. Recorded as dead end. 4. FIXED april_catalyst_scan.py: was using safe_download(period=) which breaks. Now uses yf.Ticker.history(period=). Scan correctly finds 52 stocks near 52w low. 5. NEW 52W LOW CANDIDATES: None beyond TDG and AMT. PAYX had earnings today but 19 prior crossings (not first-touch)."
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "Trade health check, 52w low scan for new catalysts, AMT script fix, trade_loop automation, CCI fundamental research",
+      "findings": "1. ALL ACTIVE TRADES HEALTHY: GO +5.3%, HD +0.3%, ABT +1.4%, BAX flat. All well above stop losses. 2. FIRST-TOUCH SCAN: TDG at 0.89% above 52w low (0 crossings), AMT at 1.1% above (0 crossings). 3. AMT activate script had COPY-PASTE BUG: barrier was written as $1,152.50 (TDG numbers) instead of $168.51. Fixed. 4. TRADE_LOOP LAUNCHAGENT DEPLOYED: created com.financialresearcher.tradeloop.plist, runs every 2 min. SYK and KHC will now auto-execute at their trigger times (no manual intervention needed). 5. V OOS VALIDATION: V first-touch March 18, currently -2.2% abnormal against short thesis (MISS after 4 days). 6. CCI (Crown Castle): +1.5% above 52w low, earnings April 22. Weak 2026 guidance, Sprint decommissioning, analyst cuts. 1 prior 52w crossing - not first-touch. Needs backtest for second-touch catalyst pattern."
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "Regime analysis of 52w low momentum short signal. Scanned for first-touch 52w lows (ADBE, SBAC, DPZ, OTIS, BSX, CPB, MKC, SYK all at 52w lows). Verified VIX=27, SPY trends, checked upcoming trade setups.",
+      "findings": "MAJOR FINDING: 52w low momentum short is REGIME-DEPENDENT. The entire signal comes from systemic selloffs.\n    \nSystemic (SPY down >0.5% AND >=5 stocks at 52w lows): N=781 events, 5d=-1.91% abnormal, p<0.0001. OOS 2023-2026 (N=165): -1.88% (p=0.0001). Near-perfect replication.\nIsolated (no broad context): N=819, mean=+0.13%, p=0.53 - ZERO EDGE. Dead end recorded.\nMulti-horizon: 3d (-1.34%), 5d (-1.91%), 10d (-2.64%), 20d (-3.38%) - all p<0.0001.\n\nRecent systemic dates: 2026-03-18 (10 stocks), 2026-03-20 (6 stocks) = HD/ABT/BAX entries.\nSYK/KHC entered March 23 (non-systemic, SPY +1.07%) = marginal expected edge.\nApril 2 tariff deadline = likely next systemic event.\n\nPre-registered: f055dc19 (sp500_52w_low_systemic_short).\nNew tools: systemic_52w_low_scanner.py, activate_systemic_short.py."
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "Dividend cut short signal \u2014 large-cap S&P500 stocks 2015-2024",
+      "findings": "n=81 events found (>25% dividend cut or suspension, >B market cap). Avg abnormal returns: 1d=+0.25%, 3d=+0.62%, 5d=+1.15%, 10d=+1.04% \u2014 ALL WRONG DIRECTION for short. Direction rate for short (pct negative abnormal returns): 42-49% across horizons, all below 50% threshold. No horizon reached p<0.05. OOS (2022-2024): 37 events, neg_rate=45.9%, avg_5d=-0.04%. Signal is not just weak \u2014 it is directionally wrong. Stocks do NOT continue to fall after dividend cuts at large-caps. Most likely explanation: by the time dividend is cut/suspended, the stock has ALREADY fallen substantially (the news was anticipated) and some recover. Discovery period (2015-2021) avg 5d=+2.15% for the stock, not negative \u2014 dividend cuts were accompanied by market rebounds (especially COVID 2020 cuts). This aligns with prior dead end (event_type=dividend_cut_suspension, id=15) from 2026-03-21 which also failed. Recorded as dead_end in knowledge base."
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "Scanner improvements, dividend cut signal research, new catalyst short setups",
+      "findings": "1. EXPANDED systemic_52w_low_scanner.py to use full 411-stock SP500 universe (was 112). March 18 systemic day now shows 23 first-touch stocks vs 6 before. April 2 Liberation Day will have much better coverage.\n2. FIXED activate_vix_spy_trade.py: removed invalid parameters (symbol, exit_deadline), switched from raw api.submit_order() to trader.place_experiment().\n3. CREATED april2_liberation_day_runbook.py: comprehensive post-market script for April 2. Checks SPY return, VIX, and 52w low count, prints exact activation commands.\n4. DIVIDEND CUT SHORT: Dead end. N=81, direction=46.9%, p=0.28, OOS avg=-0.04%. Large-cap stocks go UP not down after dividend cuts (strategic capital reallocation, market already priced in the deterioration).\n5. NEW WATCHLIST: DPZ ($12.1B), SBAC ($17.6B), GIS ($19.6B) all made first 52w low crossings March 24. DPZ+SBAC have April 27 earnings -> catalyst short setup if they drop >2% abnormal on earnings day.\n6. CAPR PDUFA Aug 22 2026: DISQUALIFIED for d302c84b (mktcap $1.66B > $500M threshold). CRL was clinical efficacy type but company too large."
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "Liberation Day preparation, new 52w low catalyst short candidates (DPZ, SBAC, TAP, ADBE), trade infrastructure verification",
+      "findings": "1. TRADE VERIFICATION COMPLETE: All March 26-27 trades properly scripted and auto-triggered via trade_loop. GO closes March 26 ~2:31 PM (deadline); SYK activates March 26 9:30 AM (trigger); KHC activates March 27 9:30 AM (trigger); HD/ABT/BAX close March 27 3:50 PM (deadline). No manual action required.\n\n2. LIBERATION DAY PREP: Pre-registered ADBE (f93527a2) as primary systemic short candidate for April 2 tariff announcement. ADBE: $98B, first 52w low March 24, no prior 2y crosses. Only activates IF SPY <-0.5% AND >=5 stocks at 52w lows on April 2. Created activate_adbe_trade.py.\n\n3. NEW CATALYST SHORTS: Pre-registered DPZ (dc68dfc3, April 27), SBAC (2e2a0aa2, April 27), TAP (f1666083, May 7) as conditional catalyst shorts. Entry ONLY if earnings miss >2% abnormal AND stock at/below 52w low. Created DPZ/SBAC activation scripts.\n\n4. DATA CORRECTIONS: GIS watchlist had wrong earnings date (April 15) - corrected to ~June 2026. RCKT PDUFA March 27/28: prior CRL was CMC (manufacturing), not efficacy \u2014 unlikely to trigger clinical_efficacy_failure_short.\n\n5. MULTIPLE STOCKS AT 52w LOWS: ADBE, GIS, BSX, OTIS, DPZ, SBAC, TAP, CPB all at first-touch 52w lows. Market is in broad sell-off mode with VIX=27, tariff uncertainty. Most are waiting for earnings catalyst to fire."
+    }
+  ]
+}
