@@ -163,9 +163,54 @@ h1 { font-size: 28px; letter-spacing: 4px; color: var(--accent); font-weight: 70
     border-radius: 6px;
     border-left: 3px solid var(--border);
 }
-.journal-entry .date { font-size: 11px; color: var(--accent); margin-bottom: 4px; }
+.journal-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.journal-entry .date { font-size: 11px; color: var(--accent); }
 .journal-entry .investigated { font-weight: 600; margin-bottom: 4px; }
 .journal-entry .findings { color: var(--muted); font-size: 13px; }
+
+/* Status badges */
+.status-badge {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.status-valid { background: rgba(102, 187, 106, 0.15); color: var(--green); }
+.status-dead-end { background: rgba(239, 83, 80, 0.15); color: var(--red); }
+.status-pending { background: rgba(255, 213, 79, 0.12); color: var(--yellow); }
+
+/* Journal pagination */
+.journal-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+.journal-pagination button {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-family: var(--font);
+    font-size: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+.journal-pagination button:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.journal-pagination button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
 
 /* Positive/negative coloring */
 .positive { color: var(--green); }

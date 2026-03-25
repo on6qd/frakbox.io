@@ -1,5 +1,8 @@
 const DATA = 'data/';
 let navChart = null;
+let journalData = [];
+let journalPage = 0;
+const JOURNAL_PER_PAGE = 10;
 
 async function fetchJSON(file) {
     try {
@@ -213,19 +216,50 @@ function renderResearch(res) {
         deEl.innerHTML = '<p class="muted">None yet</p>';
     }
 
-    // Journal
+    // Journal — store all entries, render current page
+    journalData = (res.journal || []).slice().reverse();  // newest first
+    journalPage = 0;
+    renderJournalPage();
+
+    // Wire up pagination buttons (only once)
+    const prev = el('journal-prev');
+    const next = el('journal-next');
+    prev.onclick = () => { journalPage--; renderJournalPage(); };
+    next.onclick = () => { journalPage++; renderJournalPage(); };
+}
+
+function statusLabel(status) {
+    const labels = { validated: 'Valid', dead_end: 'Dead End', pending: 'Pending' };
+    const cls = { validated: 'status-valid', dead_end: 'status-dead-end', pending: 'status-pending' };
+    return `<span class="status-badge ${cls[status] || 'status-pending'}">${labels[status] || 'Pending'}</span>`;
+}
+
+function renderJournalPage() {
     const jEl = el('journal-list');
-    if (res.journal?.length) {
-        jEl.innerHTML = res.journal.map(j => `
-            <div class="journal-entry">
-                <div class="date">${esc(j.date)}</div>
-                <div class="investigated">${esc(j.investigated)}</div>
-                <div class="findings">${esc(j.findings)}</div>
-            </div>
-        `).join('');
-    } else {
+    const total = journalData.length;
+    const totalPages = Math.ceil(total / JOURNAL_PER_PAGE);
+    const start = journalPage * JOURNAL_PER_PAGE;
+    const page = journalData.slice(start, start + JOURNAL_PER_PAGE);
+
+    if (!total) {
         jEl.innerHTML = '<p class="muted">No journal entries</p>';
+        return;
     }
+
+    jEl.innerHTML = page.map(j => `
+        <div class="journal-entry">
+            <div class="journal-header">
+                <span class="date">${esc(j.date)}</span>
+                ${statusLabel(j.status)}
+            </div>
+            <div class="investigated">${esc(j.investigated)}</div>
+            <div class="findings">${esc(j.findings)}</div>
+        </div>
+    `).join('');
+
+    el('journal-prev').disabled = journalPage <= 0;
+    el('journal-next').disabled = journalPage >= totalPages - 1;
+    el('journal-page-info').textContent = `Page ${journalPage + 1} of ${totalPages}`;
 }
 
 function esc(s) {

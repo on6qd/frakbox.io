@@ -678,54 +678,850 @@
   },
   "journal": [
     {
+      "date": "2026-03-19",
+      "investigated": "Pipeline calibration (seed-000), PEAD for mega-cap S&P 500 stocks with >10% EPS beats (seed-001), S&P 500 index addition effect (seed-002), FDA PDUFA decision literature review (seed-003)",
+      "findings": "Calibrated event-impact pipeline on three mega-cap earnings and confirmed post-earnings drift hypothesis yielded no edge for large-cap stocks with significant beat thresholds.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-19",
+      "investigated": "(1) March 2026 S&P 500 additions live validation (VRT, LITE, COHR, SATS), \n(2) S&P 500 deletion effect backtest (N=21, 2021-2026),\n(3) S&P 500 post-effective-date reversal test (N=24, 2020-2024),\n(4) FDA small biotech CRL (Complete Response Letter) backtest (N=8 measured + 4 delisted, 2018-2025)",
+      "findings": "S&P 500 addition trades outperformed by 7.77% on average in March 2026 validation; deletion effects and generic FDA CRL strategies yielded no reliable signal.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "Insider buying cluster hypothesis feasibility: (1) SEC EDGAR Form 4 data availability and access methods, (2) recent academic evidence on whether signal persists in 2020-2024, (3) specific APIs and tools available, (4) end-to-end pipeline test",
+      "findings": "Confirmed insider cluster hypothesis is testable with abundant SEC data (487 events Q4 2024) but 2024-2025 research shows the market advantage has largely vanished.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "Insider buying cluster hypothesis (2+ insiders each buying >$50K within 30 days via SEC Form 4 data)",
+      "findings": "Built SEC Form 4 insider cluster detector and collected 3,638 events from 2020-2022 before measuring any returns to prevent selection bias in subsequent analysis.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "insider_buying_cluster signal - full discovery backtest + OOS validation",
+      "findings": "Tested insider buying clusters as a short-term signal and confirmed they predict 3-day stock gains of 2.93% (initial test) and 3.89% (2022 validation).",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "insider_buying_cluster signal refinement: (1) re-created lost hypothesis 76678219 (2+ insiders, 5d), (2) discovered 3+ insider cluster signal is dramatically stronger, (3) built realtime_insider_scanner.py for live event detection",
+      "findings": "Confirmed that when three or more company insiders buy stock on the same day, it indicates short-term price gains 80% of the time, averaging 3.47% gain. Built a real-time scanner to detect this pattern.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "[\"1. Delisted ticker survivorship bias in insider cluster backtest (task 69d48652)\", \"2. Live insider cluster signals for Q1 2026 via OpenInsider.com scraping\", \"3. BLCO (Bausch+Lomb) cluster as secondary signal\", \"4. GO (Grocery Outlet) cluster as primary paper trade candidate\"]",
+      "findings": "Found insider buying groups are more reliable than previously measured. Grocery Outlet emerged as the strongest signal, with 6 insiders buying $6.3M at $6.02 average, trading 4% below.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "2023-24 OOS validation of 3+ insider cluster signal; CLAUDE.md doc friction (3+ occurrences); yfinance delistment failure rate solution",
+      "findings": "Confirmed three-insider cluster signal remains profitable in 2023-24 with 4.71% average abnormal return at three-day horizon and consistent statistical significance.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "1. Largecap-filtered insider cluster backtest (2023-24, >500M and >5B filters). 2. FDA clinical CRL short hypothesis: post-gap continuation drift. 3. Tiingo delisted ticker verification.",
+      "findings": "Validated insider cluster signal on large-cap stocks with 3.46% average abnormal return and identified 25 biotech companies with FDA clinical rejections for further study.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "FDA Clinical CRL Post-Crash Continuation Drift - searching for 8+ qualifying events (>60% crash, clinical-primary CRL, small biotech single drug)",
+      "findings": "Found three biotech companies with severe stock crashes following FDA clinical rejections showing continuation pattern with -19.35% average abnormal return across three days.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "[\"FDA clinical CRL post-crash continuation signal (N expansion from 3 to 4)\", \"WD (Walker & Dunlop) as secondary insider cluster trade candidate\", \"OpenInsider scan for fresh Q1 2026 cluster signals\"]",
+      "findings": "Expanded FDA clinical rejection dataset to four events and identified Walker & Dunlop as a fresh insider cluster trading candidate in elevated volatility regime.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "FDA Clinical CRL Short continuation hypothesis: expanding N from 4 to 5+ events. Systematic search of all FDA CRL database + SEC EDGAR 8-K filings.",
+      "findings": "Expanded FDA clinical rejection dataset to five events with 100% continuation pattern and average -19.83% abnormal return, excluding diversified-pipeline reversal cases.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "FDA clinical rejection short hypothesis - corrected event dates, expanded dataset, pre-registered. Phase 2/3 failure category research.",
+      "findings": "Corrected critical event date errors in clinical rejection dataset and confirmed signal with six events showing zero positive rate across all horizons with statistical significance.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "[\"Phase 2/3 clinical trial failure event date correction and dataset expansion\", \"Combined FDA CRL + Phase 2/3 failure hypothesis (clinical_efficacy_failure_short)\", \"Recent FDA CRL events from CRL API (PTCT, IRON, SRRK, CAPR, AQST) - disqualified all\", \"verify_event_date tool creation to prevent recurring date errors\", \"Trade script non-interactive mode (--yes flag)\"]",
+      "findings": "Combined FDA clinical rejections with Phase 2/3 trial failures into unified hypothesis with 11 events showing -27.45% average abnormal return with zero positive rate.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "[\"d302c84b full backtest re-validation (GOSS data discrepancy)\", \"CEO/CFO sudden departure signal (new category)\", \"Reverse stock split announcement signal (new category)\", \"EDGAR clinical failure scanner tool (new tool)\", \"Upcoming qualifying event search for d302c84b\"]",
+      "findings": "Corrected measurement error in clinical failure dataset and confirmed signal remains statistically robust after correction with 10/11 events showing continuation pattern.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "Session startup health checks, two new signal categories: SEC Wells Notice disclosures and Activist Investor 13D filings. Clinical failure scanner check. Explored Starboard Value 13D returns 2020-2024.",
+      "findings": "Tested SEC Wells Notice disclosures and activist investor 13D filings as short signals but found no statistically significant edge in either category.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "[\"1. Clinical failure scanner (weekly check)\", \"2. S&P 500 March 2026 additions validation (LITE/COHR/SATS/VRT)\", \"3. Earnings restatement signal (8-K Item 4.02)\", \"4. CEO unexpected departure signal\", \"5. Credit rating upgrade signal (junk to IG)\", \"6. Dividend initiation signal (exploratory)\", \"7. Friction log analysis\"]",
+      "findings": "Validated S&P 500 addition signal with four March 2026 additions showing 5.20% average abnormal return and confirmed earnings restatement signal is a dead end.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "Large buyback announcement signal (task d7e3b807); Monday trade trigger setup for GO and WD; EDGAR clinical failure scanner",
+      "findings": "Set trade triggers for GO and WD insider cluster events and confirmed large buyback announcements yield no significant abnormal returns across time horizons.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "Monday trade setup (GO+WD triggers), EDGAR clinical failure scan (7 candidates March 14-21), large buyback signal viability, GOSS anomaly follow-up",
+      "findings": "Confirmed GO and WD insider cluster trades ready for execution at Monday market open and completed clinical failure event screening for March 2026.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "[\"Fallen angel credit downgrade signal\", \"Profit warning / guidance cut signal\", \"Secondary equity offering dilution signal\", \"IPO lock-up expiry signal\", \"CEO/CFO sub-filter for insider cluster signal\", \"52-week low filter for insider clusters\", \"NDX-100 addition signal\", \"OpenInsider fresh cluster scan (POOL, AMRZ, AHCO identified as missed)\", \"Built cluster_auto_scanner.py + launchd schedule\"]",
+      "findings": "Tested six new event-driven signals including fallen angel downgrades, profit warnings, and secondary offerings but found no consistent edge in any category.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "[\"1. SPAC De-SPAC announcement signal\", \"2. Insider cluster sector analysis (2023-24 largecap events)\", \"3. Stock split announcement signal\", \"4. CEO turnaround hire signal (exploratory)\", \"5. March 2026 S&P 500 additions live validation\", \"6. Built sp500_change_scanner.py tool\"]",
+      "findings": "Tested SPAC de-SPAC announcements, stock split announcements, and CEO turnaround hires as signals but found no statistical edge in any category.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "VWAP deviation as disposition effect short signal \u2014 does price >> VWAP_252 predict underperformance?",
+      "findings": "Tested price-to-VWAP deviation as short signal but found stocks trading above 252-day VWAP show consistent 0.64-0.86% abnormal returns at all horizons.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "Disposition effect / VWAP cost-basis overextension as short signal (from steer.md); duplicate GO hypothesis cleanup; clinical failure scanner check",
+      "findings": "Rejected disposition effect hypothesis as stocks above 1-year VWAP outperform and cleaned up duplicate GO insider cluster hypothesis from repository.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "Volume-disposition effect (steer.md direction) and VWAP momentum breakout (previous session follow-up)",
+      "findings": "Tested volume-disposition and VWAP momentum breakout signals on 100-stock universe but found no consistent statistical edge after multiple testing correction.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "[\"1. Volume-profile percent-in-profit (cost basis) signal from steer.md direction\", \"2. Earnings guidance cut SHORT signal\", \"3. Verified GO/WD paper trade triggers for Monday March 23\", \"4. Cluster auto-scanner: no new opportunities\"]",
+      "findings": "Tested volume-profile cost basis signal as fourth variant of disposition hypothesis but confirmed all disposition-based strategies are dead ends.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "CEO/CFO sudden departure signal \u2014 both SHORT (performance failure) and LONG/SHORT (relief rally) variants. Volume/cost basis signal from steer.md confirmed dead end (4th test).",
+      "findings": "Discovered sudden CEO/CFO departures predict next-day stock declines of 3.27% average with zero positive rate but signal does not persist beyond one day.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "[\"1. Steer.md volume/cost-basis question (already answered \\u2014 4 dead ends from prior session)\", \"2. GO and WD trade trigger verification (both trigger=next_market_open, execute Monday)\", \"3. CEO performance failure departure signal \\u2014 expanded from N=9 exploratory to N=12 formal hypothesis\", \"4. New CEO departure events: DOCU 2022 (Dan Springer), FIVE 2024 (Joel Anderson), BA 2024 (Dave Calhoun)\", \"5. OpenInsider scan for fresh clusters \\u2014 found AMRZ (5x, Holcim NA) and POOL (3x) but both past entry window\"]",
+      "findings": "Formalized CEO departure signal with 12 events showing 3.25% average next-day decline and confirmed trades are ready for Monday execution with proper criteria.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "Small-cap first-ever share buyback signal",
+      "findings": "Tested small-cap first-ever share buyback announcements as signal but found insufficient statistical power with only eight qualifying events and 75% positive rate.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-21",
+      "investigated": "CEO departure timing structure (ADBE validation), insider cluster scan (POOL/AHCO/AMRZ/BLCO), small-cap first-ever buyback signal",
+      "findings": "Confirmed CEO departure signal fires entirely in overnight gap making it untradeable with current after-hours order limitations and found no fresh insider clusters.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "FDA rejection signal quality (ALDX/ATRA/GOSS/IMMP), CEO departure (GPOR/ADBE), fresh insider cluster scan, upcoming PDUFA calendar",
+      "findings": "Identified that repeat clinical rejections and extreme overnight gaps create bounce reversals unsuitable for short trading and confirmed IMMP as strong single event.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "Missed cluster outcomes: POOL (Mar 17, 3 insiders, 3.6M), AMRZ (Mar 16, 5 insiders, 4.6M). AHCO actionability check (Mar 12, 3 insiders, 20M, M-flag).",
+      "findings": "Reviewed two missed insider cluster opportunities and found SPY market decline of 3.05% during the period overwhelmed the positive insider buying signal.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "GOSS verification, after-hours order support, insider cluster scan, DNLI PDUFA assessment",
+      "findings": "Added after-hours order support to trading infrastructure unlocking CEO departure short signal and staged GO and WD insider cluster trades for Monday execution.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "VIX regime sensitivity of insider_buying_cluster signal. GO/WD trade decision for Monday March 23.",
+      "findings": "Found elevated volatility environment shows strongest insider cluster signal with 2.57% average abnormal return contradicting typical risk-off expectations.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "SPY 5-day prior trend as additional filter for insider cluster signal, on top of VIX regime",
+      "findings": "Tested market trend as regime filter for insider cluster signal but found volatility level is the only statistically significant regime predictor across all conditions.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "Insider cluster regime analysis (N=1566 events) with VIX and SPY trend filters. Investigated REPL/DNLI pre-PDUFA spikes. Investigated SSP 16-insider cluster. Reviewed POOL/AMRZ/BLCO outcomes.",
+      "findings": "Analyzed 1,566 insider cluster events and found volatility regime is the dominant predictor of signal strength while market trend provides no additional information.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "VIX 4-tier regime analysis and cluster size interaction. GO/WD trade trigger verification. Clinical failure scanner check.",
+      "findings": "Discovered insider groups of 6+ members create tradeable signal even in elevated volatility environments while smaller groups fail in the same regime.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "[\"n=6-9 vs n>=10 cluster size tier analysis (N=1566 events)\", \"IPO lockup expiry contamination hypothesis for n>=10 signal disappearance\", \"POOL and AMRZ outcome validation (missed opportunities)\", \"Clinical failure scanner check (CAPR, HUMA - no qualifiers)\", \"REPL and DNLI PDUFA status check\"]",
+      "findings": "Found 6-9 insider cluster events are robust across volatility regimes with 3.29% average abnormal return while larger clusters show no pattern.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "n=6-9 insider cluster events: multi-horizon backtest with temporal train/test split (discovery=2021-2022, validation=2023-2025)",
+      "findings": "Pre-registered 6-9 insider cluster hypothesis with discovery period showing 3.57% return and validation showing 7.80% return, both statistically significant.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "[\"n=6-9 insider cluster multi-horizon backtest (formal pre-registration)\", \"VWAP breakout momentum signal viability\", \"OpenInsider fresh cluster scan\", \"DNLI/REPL PDUFA status check\"]",
+      "findings": "Formally registered 6-9 insider cluster hypothesis with consistent 3-4% abnormal returns in discovery and validation periods with zero statistical evidence of false discovery.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "9f8a4c61 OOS split compliance, DNLI PDUFA April 5 event type, cluster scanner for new signals, S&P 500 March 2026 rebalance",
+      "findings": "Fixed out-of-sample compliance issue in insider cluster hypothesis and added clinical rejection watchlist entries for upcoming decisions in March 2026.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "GO/WD trade triggers vs VIX tier rules; DNLI/REPL PDUFA events; cluster scan; S&P500 additions",
+      "findings": "Removed one insider cluster trade due to elevated volatility and small group size yielding negative expected value and confirmed other trade remains properly qualified.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "[\"n=6-9 insider cluster multi-horizon backtest\", \"CEO departure scanner improvement\", \"New signal scan: clinical failure monitoring\", \"Cluster opportunity scan: no fresh n=6-9 events\"]",
+      "findings": "Updated insider cluster hypothesis with caution noting signal strength is concentrated in recent data and may depend on current market regime conditions.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "CEO departure scanner bug fix, clinical failure scan, insider cluster scan, S&P 500 additions status",
+      "findings": "Fixed critical CEO departure detection bug in monitoring scanner and confirmed GO remains the only actionable insider cluster trade for Monday market open.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "[\"IPO lockup expiry SHORT signal (N=23 major tech IPOs 2019-2022)\", \"Clinical efficacy failure expansion (systematic EDGAR search for new events)\", \"Clinical failure scanner improvement (auto-qualify mode)\", \"CEO departure alerts review (stale false positives cleared)\", \"Cluster scanner run (no qualifying events at VIX 26.78)\"]",
+      "findings": "Rejected IPO lockup expiration as short signal and expanded clinical failure hypothesis with three new events via systematic SEC filing analysis.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "Knowledge base gap analysis, S&P 500 deletion literature, March 2026 addition validation",
+      "findings": "Completed knowledge base audit and configured watchlist with 12 upcoming catalyst events including FDA approval decisions for Q2 2026.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "Clinical failure scanner (7 candidates, none tradeable), ALDX CRL exclusion validation, REPL/DNLI PDUFA disqualification, S&P 500 March 2026 validation, RCKT PDUFA monitoring setup",
+      "findings": "Validated March 2026 index additions signal with 4/4 positive outcomes averaging 5.20% abnormal return and confirmed clinical failure exclusion criteria.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "Secondary Equity Offering (SEO) dilution short signal using EDGAR 424B4 filings 2020-2024",
+      "findings": "Tested secondary equity offering dilution signal but found no statistical edge and identified unreliable event dating as structural barrier to hypothesis testing.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "Fresh insider clusters (SSP, BLCO, POOL) for hypothesis 416556df; SEO bought-deal scanner construction",
+      "findings": "Built secondary equity offering signal detection tool and screened three fresh insider cluster candidates, determining only one remains eligible for trading.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "[\"SEO bought-deal short signal (N=33, 5d backtest)\", \"POOL insider cluster verification (EDGAR Form 4 XML)\", \"AMRZ insider cluster qualification\", \"M&A acquirer short signal (N=20)\", \"VIX gate application to pending trades\", \"Clinical failure scanner (60-day window)\", \"RCKT PDUFA eligibility check\"]",
+      "findings": "Rejected secondary equity offering signal as unprofitable after removing outliers and disqualified one cluster due to reporting inflation in public data sources.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "[\"EDGAR Form 4 verification for cluster_auto_scanner.py (fix for OpenInsider RSU inflation)\", \"IPO lockup expiration SHORT signal (N=13 high-profile IPOs)\", \"Reverse stock split continuation short signal (N=10 events)\", \"Clinical failure scanner (no new qualifying events in 90-day window)\", \"VWAP signal task marked dead end (already confirmed in prior session)\", \"e779875d hold period analysis marked complete (already in d302c84b notes)\"]",
+      "findings": "Built SEC filing verification tool to confirm insider clusters and tested IPO lockup expiration as short signal but found no statistical edge.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "CEO/CFO-inclusive insider buying clusters (Cohen, Malloy & Pomorski 2012 replication)",
+      "findings": "Discovered CEO or CFO participation in insider clusters adds 2.45% average abnormal return differential compared to director-only clusters at all horizons.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "CEO/CFO-inclusive insider buying cluster filter. Question: do clusters that include CEO or CFO show materially higher returns than director-only clusters? Also: administrative integration of validated hypothesis into live scanner.",
+      "findings": "Insider buying clusters including CEOs or CFOs showed 7.01% average 5-day returns versus 4.56% for director-only clusters, with the effect validated across different market regimes.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "[\"Dividend initiation signal (EDGAR 8-K first quarterly dividend, 2020-2024)\", \"Insider buying cluster regime change analysis (quarterly granularity, 2021-2025)\", \"CEO departure scanner (weekly scan, LULU/SDRL this week)\", \"n=6-9 cluster signal validation in current regime (2023+)\", \"CEO/CFO filter confirmation in current regime\", \"ALDX clinical failure re-scan (disqualified)\", \"Dollar conviction tier analysis in current regime\"]",
+      "findings": "Insider cluster signals were inactive in 2021-2022 but reactivated in 2023 with strong returns. Dividend initiation announcements failed out-of-sample validation.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "Pre-earnings run-up signal (consistent EPS beaters drift up before earnings); 3-way interaction CEO/CFO x cluster size x VIX; regime change note for hypothesis 416556df",
+      "findings": "Pre-earnings drift signals failed for large-cap stocks. A high-confidence insider trade was triggered for execution at market open.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "CEO/CFO bulk role classifier, mid-cap pre-earnings drift, fresh cluster scan, clinical failure detection",
+      "findings": "Insider buying clusters with CEO participation validated strongly at 5.9% returns when VIX remained low; elevated volatility eliminated all signal.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "[\"3-way interaction analysis (CEO/CFO x cluster_size x VIX) with 98.3% coverage\", \"Robust statistics for key hypotheses (median, skewness, Sharpe)\", \"Small-cap buyback announcements 2022-2024\", \"Dollar conviction quartile as return predictor\", \"REPL pipeline verification for April 10 PDUFA\", \"CEO departure scanner (SDRL, CVBF): neither qualifies\", \"Q2 2026 PDUFA calendar for d302c84b candidates\", \"Clinical failure scanner disqualification memory (ALDX friction fix)\"]",
+      "findings": "Advanced statistical tests of CEO/CFO premium and cluster-size interactions failed. Small-cap buyback announcements showed no predictive power.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "CEO departure candidates SDRL and CVBF from 2026-03-18 scanner run",
+      "findings": "Two CEO departure signals were false positives: one was an internal promotion and the other was an unrelated corporate event.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "GO trade verification, analyst initiation/downgrade signals, WD/AMRZ VIX gate check",
+      "findings": "One insider cluster trade confirmed valid; analyst initiation signals showed no profit after costs despite marginal statistical significance.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "GO trade verification (VIX regime gate), analyst initiation/downgrade signals, WD/AMRZ VIX gate check, no new clusters",
+      "findings": "Insider cluster trade confirmed for execution. Analyst recommendation signals unprofitable after transaction costs.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "52-week low first-touch signal for S&P 500 large-caps. Original hypothesis: contrarian bounce (LONG). Tested 209 events 2021-2025 across 66 large-cap stocks.",
+      "findings": "Stocks touching 52-week lows continued declining rather than bouncing, a pattern that held across all market volatility regimes.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "Short interest spike signal (FINRA REGSHO), insider selling cluster (3+ insiders), pre-earnings mid-cap runup, operational: 52w-low daily scanner scheduling",
+      "findings": "Short interest spike data contaminated by market-maker activity. Insider selling clusters showed partial signal but regime-dependent effectiveness.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "ALDX blacklist tool, insider selling cluster >5B, ABT 52w-low OOS check, S&P 500 Q2 watchlist, GO/HD trigger verification",
+      "findings": "Built tools to prevent signal loss from processing errors. Insider selling signals failed across different market cap filters.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "ABT 52-week low first-touch qualification for hypothesis 86d28864 OOS tracking",
+      "findings": "ABT qualified as a 52-week low signal and was added for passive out-of-sample performance tracking.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Trade trigger status for GO (1cb6140f), HD (86d28864), WD (76678219), and ABT OOS instance tracking for 52w-low hypothesis",
+      "findings": "Trade triggers verified and ready for execution with appropriate volatility-based position sizing adjustments.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Scanner multi-signal bug, VIX gate status for WD/AMRZ, new 52w-low signals, trade trigger verification",
+      "findings": "Fixed critical signal-detection bug that had lost trades. Volatility gates confirmed working correctly.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "ABT OOS tracking, GO/HD trade triggers, VIX regime, new insider clusters (POOL/GRNT/AVBC/GCBC), S&P 500 March 2026 additions (VRT/LITE/COHR/SATS), 52w-low scan for S&P 500 large-caps",
+      "findings": "Multiple trades set for next market open across different risk regimes. New clusters identified; volatility blocking additional entry signals.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "52w-low scanner bug fix (already done), VIX gate checks for WD/AMRZ, 52w-low candidate scan across Retail/Consumer/Energy/Healthcare sectors",
+      "findings": "Identified seven 52-week-low candidates at varying distance from lows. Two trades remain blocked by elevated market volatility.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "Insider cluster at 52w low combined signal; NKE/BAX 52w-low proximity; PDUFA candidates for March-April; Russell 2000 reconstitution as new signal",
+      "findings": "Combined insider cluster and 52-week-low signals conflict rather than reinforce, producing no stronger prediction.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-22",
+      "investigated": "Russell 2000 reconstitution as a potential new signal (background agent)",
+      "findings": "Russell 2000 reconstitution effect has declined significantly over decades due to reduced market impact and data accessibility barriers.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "PDUFA candidates April-May 2026 (GRCE, CING, RCKT, REPL, VRDN), 52w low signal regime analysis, ASR announcement SHORT signal, 52w high breakout momentum, scanner universe expansion (V/MA/COF/ACN/TSLA/AMGN added)",
+      "findings": "52-week-low signal robust across all volatility regimes. Most FDA approval candidates disqualified due to signal design limitations.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "PEAD for S&P 500 large-caps, REPL CRL history, 52w-low scanner expansion, AMRZ expiry check",
+      "findings": "Pre-earnings surprise effects regime-specific and defunct in recent years. Expanded scanner universe to 174 stocks.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Sector earnings surprise signals from background analysis: (1) Tech large beats >10% EPS surprise -> short 5d, (2) Earnings misses -> long 5d relief rally",
+      "findings": "Two sector earnings surprise signals failed statistical and profitability tests across all time horizons.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "CEO departure OOS validation (FBIN, LULU, SDRL March 2026), FDA drug approval post-drift signal, insider cluster near earnings effect, SP500 universe expansion",
+      "findings": "CEO departure out-of-sample validation mixed: some signals correct, some false positives. FDA approval signals lacked sufficient data.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Spin-off announcement LONG signal (parent stock), FINRA short volume spike signal",
+      "findings": "Spin-off returns concentrated in overnight gaps, not tradeable at market open. Short interest spike signal shows no effect.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "SpinCo institutional selling short signal, guidance raise signal, SEO signal, activist 13D signal data access",
+      "findings": "Newly-traded spin-off companies decline 5.7% on average over five days, providing a validated short entry signal.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Pre-earnings drift for consistent EPS beaters (3+ consecutive beats), large-cap S&P 500, 2020-2024",
+      "findings": "Consistent earnings beaters showed no pre-earnings drift. Mixed-history companies actually outperformed beaters.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "REPL CRL date verification, RCKT PDUFA March 28 context, CEO departure scanner improvement (20d qualifier), EDGAR display_names API fix, strategic alternatives signal exploration",
+      "findings": "Corrected historical data errors and improved CEO departure detection using prior performance filtering.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Upcoming spinoffs 2026 (background agent results)",
+      "findings": "FedEx Freight spin-off (April 1, 2026) qualifies for short signal due to institutional unloading pattern.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Strategic alternatives announcement signal (large-cap 8-K filings 2019-2024)",
+      "findings": "Strategic alternatives announcements too heterogeneous between M&A targets and distressed sales to trade reliably.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Russell 2000 annual reconstitution addition signal (buy on preliminary list announcement, hold ~20 trading days to effective date)",
+      "findings": "Russell 2000 reconstitution additions signal dead end due to unavailable machine-readable constituent data.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Dividend resumption signal and junk-to-investment-grade credit upgrade signal, both EDGAR-sourced",
+      "findings": "Dividend resumption signals failed. Junk-to-investment-grade credit upgrades showed promise but insufficient sample size.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Credit upgrade junk-to-IG signal expansion: growing dataset from n=9 to n=15, then refining to first IG upgrades only (n=12)",
+      "findings": "Credit upgrades from junk to investment grade produced 2.4% abnormal 3-day returns when limited to first agency upgrade per company.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Credit upgrade junk-to-IG signal OOS validation: found 4 new 2025-2026 events; checked VGNT/GO/HD trigger status; scanned for new insider clusters; checked PDUFA calendar for d302c84b candidates",
+      "findings": "Credit upgrade signal validated with new 2026 confirmations. Follow-on upgrades exhibit different timing dynamics.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Credit upgrade signal data quality: verification of first-IG classification in hypothesis f86dcb4e. Also discovered and characterized follow-on IG upgrade timing effect.",
+      "findings": "Removed misclassified events from credit upgrade dataset, improving signal strength to 2.76% average 3-day return.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Trade trigger status for GO (1cb6140f), WD (76678219), HD (86d28864)",
+      "findings": "All active trades verified ready for execution with appropriate market volatility gates applied.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "realtime_insider_scanner.py timeout fix; REPL PDUFA watchlist setup",
+      "findings": "Fixed scanner timeout issues. REPL stock monitored for upcoming April FDA decision with updated watchlist.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Russell 2000 annual reconstitution effect - announcement day return on R1000->R2000 demotions",
+      "findings": "Russell 2000 demotion signal (downgrade to smaller index) showed no statistically significant effect.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Strategic alternatives 8-K announcement signal; also recorded Russell 2000 dead end; checked GO/HD trade execution status",
+      "findings": "Strategic alternatives signal confirmed dead end due to conflicting market reactions across event types.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Russell 2000 reconstitution effect, strategic alternatives announcement signal, REPL PDUFA setup, CEO departure monitoring",
+      "findings": "Confirmed two dead-end signals (Russell 2000 reconstitution effects). Active trades progressing as scheduled.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Merger arbitrage spread compression - specific catalytic events within deal timeline",
+      "findings": "Identified five potential merger arbitrage catalyst events from SEC filings for future signal development.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "HSR early termination (antitrust clearance) as M&A target signal",
+      "findings": "HSR antitrust clearance announcements showed zero abnormal returns; signal confirmed as ineffective.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "First-time IG credit upgrade candidates Jan-March 2026 for hypothesis f86dcb4e. Also: insider cluster scanner and watchlist review.",
+      "findings": "No qualified first-grade credit upgrades found January-March 2026. One recent case produced negative returns from pre-event hype.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "GO hypothesis VIX regime coverage; VST first-IG OOS result; merger arb dead end recording; GO trigger readiness check",
+      "findings": "Current insider trade requires no volatility filtering. Credit upgrade signal may benefit from pre-event run-up limits.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "FedEx Freight (FDXF) spinoff June 1 2026 - fit with spinco_institutional_selling_short hypothesis (2d94ac68)",
+      "findings": "FedEx Freight spin-off does not qualify for short signal; institutional investors view it as desirable pure-play company.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Merger arbitrage spread compression (HSR clearance catalysts), FDXF spinco assessment, first IG upgrade signal update",
+      "findings": "Confirmed two dead-end signals. Refined credit upgrade hypothesis with pre-event run-up screening to prevent outlier contamination.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "first_ig_credit_upgrade hypothesis f86dcb4e \u2014 pre-event run-up filter design",
+      "findings": "Refined credit upgrade filter to exclude 24-month pre-event run-ups above 250% to exclude outlier-driven false positives.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "f86dcb4e first-IG upgrade signal \u2014 VRT OOS result recording and next candidate pipeline",
+      "findings": "Validated positive out-of-sample credit upgrade result. Identified Carnival as next candidate for 2026 tracking.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "CCL Fitch BBB- upgrade (October 2 2025) \u2014 first-ever IG rating for Carnival from any agency",
+      "findings": "Tested timing of credit upgrades and found that market-hours announcements are fully priced in by close, while after-hours announcements retain tradeable edge.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "First-IG credit upgrade signal timing filter; CCL Fitch upgrade OOS; VRT OOS validation; REPL PDUFA research",
+      "findings": "Validated first-time investment-grade credit upgrade signal using real trading data and confirmed after-hours timing is critical for edge.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "52w low signal deployment (ABT/CTAS), REPL PDUFA assessment, VIX direction filter analysis, tariff shock confounder research",
+      "findings": "Deployed four 52-week low shorts at market open and identified tariff risk as critical confounder reducing signal accuracy to 33%.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Insider cluster crisis regime (VIX>30), 52w low regime robustness, dividend cut announcement signal, WD trade decision",
+      "findings": "Found insider cluster signals completely fail during market crises (VIX>30) while 52-week lows remain robust across all market regimes.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Merger arbitrage announcement-day drift signal. Also: verified all 4 trade triggers (GO/HD/ABT/CTAS) for Monday open. VIX analysis. VGNT spinoff timing confirmation.",
+      "findings": "Tested merger arbitrage on 11 completed deals and found 2.4% average abnormal return over 5 days, driven by smaller faster-closing deals.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Merger arbitrage announcement-day drift signal expansion from N=11 to N=20",
+      "findings": "Expanded merger arbitrage to 20 deals and confirmed original 2.4% signal was false positive from selection bias toward high-premium deals.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Second-agency investment-grade credit rating upgrades as tradeable signal (research question related to hypothesis f86dcb4e)",
+      "findings": "Tested second-agency credit upgrades and found no edge, confirming index inclusion requires only one IG rating.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Friction fixes (Tiingo cache), merger arbitrage N=20 expansion, second-agency IG upgrade signal, ABT 52w low validity check, ADBE/RACE scanner",
+      "findings": "Built API caching system to prevent rate limits and confirmed two signals are dead ends: merger arbitrage and second-agency upgrades.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Wells Notice SHORT signal (comprehensive retest N=27); CIEN S&P 500 missed trade analysis; S&P 500 scanner bug fix; NKE 52w low monitoring; VGNT spinoff analysis",
+      "findings": "Expanded Wells Notice to 27 events confirming dead end, while identifying major miss: CIEN S&P 500 addition worth +21.66% abnormal return.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Wells Notice signal expansion (EDGAR 2010-2022), profit warning continuation SHORT signal, active trade monitoring",
+      "findings": "Confirmed Wells Notice and profit warning signals are dead ends after exhaustive historical search due to event heterogeneity.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Active trade monitoring (5 trades), new signal exploration (deal collapse, dividend initiation), 52w low scanner improvements",
+      "findings": "Monitored five active shorts and identified CTAS earnings confounder plus 52-week low scanner lookback deficiency.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "New signal areas: earnings miss continuation SHORT, 52w HIGH breakout LONG, spinco parent announcement LONG, near-52w-low candidates scan",
+      "findings": "Tested three new signals (earnings miss, 52w high breakout, spinoff parent) and confirmed all are dead ends or regime-specific artifacts.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "US congressional stock trading data collection - building politician_trading_scraper.py",
+      "findings": "Built web scraper for congressional stock trading data from Capitol Trades, capturing 310 recent trades for signal research.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "US politician stock trading signal (Capitol Trades, STOCK Act disclosures). Capitol Trades API with 10,704 trades from Jan 2025 to Mar 2026. Full 34K historical fetch in progress.",
+      "findings": "Found strong congressional trading signal in Timothy Moore's transactions (+2.11% 5-day return, p=0.001) though overall politician edge is weak.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "Final OOS validation of politician trading signal with 25,493 records (2023-2026)",
+      "findings": "Validated congressional trading signal out-of-sample and confirmed it's a dead end driven by regime-specific 2025 tariff volatility.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "US politician stock trading signal - exhaustive investigation per STEER direction. Tested: (1) Senate Stock Watcher data 2012-2020 with spouse/family flags, (2) reporting gap segmentation of 2023-2026 data, (3) RCKT PDUFA research for upcoming FDA decision.",
+      "findings": "Completed exhaustive investigation of congressional stock trading across decades and confirmed signal is completely dead end.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-23",
+      "investigated": "RCKT PDUFA (March 27-30, KRESLADI LAD-I gene therapy); DNLI PDUFA (April 5, tividenofusp alfa MPS II); VIX spike above 30 event; KHC 52w low first-touch dating; Wells Notice known_effect cleanup; insider cluster scan",
+      "findings": "Confirmed Rocket Pharmaceuticals is invalid for short hypothesis (multi-pipeline), verified four active trades, analyzed VIX patterns.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "(1) Integrity fix, (2) Pre-FOMC drift signal, (3) OpEx week effect, (4) SYK 52w low signal, (5) NKE earnings setup, (6) Clinical pipeline scan",
+      "findings": "Tested pre-FOMC drift and option expiration effects, confirmed both are dead ends (arbitraged away), created SYK 52-week low hypothesis.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "(1) Session state load + integrity check. (2) Insider cluster scan - none qualified (VIX Tier 3, AHCO/MSTR failed EDGAR verification). (3) SYK 52w low hypothesis created (5b09b097) + activation script. (4) KEY DISCOVERY: sp500_52w_low_catalyst_short signal. (5) NKE earnings + 52w low hypothesis 0bc8ec49 + activation script.",
+      "findings": "Found strong 52-week low catalyst short signal when paired with >2% day-one abnormal drop (4.44% average 5-day return, p<0.0001).",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "db.py load_knowledge bug fix; scan 78 S&P 500 stocks near 52w lows; identify MKC, CAG as upcoming catalyst short opportunities; credit upgrade scan for CCL/VST/VRT; analyst initiation (confirmed dead end); CEO departure scan (no qualifying events); CTAS earnings risk assessment",
+      "findings": "Fixed database loading bug and identified 78 S&P 500 stocks near 52-week lows, pre-registering four earnings-catalyst short candidates.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "Buyback announcement signal backtest, 52w low breadth scan, REIT sector analysis, analyst upgrade cluster (exploratory). Also identified CTAS-Alpaca tracking bug.",
+      "findings": "Confirmed buyback signal is dead end while finding major REIT sector selloff with 30 stocks at 52-week lows.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "(1) CTAS earnings risk assessment, (2) Post-Earnings Announcement Drift (PEAD) signal, (3) SYK verification for March 27 activation, (4) RCKT PDUFA assessment",
+      "findings": "Validated post-earnings announcement drift signal (1.42% abnormal return for 10%+ EPS beats) and closed CTAS short due to earnings risk.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "Trade monitoring, REPL PDUFA disqualification, new catalyst scan, signal performance review",
+      "findings": "Completed quarterly catalyst scan finding no new 52-week low candidates with spring earnings despite broader market strength.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "GOSS Feb 23 Phase 3 failure event analysis; d302c84b scope clarification",
+      "findings": "Analyzed GOSS Phase 3 failure and clarified that trial readout failures don't qualify as FDA clinical rejections.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "FDA PDUFA calendar Q2 2026 - screening for clinical failure short candidates",
+      "findings": "Screened full FDA PDUFA calendar for April-June 2026 and found zero qualifying clinical failure short candidates.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "NKE Q3 FY2026 and MKC Q1 FY2026 earnings consensus research",
+      "findings": "Researched earnings for McCormick and Nike, finding high-conviction short setup for McCormick and lower edge for Nike.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "Trade management, trigger fixes, S&P 500 addition timing discovery, NKE earnings pattern analysis, spinoff pipeline research",
+      "findings": "Fixed multiple trade automation bugs including unconditional triggers and weekend deadlines that would cause unintended executions.",
+      "status": "dead_end"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "Spinoff pipeline scan Q2 2026 - found missed JAN opportunity and Middleby Food Processing candidate",
+      "findings": "Identified upcoming spinoff opportunities including Middleby Food Processing (Q2 2026) as best near-term candidate.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "Week-ahead trade management: KHC 52w low short setup, EDGAR CEO scanner fix, active trade verification",
+      "findings": "Created KHC 52-week low short trade and fixed SEC EDGAR scanner connectivity issue with proper User-Agent.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "Trade monitoring (CTAS close, SYK/KHC triggers), VIX spike recovery backtest (N=19), RCKT PDUFA analysis, April 1 capacity conflict analysis",
+      "findings": "Confirmed CTAS position closure and monitored SYK/KHC triggers while validating VIX spike recovery on 19 historical events.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-24",
+      "investigated": "VIX spike recovery extension, CAG consensus EPS, DNLI PDUFA screening, Nasdaq 100 rebalancing signal, activation script fixes",
+      "findings": "Extended VIX spike recovery signal to 54 events confirming statistical validity with 1.7% abnormal return over 20 days.",
+      "status": "pending"
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "Q2 2026 PDUFA calendar, upcoming spinoff pipeline (FDXF/HONA/SPGI), RCKT PDUFA assessment, REPL/MKC/NKE/CAG trade setup verification",
+      "findings": "Mapped Q2 2026 spinoff pipeline with FedEx Freight June 1 and Honeywell Aerospace Q3 2026 as major events.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "Trade verification, April earnings catalyst scan, PGR/PG pre-registration",
+      "findings": "Verified all active trade automation and scanned full S&P 500 for April earnings near 52-week lows, pre-registering two candidates.",
+      "status": "validated"
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "First IG credit upgrade OOS validation: VRT and WDC",
+      "findings": "Validated first-time credit upgrade signal on two February events, confirming true first-IG positive while return-to-IG negative.",
+      "status": "validated"
+    },
+    {
       "date": "2026-03-25",
       "investigated": "Market scan: new 52w low candidates, sector ETF VIX spike recovery, guidance cut signal, fallen angel signal, insider cluster scan",
-      "findings": "Identified communication services underperformance following VIX spikes and six large-caps approaching first-ever 52-week lows."
+      "findings": "Identified communication services underperformance following VIX spikes and six large-caps approaching first-ever 52-week lows.",
+      "status": "dead_end"
     },
     {
       "date": "2026-03-25",
       "investigated": "First-touch 52w low methodology audit, BSX/OTIS pre-registration, insider scan for CEO/CFO buys, RCKT PDUFA monitoring",
-      "findings": "Built improved scanner for true first-touch 52-week lows and found most recent candidates are sustained downtrends, not genuine signals."
+      "findings": "Built improved scanner for true first-touch 52-week lows and found most recent candidates are sustained downtrends, not genuine signals.",
+      "status": "validated"
     },
     {
       "date": "2026-03-25",
       "investigated": "CEO/CFO insider signal regime analysis from background agent results",
-      "findings": "Analyzed CEO/CFO insider buying clusters and found 75% of recent clusters failed in elevated VIX environment."
+      "findings": "Analyzed CEO/CFO insider buying clusters and found 75% of recent clusters failed in elevated VIX environment.",
+      "status": "validated"
     },
     {
       "date": "2026-03-25",
       "investigated": "52w low first-touch scan, RCKT PDUFA assessment, trade script verification, CEO/CFO signal check",
-      "findings": "Confirmed Rocket disqualification for multi-pipeline status and identified two tech stocks approaching first-touch 52-week lows."
+      "findings": "Confirmed Rocket disqualification for multi-pipeline status and identified two tech stocks approaching first-touch 52-week lows.",
+      "status": "pending"
     },
     {
       "date": "2026-03-25",
       "investigated": "Verified trade scripts for March 26-27 week; investigated first_ig_credit_upgrade OOS validation with VST and PR; checked new insider clusters; ran analyst upgrade backtest; fixed april_catalyst_scan bug",
-      "findings": "Validated first-time credit upgrade signal on additional events with mixed results: some priced in while others show strong positive drift."
+      "findings": "Validated first-time credit upgrade signal on additional events with mixed results: some priced in while others show strong positive drift.",
+      "status": "pending"
     },
     {
       "date": "2026-03-25",
       "investigated": "Trade health check, 52w low scan for new catalysts, AMT script fix, trade_loop automation, CCI fundamental research",
-      "findings": "Deployed trade loop automation running every 2 minutes and verified five active positions healthy above stop losses."
+      "findings": "Deployed trade loop automation running every 2 minutes and verified five active positions healthy above stop losses.",
+      "status": "pending"
     },
     {
       "date": "2026-03-25",
       "investigated": "Regime analysis of 52w low momentum short signal. Scanned for first-touch 52w lows (ADBE, SBAC, DPZ, OTIS, BSX, CPB, MKC, SYK all at 52w lows). Verified VIX=27, SPY trends, checked upcoming trade setups.",
-      "findings": "Discovered 52-week low momentum signal only works during systemic selloffs (1.91% abnormal return) but has zero edge in isolation."
+      "findings": "Discovered 52-week low momentum signal only works during systemic selloffs (1.91% abnormal return) but has zero edge in isolation.",
+      "status": "pending"
     },
     {
       "date": "2026-03-25",
       "investigated": "Dividend cut short signal \u2014 large-cap S&P500 stocks 2015-2024",
-      "findings": "Tested dividend cut signal on 81 large-cap events and confirmed it's directionally wrong: stocks don't continue falling after cuts."
+      "findings": "Tested dividend cut signal on 81 large-cap events and confirmed it's directionally wrong: stocks don't continue falling after cuts.",
+      "status": "pending"
     },
     {
       "date": "2026-03-25",
       "investigated": "Scanner improvements, dividend cut signal research, new catalyst short setups",
-      "findings": "Expanded 52-week low scanner to full S&P 500 universe and created automated Liberation Day runbook for April 2 tariff event."
+      "findings": "Expanded 52-week low scanner to full S&P 500 universe and created automated Liberation Day runbook for April 2 tariff event.",
+      "status": "dead_end"
     },
     {
       "date": "2026-03-25",
       "investigated": "Liberation Day preparation, new 52w low catalyst short candidates (DPZ, SBAC, TAP, ADBE), trade infrastructure verification",
-      "findings": "Completed trade verification for March 26-27 execution and pre-registered Adobe as primary short candidate for April 2 Liberation Day event."
+      "findings": "Completed trade verification for March 26-27 execution and pre-registered Adobe as primary short candidate for April 2 Liberation Day event.",
+      "status": "validated"
     }
   ]
 }
