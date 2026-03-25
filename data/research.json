@@ -381,8 +381,8 @@
     "literature_count": 25
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 88404828,
+    "sessions_today": 0,
+    "tokens_today": 0,
     "sessions_by_day": [
       {
         "date": "2026-03-25",
