@@ -38,14 +38,24 @@
         "magnitude_pct": -1.91
       },
       {
-        "name": "tariff_xlf_sector_short",
-        "status": "strong",
-        "magnitude_pct": -1.1
-      },
-      {
         "name": "tariff_xlu_utility_long_20d",
         "status": "borderline_underpowered",
         "magnitude_pct": 3.92
+      },
+      {
+        "name": "tariff_escalation_wfc_bank_short",
+        "status": "strong",
+        "magnitude_pct": -1.94
+      },
+      {
+        "name": "tariff_soxx_semiconductor_short",
+        "status": "borderline_underpowered",
+        "magnitude_pct": -2.13
+      },
+      {
+        "name": "tariff_xlf_sector_short",
+        "status": "contaminated_revisit",
+        "magnitude_pct": -0.96
       }
     ],
     "dead_ends": [
@@ -384,20 +394,28 @@
       {
         "name": "dividend_cut_short",
         "reason": "Signal failed 5 check(s): passes_multiple_testing, direction>50pct, abnormal_return>0.5pct, return_after_costs>0, oos_direction>50pct. n=81, best_horizon=1d, avg_abnormal=0.250% (0.25 pct pts), p=0.2841, direction%=46.9%, passes_mt=False, oos_n=37, oos_neg_rate=45.9%. Universe: 205 S&P500 large-caps >$2B, 2015-01-01-2024-12-31."
+      },
+      {
+        "name": "sp500_52w_low_catalyst_short_repeat_touch",
+        "reason": "Repeat-touch + catalyst signal NOT validated. Backtest of 10 repeat-touch events shows: 5d mean=-0.61%, direction=50%, p=0.73. The validated signal (n=67, -4.44%) requires FIRST crossing. NKE (2nd), MKC (3rd), DPZ (2nd), TAP (3rd), CAG (4th) are disqualified. Tool: tools/first_touch_52w_low_scanner.py to verify before trading."
+      },
+      {
+        "name": "tariff_soxx_semiconductor_etf_short",
+        "reason": "FAILS multiple testing with clean N=7 China-targeted tariff dataset. Only 20d significant (p=0.019), 5d p=0.084, 10d p=0.066. When adding expected/smaller tariff events (Feb/Mar 2025 +0.63% each), signal dilutes further. Selection bias: only China-specific surprise events show strong negative signal. 86% direction but cannot validate statistically with N=7. XLF ETF also fails after removing Phase 1 signing COVID contamination. RECOMMENDATION: Use WFC individual stock (passes clean multiple testing: 5d p=0.015, 10d p=0.048). Semiconductor tariff signal may be real but needs N=10+ non-overlapping events to validate."
       }
     ],
-    "signal_count": 6,
-    "dead_end_count": 84,
+    "signal_count": 8,
+    "dead_end_count": 86,
     "literature_count": 25
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 17393651,
+    "sessions_today": 4,
+    "tokens_today": 32473496,
     "sessions_by_day": [
       {
         "date": "2026-03-26",
-        "sessions": 2,
-        "tokens": 17393651
+        "sessions": 4,
+        "tokens": 32473496
       },
       {
         "date": "2026-03-25",
@@ -1294,6 +1312,18 @@
       "investigated": "Tariff sector rotation analysis: which sectors/stocks underperform after US tariff escalation announcements. Tested 11 sector ETFs and 6 major bank stocks across 8 historical tariff events (2018-2025).",
       "findings": "Discovered that Wells Fargo and other big bank stocks consistently underperform the broader market in the 5 days after major US tariff announcements, a pattern holding 88% of the time from 2018 through 2025. With Liberation Day tariff announcements expected April 2, we pre-registered a trade to short Wells Fargo if the announcements cause a market selloff.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "First-touch audit of all pending 52w low hypotheses; repeat-touch catalyst backtest; tariff sector rotation analysis; Liberation Day preparation; TDG first-touch setup",
+      "findings": "(1) CRITICAL: Most pending 52w low hypotheses are for repeat-touch stocks. Catalyst_short AND momentum_short both require FIRST crossing. Dead end: repeat-touch + catalyst 5d=-0.61%, dir=50%, p=0.73. ",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-26",
+      "investigated": "Tariff sector rotation (WFC/XLF/SOXX vs SPY after tariff escalation), GRCE PDUFA April 23 pre-registration research, VIX spike monitoring setup",
+      "findings": "1. WFC TARIFF SIGNAL CONFIRMED: Clean N=7 dataset (excl 2020-01-15 Phase 1 signing which was COVID-contaminated). WFC shows 5d p=0.015, 10d p=0.048 - PASSES multiple testing. Direction: 86% (6/7 negat",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -1359,6 +1389,11 @@
         "symbol": "AMT"
       },
       {
+        "event": "TDG IMMINENT first-ever 52w low crossing. Close=$1,156.49 vs barrier=$1,152.50 (0.35% above). 0 crossings in 2yr history",
+        "date": "2026-03-26",
+        "symbol": "TDG"
+      },
+      {
         "event": "HD SHORT: Close at market close Friday March 27. Run: python tools/close_hd_trade.py. Verify position in Alpaca first.",
         "date": "2026-03-27",
         "symbol": "HD"
@@ -1367,11 +1402,6 @@
         "event": "ABT 52-week low first touch on 2026-03-20 (105.46, fresh new 52w low after 35-day gap from Jan cluster). Track 5d outcom",
         "date": "2026-03-27",
         "symbol": "ABT"
-      },
-      {
-        "event": "RCKT PDUFA March 28 (Sat) - FDA acts Fri March 27 or Mon March 30. KRESLADI (LAD-I gene therapy). Prior CRL was CMC-only",
-        "date": "2026-03-27",
-        "symbol": "RCKT"
       }
     ],
     "pending_triggers": [
@@ -1384,7 +1414,7 @@
       {
         "symbol": "SYK",
         "direction": "short",
-        "trigger": "2026-03-26T09:30",
+        "trigger": "next_market_open",
         "event_type": "sp500 52w low momentum short"
       },
       {
@@ -1398,6 +1428,18 @@
         "direction": "short",
         "trigger": "2026-03-30T09:30",
         "event_type": "sp500 52w low momentum short"
+      },
+      {
+        "symbol": "ADBE",
+        "direction": "short",
+        "trigger": "next_market_open",
+        "event_type": "sp500 52w low systemic short"
+      },
+      {
+        "symbol": "SBAC",
+        "direction": "short",
+        "trigger": "next_market_open",
+        "event_type": "sp500 52w low catalyst short"
       }
     ],
     "research_queue": [
@@ -1427,6 +1469,12 @@
         "category": "first_ig_credit_upgrade"
       }
     ],
-    "handoff": "\"STATE: 4 active trades (GO auto-closes March 26 ~9:31 ET, SYK activates March 26 9:30, HD/ABT/BAX auto-close March 27, KHC activates March 27). THIS SESSION: Invalidated stale COHR (prevented bad trade). VGNT confirmed on track. AMT trigger set March 30. MKC earnings March 31. ADBE script ready for April 3. Capacity flow: March 26=4 positions, March 27=2, March 30=3, March 31=3-4, April 1=4-5. VIX=25.3 (below 30). Exact next step: March 30 morning verify AMT activated. If not, activate manually"
+    "handoff": {
+      "state": "4 active trades. SYK activates March 26 9:30 AM. GO closes March 26 ~2:31 PM. HD/ABT/BAX close March 27 3:50 PM. AMT activates March 30. TDG approaching 52w low barrier.",
+      "investigating": "Tariff sector analysis, GRCE PDUFA setup, VIX monitoring",
+      "findings": "1. WFC tariff signal CONFIRMED clean (N=7 excl Phase 1 signing): 5d p=0.015, 10d p=0.048. XLF was contaminated by COVID. SOXX sector ETF fails multiple testing. 2. GRCE PDUFA April 23: strong d302c84b candidate (~10% CRL prob, >75% crash if CRL, $20M cash, near 52w high, GTx-104 only active pipeline). 3. VIX monitor tool created (tools/vix_monitor.py). 4. Watchlist entries added for Liberation Day (April 2), AMT (March 30), REPL (April 10), GRCE (April 23).",
+      "blocked_by": "None. Waiting for events.",
+      "next_step": "Verify SYK executed March 26. Check TDG price. Run vix_monitor.py. On April 2: check tariff announcement and manually set WFC trigger if warranted."
+    }
   }
 }
