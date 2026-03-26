@@ -1,13 +1,6 @@
 {
   "active": [
     {
-      "symbol": "GO",
-      "direction": "long",
-      "event_type": "insider_buying_cluster",
-      "thesis": "When 3+ corporate insiders (officers/directors) make open-market stock purchases within 30 days of each other (each >$50",
-      "opened_date": "2026-03-21"
-    },
-    {
       "symbol": "HD",
       "direction": "short",
       "event_type": "sp500_52w_low_momentum_short",
@@ -27,9 +20,26 @@
       "event_type": "sp500_52w_low_momentum_short",
       "thesis": "When an S&P 500 large-cap stock (>500M market cap) first crosses below its 52-week low on a close basis, SHORT at next-d",
       "opened_date": "2026-03-23"
+    },
+    {
+      "symbol": "SYK",
+      "direction": "short",
+      "event_type": "sp500_52w_low_momentum_short",
+      "thesis": "SYK (Stryker Corp) first crossed below 52-week low on 2026-03-23 (close=$332.59, 52w low=$335.05, breach=-0.7%). Large-c",
+      "opened_date": "2026-03-24"
     }
   ],
   "recent_closed": [
+    {
+      "symbol": "GO",
+      "direction": "long",
+      "event_type": "insider_buying_cluster",
+      "result_pct": 8.36,
+      "exit_reason": "DEADLINE: GO held past deadline (2026-03-26), return +8.4%",
+      "closed_date": "2026-03-26",
+      "thesis": "When 3+ corporate insiders (officers/directors) make open-market stock purchases within 30 days of each other (each >$50",
+      "direction_correct": null
+    },
     {
       "symbol": "CTAS",
       "direction": "short",
