@@ -402,20 +402,28 @@
       {
         "name": "tariff_soxx_semiconductor_etf_short",
         "reason": "FAILS multiple testing with clean N=7 China-targeted tariff dataset. Only 20d significant (p=0.019), 5d p=0.084, 10d p=0.066. When adding expected/smaller tariff events (Feb/Mar 2025 +0.63% each), signal dilutes further. Selection bias: only China-specific surprise events show strong negative signal. 86% direction but cannot validate statistically with N=7. XLF ETF also fails after removing Phase 1 signing COVID contamination. RECOMMENDATION: Use WFC individual stock (passes clean multiple testing: 5d p=0.015, 10d p=0.048). Semiconductor tariff signal may be real but needs N=10+ non-overlapping events to validate."
+      },
+      {
+        "name": "tariff_sector_etf_shorts",
+        "reason": "Sector ETFs (XLI +0.25%, XLY +0.06%, XLB +0.16%, XLE -0.03%, XLK -0.04%) show NO meaningful downward signal at 5d after tariff escalations (all p>0.60). Individual stock shorts (WFC -1.9%) are far stronger than sector ETF shorts \u2014 diversification averages out. CONCLUSION: Use individual stocks not sector ETFs for tariff short plays. LONG defensives (XLV, XLU) are the sector-level tariff play."
+      },
+      {
+        "name": "auto_sector_tariff_short",
+        "reason": "N=40 (8 events x 5 stocks: TM/HMC/F/GM/STLA). 5-day: avg=+0.48%, dir=48%, p=0.50. NO SIGNAL. Extreme inconsistency: 2025-03-04 bounce (+9.05%) vs 2025-03-26 decline (-3.85%). Effect cancels at sector level because tariffs benefit US makers (F/GM) while hurting importers (TM/HMC). NOTE: Auto-import specific (TM/HMC after AUTO-SPECIFIC tariffs) shows -4.2% but n=1 event only - watch Liberation Day April 2 for more data."
       }
     ],
     "signal_count": 8,
-    "dead_end_count": 86,
+    "dead_end_count": 88,
     "literature_count": 25
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 32473496,
+    "sessions_today": 6,
+    "tokens_today": 48951900,
     "sessions_by_day": [
       {
         "date": "2026-03-26",
-        "sessions": 4,
-        "tokens": 32473496
+        "sessions": 6,
+        "tokens": 48951900
       },
       {
         "date": "2026-03-25",
@@ -1324,6 +1332,24 @@
       "investigated": "Tariff sector rotation (WFC/XLF/SOXX vs SPY after tariff escalation), GRCE PDUFA April 23 pre-registration research, VIX spike monitoring setup",
       "findings": "1. WFC TARIFF SIGNAL CONFIRMED: Clean N=7 dataset (excl 2020-01-15 Phase 1 signing which was COVID-contaminated). WFC shows 5d p=0.015, 10d p=0.048 - PASSES multiple testing. Direction: 86% (6/7 negat",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-03-26",
+      "investigated": "Trade state audit (SYK/CTAS/GO timing); sector ETF performance after tariff escalations (XLI/XLY/XLB/XLE/XLV/XLK/XLC); 52-week low first-touch candidates (ADBE, SBAC, CPB); Liberation Day April 2 preparation",
+      "findings": "Analyzed sector ETF reactions to US tariff announcements \u2014 found healthcare ETF (XLV) consistently outperforms after tariffs due to defensive rotation, while industrial/tech ETFs show no clear signal. Three new 52-week low short setups (SYK, ADBE, SBAC) queued for tomorrow as markets continue declining.",
+      "tag": "discovery"
+    },
+    {
+      "date": "2026-03-26",
+      "investigated": "52w low signal validation cleanup, auto tariff sector research, first-touch candidate scanning, OOS validation tracking",
+      "findings": "1. ADBE/SBAC triggers cleared - both non-first-touch (32 and 13 crossings). 2. AMT confirmed first-touch March 25 (trigger March 30 correct). 3. Auto sector tariff = DEAD END (p=0.50, direction=48%). ",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-26",
+      "investigated": "Trade state verification, OOS validation tracking (V and CTAS), TDG first-touch monitoring, Liberation Day April 2 trigger setup, VIX behavior around tariff events, fresh insider cluster screening",
+      "findings": "Our short-selling signal for stocks hitting new 52-week lows is showing mixed early results: Cintas is down as predicted, but Visa has bounced back against expectations. We are preparing for 'Liberation Day' on April 2, when major tariff announcements could trigger bank stock shorts and potential market recovery plays.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -1394,14 +1420,14 @@
         "symbol": "TDG"
       },
       {
+        "event": "TDG FIRST-EVER 52w low imminent. Currently $1,156.49 vs barrier=$1,152.50 (0.35% away).\nCONFIRMED: 0 crossings in 2-year",
+        "date": "2026-03-26",
+        "symbol": "TDG"
+      },
+      {
         "event": "HD SHORT: Close at market close Friday March 27. Run: python tools/close_hd_trade.py. Verify position in Alpaca first.",
         "date": "2026-03-27",
         "symbol": "HD"
-      },
-      {
-        "event": "ABT 52-week low first touch on 2026-03-20 (105.46, fresh new 52w low after 35-day gap from Jan cluster). Track 5d outcom",
-        "date": "2026-03-27",
-        "symbol": "ABT"
       }
     ],
     "pending_triggers": [
@@ -1428,18 +1454,6 @@
         "direction": "short",
         "trigger": "2026-03-30T09:30",
         "event_type": "sp500 52w low momentum short"
-      },
-      {
-        "symbol": "ADBE",
-        "direction": "short",
-        "trigger": "next_market_open",
-        "event_type": "sp500 52w low systemic short"
-      },
-      {
-        "symbol": "SBAC",
-        "direction": "short",
-        "trigger": "next_market_open",
-        "event_type": "sp500 52w low catalyst short"
       }
     ],
     "research_queue": [
@@ -1470,11 +1484,19 @@
       }
     ],
     "handoff": {
-      "state": "4 active trades. SYK activates March 26 9:30 AM. GO closes March 26 ~2:31 PM. HD/ABT/BAX close March 27 3:50 PM. AMT activates March 30. TDG approaching 52w low barrier.",
-      "investigating": "Tariff sector analysis, GRCE PDUFA setup, VIX monitoring",
-      "findings": "1. WFC tariff signal CONFIRMED clean (N=7 excl Phase 1 signing): 5d p=0.015, 10d p=0.048. XLF was contaminated by COVID. SOXX sector ETF fails multiple testing. 2. GRCE PDUFA April 23: strong d302c84b candidate (~10% CRL prob, >75% crash if CRL, $20M cash, near 52w high, GTx-104 only active pipeline). 3. VIX monitor tool created (tools/vix_monitor.py). 4. Watchlist entries added for Liberation Day (April 2), AMT (March 30), REPL (April 10), GRCE (April 23).",
-      "blocked_by": "None. Waiting for events.",
-      "next_step": "Verify SYK executed March 26. Check TDG price. Run vix_monitor.py. On April 2: check tariff announcement and manually set WFC trigger if warranted."
+      "investigating": "State verification, OOS tracking, TDG/Liberation Day setup, tariff VIX research",
+      "findings": [
+        "TDG confirmed 0 crossings in 2 years, 0.35% from 52w barrier. Activation command ready when it crosses.",
+        "V OOS (short): MISS partial (+2.05% abnormal wrong direction). Final exit March 26 close.",
+        "CTAS OOS (short): HIT partial (-2.48% abnormal correct direction). Final exit March 27 close.",
+        "Liberation Day runbook FIXED: Good Friday April 3 = CLOSED. All actions \u2192 April 7.",
+        "VIX historical: tariff events never pushed VIX above 30 (max 27.9 March 2025). Liberation Day starting at VIX=26 may spike to 30+.",
+        "WFC (b73efac3) and SPY (b63a0168) ready to activate on Liberation Day conditions.",
+        "SBSW (fresh 3-insider cluster): REJECTED - not S&P 500, SA mining company, insufficient quality.",
+        "Steel tariff beneficiaries (NUE/STLD): N=4 events, underpowered. Not actionable for Liberation Day."
+      ],
+      "blocked_by": "None - all setups complete",
+      "next_step": "Run liberation day runbook April 2 after close. Check V/CTAS final prices March 26-27. Monitor TDG and KHC for 52w low crosses."
     }
   }
 }
