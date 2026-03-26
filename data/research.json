@@ -63,9 +63,24 @@
         "magnitude_pct": 3.57
       },
       {
+        "name": "tariff_kre_regional_banks_short",
+        "status": "needs_more_data",
+        "magnitude_pct": -2.53
+      },
+      {
+        "name": "tariff_gld_gold_long_20d",
+        "status": "needs_more_data",
+        "magnitude_pct": 4.75
+      },
+      {
         "name": "stld_domestic_steel_tariff_short",
         "status": "needs_more_data",
-        "magnitude_pct": -3.06
+        "magnitude_pct": -6.33
+      },
+      {
+        "name": "tariff_aapl_china_short",
+        "status": "needs_more_data",
+        "magnitude_pct": -1.82
       }
     ],
     "dead_ends": [
@@ -424,20 +439,24 @@
       {
         "name": "sp500_52w_low_catalyst_repeat_touch",
         "reason": "DEAD END: Repeat-touch 52w low stocks do NOT qualify for sp500_52w_low catalyst/momentum short signals. 11 incorrectly-classified hypotheses abandoned March 25 2026: KHC(30x), ADBE(38x), MKC(22x), CAG(36x), PGR(10x), PG(13x), BSX(10x), OTIS(9x), DPZ(8x), SBAC(14x), TAP(24x). ONLY first-touch (0 prior crossings in 400-day rolling window) qualifies. Always verify n_crossings before pre-registering."
+      },
+      {
+        "name": "tariff_china_adr_short",
+        "reason": "Chinese ADRs (BABA, JD, KWEB, FXI, MCHI) show NO consistent underperformance after US tariff escalations. Avg 5d returns range from -1.2% (PDD) to +2.76% (BIDU), direction 29-43%, all p>0.37. Chinese government stimulus appears to offset tariff impact on Chinese equity prices. Tested 7 tariff events 2018-2026 with n=7 per ticker."
       }
     ],
-    "signal_count": 10,
-    "dead_end_count": 89,
+    "signal_count": 13,
+    "dead_end_count": 90,
     "literature_count": 25
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 65667886,
+    "sessions_today": 10,
+    "tokens_today": 82955820,
     "sessions_by_day": [
       {
         "date": "2026-03-26",
-        "sessions": 8,
-        "tokens": 65667886
+        "sessions": 10,
+        "tokens": 82955820
       },
       {
         "date": "2026-03-25",
@@ -1376,6 +1395,12 @@
       "investigated": "New tariff sector effects (agricultural, steel, retail, airlines, consumer staples); V and CTAS OOS validation; April 2 Liberation Day prep; Q1 2026 earnings calendar",
       "findings": "Discovered that major US warehouse retailers like Costco and Walmart consistently outperform the stock market after tariff escalation announcements - a flight-to-safety rotation where investors move into defensive consumer stocks during trade war uncertainty. Validated across 7 historical events from 2018-2025 with 86% consistency and strengthening effect. A trade is pre-registered ahead of the April 2 tariff announcement.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-03-26",
+      "investigated": "Tariff sector rotation analysis across 18 ETFs and individual stocks; AAPL China tariff signal; Chinese ADR dead end; KRE regional bank tariff short signal; GLD gold tariff long signal; STLD domestic steel tariff underperformance; TDG and AMT 52w low monitoring",
+      "findings": "1. SECTOR ROTATION: KRE (Regional Banks) shows strongest tariff signal: 20d avg=-2.53%, dir=86%, p=0.016. Only fails because need p<0.01 single-horizon (two-tailed). One more data point (April 2) coul",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -1515,17 +1540,6 @@
         "category": "first_ig_credit_upgrade"
       }
     ],
-    "handoff": {
-      "session_date": "2026-03-26",
-      "major_findings": [
-        "DISCOVERED: tariff_defensive_retail_long - COST/WMT/XLP +3.57% 5d after tariff events. n=21, 86% dir, MT PASSES. OOS 6/6. Pre-registered hyp 8c2f8cbb triggers April 7.",
-        "V OOS March 25 partial: +2.05% abnormal (MISS). Awaiting March 26 close for final.",
-        "CTAS OOS March 25 partial: -2.48% abnormal (HIT). Awaiting March 27 close for final.",
-        "STLD domestic steel: -3.06% 5d after tariff events, 100% direction, but fails MT. Needs more data.",
-        "PEAD candidates identified: JPM April 14, TSM/NFLX April 16. Watchlist added."
-      ],
-      "blocked_by": "Market close needed for V (March 26) and CTAS (March 27) final OOS results.",
-      "next_exact_step": "Run python3 run.py --context to load state. Then check if GO/SYK/HD/ABT/BAX all executed correctly at March 26-27. Get V March 26 close and CTAS March 27 close. Compute final OOS abnormal returns. Update knowledge base entries."
-    }
+    "handoff": "\"Session March 26: Researched tariff sector rotation across 18 ETFs/stocks. Key findings: (1) KRE regional banks 20d avg=-2.53%, dir=86%, p=0.016 - near threshold after April 2 Liberation Day. (2) GLD gold 20d avg=+4.75%, dir=86%, p=0.047 - needs one more event. (3) STLD domestic steel 20d avg=-6.33%, p=0.078. (4) AAPL 5d avg=-1.82%, p=0.039 - only 1 horizon, but vs QQQ p=0.0078. (5) Chinese ADRs dead end - no signal. All signals recorded in knowledge base. Active trades unchanged: GO (closing M"
   }
 }
