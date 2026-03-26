@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 41,
-    "pending": 30,
+    "total_hypotheses": 42,
+    "pending": 20,
     "active": 4,
     "completed": 1,
     "invalidated": 1,
@@ -56,6 +56,16 @@
         "name": "tariff_xlf_sector_short",
         "status": "contaminated_revisit",
         "magnitude_pct": -0.96
+      },
+      {
+        "name": "tariff_defensive_retail_long",
+        "status": "validated",
+        "magnitude_pct": 3.57
+      },
+      {
+        "name": "stld_domestic_steel_tariff_short",
+        "status": "needs_more_data",
+        "magnitude_pct": -3.06
       }
     ],
     "dead_ends": [
@@ -410,20 +420,24 @@
       {
         "name": "auto_sector_tariff_short",
         "reason": "N=40 (8 events x 5 stocks: TM/HMC/F/GM/STLA). 5-day: avg=+0.48%, dir=48%, p=0.50. NO SIGNAL. Extreme inconsistency: 2025-03-04 bounce (+9.05%) vs 2025-03-26 decline (-3.85%). Effect cancels at sector level because tariffs benefit US makers (F/GM) while hurting importers (TM/HMC). NOTE: Auto-import specific (TM/HMC after AUTO-SPECIFIC tariffs) shows -4.2% but n=1 event only - watch Liberation Day April 2 for more data."
+      },
+      {
+        "name": "sp500_52w_low_catalyst_repeat_touch",
+        "reason": "DEAD END: Repeat-touch 52w low stocks do NOT qualify for sp500_52w_low catalyst/momentum short signals. 11 incorrectly-classified hypotheses abandoned March 25 2026: KHC(30x), ADBE(38x), MKC(22x), CAG(36x), PGR(10x), PG(13x), BSX(10x), OTIS(9x), DPZ(8x), SBAC(14x), TAP(24x). ONLY first-touch (0 prior crossings in 400-day rolling window) qualifies. Always verify n_crossings before pre-registering."
       }
     ],
-    "signal_count": 8,
-    "dead_end_count": 88,
+    "signal_count": 10,
+    "dead_end_count": 89,
     "literature_count": 25
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 48951900,
+    "sessions_today": 8,
+    "tokens_today": 65667886,
     "sessions_by_day": [
       {
         "date": "2026-03-26",
-        "sessions": 6,
-        "tokens": 48951900
+        "sessions": 8,
+        "tokens": 65667886
       },
       {
         "date": "2026-03-25",
@@ -1350,6 +1364,18 @@
       "investigated": "Trade state verification, OOS validation tracking (V and CTAS), TDG first-touch monitoring, Liberation Day April 2 trigger setup, VIX behavior around tariff events, fresh insider cluster screening",
       "findings": "Our short-selling signal for stocks hitting new 52-week lows is showing mixed early results: Cintas is down as predicted, but Visa has bounced back against expectations. We are preparing for 'Liberation Day' on April 2, when major tariff announcements could trigger bank stock shorts and potential market recovery plays.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-03-25",
+      "investigated": "Repeat-touch 52w low hypothesis audit; semiconductor tariff individual stock analysis; VGNT spinco identification; trade state verification for March 26-27 closures",
+      "findings": "1. CRITICAL CLEANUP: Abandoned 11 pending hypotheses incorrectly classified as first-touch 52w low events. KHC was most urgent (was queued for activation after March 27 but had 30 prior crossings). Co",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-26",
+      "investigated": "New tariff sector effects (agricultural, steel, retail, airlines, consumer staples); V and CTAS OOS validation; April 2 Liberation Day prep; Q1 2026 earnings calendar",
+      "findings": "Discovered that major US warehouse retailers like Costco and Walmart consistently outperform the stock market after tariff escalation announcements - a flight-to-safety rotation where investors move into defensive consumer stocks during trade war uncertainty. Validated across 7 historical events from 2018-2025 with 86% consistency and strengthening effect. A trade is pre-registered ahead of the April 2 tariff announcement.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -1454,6 +1480,12 @@
         "direction": "short",
         "trigger": "2026-03-30T09:30",
         "event_type": "sp500 52w low momentum short"
+      },
+      {
+        "symbol": "COST",
+        "direction": "long",
+        "trigger": "2026-04-07T09:30",
+        "event_type": "tariff defensive retail long"
       }
     ],
     "research_queue": [
@@ -1484,19 +1516,16 @@
       }
     ],
     "handoff": {
-      "investigating": "State verification, OOS tracking, TDG/Liberation Day setup, tariff VIX research",
-      "findings": [
-        "TDG confirmed 0 crossings in 2 years, 0.35% from 52w barrier. Activation command ready when it crosses.",
-        "V OOS (short): MISS partial (+2.05% abnormal wrong direction). Final exit March 26 close.",
-        "CTAS OOS (short): HIT partial (-2.48% abnormal correct direction). Final exit March 27 close.",
-        "Liberation Day runbook FIXED: Good Friday April 3 = CLOSED. All actions \u2192 April 7.",
-        "VIX historical: tariff events never pushed VIX above 30 (max 27.9 March 2025). Liberation Day starting at VIX=26 may spike to 30+.",
-        "WFC (b73efac3) and SPY (b63a0168) ready to activate on Liberation Day conditions.",
-        "SBSW (fresh 3-insider cluster): REJECTED - not S&P 500, SA mining company, insufficient quality.",
-        "Steel tariff beneficiaries (NUE/STLD): N=4 events, underpowered. Not actionable for Liberation Day."
+      "session_date": "2026-03-26",
+      "major_findings": [
+        "DISCOVERED: tariff_defensive_retail_long - COST/WMT/XLP +3.57% 5d after tariff events. n=21, 86% dir, MT PASSES. OOS 6/6. Pre-registered hyp 8c2f8cbb triggers April 7.",
+        "V OOS March 25 partial: +2.05% abnormal (MISS). Awaiting March 26 close for final.",
+        "CTAS OOS March 25 partial: -2.48% abnormal (HIT). Awaiting March 27 close for final.",
+        "STLD domestic steel: -3.06% 5d after tariff events, 100% direction, but fails MT. Needs more data.",
+        "PEAD candidates identified: JPM April 14, TSM/NFLX April 16. Watchlist added."
       ],
-      "blocked_by": "None - all setups complete",
-      "next_step": "Run liberation day runbook April 2 after close. Check V/CTAS final prices March 26-27. Monitor TDG and KHC for 52w low crosses."
+      "blocked_by": "Market close needed for V (March 26) and CTAS (March 27) final OOS results.",
+      "next_exact_step": "Run python3 run.py --context to load state. Then check if GO/SYK/HD/ABT/BAX all executed correctly at March 26-27. Get V March 26 close and CTAS March 27 close. Compute final OOS abnormal returns. Update knowledge base entries."
     }
   }
 }
