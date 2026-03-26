@@ -1,10 +1,10 @@
 {
   "summary": {
-    "total_hypotheses": 40,
+    "total_hypotheses": 41,
     "pending": 30,
     "active": 4,
     "completed": 1,
-    "invalidated": 0,
+    "invalidated": 1,
     "direction_accuracy": "1/1",
     "patterns_discovered": 1,
     "reliable_patterns": [],
@@ -36,6 +36,16 @@
         "name": "sp500_52w_low_systemic_short",
         "status": "strong",
         "magnitude_pct": -1.91
+      },
+      {
+        "name": "tariff_xlf_sector_short",
+        "status": "strong",
+        "magnitude_pct": -1.1
+      },
+      {
+        "name": "tariff_xlu_utility_long_20d",
+        "status": "borderline_underpowered",
+        "magnitude_pct": 3.92
       }
     ],
     "dead_ends": [
@@ -376,14 +386,19 @@
         "reason": "Signal failed 5 check(s): passes_multiple_testing, direction>50pct, abnormal_return>0.5pct, return_after_costs>0, oos_direction>50pct. n=81, best_horizon=1d, avg_abnormal=0.250% (0.25 pct pts), p=0.2841, direction%=46.9%, passes_mt=False, oos_n=37, oos_neg_rate=45.9%. Universe: 205 S&P500 large-caps >$2B, 2015-01-01-2024-12-31."
       }
     ],
-    "signal_count": 4,
+    "signal_count": 6,
     "dead_end_count": 84,
     "literature_count": 25
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 2,
+    "tokens_today": 17393651,
     "sessions_by_day": [
+      {
+        "date": "2026-03-26",
+        "sessions": 2,
+        "tokens": 17393651
+      },
       {
         "date": "2026-03-25",
         "sessions": 10,
@@ -1267,6 +1282,18 @@
       "investigated": "Liberation Day preparation, new 52w low catalyst short candidates (DPZ, SBAC, TAP, ADBE), trade infrastructure verification",
       "findings": "Completed trade verification for March 26-27 execution and pre-registered Adobe as primary short candidate for April 2 Liberation Day event.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-03-26",
+      "investigated": "Trade state review, stale hypothesis cleanup, new 52w low signal identification, upcoming trade prep",
+      "findings": "1. COHR invalidated: S&P 500 Q1 addition (effective March 23) was stale - +6.5% already played out. Prevented bad trade. 2. VGNT confirmed: Versigent (Aptiv spinoff) on track for April 1 regular tradi",
+      "tag": "operational"
+    },
+    {
+      "date": "2026-03-26",
+      "investigated": "Tariff sector rotation analysis: which sectors/stocks underperform after US tariff escalation announcements. Tested 11 sector ETFs and 6 major bank stocks across 8 historical tariff events (2018-2025).",
+      "findings": "Discovered that Wells Fargo and other big bank stocks consistently underperform the broader market in the 5 days after major US tariff announcements, a pattern holding 88% of the time from 2018 through 2025. With Liberation Day tariff announcements expected April 2, we pre-registered a trade to short Wells Fargo if the announcements cause a market selloff.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -1349,12 +1376,6 @@
     ],
     "pending_triggers": [
       {
-        "symbol": "COHR",
-        "direction": "long",
-        "trigger": "next_market_open",
-        "event_type": "sp500 index addition"
-      },
-      {
         "symbol": "VGNT",
         "direction": "short",
         "trigger": "2026-04-01T16:00",
@@ -1367,16 +1388,16 @@
         "event_type": "sp500 52w low momentum short"
       },
       {
-        "symbol": "KHC",
-        "direction": "short",
-        "trigger": "2026-03-27T09:30",
-        "event_type": "sp500 52w low momentum short"
-      },
-      {
         "symbol": "FDXF",
         "direction": "short",
         "trigger": "2026-06-01T16:00",
         "event_type": "spinco institutional selling short"
+      },
+      {
+        "symbol": "AMT",
+        "direction": "short",
+        "trigger": "2026-03-30T09:30",
+        "event_type": "sp500 52w low momentum short"
       }
     ],
     "research_queue": [
@@ -1406,6 +1427,6 @@
         "category": "first_ig_credit_upgrade"
       }
     ],
-    "handoff": "\"STATE: 4 active trades (GO closes March 26 ~2:31PM auto, SYK activates March 26 9:30 auto, HD/ABT/BAX close March 27 3:50 auto, KHC activates March 27 9:30 auto).\\n\\nTHIS SESSION COMPLETED:\\n1. ADBE hypothesis f93527a2 pre-registered (systemic short, $98B, first 52w low March 24). activate_adbe_trade.py created.\\n2. DPZ (dc68dfc3) + SBAC (2e2a0aa2) catalyst shorts pre-registered for April 27 earnings.\\n3. TAP (f1666083) catalyst short pre-registered for May 7 earnings.\\n4. Liberation Day runboo"
+    "handoff": "\"STATE: 4 active trades (GO auto-closes March 26 ~9:31 ET, SYK activates March 26 9:30, HD/ABT/BAX auto-close March 27, KHC activates March 27). THIS SESSION: Invalidated stale COHR (prevented bad trade). VGNT confirmed on track. AMT trigger set March 30. MKC earnings March 31. ADBE script ready for April 3. Capacity flow: March 26=4 positions, March 27=2, March 30=3, March 31=3-4, April 1=4-5. VIX=25.3 (below 30). Exact next step: March 30 morning verify AMT activated. If not, activate manually"
   }
 }
