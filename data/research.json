@@ -2,20 +2,20 @@
   "summary": {
     "total_hypotheses": 48,
     "pending": 15,
-    "active": 1,
-    "completed": 5,
+    "active": 4,
+    "completed": 2,
     "invalidated": 1,
-    "direction_accuracy": "1/5",
-    "patterns_discovered": 1,
+    "direction_accuracy": "2/2",
+    "patterns_discovered": 2,
     "reliable_patterns": [],
     "by_event_type": {
       "insider_buying_cluster": {
-        "accuracy": "0/1",
+        "accuracy": "1/1",
         "avg_confidence": 7.0
       },
       "sp500_52w_low_momentum_short": {
-        "accuracy": "1/4",
-        "avg_confidence": 6.5
+        "accuracy": "1/1",
+        "avg_confidence": 7.0
       }
     }
   },
