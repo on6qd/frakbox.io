@@ -1729,9 +1729,9 @@
         "category": "first_ig_credit_upgrade"
       },
       {
-        "question": "VST first-IG negative result: was the Dec 2025 upgrade fully anticipated? Measure pre-event equity run-up vs other first-IG events to test whether ant",
-        "priority": 6,
-        "category": "first_ig_credit_upgrade"
+        "question": "Validated signal 'test_signal' (4/5 correct). Scan for the next opportunity to trade this signal. Every trade is both profit and ongoing revalidation.",
+        "priority": 7,
+        "category": "signal_continuation"
       }
     ],
     "handoff": {
