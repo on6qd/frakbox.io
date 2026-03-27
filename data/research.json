@@ -1,46 +1,35 @@
 {
   "summary": {
-    "total_hypotheses": 42,
-    "pending": 20,
-    "active": 4,
-    "completed": 1,
+    "total_hypotheses": 48,
+    "pending": 15,
+    "active": 1,
+    "completed": 5,
     "invalidated": 1,
-    "direction_accuracy": "1/1",
+    "direction_accuracy": "1/5",
     "patterns_discovered": 1,
     "reliable_patterns": [],
     "by_event_type": {
-      "sp500_52w_low_momentum_short": {
-        "accuracy": "1/1",
+      "insider_buying_cluster": {
+        "accuracy": "0/1",
         "avg_confidence": 7.0
+      },
+      "sp500_52w_low_momentum_short": {
+        "accuracy": "1/4",
+        "avg_confidence": 6.5
       }
     }
   },
   "knowledge": {
     "signals": [
       {
-        "name": "insider_buying_cluster_5d",
-        "status": "strong",
-        "magnitude_pct": 3.44
-      },
-      {
         "name": "sp500_index_removal_short",
         "status": "disproven",
         "magnitude_pct": 2.4
       },
       {
-        "name": "pead_earnings_beat_gte10pct",
-        "status": "moderate",
-        "magnitude_pct": 1.54
-      },
-      {
         "name": "sp500_52w_low_systemic_short",
         "status": "strong",
         "magnitude_pct": -1.91
-      },
-      {
-        "name": "tariff_xlu_utility_long_20d",
-        "status": "borderline_underpowered",
-        "magnitude_pct": 3.92
       },
       {
         "name": "tariff_escalation_wfc_bank_short",
@@ -63,24 +52,89 @@
         "magnitude_pct": 3.57
       },
       {
-        "name": "tariff_kre_regional_banks_short",
-        "status": "needs_more_data",
-        "magnitude_pct": -2.53
-      },
-      {
-        "name": "tariff_gld_gold_long_20d",
-        "status": "needs_more_data",
-        "magnitude_pct": 4.75
-      },
-      {
-        "name": "stld_domestic_steel_tariff_short",
-        "status": "needs_more_data",
-        "magnitude_pct": -6.33
-      },
-      {
         "name": "tariff_aapl_china_short",
         "status": "needs_more_data",
         "magnitude_pct": -1.82
+      },
+      {
+        "name": "tariff_gld_gold_long_20d",
+        "status": "validated",
+        "magnitude_pct": 4.29
+      },
+      {
+        "name": "sp500_52w_low_spy_regime_filter",
+        "status": "needs_oos_validation",
+        "magnitude_pct": -1.92
+      },
+      {
+        "name": "sp500_52w_low_momentum_short",
+        "status": "DEAD_END_OOS_INVERTED_2026",
+        "magnitude_pct": -3.16
+      },
+      {
+        "name": "fda_clinical_rejection_short",
+        "status": "NEEDS_MORE_DATA_p0.34",
+        "magnitude_pct": 5.0
+      },
+      {
+        "name": "clinical_efficacy_failure_short",
+        "status": "NEEDS_MORE_DATA_p0.34",
+        "magnitude_pct": 5.0
+      },
+      {
+        "name": "insider_buying_cluster_5d",
+        "status": "unknown",
+        "magnitude_pct": 3.44
+      },
+      {
+        "name": "sp500_52w_low_first_touch_long_tariff_regime",
+        "status": "DEAD_END_CORRECTED_2026-03-27",
+        "magnitude_pct": -0.24
+      },
+      {
+        "name": "tariff_xlv_healthcare_long",
+        "status": "validated_candidate",
+        "magnitude_pct": 1.48
+      },
+      {
+        "name": "stld_domestic_steel_tariff_short",
+        "status": "validated_candidate",
+        "magnitude_pct": -2.58
+      },
+      {
+        "name": "tariff_kre_regional_banks_short",
+        "status": "validated_candidate",
+        "magnitude_pct": -3.08
+      },
+      {
+        "name": "pead_earnings_beat_gte10pct",
+        "status": "disproven",
+        "magnitude_pct": 0.0
+      },
+      {
+        "name": "tariff_xlp_consumer_staples_long",
+        "status": "weak",
+        "magnitude_pct": 2.27
+      },
+      {
+        "name": "tariff_gdx_gold_miners_long",
+        "status": "weak",
+        "magnitude_pct": 5.55
+      },
+      {
+        "name": "tariff_ko_defensive_long_10d",
+        "status": "strong",
+        "magnitude_pct": 4.38
+      },
+      {
+        "name": "pead_q1_2026_calendar",
+        "status": "disproven",
+        "magnitude_pct": 0.0
+      },
+      {
+        "name": "tariff_xlu_utility_long_20d",
+        "status": "strong",
+        "magnitude_pct": 3.36
       }
     ],
     "dead_ends": [
@@ -443,16 +497,69 @@
       {
         "name": "tariff_china_adr_short",
         "reason": "Chinese ADRs (BABA, JD, KWEB, FXI, MCHI) show NO consistent underperformance after US tariff escalations. Avg 5d returns range from -1.2% (PDD) to +2.76% (BIDU), direction 29-43%, all p>0.37. Chinese government stimulus appears to offset tariff impact on Chinese equity prices. Tested 7 tariff events 2018-2026 with n=7 per ticker."
+      },
+      {
+        "name": "pead_earnings_beat_10pct_largecap",
+        "reason": "PEAD tested: 30 large-cap S&P500 stocks, n=206 events (EPS beat >=10%). DISCOVERY 2020-2023 n=160: avg5d=+0.15%, dir=46%, p=0.78. NO SIGNAL. OOS 2024-2025 n=46: appears strong (avg5d=+2.20%, p=0.02) but discovery FAILED so cannot validate. Dead end for general PEAD. Pandemic/rate-hike era overwhelms individual earnings signals."
+      },
+      {
+        "name": "vix_backwardation_spy_long",
+        "reason": "VIX/VIX3M ratio backwardation tested: n=5-12 events, direction 80-88% but p=0.79-0.94. Too few events + high variance = insignificant. Better alternative: VIX>30 level (pre-registered, n=54)."
+      },
+      {
+        "name": "homebuilder_tariff_materials_short",
+        "reason": "ITB/XHB/LEN/DHI vs 11 tariff events: 5d p=0.39-0.82, dir~50%, all fail. Tariff effects ambiguous for homebuilders (cost increases vs demand destruction). Dead end."
+      },
+      {
+        "name": "agricultural_exporter_china_retaliation_short",
+        "reason": "ADM/BG/CF/MOS/NTR vs 7 China retaliation events: 5d p>0.25, dir~40-57%. No signal. Agricultural stocks overwhelmed by weather/currency/global demand factors. Dead end."
+      },
+      {
+        "name": "dpz_non_firsttouch_52w_low",
+        "reason": "DPZ had 9 prior crossings before March 26 2026 signal. Hypothesis was pre-registered as first-ever but this was incorrect. Non-first-touch entries have no valid momentum signal."
+      },
+      {
+        "name": "sp500_52w_low_momentum_short_bullmarket",
+        "reason": "Strict first-touch 52w low shorts failed in 2023-2025 bull market (avg=+1.92% vs -1.92% discovery). Signal only works in bear market / macro shock regimes. Not a general signal."
+      },
+      {
+        "name": "tlt_treasury_bond_tariff_signal",
+        "reason": "TLT shows no reliable signal after tariff announcements. N=23 events 2018-2025. 1d avg=-0.29% dir=34.8%, 5d avg=-0.15% dir=47.8%, 10d avg=-0.19% dir=43.5%. All p>0.05. REGIME-DEPENDENT: 2018-2019 (low inflation) TLT rallied (flight to safety). 2022-2025 (inflationary) TLT sold off. No reliable tradeable signal."
+      },
+      {
+        "name": "sp500_52w_low_momentum_short_oos",
+        "reason": "OOS 2025-2026 (n=15 first-ever events): mean short=-3.16%, dir=13%, p=0.0096. REVERSED signal. COVID strategy does not generalize to tariff/macro regimes. AMT trigger cancelled."
+      },
+      {
+        "name": "sp500_52w_low_first_touch_long_tariff_regime",
+        "reason": "Full 48-event scan (252d first-ever lookback, 2025-2026) shows no signal. VIX<20: n=20, mean=+1.22%, dir=70%, p=0.13 (not significant). VIX 20-40: n=14, mean=-1.11%, dir=43%, p=0.44. VIX>40: n=14, mean=-1.45%, dir=36%. Previous +3.16% report was raw returns not SPY-benchmarked. With proper benchmarking = no signal."
+      },
+      {
+        "name": "auto_oem_tariff_continuation_short",
+        "reason": "N=4 events (2018-2025), 4/8 negative (50% direction), avg abnormal +1.31%. Events range -7.8% to +12.2%. March 2025 re-enactment caused +10-12% REVERSAL. No continuation signal after auto tariff announcements. Broad tariff signals (WFC, GLD, COST) already validated for complete tariff regime."
+      },
+      {
+        "name": "pead_earnings_beat_gte10pct_largecap",
+        "reason": "Systematic backtest (N=421 events, 66 large-cap S&P 500 stocks, 2020-2025) shows NO drift signal. Direction=42% (below 50%), mean 5d abnormal=-0.06%, p=0.69. Results consistent across all VIX regimes (VIX<20: dir=42%; VIX 25-30: dir=41%). Mega-cap tech sector: dir=42%, p=0.69. Previous knowledge base entry was based on cherry-picked examples (MSFT +3.34%, AMZN +8.44%), not systematic backtest. PEAD has been arbitraged away in large-caps. Hypothesis 9e2a03ac should be abandoned. DO NOT trade PEAD in Q1 2026 earnings season."
+      },
+      {
+        "name": "spy_unconditional_recovery_after_tariff",
+        "reason": "N=19 tariff events (2018-2025). SPY shows NO recovery pattern after tariff announcements. 5d: mean=+0.34%, p=0.36. 20d: mean=-0.74%, p=0.36. 2025 regime: 5d=-0.27%, 20d=-2.77%, direction=17%. Market often continues lower after tariff escalations. DO NOT go long SPY unconditionally on Liberation Day (April 2). VIX>30 SPY recovery (hypothesis b63a0168) is different - it is VIX-triggered and valid."
       }
     ],
-    "signal_count": 13,
-    "dead_end_count": 90,
+    "signal_count": 23,
+    "dead_end_count": 102,
     "literature_count": 25
   },
   "activity": {
     "sessions_today": 10,
-    "tokens_today": 82955820,
+    "tokens_today": 97407278,
     "sessions_by_day": [
+      {
+        "date": "2026-03-27",
+        "sessions": 10,
+        "tokens": 97407278
+      },
       {
         "date": "2026-03-26",
         "sessions": 10,
@@ -1401,6 +1508,66 @@
       "investigated": "Tariff sector rotation analysis across 18 ETFs and individual stocks; AAPL China tariff signal; Chinese ADR dead end; KRE regional bank tariff short signal; GLD gold tariff long signal; STLD domestic steel tariff underperformance; TDG and AMT 52w low monitoring",
       "findings": "1. SECTOR ROTATION: KRE (Regional Banks) shows strongest tariff signal: 20d avg=-2.53%, dir=86%, p=0.016. Only fails because need p<0.01 single-horizon (two-tailed). One more data point (April 2) coul",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-27",
+      "investigated": "TDG activation, V OOS final, CTAS confound analysis, VIX>30 threshold validation, 52w low scanner",
+      "findings": "1. TDG activated: first-ever 52w low crossing on March 26 (close=$1151.94 < barrier $1152.50). Short entered at $1151.55, deadline April 7 (Good Friday April 3 = closed). 2. V OOS FINAL: MISS at +4.05",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-27",
+      "investigated": "Non-first-touch audit for 52w low hypothesis; DPZ hypothesis creation; Monday trade setup; Liberation Day preparation",
+      "findings": "1. CONFIRMED non-first-touch entries: ABT (4 prior), BAX (25 prior), HD (1 prior March 20). Invalid OOS tests. 2. VALID OOS: SYK (0 prior), TDG (0 prior), DPZ (0 prior), AMT (0 prior). 3. GO +10.1% ab",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-27",
+      "investigated": "PEAD earnings beat backtest; VIX backwardation signal; homebuilder/ag tariff signals; 52w low regime analysis",
+      "findings": "1. 52w LOW REGIME FILTER DISCOVERY: Signal degrades on extreme selloff days. Q1 (SPY < -1.9%): n=53, dir=47%, p=0.15 (random). Filtered (SPY >= -1.9%): n=156, dir=62%, p<0.0001. Proposed filter: skip ",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-27",
+      "investigated": "52w low regime dependence analysis; PEAD Q1 2026 calendar; TLT tariff signal; DPZ non-first-touch; April trade prep",
+      "findings": "1) DPZ abandoned - 9 prior crossings, not first-touch. 2) 52w low momentum short is REGIME-DEPENDENT: OOS 2023-2025 strict first-touch (n=19) shows avg=+1.92% REVERSED when VIX<20 (wrong direction). V",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-27",
+      "investigated": "52w low momentum short OOS validation; VIX regime filter backtest; clinical failure post-crash drift backtest; GO insider cluster result recording",
+      "findings": "1. 52W LOW MOMENTUM SHORT OOS INVALIDATED: n=15 first-ever events (2025-2026), mean short=-3.16%, dir=13%, p=0.0096. STATISTICALLY SIGNIFICANT REVERSAL. Discovery period (2018-2024, n=317) was driven ",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-27",
+      "investigated": "52w low LONG hypothesis validity; VGNT/FDXF/HONA spinco tradability; DKS insider cluster; Monday close runbook",
+      "findings": "1. CRITICAL CORRECTION: 52w low LONG hypothesis (previous session +3.16%, dir=87%) was ERROR. Full 48-event scan with SPY-benchmarked abnormal returns shows: VIX<20 mean=+1.22%, dir=70%, p=0.13; VIX 2",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-27",
+      "investigated": "DKS/SWK insider clusters; auto tariff continuation hypothesis; systemic 52w low signal check; EDGAR scanner for real purchases; runbook bug fix; April 2 Liberation Day prep",
+      "findings": "1. DKS (8 filings) and SWK (8 filings): ALL code-A compensation grants, not purchases. March is annual equity award season. 2. Real insider purchases in top-40 clusters: only 3 companies, all small-ca",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-27",
+      "investigated": "KO tariff defensive signal; EWW/country ETF tariff impact; ABT/BAX/HD orphan position cleanup; VIX/SPY status check",
+      "findings": "1. KO (Coca-Cola) is the strongest tariff defensive signal in consumer staples. n=10 events (2018-2026): 10d avg=+3.14%, 80% direction, p=0.0061. OOS (2024+, n=4): +5.06%, 100% direction. Passes Bonfe",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-27",
+      "investigated": "Tariff sector analysis: tested all major sector ETFs during 10 tariff events (2018-2025). Investigated STLD domestic steel short, KRE regional bank short, XLV healthcare long, NUE comparison. Also reviewed April 2 Liberation Day portfolio state.",
+      "findings": "1) STLD short VALIDATED: n=10, 5d avg=-2.58%, 80% direction, p=0.007. Passes MT (p<0.01 single horizon). Counter-intuitive - domestic steel DROPS on tariff news. Discovery (2018-2019): -3.37% dir=83%.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-27",
+      "investigated": "PEAD VIX regime analysis; SPY tariff recovery; sector ETF tariff analysis (XLP/XLE/XLI/XLU/XLV); XLU deep validation",
+      "findings": "1. PEAD DEAD END: N=421, 66 large-cap stocks, 2020-2025. Dir=42%, p=0.69. All VIX regimes no signal. Hypothesis 9e2a03ac abandoned. 2. SPY tariff recovery DEAD END: N=19 events, 2025 regime 20d=-2.77%",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -1483,34 +1650,22 @@
     ],
     "pending_triggers": [
       {
-        "symbol": "VGNT",
-        "direction": "short",
-        "trigger": "2026-04-01T16:00",
-        "event_type": "spinco institutional selling short"
-      },
-      {
-        "symbol": "SYK",
-        "direction": "short",
-        "trigger": "next_market_open",
-        "event_type": "sp500 52w low momentum short"
-      },
-      {
-        "symbol": "FDXF",
-        "direction": "short",
-        "trigger": "2026-06-01T16:00",
-        "event_type": "spinco institutional selling short"
-      },
-      {
-        "symbol": "AMT",
-        "direction": "short",
-        "trigger": "2026-03-30T09:30",
-        "event_type": "sp500 52w low momentum short"
-      },
-      {
         "symbol": "COST",
         "direction": "long",
         "trigger": "2026-04-07T09:30",
         "event_type": "tariff defensive retail long"
+      },
+      {
+        "symbol": "KO",
+        "direction": "long",
+        "trigger": "2026-04-07T09:30",
+        "event_type": "tariff ko defensive long"
+      },
+      {
+        "symbol": "XLU",
+        "direction": "long",
+        "trigger": "2026-04-07T09:30",
+        "event_type": "tariff xlu utility long"
       }
     ],
     "research_queue": [
@@ -1540,6 +1695,12 @@
         "category": "first_ig_credit_upgrade"
       }
     ],
-    "handoff": "\"Session March 26: Researched tariff sector rotation across 18 ETFs/stocks. Key findings: (1) KRE regional banks 20d avg=-2.53%, dir=86%, p=0.016 - near threshold after April 2 Liberation Day. (2) GLD gold 20d avg=+4.75%, dir=86%, p=0.047 - needs one more event. (3) STLD domestic steel 20d avg=-6.33%, p=0.078. (4) AAPL 5d avg=-1.82%, p=0.039 - only 1 horizon, but vs QQQ p=0.0078. (5) Chinese ADRs dead end - no signal. All signals recorded in knowledge base. Active trades unchanged: GO (closing M"
+    "handoff": {
+      "attempted": "1) PEAD VIX regime analysis 2) SPY tariff recovery signal 3) Sector ETF tariff analysis (XLP, XLE, XLI, XLB, XLU, XLV) 4) XLU deep-dive and hypothesis creation",
+      "accomplished": "1) PEAD DEAD END confirmed (N=421, dir=42%, p=0.69) - hypothesis 9e2a03ac abandoned 2) SPY tariff recovery DEAD END (2025 regime: 20d=-2.77%, dir=17%) 3) XLU VALIDATED (IS 20d p=0.010, 25d p=0.0008, OOS 75% dir) - new hypothesis 9184ba0f created with April 7 trigger 4) KO signal STRONG confirmation (10d p=0.021, 20d p=0.005, direction 77-85%) 5) Dead ends: pead_earnings_beat_gte10pct_largecap, spy_unconditional_recovery_after_tariff",
+      "partial_results": "GDX (gold miners) shows +5.55% at 20d but p=0.058 (borderline, fails multiple testing). XLP +2.27% at 20d but only 1 significant horizon. Both noted in knowledge base but not hypothesis-worthy yet.",
+      "blocked_by": "yfinance batch downloads had some parse issues. PEAD analysis limited to 2020-2025 due to earnings_dates API range.",
+      "key_insight": "XLU is the strongest NEW signal found this session. It was previously 'underpowered' but with 13 deduped events shows p=0.0015 at 20d and p=0.0001 at 25d with 100% direction. Ready to trade April 7. Also: PEAD is definitively dead for large-caps - do not build any earnings-based strategies."
+    }
   }
 }
