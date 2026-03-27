@@ -551,6 +551,45 @@
     "dead_end_count": 102,
     "literature_count": 25
   },
+  "live_signals": [
+    {
+      "event_type": "sp500_52w_low_momentum_short",
+      "state": "EXPLORING",
+      "total_experiments": 1,
+      "effective_independent_n": 1,
+      "effective_correct_n": 1,
+      "last_updated": "2026-03-24T02:16:21.665654",
+      "experiments": [
+        {
+          "symbol": "CTAS",
+          "correct": true,
+          "return_pct": -1.33,
+          "date": "2026-03-24"
+        }
+      ]
+    },
+    {
+      "event_type": "insider_buying_cluster",
+      "state": "EXPLORING",
+      "total_experiments": 1,
+      "effective_independent_n": 1,
+      "effective_correct_n": 1,
+      "last_updated": "2026-03-27T07:13:56.897350",
+      "experiments": [
+        {
+          "symbol": "GO",
+          "correct": true,
+          "return_pct": 8.36,
+          "date": "2026-03-26"
+        }
+      ]
+    }
+  ],
+  "focus": {
+    "active_signal_types": 16,
+    "max_signal_types": 3,
+    "over_limit": true
+  },
   "activity": {
     "sessions_today": 10,
     "tokens_today": 97407278,
