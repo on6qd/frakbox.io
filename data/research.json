@@ -2,20 +2,26 @@
   "summary": {
     "total_hypotheses": 48,
     "pending": 15,
-    "active": 4,
-    "completed": 2,
-    "invalidated": 1,
-    "direction_accuracy": "2/2",
+    "active": 1,
+    "completed": 4,
+    "invalidated": 2,
+    "direction_accuracy": "2/4",
     "patterns_discovered": 2,
-    "reliable_patterns": [],
+    "reliable_patterns": [
+      {
+        "event_type": "sp500_52w_low_momentum_short",
+        "reliability": 0.33,
+        "tests": 3
+      }
+    ],
     "by_event_type": {
       "insider_buying_cluster": {
         "accuracy": "1/1",
         "avg_confidence": 7.0
       },
       "sp500_52w_low_momentum_short": {
-        "accuracy": "1/1",
-        "avg_confidence": 7.0
+        "accuracy": "1/3",
+        "avg_confidence": 6.7
       }
     }
   },
@@ -23,7 +29,7 @@
     "signals": [
       {
         "name": "sp500_index_removal_short",
-        "status": "disproven",
+        "status": "conditionally_tradeable_vix_required",
         "magnitude_pct": 2.4
       },
       {
@@ -545,26 +551,46 @@
       {
         "name": "spy_unconditional_recovery_after_tariff",
         "reason": "N=19 tariff events (2018-2025). SPY shows NO recovery pattern after tariff announcements. 5d: mean=+0.34%, p=0.36. 20d: mean=-0.74%, p=0.36. 2025 regime: 5d=-0.27%, 20d=-2.77%, direction=17%. Market often continues lower after tariff escalations. DO NOT go long SPY unconditionally on Liberation Day (April 2). VIX>30 SPY recovery (hypothesis b63a0168) is different - it is VIX-triggered and valid."
+      },
+      {
+        "name": "ssr_lift_short",
+        "reason": "OPPOSITE direction. When SSR lifts after >10% drop, stocks BOUNCE (not fall). N=147, avg_ab=+1.00%, dir_neg=40%, p=0.0079 (significant but LONG direction). COVID excluded: N=83, p=0.12 (not significant). Effect is buy-the-dip, not pent-up short pressure. DEAD END for short thesis."
+      },
+      {
+        "name": "material_weakness_8k_short",
+        "reason": "NOT TRADEABLE. N=104 large-cap events 2021-2025. 5d abnormal=-0.30%, dir=52.9%, t=-0.33 (not significant). Fat-tailed distribution dominated by cases where material weakness accompanied broader negative news (fraud, earnings miss). Item 4.02-only subset (N=35): -2.89% avg, 57% dir, t=-1.29 (directional but underpowered). Key confounders: 38/104 events had simultaneous earnings (item 2.02). 2022 bear market bias inflated signal. Cannot isolate accounting disclosure effect from coincident news."
       }
     ],
     "signal_count": 23,
-    "dead_end_count": 102,
+    "dead_end_count": 104,
     "literature_count": 25
   },
   "live_signals": [
     {
       "event_type": "sp500_52w_low_momentum_short",
       "state": "EXPLORING",
-      "total_experiments": 1,
+      "total_experiments": 3,
       "effective_independent_n": 1,
-      "effective_correct_n": 1,
-      "last_updated": "2026-03-24T02:16:21.665654",
+      "effective_correct_n": 0,
+      "last_updated": "2026-03-28T00:08:38.513359",
       "experiments": [
         {
           "symbol": "CTAS",
           "correct": true,
           "return_pct": -1.33,
           "date": "2026-03-24"
+        },
+        {
+          "symbol": "ABT",
+          "correct": false,
+          "return_pct": 3.02,
+          "date": "2026-03-28"
+        },
+        {
+          "symbol": "BAX",
+          "correct": false,
+          "return_pct": 4.09,
+          "date": "2026-03-28"
         }
       ]
     },
@@ -591,9 +617,14 @@
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 97407278,
+    "sessions_today": 1,
+    "tokens_today": 7744909,
     "sessions_by_day": [
+      {
+        "date": "2026-03-28",
+        "sessions": 1,
+        "tokens": 7744909
+      },
       {
         "date": "2026-03-27",
         "sessions": 10,
@@ -1607,6 +1638,12 @@
       "investigated": "PEAD VIX regime analysis; SPY tariff recovery; sector ETF tariff analysis (XLP/XLE/XLI/XLU/XLV); XLU deep validation",
       "findings": "1. PEAD DEAD END: N=421, 66 large-cap stocks, 2020-2025. Dir=42%, p=0.69. All VIX regimes no signal. Hypothesis 9e2a03ac abandoned. 2. SPY tariff recovery DEAD END: N=19 events, 2025 regime 20d=-2.77%",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-28",
+      "investigated": "Data integrity cleanup (HD/ABT/BAX overdue hypotheses), VIX spike response, tariff pre-selloff regime analysis, April 2 runbook update",
+      "findings": "VIX spiked above 30 on March 27, triggering a planned SPY recovery trade set to enter Monday. Research also found that the upcoming Liberation Day tariff announcement is being preceded by an unusually large market selloff \u2014 larger than any historical tariff event in our backtest. This means our defensive stock signals (gold, utilities, consumer staples) are entering uncharted territory, so we made them conditional on confirmation that the market is actually reacting to tariffs on April 2.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -1689,22 +1726,10 @@
     ],
     "pending_triggers": [
       {
-        "symbol": "COST",
+        "symbol": "SPY",
         "direction": "long",
-        "trigger": "2026-04-07T09:30",
-        "event_type": "tariff defensive retail long"
-      },
-      {
-        "symbol": "KO",
-        "direction": "long",
-        "trigger": "2026-04-07T09:30",
-        "event_type": "tariff ko defensive long"
-      },
-      {
-        "symbol": "XLU",
-        "direction": "long",
-        "trigger": "2026-04-07T09:30",
-        "event_type": "tariff xlu utility long"
+        "trigger": "next_market_open",
+        "event_type": "vix spike above 30 spy long"
       }
     ],
     "research_queue": [

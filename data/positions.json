@@ -1,27 +1,6 @@
 {
   "active": [
     {
-      "symbol": "HD",
-      "direction": "short",
-      "event_type": "sp500_52w_low_momentum_short",
-      "thesis": "When an S&P 500 large-cap stock (>500M market cap) first crosses below its 52-week low (after 30+ days above that level)",
-      "opened_date": "2026-03-22"
-    },
-    {
-      "symbol": "ABT",
-      "direction": "short",
-      "event_type": "sp500_52w_low_momentum_short",
-      "thesis": "When an S&P 500 large-cap stock (>500M market cap) first crosses below its 52-week low (after 30+ days above that level)",
-      "opened_date": "2026-03-23"
-    },
-    {
-      "symbol": "BAX",
-      "direction": "short",
-      "event_type": "sp500_52w_low_momentum_short",
-      "thesis": "When an S&P 500 large-cap stock (>500M market cap) first crosses below its 52-week low on a close basis, SHORT at next-d",
-      "opened_date": "2026-03-23"
-    },
-    {
       "symbol": "SYK",
       "direction": "short",
       "event_type": "sp500_52w_low_momentum_short",
@@ -30,6 +9,26 @@
     }
   ],
   "recent_closed": [
+    {
+      "symbol": "BAX",
+      "direction": "short",
+      "event_type": "sp500_52w_low_momentum_short",
+      "result_pct": 0.84,
+      "exit_reason": "",
+      "closed_date": "2026-03-28",
+      "thesis": "When an S&P 500 large-cap stock (>500M market cap) first crosses below its 52-week low on a close basis, SHORT at next-d",
+      "direction_correct": false
+    },
+    {
+      "symbol": "ABT",
+      "direction": "short",
+      "event_type": "sp500_52w_low_momentum_short",
+      "result_pct": -0.23,
+      "exit_reason": "",
+      "closed_date": "2026-03-28",
+      "thesis": "When an S&P 500 large-cap stock (>500M market cap) first crosses below its 52-week low (after 30+ days above that level)",
+      "direction_correct": false
+    },
     {
       "symbol": "GO",
       "direction": "long",
