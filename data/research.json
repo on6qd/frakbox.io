@@ -563,10 +563,30 @@
       {
         "name": "fallen_angel_ig_to_hy_short_expanded",
         "reason": "N=5 non-COVID events after delisting. Variance too high (PCG +95%, FCX +64%). p>0.4. Needs Bloomberg/WRDS dataset."
+      },
+      {
+        "name": "tariff_xle_energy_sector",
+        "reason": "XLE showed no signal during tariff events: 5d=-0.22% p=0.79, 10d=+0.14% p=0.92, 20d=+0.10% p=0.96 (n=10, 2018-2025). Direction=50% at all horizons. Energy has competing forces (demand destruction vs domestic protection) that cancel out."
+      },
+      {
+        "name": "tariff_xlf_financial_sector",
+        "reason": "XLF financials pooled showed no consistent signal: 5d=+0.54% p=0.26, 10d=+0.04% p=0.96, 20d=-0.44% p=0.54. Individual banks (WFC, KRE) are stronger than the sector ETF. Use WFC/KRE, not XLF."
+      },
+      {
+        "name": "tariff_xlb_materials_sector",
+        "reason": "XLB materials ETF: 5d=-0.10% p=0.81, 10d=-0.37% p=0.36, 20d=-0.35% p=0.74. No significant signal. STLD individual stock is stronger signal than sector ETF approach."
+      },
+      {
+        "name": "tariff_xli_industrials_sector",
+        "reason": "XLI industrials: 5d=-0.03% p=0.94, 10d=-0.49% p=0.34, 20d=-0.43% p=0.44. No signal despite supply chain disruption thesis. Use individual stocks, not sector ETF."
+      },
+      {
+        "name": "ceo_departure_broad_scanner",
+        "reason": "EDGAR scanner detects too many false positives. OOS 2026: 1/5 correct (20%), avg abnormal +1.5% (WRONG DIRECTION). Many departures are voluntary/planned. Need: board explicitly stated CEO failed, multiple earnings misses, stock down >30% prior 12m."
       }
     ],
     "signal_count": 23,
-    "dead_end_count": 105,
+    "dead_end_count": 110,
     "literature_count": 25
   },
   "live_signals": [
@@ -621,13 +641,13 @@
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 22941458,
+    "sessions_today": 5,
+    "tokens_today": 38064203,
     "sessions_by_day": [
       {
         "date": "2026-03-28",
-        "sessions": 3,
-        "tokens": 22941458
+        "sessions": 5,
+        "tokens": 38064203
       },
       {
         "date": "2026-03-27",
@@ -1660,6 +1680,18 @@
       "investigated": "VIX spike timing analysis; AWK vs XLU tariff-defensive utility comparison; fallen angel credit downgrade signal; CEO departure scan; PICS insider cluster; first IG upgrade candidates (CCL/RCL)",
       "findings": "Research today found that individual water utility stocks \u2014 especially American Water Works \u2014 outperform utility ETFs by about 2x during tariff events, likely because they have zero import/export exposure and attract safe-haven capital flows. We also confirmed that after VIX spikes above 30, markets are historically positive 75% of the time at 30 days, supporting our current SPY long trade set up for Monday.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-28",
+      "investigated": "PICS insider cluster evaluation; tariff VIX regime analysis; 2025 Liberation Day OOS verification; XLE/XLF/XLB/XLI tariff sector tests; 52w low candidates (TDG/ADBE/DPZ/OTIS)",
+      "findings": "1. PICS cluster: 3 insiders (CEO 87K@$11.52, Pruett 100K@$11.80, IR 6.5K@$11.55), stock now $10.22. SKIPPED: below 6+ threshold, downtrend. 2. Tariff VIX spikes have slower recovery: 33% direction at ",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-28",
+      "investigated": "CEO departure OOS validation; REPL PDUFA research; PICS cluster assessment; GO trade outcome recording; Liberation Day final verification",
+      "findings": "Validated the insider buying cluster signal with a live +8.36% paper trade, while discovering that a CEO departure signal that showed 83% accuracy historically is failing in 2026 data (only 20% correct). The system correctly blocked an insider cluster trade when market fear was extreme, and that stock subsequently fell 12% \u2014 the risk filter is working. With Liberation Day tariff announcements expected April 2, several contingent trades are ready to deploy automatically.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -1775,6 +1807,25 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"{'current_state': '2026-03-28 session end', 'active_trades': ['SYK short (5b09b097): entry $326.23, currently ~-0.2%, deadline April 2', 'SPY long (b63a0168): pending, fires Monday March 31 at 9:30 AM open'], 'pending_staged': ['Liberation Day hypotheses: GLD/KO/KRE/WFC/STLD/XLU/COST \\u2014 all NO triggers yet, set via runbook April 2'], 'key_findings_this_session': ['VIX timing (n=28 events): median 14d to bottom, 75% positive at 30d. Tariff analogs (2025, 2018) show +11-12% 20d recovery. 8% s"
+    "handoff": {
+      "current_state": "2026-03-28 session 2 end",
+      "active_trades": [
+        "SYK short (5b09b097): entry $326.23, current ~$327.00 (-0.2%), deadline April 2",
+        "SPY long (b63a0168): trigger=next_market_open, fires Monday March 31"
+      ],
+      "key_findings": [
+        "PICS cluster (3 insiders): SKIPPED - below 6+ threshold. CEO bought 87K@11.52, stock now $10.22",
+        "Tariff VIX spikes: slower recovery, 33% dir at 5d vs 75% non-tariff. All within 8% max DD (max -7.5% in Apr 2025)",
+        "2025 Liberation Day OOS: GLD +4.3%/+8.8% at 5-10d but -1.6% at 20d (rollback). ALL defensive fail at 20-30d when rollback occurs",
+        "Dead ends added: XLE, XLF, XLB, XLI (all no-signal during tariff events)",
+        "TDG/ADBE/DPZ/OTIS hit 52w lows March 27 - not trading (momentum short dead end)",
+        "VGNT unavailable in Alpaca March 28. Hypothesis abandoned. Check April 1."
+      ],
+      "key_risks": [
+        "SPY long 8% stop at risk if Liberation Day 2026 worse than 2025 (-7.5% max DD in Apr 2025)",
+        "Tariff rollback scenario kills ALL defensive longs at 20-30d",
+        "Good Friday 4-day gap: announcement April 2, first US open April 7"
+      ]
+    }
   }
 }
