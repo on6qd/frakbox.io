@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 48,
-    "pending": 15,
+    "total_hypotheses": 49,
+    "pending": 13,
     "active": 1,
     "completed": 4,
     "invalidated": 2,
@@ -583,10 +583,18 @@
       {
         "name": "ceo_departure_broad_scanner",
         "reason": "EDGAR scanner detects too many false positives. OOS 2026: 1/5 correct (20%), avg abnormal +1.5% (WRONG DIRECTION). Many departures are voluntary/planned. Need: board explicitly stated CEO failed, multiple earnings misses, stock down >30% prior 12m."
+      },
+      {
+        "name": "ceo_performance_failure_departure_short_oosvalidation",
+        "reason": "{\"description\": \"CEO performance failure departure short FAILED OOS validation. 2026 scanner found 5 qualifying events; only 1/5 correct (20%). Expected 60%+.\", \"root_cause\": \"Scanner too broad, market prices departure before announcement.\", \"hypothesis_id\": \"5dbcfb37\", \"recommendation\": \"DEAD END for broad scanner. Dead end recorded.\"}"
+      },
+      {
+        "name": "earnings_guidance_cut_drift_broad_proxy",
+        "reason": "Systematic backtest N=2318 earnings events (S&P 500 top 100, 2020-2026). Post-earnings drops do NOT predict continued decline when benchmarked. Day0<-10%: direction=61.7%, avg_abnormal=-1.02%, p=0.20 (NOT significant). Large-cap stocks mean-revert after earnings drops. Cases (PRGO/GIS/LOW/ACN) appear to be outliers. Specific guidance cuts from verified data (FactSet/Benzinga) would be needed to test properly - cannot distinguish from pure EPS misses in this dataset."
       }
     ],
     "signal_count": 23,
-    "dead_end_count": 110,
+    "dead_end_count": 112,
     "literature_count": 25
   },
   "live_signals": [
@@ -636,18 +644,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 16,
+    "active_signal_types": 13,
     "max_signal_types": 3,
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 38064203,
+    "sessions_today": 9,
+    "tokens_today": 70043296,
     "sessions_by_day": [
       {
         "date": "2026-03-28",
-        "sessions": 5,
-        "tokens": 38064203
+        "sessions": 9,
+        "tokens": 70043296
       },
       {
         "date": "2026-03-27",
@@ -1692,6 +1700,36 @@
       "investigated": "CEO departure OOS validation; REPL PDUFA research; PICS cluster assessment; GO trade outcome recording; Liberation Day final verification",
       "findings": "Validated the insider buying cluster signal with a live +8.36% paper trade, while discovering that a CEO departure signal that showed 83% accuracy historically is failing in 2026 data (only 20% correct). The system correctly blocked an insider cluster trade when market fear was extreme, and that stock subsequently fell 12% \u2014 the risk filter is working. With Liberation Day tariff announcements expected April 2, several contingent trades are ready to deploy automatically.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-28",
+      "investigated": "AMD+QCOM semiconductor basket tariff signal; Liberation Day 2026 risk assessment; 2025 Liberation Day OOS analysis",
+      "findings": "1. AMD+QCOM basket: 10d avg=-6.16% abnormal, 8/8 (100%) direction, p=0.0008, n=8 tariff events (2018-2025). Passes multiple testing at both 5d (p=0.0039) and 10d (p=0.0008). 2. 2025 Liberation Day OOS",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-28",
+      "investigated": "AMD+QCOM semiconductor basket tariff signal validation; Liberation Day 2026 risk assessment; 2025 OOS analysis",
+      "findings": "1. AMD+QCOM basket: 10d avg=-6.16% abnormal, 8/8 direction (100%), p=0.0008, n=8 events. Passes multiple testing. 2. 2025 Liberation Day OOS: KO(-7.7%), XLU(-4.5%), STLD(+1.8% WRONG) failed due to 90-",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-28",
+      "investigated": "VGNT spinco reinstated; GRCE PDUFA hypothesis created; PICS insider cluster macro analysis; KO/XLU/STLD abandoned; guidance cut drift signal previewed; db bug fix",
+      "findings": "This session cleaned house before the major Liberation Day tariff event on April 2: cancelled three trade setups that failed historical tests, pre-registered a new conditional pharmaceutical trade for April 23, and identified an automotive spinoff opportunity starting Tuesday. The fund is positioned for the week with clear playbooks ready.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-28",
+      "investigated": "Earnings guidance cut drift backtest; Liberation Day April 2 readiness check; PICS/RCKT PDUFA outcomes",
+      "findings": "Research tested whether stocks continue falling after large earnings-day drops \u2014 they do not. Large-cap stocks mean-revert after big drops, not continue lower. Separately, all trades are staged and ready for the April 2 Liberation Day tariff announcement, with clear rules for which positions to take on April 7.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-28",
+      "investigated": "Liberation Day preparation; operational readiness audit; GRCE activation script; systemic short focus gate bug",
+      "findings": "1. CRITICAL BUG FIXED: activate_systemic_short.py referenced event_type sp500_52w_low_systemic_short, which is NOT in active signal types (13 types active, MAX=3). Would have hit focus gate on April 7",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -1774,6 +1812,12 @@
     ],
     "pending_triggers": [
       {
+        "symbol": "VGNT",
+        "direction": "short",
+        "trigger": "2026-04-01T16:00",
+        "event_type": "spinco institutional selling short"
+      },
+      {
         "symbol": "SPY",
         "direction": "long",
         "trigger": "next_market_open",
@@ -1807,25 +1851,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": {
-      "current_state": "2026-03-28 session 2 end",
-      "active_trades": [
-        "SYK short (5b09b097): entry $326.23, current ~$327.00 (-0.2%), deadline April 2",
-        "SPY long (b63a0168): trigger=next_market_open, fires Monday March 31"
-      ],
-      "key_findings": [
-        "PICS cluster (3 insiders): SKIPPED - below 6+ threshold. CEO bought 87K@11.52, stock now $10.22",
-        "Tariff VIX spikes: slower recovery, 33% dir at 5d vs 75% non-tariff. All within 8% max DD (max -7.5% in Apr 2025)",
-        "2025 Liberation Day OOS: GLD +4.3%/+8.8% at 5-10d but -1.6% at 20d (rollback). ALL defensive fail at 20-30d when rollback occurs",
-        "Dead ends added: XLE, XLF, XLB, XLI (all no-signal during tariff events)",
-        "TDG/ADBE/DPZ/OTIS hit 52w lows March 27 - not trading (momentum short dead end)",
-        "VGNT unavailable in Alpaca March 28. Hypothesis abandoned. Check April 1."
-      ],
-      "key_risks": [
-        "SPY long 8% stop at risk if Liberation Day 2026 worse than 2025 (-7.5% max DD in Apr 2025)",
-        "Tariff rollback scenario kills ALL defensive longs at 20-30d",
-        "Good Friday 4-day gap: announcement April 2, first US open April 7"
-      ]
-    }
+    "handoff": "\"HANDOFF 2026-03-28 (Saturday - pre-Liberation Day prep session)\\n\\nCURRENT STATE:\\n- 1 active trade: SYK short (5b09b097), entry $326.89, deadline April 2, currently -0.4%\\n- SPY VIX long (b63a0168): triggers MARCH 31 open (next business day - AUTOMATED)\\n- VGNT spinco short (2d94ac68): triggers April 1 16:00 (AUTOMATED but check manually first)\\n- All tariff hypotheses (WFC/KRE/GLD/COST) await April 2 Liberation Day\\n\\nCHANGES THIS SESSION:\\n1. FIXED: activate_systemic_short.py - focus gate bu"
   }
 }
