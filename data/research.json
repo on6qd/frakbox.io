@@ -649,8 +649,8 @@
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 76093479,
+    "sessions_today": 0,
+    "tokens_today": 0,
     "sessions_by_day": [
       {
         "date": "2026-03-28",
@@ -1820,7 +1820,7 @@
       {
         "symbol": "VGNT",
         "direction": "short",
-        "trigger": "2026-04-01T16:00",
+        "trigger": "2026-04-01T15:55",
         "event_type": "spinco institutional selling short"
       },
       {
