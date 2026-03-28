@@ -559,10 +559,14 @@
       {
         "name": "material_weakness_8k_short",
         "reason": "NOT TRADEABLE. N=104 large-cap events 2021-2025. 5d abnormal=-0.30%, dir=52.9%, t=-0.33 (not significant). Fat-tailed distribution dominated by cases where material weakness accompanied broader negative news (fraud, earnings miss). Item 4.02-only subset (N=35): -2.89% avg, 57% dir, t=-1.29 (directional but underpowered). Key confounders: 38/104 events had simultaneous earnings (item 2.02). 2022 bear market bias inflated signal. Cannot isolate accounting disclosure effect from coincident news."
+      },
+      {
+        "name": "fallen_angel_ig_to_hy_short_expanded",
+        "reason": "N=5 non-COVID events after delisting. Variance too high (PCG +95%, FCX +64%). p>0.4. Needs Bloomberg/WRDS dataset."
       }
     ],
     "signal_count": 23,
-    "dead_end_count": 104,
+    "dead_end_count": 105,
     "literature_count": 25
   },
   "live_signals": [
@@ -617,13 +621,13 @@
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 7744909,
+    "sessions_today": 3,
+    "tokens_today": 22941458,
     "sessions_by_day": [
       {
         "date": "2026-03-28",
-        "sessions": 1,
-        "tokens": 7744909
+        "sessions": 3,
+        "tokens": 22941458
       },
       {
         "date": "2026-03-27",
@@ -1644,6 +1648,18 @@
       "investigated": "Data integrity cleanup (HD/ABT/BAX overdue hypotheses), VIX spike response, tariff pre-selloff regime analysis, April 2 runbook update",
       "findings": "VIX spiked above 30 on March 27, triggering a planned SPY recovery trade set to enter Monday. Research also found that the upcoming Liberation Day tariff announcement is being preceded by an unusually large market selloff \u2014 larger than any historical tariff event in our backtest. This means our defensive stock signals (gold, utilities, consumer staples) are entering uncharted territory, so we made them conditional on confirmation that the market is actually reacting to tariffs on April 2.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-28",
+      "investigated": "S&P 500 deletion VIX regime; SSR lift short signal; material weakness 8-K short signal; Liberation Day pre-selloff regime risk; REPL price thresholds",
+      "findings": "Tested 3 new signals: SSR lift short (dead end - stocks bounce), material weakness 8-K short (dead end - not statistically significant), and S&P 500 deletion VIX regime (validated - works at VIX>22). Updated Liberation Day risk analysis with 2019-08-23 analog.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-28",
+      "investigated": "VIX spike timing analysis; AWK vs XLU tariff-defensive utility comparison; fallen angel credit downgrade signal; CEO departure scan; PICS insider cluster; first IG upgrade candidates (CCL/RCL)",
+      "findings": "Research today found that individual water utility stocks \u2014 especially American Water Works \u2014 outperform utility ETFs by about 2x during tariff events, likely because they have zero import/export exposure and attract safe-haven capital flows. We also confirmed that after VIX spikes above 30, markets are historically positive 75% of the time at 30 days, supporting our current SPY long trade set up for Monday.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -1759,12 +1775,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": {
-      "attempted": "1) PEAD VIX regime analysis 2) SPY tariff recovery signal 3) Sector ETF tariff analysis (XLP, XLE, XLI, XLB, XLU, XLV) 4) XLU deep-dive and hypothesis creation",
-      "accomplished": "1) PEAD DEAD END confirmed (N=421, dir=42%, p=0.69) - hypothesis 9e2a03ac abandoned 2) SPY tariff recovery DEAD END (2025 regime: 20d=-2.77%, dir=17%) 3) XLU VALIDATED (IS 20d p=0.010, 25d p=0.0008, OOS 75% dir) - new hypothesis 9184ba0f created with April 7 trigger 4) KO signal STRONG confirmation (10d p=0.021, 20d p=0.005, direction 77-85%) 5) Dead ends: pead_earnings_beat_gte10pct_largecap, spy_unconditional_recovery_after_tariff",
-      "partial_results": "GDX (gold miners) shows +5.55% at 20d but p=0.058 (borderline, fails multiple testing). XLP +2.27% at 20d but only 1 significant horizon. Both noted in knowledge base but not hypothesis-worthy yet.",
-      "blocked_by": "yfinance batch downloads had some parse issues. PEAD analysis limited to 2020-2025 due to earnings_dates API range.",
-      "key_insight": "XLU is the strongest NEW signal found this session. It was previously 'underpowered' but with 13 deduped events shows p=0.0015 at 20d and p=0.0001 at 25d with 100% direction. Ready to trade April 7. Also: PEAD is definitively dead for large-caps - do not build any earnings-based strategies."
-    }
+    "handoff": "\"{'current_state': '2026-03-28 session end', 'active_trades': ['SYK short (5b09b097): entry $326.23, currently ~-0.2%, deadline April 2', 'SPY long (b63a0168): pending, fires Monday March 31 at 9:30 AM open'], 'pending_staged': ['Liberation Day hypotheses: GLD/KO/KRE/WFC/STLD/XLU/COST \\u2014 all NO triggers yet, set via runbook April 2'], 'key_findings_this_session': ['VIX timing (n=28 events): median 14d to bottom, 75% positive at 30d. Tariff analogs (2025, 2018) show +11-12% 20d recovery. 8% s"
   }
 }
