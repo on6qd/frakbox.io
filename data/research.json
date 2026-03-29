@@ -611,10 +611,14 @@
       {
         "name": "eww_mexico_tariff_signal",
         "reason": "EWW (Mexico ETF) shows NO negative effect from tariff events. At 20d, avg=+3.93%, direction_negative=22%. Mexico may BENEFIT from China tariffs (trade rerouting, USMCA protection). BUT: 2025-04-02 (Liberation Day with Mexico tariffs) shows -6.6% at 5d - Mexico-specific tariffs are different. CONTEXT-DEPENDENT, not reliable signal."
+      },
+      {
+        "name": "tariff_rollback_reversal",
+        "reason": "Tariff pause/rollback not a reliable exit signal for defensive positions. 6 events (2018-2025): SOXX/XLF/KRE all ~50% direction (noise). GLD kept rising 67-83% of time after rollbacks. Root cause: rollbacks are heterogeneous (pre-priced, partial, concurrent macro fears). DEAD END."
       }
     ],
     "signal_count": 23,
-    "dead_end_count": 117,
+    "dead_end_count": 118,
     "literature_count": 25
   },
   "live_signals": [
@@ -669,13 +673,13 @@
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 44297395,
+    "sessions_today": 6,
+    "tokens_today": 57947395,
     "sessions_by_day": [
       {
         "date": "2026-03-29",
-        "sessions": 4,
-        "tokens": 44297395
+        "sessions": 6,
+        "tokens": 57947395
       },
       {
         "date": "2026-03-28",
@@ -1791,6 +1795,18 @@
       "investigated": "Liberation Day readiness verification; first-IG upgrade scanner build; SYK trade analysis; AMD/QCOM/FXI post-Liberation Day planning",
       "findings": "1. All Liberation Day scripts verified ready (april2_liberation_day_runbook.py, check_vgnt_and_activate.py, activate_repl_trade.py). SPY long b63a0168 triggers Monday. 2. Built tools/scan_first_ig_upg",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-03-29",
+      "investigated": "Tariff rollback reversal signal; First-IG credit upgrade pipeline (CCL/TEVA screening); PICS insider cluster activation conditions; Post-tariff VIX spike sector rotation analysis",
+      "findings": "Tested whether tariff rollback announcements signal the right time to exit defensive positions - they do not. Gold kept rising even after tariffs were partially paused in 2025. Also scanned for upcoming credit upgrade opportunities - no qualifying events expected until Q3-Q4 2026.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-29",
+      "investigated": "First-IG credit upgrade OOS validation (PR result), agricultural exporter tariff analysis, Liberation Day readiness verification, AMD/QCOM observer check, auto tariff watchlist setup",
+      "findings": "1. PR (Permian Resources) S&P upgrade BB+->BBB- March 17, 2026: +5.62% 3d abnormal (strong positive OOS). True first-IG AH events now 2/2=100% hit rate. Overall OOS improved from 50% to 57% (4/7 count",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -1912,6 +1928,17 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"{\\\"current_state\\\": \\\"March 29 session. Market closed. SPY long b63a0168 fires Monday. VGNT fires April 1. Liberation Day April 2. All scripts verified and ready.\\\", \\\"key_open_questions\\\": [\\\"Will Liberation Day tariffs be large enough to trigger SPY<-0.5% gate?\\\", \\\"Will VGNT be tradeable in Alpaca by April 1?\\\", \\\"Will REPL get CRL or approval on April 10?\\\", \\\"Will FXI reach statistical significance with 10th event?\\\"], \\\"signals_built_this_session\\\": [\\\"First-IG scanner (tools/scan_first_i"
+    "handoff": {
+      "current_state": "March 29 Sunday session. Liberation Day April 2 confirmed ready. SPY long fires Monday (b63a0168). VGNT fires April 1. Good Friday April 3 = market CLOSED.",
+      "key_research_findings_this_session": [
+        "PR (Permian Resources) first-IG upgrade: +5.62% 3d abnormal (STRONG). True first-IG AH hit rate now 2/2=100%.",
+        "Agricultural exporters INCONCLUSIVE: ADM goes UP paradoxically, DE borderline negative (p=0.098). Not tradeable.",
+        "TM/HMC auto tariff watchlist added: Liberation Day = informal OOS event #2 for auto_import_tariff_short.",
+        "AMD/QCOM observer ready for April 8-9 (5d) and April 14-15 (10d).",
+        "Signal cap issue documented: 13 types vs max 3. Must complete tariff hypotheses before adding AMD/QCOM or AWK."
+      ],
+      "blockers": "Signal cap at 13 types - must complete Liberation Day tariff hypotheses before adding AMD/QCOM/AWK.",
+      "next_step": "April 2 POST-MARKET: Run april2_liberation_day_runbook.py. If SPY<-0.5%: set GLD/WFC/KRE/COST for April 7. Good Friday April 3 closed. April 7 morning: verify all 4 tariff trades executed."
+    }
   }
 }
