@@ -77,6 +77,12 @@
       "equity": 100427.5,
       "cash": 105339.1,
       "position_count": 1
+    },
+    {
+      "date": "2026-03-30",
+      "equity": 100427.5,
+      "cash": 105339.1,
+      "position_count": 1
     }
   ],
   "current": {

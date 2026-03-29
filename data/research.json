@@ -619,10 +619,14 @@
       {
         "name": "sector_rotation_post_tariff_vix30",
         "reason": "XLI 100% direction (n=3) was artifact of incorrect VIX classification. 2019-08-26 had VIX=19.3 (not >30). True VIX>30 tariff events n=2 (2018-12-21 VIX=30.1, 2025-04-03 VIX=30.0). Expanded test n=5 (VIX>20 events): XLI avg=-0.19%, 60% direction. Not tradeable. Monitor Liberation Day 2026 for n=3 but still underpowered for hypothesis registration."
+      },
+      {
+        "name": "tlt_treasury_tariff_long",
+        "reason": "DEAD END: TLT 5d mean=-0.52% positive=43% p=0.63; 10d mean=-1.45% positive=36% p=0.35; 20d mean=-2.20% positive=36% p=0.24. N=14 tariff events 2018-2025. TLT direction is rate-regime dependent (positive in 2019 Fed-cut cycle, negative in 2018/2022 Fed-hike cycles). No consistent signal. Not tradeable without predicting Fed policy separately. 2026 regime: Fed constrained by tariff inflation, cannot predict TLT direction."
       }
     ],
     "signal_count": 23,
-    "dead_end_count": 119,
+    "dead_end_count": 120,
     "literature_count": 25
   },
   "live_signals": [
@@ -677,8 +681,8 @@
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 68853843,
+    "sessions_today": 0,
+    "tokens_today": 0,
     "sessions_by_day": [
       {
         "date": "2026-03-29",
@@ -1817,6 +1821,12 @@
       "investigated": "Macro regime filter for insider scanner; XLI sector rotation validation; AMD/QCOM signal verification; GO/PICS cluster monitoring; First-IG upgrade candidate search",
       "findings": "1. MACRO REGIME FILTER ADDED to cluster_auto_scanner.py. New get_macro_regime() function checks SPY vs 20d MA. Current state: SPY -4.6% below 20d MA = macro selloff. Insider signal is 33% direction in",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-30",
+      "investigated": "Pre-Liberation Day prep, PICS investigation, GO insider cluster analysis, TLT tariff dead end, sector recovery backtest",
+      "findings": "We confirmed our trading system is ready for a major tariff announcement expected April 2. Key finding: two back-to-back rounds of insider buying at Grocery Outlet (a discount grocer) showed the insider buying signal can beat the market even during extreme volatility \u2014 something our safety rules had blocked from trading.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -1938,17 +1948,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": {
-      "current_state": "March 29 Sunday session. Liberation Day April 2 confirmed ready. SPY long fires Monday (b63a0168). VGNT fires April 1. Good Friday April 3 = market CLOSED.",
-      "key_research_findings_this_session": [
-        "PR (Permian Resources) first-IG upgrade: +5.62% 3d abnormal (STRONG). True first-IG AH hit rate now 2/2=100%.",
-        "Agricultural exporters INCONCLUSIVE: ADM goes UP paradoxically, DE borderline negative (p=0.098). Not tradeable.",
-        "TM/HMC auto tariff watchlist added: Liberation Day = informal OOS event #2 for auto_import_tariff_short.",
-        "AMD/QCOM observer ready for April 8-9 (5d) and April 14-15 (10d).",
-        "Signal cap issue documented: 13 types vs max 3. Must complete tariff hypotheses before adding AMD/QCOM or AWK."
-      ],
-      "blockers": "Signal cap at 13 types - must complete Liberation Day tariff hypotheses before adding AMD/QCOM/AWK.",
-      "next_step": "April 2 POST-MARKET: Run april2_liberation_day_runbook.py. If SPY<-0.5%: set GLD/WFC/KRE/COST for April 7. Good Friday April 3 closed. April 7 morning: verify all 4 tariff trades executed."
-    }
+    "handoff": "\"CRITICAL WEEK: Liberation Day April 2, 2026. SPY long (b63a0168) fires Monday March 30 open (already configured). VGNT fires April 1 at 15:55. Liberation Day April 2 PM: run runbook. SYK closes April 2 EOD. TLT tested and confirmed DEAD END (rate-regime dependent). PICS is Brazilian fintech not pharma - VIX blocked. GO second cluster (n=6 CEO $7M March 25) missed window due to VIX=31 but stock rose +8.1% vs SPY -1.7% - evidence VIX threshold might be too strict for high-conviction clusters. BLO"
   }
 }
