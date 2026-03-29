@@ -615,10 +615,14 @@
       {
         "name": "tariff_rollback_reversal",
         "reason": "Tariff pause/rollback not a reliable exit signal for defensive positions. 6 events (2018-2025): SOXX/XLF/KRE all ~50% direction (noise). GLD kept rising 67-83% of time after rollbacks. Root cause: rollbacks are heterogeneous (pre-priced, partial, concurrent macro fears). DEAD END."
+      },
+      {
+        "name": "sector_rotation_post_tariff_vix30",
+        "reason": "XLI 100% direction (n=3) was artifact of incorrect VIX classification. 2019-08-26 had VIX=19.3 (not >30). True VIX>30 tariff events n=2 (2018-12-21 VIX=30.1, 2025-04-03 VIX=30.0). Expanded test n=5 (VIX>20 events): XLI avg=-0.19%, 60% direction. Not tradeable. Monitor Liberation Day 2026 for n=3 but still underpowered for hypothesis registration."
       }
     ],
     "signal_count": 23,
-    "dead_end_count": 118,
+    "dead_end_count": 119,
     "literature_count": 25
   },
   "live_signals": [
@@ -673,13 +677,13 @@
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 57947395,
+    "sessions_today": 8,
+    "tokens_today": 68853843,
     "sessions_by_day": [
       {
         "date": "2026-03-29",
-        "sessions": 6,
-        "tokens": 57947395
+        "sessions": 8,
+        "tokens": 68853843
       },
       {
         "date": "2026-03-28",
@@ -1806,6 +1810,12 @@
       "date": "2026-03-29",
       "investigated": "First-IG credit upgrade OOS validation (PR result), agricultural exporter tariff analysis, Liberation Day readiness verification, AMD/QCOM observer check, auto tariff watchlist setup",
       "findings": "1. PR (Permian Resources) S&P upgrade BB+->BBB- March 17, 2026: +5.62% 3d abnormal (strong positive OOS). True first-IG AH events now 2/2=100% hit rate. Overall OOS improved from 50% to 57% (4/7 count",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-29",
+      "investigated": "Macro regime filter for insider scanner; XLI sector rotation validation; AMD/QCOM signal verification; GO/PICS cluster monitoring; First-IG upgrade candidate search",
+      "findings": "1. MACRO REGIME FILTER ADDED to cluster_auto_scanner.py. New get_macro_regime() function checks SPY vs 20d MA. Current state: SPY -4.6% below 20d MA = macro selloff. Insider signal is 33% direction in",
       "tag": "dead_end"
     }
   ],
