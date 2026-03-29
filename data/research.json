@@ -99,7 +99,7 @@
       },
       {
         "name": "tariff_xlv_healthcare_long",
-        "status": "validated_candidate",
+        "status": "DISQUALIFIED - OOS failure in 2025 Liberation Day rollback scenario",
         "magnitude_pct": 1.48
       },
       {
@@ -599,10 +599,22 @@
       {
         "name": "vix_spike_sector_rotation",
         "reason": "Fails multiple testing. N=24 VIX>30 first-cross events 2002-2026. Tested 14 sectors (XLF,XLV,XLP,XLU,XLK,XLI,XLE,XLB,XLRE,XLC,XLY,GLD,TLT,IWM) at 5d/10d/20d vs SPY. Only GLD shows +2.88% at 10d (p=0.019) but not significant at 5d or 20d - fails 2-horizon rule. TLT short at 5d (p=0.016, 79% direction) and XLP short (p=0.024) fail persistence at 10d+. No sector shows excess return vs SPY at 2+ horizons p<0.05. GLD covered by tariff-specific signal. DEAD END for new sector rotation signal."
+      },
+      {
+        "name": "uup_dollar_tariff_signal",
+        "reason": "UUP (US Dollar ETF) shows no signal after tariff escalations. N=9 events, direction=44% negative at 5d, 11% at 10d (goes UP), p>0.9. Dollar is mixed - sometimes safe haven bid, sometimes recession fears. DEAD END."
+      },
+      {
+        "name": "eem_emerging_market_tariff_signal",
+        "reason": "EEM (Emerging Markets ETF) shows no signal after tariff escalations. N=9 events, direction=56% negative, p>0.35 at all horizons. EEM has too much country diversity to isolate China tariff effect. DEAD END."
+      },
+      {
+        "name": "eww_mexico_tariff_signal",
+        "reason": "EWW (Mexico ETF) shows NO negative effect from tariff events. At 20d, avg=+3.93%, direction_negative=22%. Mexico may BENEFIT from China tariffs (trade rerouting, USMCA protection). BUT: 2025-04-02 (Liberation Day with Mexico tariffs) shows -6.6% at 5d - Mexico-specific tariffs are different. CONTEXT-DEPENDENT, not reliable signal."
       }
     ],
     "signal_count": 23,
-    "dead_end_count": 114,
+    "dead_end_count": 117,
     "literature_count": 25
   },
   "live_signals": [
@@ -657,13 +669,13 @@
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 28237970,
+    "sessions_today": 4,
+    "tokens_today": 44297395,
     "sessions_by_day": [
       {
         "date": "2026-03-29",
-        "sessions": 2,
-        "tokens": 28237970
+        "sessions": 4,
+        "tokens": 44297395
       },
       {
         "date": "2026-03-28",
@@ -1767,6 +1779,18 @@
       "investigated": "VIX spike confirmation (closed 31.05 March 27), Liberation Day readiness, sector rotation after VIX spikes, first-ever IG credit upgrade signal expansion, GO insider cluster evaluation, MSCI rising star identification",
       "findings": "This week's market volatility triggered our VIX recovery signal \u2014 when fear spikes above 30, stocks historically bounce strongly over the following month. We also expanded our analysis of companies receiving their first-ever investment-grade credit rating, finding the signal works well in normal markets (+1.57% outperformance) but fails during extreme market panic.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-29",
+      "investigated": "Tariff signal OOS validation (XLV, FXI, UUP, EEM, EWW), insider cluster macro regime analysis, first IG upgrade pipeline discovery (MDLN, CRS), Liberation Day preparation verification",
+      "findings": "1. XLV healthcare: DISQUALIFIED for Liberation Day (5d=-5.27% in 2025 OOS rollback). Same failure pattern as KO/XLU. 2. FXI China ETF: Near-signal (20d p=0.041, -2.90%, n=9). 3. UUP/EEM/EWW: All dead ",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-29",
+      "investigated": "Liberation Day readiness verification; first-IG upgrade scanner build; SYK trade analysis; AMD/QCOM/FXI post-Liberation Day planning",
+      "findings": "1. All Liberation Day scripts verified ready (april2_liberation_day_runbook.py, check_vgnt_and_activate.py, activate_repl_trade.py). SPY long b63a0168 triggers Monday. 2. Built tools/scan_first_ig_upg",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -1888,6 +1912,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"HANDOFF 2026-03-29 (Sunday - Liberation Day prep complete)\\n\\nKEY SIGNALS READY: SPY long fires auto Monday March 30, VGNT fires April 1T15:55, SYK closes April 2 (deadline). Liberation Day runbook tested and confirmed working.\\n\\nRESEARCH FINDINGS:\\n- Sector rotation after VIX>30: DEAD END (14 sectors, 3 horizons, all fail multiple testing)\\n- IG upgrade signal expanded to n=6 historical events: mean=+1.57% 3d, dir=83% (excl. UBER Aug 2024 VIX>60 confound)\\n- Regime constraint added: DO NOT ac"
+    "handoff": "\"{\\\"current_state\\\": \\\"March 29 session. Market closed. SPY long b63a0168 fires Monday. VGNT fires April 1. Liberation Day April 2. All scripts verified and ready.\\\", \\\"key_open_questions\\\": [\\\"Will Liberation Day tariffs be large enough to trigger SPY<-0.5% gate?\\\", \\\"Will VGNT be tradeable in Alpaca by April 1?\\\", \\\"Will REPL get CRL or approval on April 10?\\\", \\\"Will FXI reach statistical significance with 10th event?\\\"], \\\"signals_built_this_session\\\": [\\\"First-IG scanner (tools/scan_first_i"
   }
 }
