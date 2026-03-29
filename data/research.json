@@ -681,9 +681,14 @@
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 2,
+    "tokens_today": 19236501,
     "sessions_by_day": [
+      {
+        "date": "2026-03-30",
+        "sessions": 2,
+        "tokens": 19236501
+      },
       {
         "date": "2026-03-29",
         "sessions": 8,
@@ -1827,6 +1832,12 @@
       "investigated": "Pre-Liberation Day prep, PICS investigation, GO insider cluster analysis, TLT tariff dead end, sector recovery backtest",
       "findings": "We confirmed our trading system is ready for a major tariff announcement expected April 2. Key finding: two back-to-back rounds of insider buying at Grocery Outlet (a discount grocer) showed the insider buying signal can beat the market even during extreme volatility \u2014 something our safety rules had blocked from trading.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-30",
+      "investigated": "VIX Tier 4 threshold investigation for insider clusters; portfolio readiness check for Liberation Day",
+      "findings": "1. VIX TIER 4 REVISED: Backtest N=38 total VIX>30 n=6-9 clusters (2020-2024). Key finding: VIX 30-40 specific bucket (N=25) shows avg=+4.44%, pos=60%, p=0.024 \u2014 SIGNAL EXISTS. VIX>40 bucket (N=7) show",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -1948,6 +1959,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"CRITICAL WEEK: Liberation Day April 2, 2026. SPY long (b63a0168) fires Monday March 30 open (already configured). VGNT fires April 1 at 15:55. Liberation Day April 2 PM: run runbook. SYK closes April 2 EOD. TLT tested and confirmed DEAD END (rate-regime dependent). PICS is Brazilian fintech not pharma - VIX blocked. GO second cluster (n=6 CEO $7M March 25) missed window due to VIX=31 but stock rose +8.1% vs SPY -1.7% - evidence VIX threshold might be too strict for high-conviction clusters. BLO"
+    "handoff": "\"CRITICAL WEEK: Liberation Day April 2, 2026.\\n\\nRESEARCH UPDATE (2026-03-30): VIX Tier 4 rule revised. n=6-9 insider clusters are TRADEABLE at VIX 30-40 (not just VIX<30). Backtest: N=25, avg=+4.44%, pos=60%, p=0.024. 2022 OOS: N=12, avg=+7.75%, pos=67%, p=0.015. VIX>40 still DO NOT TRADE. Scanner updated. GO second cluster (VIX=31, n=6) was missed valid trade (+9.6%). PICS (VIX=31, n=3) correctly skipped (down -12.4%).\\n\\nPORTFOLIO STATE (March 30 evening):\\n- SYK: active short, deadline April"
   }
 }
