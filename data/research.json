@@ -591,10 +591,18 @@
       {
         "name": "earnings_guidance_cut_drift_broad_proxy",
         "reason": "Systematic backtest N=2318 earnings events (S&P 500 top 100, 2020-2026). Post-earnings drops do NOT predict continued decline when benchmarked. Day0<-10%: direction=61.7%, avg_abnormal=-1.02%, p=0.20 (NOT significant). Large-cap stocks mean-revert after earnings drops. Cases (PRGO/GIS/LOW/ACN) appear to be outliers. Specific guidance cuts from verified data (FactSet/Benzinga) would be needed to test properly - cannot distinguish from pure EPS misses in this dataset."
+      },
+      {
+        "name": "gdx_gold_miner_tariff_amplified",
+        "reason": "GDX vs GLD in tariff events (n=11, 2018-2025): GDX 5d abnormal avg=+2.69% but p=0.105 (NOT significant). Signal dominated by 2025 Liberation Day outlier (+23.9% at 10d). Without outlier: GDX 10d avg ~+1.2%, no signal. GDX does not reliably amplify gold signal in tariff events. Stick with GLD (b768e8d8) which has p=0.0016 validated. GDX leverage is real but inconsistent - not a pre-registerable signal."
+      },
+      {
+        "name": "vix_spike_sector_rotation",
+        "reason": "Fails multiple testing. N=24 VIX>30 first-cross events 2002-2026. Tested 14 sectors (XLF,XLV,XLP,XLU,XLK,XLI,XLE,XLB,XLRE,XLC,XLY,GLD,TLT,IWM) at 5d/10d/20d vs SPY. Only GLD shows +2.88% at 10d (p=0.019) but not significant at 5d or 20d - fails 2-horizon rule. TLT short at 5d (p=0.016, 79% direction) and XLP short (p=0.024) fail persistence at 10d+. No sector shows excess return vs SPY at 2+ horizons p<0.05. GLD covered by tariff-specific signal. DEAD END for new sector rotation signal."
       }
     ],
     "signal_count": 23,
-    "dead_end_count": 112,
+    "dead_end_count": 114,
     "literature_count": 25
   },
   "live_signals": [
@@ -649,9 +657,14 @@
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 2,
+    "tokens_today": 28237970,
     "sessions_by_day": [
+      {
+        "date": "2026-03-29",
+        "sessions": 2,
+        "tokens": 28237970
+      },
       {
         "date": "2026-03-28",
         "sessions": 10,
@@ -1736,6 +1749,24 @@
       "investigated": "Liberation Day April 2 readiness; March 27 systemic event; PICS cluster; AMD/QCOM OOS planning",
       "findings": "On March 27, the market sell-off pushed 28 large-cap companies to their lowest prices in over a year at once -- a rare broad selloff signal. We are preserving portfolio capacity for more proven tariff-related trades expected after the April 2 tariff announcements.",
       "tag": "validation"
+    },
+    {
+      "date": "2026-03-29",
+      "investigated": "Liberation Day readiness verification; GDX vs GLD tariff analysis; pre-sold VIX spike regime analysis; credit upgrade signal monitoring; PICS cluster assessment",
+      "findings": "1. Fixed VGNT trigger 16:00->15:55 (race condition with market close; 15:55 safely within hours). 2. Created missing activate_gld_tariff_trade.py (was absent despite GLD being priority 2 signal for Li",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-29",
+      "investigated": "First-ever IG credit upgrade signal - PR (Permian Resources) detection via agent search",
+      "findings": "PR upgraded BB+->BBB- by S&P on March 17, 2026. True first-ever IG. Confirmed +5.97% 3d abnormal (strong positive). Signal was already in knowledge base but NOT traded because detected 12 days after u",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-29",
+      "investigated": "VIX spike confirmation (closed 31.05 March 27), Liberation Day readiness, sector rotation after VIX spikes, first-ever IG credit upgrade signal expansion, GO insider cluster evaluation, MSCI rising star identification",
+      "findings": "This week's market volatility triggered our VIX recovery signal \u2014 when fear spikes above 30, stocks historically bounce strongly over the following month. We also expanded our analysis of companies receiving their first-ever investment-grade credit rating, finding the signal works well in normal markets (+1.57% outperformance) but fails during extreme market panic.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -1857,6 +1888,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"HANDOFF 2026-03-28 (Saturday - Liberation Day prep complete)\""
+    "handoff": "\"HANDOFF 2026-03-29 (Sunday - Liberation Day prep complete)\\n\\nKEY SIGNALS READY: SPY long fires auto Monday March 30, VGNT fires April 1T15:55, SYK closes April 2 (deadline). Liberation Day runbook tested and confirmed working.\\n\\nRESEARCH FINDINGS:\\n- Sector rotation after VIX>30: DEAD END (14 sectors, 3 horizons, all fail multiple testing)\\n- IG upgrade signal expanded to n=6 historical events: mean=+1.57% 3d, dir=83% (excl. UBER Aug 2024 VIX>60 confound)\\n- Regime constraint added: DO NOT ac"
   }
 }
