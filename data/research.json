@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 49,
-    "pending": 13,
+    "total_hypotheses": 52,
+    "pending": 16,
     "active": 1,
     "completed": 4,
     "invalidated": 2,
@@ -676,18 +676,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 13,
-    "max_signal_types": 3,
-    "over_limit": true
+    "active_signal_types": 15,
+    "max_signal_types": 20,
+    "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 36352250,
+    "sessions_today": 6,
+    "tokens_today": 55894650,
     "sessions_by_day": [
       {
         "date": "2026-03-30",
-        "sessions": 4,
-        "tokens": 36352250
+        "sessions": 6,
+        "tokens": 55894650
       },
       {
         "date": "2026-03-29",
@@ -1850,6 +1850,18 @@
       "investigated": "Liberation Day pre-flight: verified all pending trades, 2025 OOS per-asset analysis, AEP utility signal discovery",
       "findings": "1. All Liberation Day trade triggers verified: SPY long fires March 31 open, VGNT fires April 1 15:55, GLD/WFC/KRE/COST pending April 2 trigger. 2. 2025 OOS per-asset analysis: GLD most resilient (+13",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-03-30",
+      "investigated": "First-ever IG upgrade signal audit; PICS cluster decision; Liberation Day week prep; MELI rating history",
+      "findings": "We discovered a missed trading signal: MercadoLibre became investment-grade in October 2024 and the stock gained +1.99% relative to the market over the next 3 days \u2014 confirming our hypothesis that companies getting their first-ever investment grade credit rating tend to outperform. We also corrected an error in our database (Permian Resources was misclassified as a first-ever event). Our investment grade signal database is now 3 for 5 (60%) on true out-of-sample tests.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-30",
+      "investigated": "Pre-registered semiconductor + utility signals for Liberation Day; analyzed signal type cap issue; verified AMD/QCOM OOS split; checked PICS/GO/SYK/VGNT status",
+      "findings": "1. AMD/QCOM semiconductor basket fully validated with proper 3-event OOS split (2019-05-10, 2025-03-26, 2025-04-02 all CORRECT at 5d and 10d). Full N=8: 5d p=0.0001 (100% dir), 10d p=0.0008 (87.5% dir",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -1942,6 +1954,48 @@
         "direction": "long",
         "trigger": "next_market_open",
         "event_type": "vix spike above 30 spy long"
+      },
+      {
+        "symbol": "WFC",
+        "direction": "short",
+        "trigger": "2026-04-03T09:30",
+        "event_type": "tariff escalation bank short"
+      },
+      {
+        "symbol": "COST",
+        "direction": "long",
+        "trigger": "2026-04-11T09:30",
+        "event_type": "tariff defensive retail long"
+      },
+      {
+        "symbol": "GLD",
+        "direction": "long",
+        "trigger": "2026-04-07T09:30",
+        "event_type": "tariff escalation gld long"
+      },
+      {
+        "symbol": "KRE",
+        "direction": "short",
+        "trigger": "2026-04-10T09:30",
+        "event_type": "tariff escalation kre bank short"
+      },
+      {
+        "symbol": "AMD",
+        "direction": "short",
+        "trigger": "2026-04-03T09:30",
+        "event_type": "tariff escalation semiconductor short"
+      },
+      {
+        "symbol": "QCOM",
+        "direction": "short",
+        "trigger": "2026-04-03T09:30",
+        "event_type": "tariff escalation semiconductor short"
+      },
+      {
+        "symbol": "AEP",
+        "direction": "long",
+        "trigger": "2026-04-14T09:30",
+        "event_type": "tariff escalation utility long"
       }
     ],
     "research_queue": [
@@ -1971,6 +2025,10 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"CRITICAL WEEK: Liberation Day April 2, 2026 (WEDNESDAY).\\n\\nSESSION 2026-03-30 COMPLETED:\\n1. All Liberation Day trades verified. SPY(b63a0168) fires Monday March 31, VGNT(2d94ac68) fires April 1 15:55.\\n2. KRE CAUTION: 2025 OOS shows 20d KRE fails with rollback. Added 8% TP to 6e732966. Exit at 5d if profitable.\\n3. WFC confirmed: 2025 OOS 5d=-5.3% abn (correct). Hold 5d as pre-registered.\\n4. AEP UTILITY SIGNAL: n=10, 10d p=0.035 dir=90%, 20d p=0.046 dir=80%. PASSES MT. READY_TO_PREREGISTER. "
+    "handoff": {
+      "P0": "SYK close April 2: complete_hypothesis(5b09b097) after close",
+      "P1": "Post-Liberation Day: activate GLD/WFC/KRE/COST if SPY < -0.5% on April 2",
+      "P2": "Run ig_upgrade_weekly_scanner.py every Monday morning"
+    }
   }
 }
