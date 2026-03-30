@@ -103,11 +103,6 @@
         "magnitude_pct": 1.48
       },
       {
-        "name": "stld_domestic_steel_tariff_short",
-        "status": "validated_candidate",
-        "magnitude_pct": -2.58
-      },
-      {
         "name": "tariff_kre_regional_banks_short",
         "status": "validated_candidate",
         "magnitude_pct": -3.08
@@ -141,6 +136,11 @@
         "name": "tariff_xlu_utility_long_20d",
         "status": "strong",
         "magnitude_pct": 3.36
+      },
+      {
+        "name": "stld_domestic_steel_tariff_short",
+        "status": "needs_oos_validation",
+        "magnitude_pct": -2.58
       }
     ],
     "dead_ends": [
@@ -685,13 +685,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 20670691,
+    "sessions_today": 4,
+    "tokens_today": 27268430,
     "sessions_by_day": [
       {
         "date": "2026-03-31",
-        "sessions": 3,
-        "tokens": 20670691
+        "sessions": 4,
+        "tokens": 27268430
       },
       {
         "date": "2026-03-30",
@@ -1925,6 +1925,12 @@
       "investigated": "Insider cluster scan (VIX 30-40 window, March 27-31); IPX/PICS qualification check; GO result impact analysis; Liberation Day trade verification",
       "findings": "We found that insider buying signals work well when 6 or more company insiders buy together \u2014 even during market selloffs. A recent test with Grocery Outlet (n=6 insiders) returned nearly 10% outperformance in 3 days during the tariff-driven market decline. Our previous concern that all insider signals fail in tariff markets was wrong \u2014 it only applied to smaller clusters of 3-5 insiders.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-03-31",
+      "investigated": "Pre-Liberation Day final prep: VGNT spinoff handling, 52w low scan, insider cluster scan, NUE/STLD steel paradox investigation",
+      "findings": "In preparation for Liberation Day (April 2 tariff announcements), we verified all trades are queued and found that domestic steel stocks show inconsistent responses to tariff news - a signal thought to be reliable for one company (STLD) did not repeat in a similar company (Nucor), raising questions about its validity.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2007,15 +2013,9 @@
     ],
     "pending_triggers": [
       {
-        "symbol": "VGNT",
-        "direction": "short",
-        "trigger": "2026-04-01T15:55",
-        "event_type": "spinco institutional selling short"
-      },
-      {
         "symbol": "WFC",
         "direction": "short",
-        "trigger": "2026-04-03T09:30",
+        "trigger": "2026-04-06T09:30",
         "event_type": "tariff escalation bank short"
       },
       {
@@ -2039,13 +2039,13 @@
       {
         "symbol": "AMD",
         "direction": "short",
-        "trigger": "2026-04-03T09:30",
+        "trigger": "2026-04-06T09:30",
         "event_type": "tariff escalation semiconductor short"
       },
       {
         "symbol": "QCOM",
         "direction": "short",
-        "trigger": "2026-04-03T09:30",
+        "trigger": "2026-04-06T09:30",
         "event_type": "tariff escalation semiconductor short"
       },
       {
@@ -2082,6 +2082,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"April 6 session: Verify all Liberation Day trades fired. Liberation Day (April 2) tariff announcement will dominate market April 3-6. Run liberation_day_outcome_checker.py. SYK should have closed April 2. VGNT may have failed (not in Alpaca). Good Friday April 3 means WFC/AMD/QCOM trigger at April 6 open. Key decisions: (1) Was tariff escalation actually announced on April 2? (2) Are the sector signals directionally correct? (3) Should KRE exit be manual at 5d (April 17) per OOS caveat?\""
+    "handoff": "\"April 6 is the critical session. Liberation Day (April 2) tariff announcement will dominate markets.\\nKEY PRICES PRE-LIBERATION DAY (March 30 close): SPY=631.97, QQQ=558.28, XLF=48.36, SOXX=309.79, GLD=414.58, TLT=86.78, KRE=63.61, XLU=45.92, VIX=30.61\\nINDIVIDUAL: WFC=76.80, AMD=196.04, QCOM=127.07, STLD=171.78, AEP=131.12, COST=996.58, NUE=164.75\\nSPY position: 15.63 shares long @ .88, entry March 31, deadline April 27, 8% stop (~)\\nSYK position: 15 shares short @ .23, deadline April 2 (auto-"
   }
 }
