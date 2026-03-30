@@ -623,10 +623,14 @@
       {
         "name": "tlt_treasury_tariff_long",
         "reason": "DEAD END: TLT 5d mean=-0.52% positive=43% p=0.63; 10d mean=-1.45% positive=36% p=0.35; 20d mean=-2.20% positive=36% p=0.24. N=14 tariff events 2018-2025. TLT direction is rate-regime dependent (positive in 2019 Fed-cut cycle, negative in 2018/2022 Fed-hike cycles). No consistent signal. Not tradeable without predicting Fed policy separately. 2026 regime: Fed constrained by tariff inflation, cannot predict TLT direction."
+      },
+      {
+        "name": "tariff_fxi_china_etf_short",
+        "reason": "FXI backtest across 8 tariff events (2018-2026): n=8, all p>0.40. Mean abnormal at 3d=-0.99%, 5d=-0.89%, 20d=0.0%. Direction only 50-62%. Critical variance: 2025-01-21 Trump 10% EO = FXI OUTPERFORMED SPY by +12.35% at 20d (China stimulus response). 2025 Liberation Day = FXI underperformed by -8.49% at 3d. Signal is regime-dependent on Chinese government response to tariffs. Pre-event retaliation risk is unknowable. Cannot build systematic short strategy on FXI."
       }
     ],
     "signal_count": 23,
-    "dead_end_count": 120,
+    "dead_end_count": 121,
     "literature_count": 25
   },
   "live_signals": [
@@ -681,9 +685,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 84822374,
+    "sessions_today": 3,
+    "tokens_today": 20670691,
     "sessions_by_day": [
+      {
+        "date": "2026-03-31",
+        "sessions": 3,
+        "tokens": 20670691
+      },
       {
         "date": "2026-03-30",
         "sessions": 10,
@@ -1892,6 +1901,30 @@
       "investigated": "Pre-Liberation Day setup review: verified all 8 triggered hypotheses (SPY, VGNT, WFC, AMD, QCOM, GLD, KRE, COST, AEP), checked market calendar, assessed VGNT availability, reviewed 2025 Liberation Day OOS results, explored new signals (ag_exporter, auto_import_tariff, 52w_low_long, FXI)",
       "findings": "1. All 8 Liberation Day triggers verified correct. Good Friday April 3 causes WFC/AMD/QCOM to fire April 6 instead. 2. VGNT not yet in Alpaca; risk of non-execution April 1. 3. Pre-sold regime (SPY -7",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-31",
+      "investigated": "Pre-Liberation Day final verification; 52w low scan March 27-31; PICS skip confirmation; post-Liberation Day monitoring plan",
+      "findings": "1. ALL Liberation Day triggers verified: WFC/AMD/QCOM set for April 3 09:30 but market closed (Good Friday) -> will fire April 6; GLD fires April 7; KRE April 10; COST April 11; AEP April 14. Trade_lo",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-31",
+      "investigated": "Pre-Liberation Day verification; FXI China ETF tariff backtest; IPX insider cluster scan; KRE exit deadline fix; Liberation Day trade setup verification",
+      "findings": "1. All 7 Liberation Day triggers verified correct: WFC/AMD/QCOM trigger=2026-04-03T09:30 will auto-fire April 6 (trade_loop.py waits for next market open >= trigger date). GLD=April 7, KRE=April 10, C",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-31",
+      "investigated": "S&P rising stars audit for March 17-31 2026; PR (Permian Resources) IG classification correction",
+      "findings": "CORRECTION: PR (Permian Resources) S&P BBB- on March 17 was incorrectly labeled as \"true first-ever IG\" in prior session notes. Agent confirmed: (1) Fitch already upgraded PR to BBB- in July 2025 (8 m",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-31",
+      "investigated": "Insider cluster scan (VIX 30-40 window, March 27-31); IPX/PICS qualification check; GO result impact analysis; Liberation Day trade verification",
+      "findings": "We found that insider buying signals work well when 6 or more company insiders buy together \u2014 even during market selloffs. A recent test with Grocery Outlet (n=6 insiders) returned nearly 10% outperformance in 3 days during the tariff-driven market decline. Our previous concern that all insider signals fail in tariff markets was wrong \u2014 it only applied to smaller clusters of 3-5 insiders.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2049,11 +2082,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": {
-      "current_investigation": "first_ig_credit_upgrade OOS audit. Signal WEAK at 2/4=50% direction. Events: MELI Oct2024+1.99%, VRT Feb2026+1.36% positive; ROL Feb2025-2.45%, PR_Fitch Jul2025-1.48% negative. CCL=fallen angel excluded. VST=run-up excluded.",
-      "intermediate_findings": "PR S&P March 2026 CONFIRMED follow-on (Fitch upgraded July 2025). BIRK is BB not BB+ (2 notches from IG, needs 2 upgrades). FLG March 2026 = deposit rating only, NOT qualifying. DTM mentioned in prior journal was error (not in data). liberation_day_outcome_checker.py tool built.",
-      "blockers": "Cannot measure Liberation Day outcomes until April 3+ when data is available.",
-      "next_step": "Priority 1: Verify all April 3 Liberation Day trades execute. Priority 2: Check all April 10 hypothesis outcomes (WFC/AMD/QCOM at 5d). Priority 3: Complete first_ig_credit_upgrade hypothesis if more OOS events found. Run tariff_oos_check.py April 3 entry after April 17 when 10d elapses."
-    }
+    "handoff": "\"April 6 session: Verify all Liberation Day trades fired. Liberation Day (April 2) tariff announcement will dominate market April 3-6. Run liberation_day_outcome_checker.py. SYK should have closed April 2. VGNT may have failed (not in Alpaca). Good Friday April 3 means WFC/AMD/QCOM trigger at April 6 open. Key decisions: (1) Was tariff escalation actually announced on April 2? (2) Are the sector signals directionally correct? (3) Should KRE exit be manual at 5d (April 17) per OOS caveat?\""
   }
 }
