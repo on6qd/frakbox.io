@@ -681,13 +681,13 @@
     "over_limit": true
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 19236501,
+    "sessions_today": 4,
+    "tokens_today": 36352250,
     "sessions_by_day": [
       {
         "date": "2026-03-30",
-        "sessions": 2,
-        "tokens": 19236501
+        "sessions": 4,
+        "tokens": 36352250
       },
       {
         "date": "2026-03-29",
@@ -1838,6 +1838,18 @@
       "investigated": "VIX Tier 4 threshold investigation for insider clusters; portfolio readiness check for Liberation Day",
       "findings": "1. VIX TIER 4 REVISED: Backtest N=38 total VIX>30 n=6-9 clusters (2020-2024). Key finding: VIX 30-40 specific bucket (N=25) shows avg=+4.44%, pos=60%, p=0.024 \u2014 SIGNAL EXISTS. VIX>40 bucket (N=7) show",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-30",
+      "investigated": "Liberation Day readiness check, GLD regime analysis, AMD/QCOM pre-event baseline, systemic 52w low OOS observer, PICS insider cluster status, WFC/KRE pre-event behavior",
+      "findings": "1. LIBERATION DAY SETUP VERIFIED: All triggers set correctly. SPY long (b63a0168) auto-fires March 31 open (daemon running). VGNT trigger April 1 15:55. GLD/WFC/KRE/COST trigger=None (set manually pos",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-30",
+      "investigated": "Liberation Day pre-flight: verified all pending trades, 2025 OOS per-asset analysis, AEP utility signal discovery",
+      "findings": "1. All Liberation Day trade triggers verified: SPY long fires March 31 open, VGNT fires April 1 15:55, GLD/WFC/KRE/COST pending April 2 trigger. 2. 2025 OOS per-asset analysis: GLD most resilient (+13",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -1959,6 +1971,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"CRITICAL WEEK: Liberation Day April 2, 2026.\\n\\nRESEARCH UPDATE (2026-03-30): VIX Tier 4 rule revised. n=6-9 insider clusters are TRADEABLE at VIX 30-40 (not just VIX<30). Backtest: N=25, avg=+4.44%, pos=60%, p=0.024. 2022 OOS: N=12, avg=+7.75%, pos=67%, p=0.015. VIX>40 still DO NOT TRADE. Scanner updated. GO second cluster (VIX=31, n=6) was missed valid trade (+9.6%). PICS (VIX=31, n=3) correctly skipped (down -12.4%).\\n\\nPORTFOLIO STATE (March 30 evening):\\n- SYK: active short, deadline April"
+    "handoff": "\"CRITICAL WEEK: Liberation Day April 2, 2026 (WEDNESDAY).\\n\\nSESSION 2026-03-30 COMPLETED:\\n1. All Liberation Day trades verified. SPY(b63a0168) fires Monday March 31, VGNT(2d94ac68) fires April 1 15:55.\\n2. KRE CAUTION: 2025 OOS shows 20d KRE fails with rollback. Added 8% TP to 6e732966. Exit at 5d if profitable.\\n3. WFC confirmed: 2025 OOS 5d=-5.3% abn (correct). Hold 5d as pre-registered.\\n4. AEP UTILITY SIGNAL: n=10, 10d p=0.035 dir=90%, 20d p=0.046 dir=80%. PASSES MT. READY_TO_PREREGISTER. "
   }
 }
