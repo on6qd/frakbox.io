@@ -1,8 +1,8 @@
 {
   "summary": {
     "total_hypotheses": 52,
-    "pending": 16,
-    "active": 1,
+    "pending": 15,
+    "active": 2,
     "completed": 4,
     "invalidated": 2,
     "direction_accuracy": "2/4",
@@ -1978,12 +1978,6 @@
         "direction": "short",
         "trigger": "2026-04-01T15:55",
         "event_type": "spinco institutional selling short"
-      },
-      {
-        "symbol": "SPY",
-        "direction": "long",
-        "trigger": "next_market_open",
-        "event_type": "vix spike above 30 spy long"
       },
       {
         "symbol": "WFC",
