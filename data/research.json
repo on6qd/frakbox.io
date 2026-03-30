@@ -681,13 +681,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 55894650,
+    "sessions_today": 8,
+    "tokens_today": 70842823,
     "sessions_by_day": [
       {
         "date": "2026-03-30",
-        "sessions": 6,
-        "tokens": 55894650
+        "sessions": 8,
+        "tokens": 70842823
       },
       {
         "date": "2026-03-29",
@@ -1862,6 +1862,24 @@
       "investigated": "Pre-registered semiconductor + utility signals for Liberation Day; analyzed signal type cap issue; verified AMD/QCOM OOS split; checked PICS/GO/SYK/VGNT status",
       "findings": "1. AMD/QCOM semiconductor basket fully validated with proper 3-event OOS split (2019-05-10, 2025-03-26, 2025-04-02 all CORRECT at 5d and 10d). Full N=8: 5d p=0.0001 (100% dir), 10d p=0.0008 (87.5% dir",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-03-30",
+      "investigated": "Liberation Day execution setup; PICS skip decision; VIX/insider regime formalization; COST/KRE timeframe fix; IG upgrade pipeline scan",
+      "findings": "1. SET ALL LIBERATION DAY TRIGGERS: WFC Apr3, AMD Apr3, QCOM Apr3, GLD Apr7, KRE Apr10, COST Apr11, AEP Apr14. SPY fires tomorrow (next_market_open). VGNT fires Apr1 15:55. Total: 9 Liberation Day tra",
+      "tag": "discovery"
+    },
+    {
+      "date": "2026-03-30",
+      "investigated": "First-ever IG upgrade candidate scan for Q2-Q3 2026",
+      "findings": "Agent scan completed. Key findings:\n1. BIRK (Birkenstock): BB+ S&P Feb 2026, stable outlook. TRUE first-ever IG candidate (IPO 2023, never been IG). Upgrade conditions: 2x leverage + 30-45% FFO/debt. ",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-30",
+      "investigated": "Liberation Day pre-flight verification; Q2 PDUFA pipeline scan; 52w low casualty scan during tariff selloff; KRE exit strategy; PICS/FXI regime check",
+      "findings": "Verified all trading setups for Liberation Day (April 2 US tariff announcement). Eight trades are staged to execute automatically over the next two weeks. Also found that several major tech and industrial companies hit new 52-week price lows ahead of the tariff announcement, suggesting the market is pricing in significant economic disruption.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2026,9 +2044,38 @@
       }
     ],
     "handoff": {
-      "P0": "SYK close April 2: complete_hypothesis(5b09b097) after close",
-      "P1": "Post-Liberation Day: activate GLD/WFC/KRE/COST if SPY < -0.5% on April 2",
-      "P2": "Run ig_upgrade_weekly_scanner.py every Monday morning"
+      "session_date": "2026-03-30",
+      "current_state": "Pre-Liberation Day. 1 active trade (SYK short, closes April 2). 8 Liberation Day trades queued (SPY, VGNT, WFC, AMD, QCOM, GLD, KRE, COST) plus AEP. All triggers verified.",
+      "verified_today": [
+        "SYK exit_deadline confirmed April 2 15:50",
+        "SPY long trigger = next_market_open (VIX=31.05 at Friday close = trigger condition MET)",
+        "VGNT fires April 1 15:55",
+        "WFC+AMD+QCOM fire April 3 09:30",
+        "GLD fires April 7 09:30",
+        "KRE fires April 10 09:30",
+        "COST fires April 11 09:30",
+        "AEP fires April 14 09:30",
+        "REPL activate_repl_trade.py script verified - ready for April 10",
+        "GRCE activate_grce_trade.py script verified - ready for April 23"
+      ],
+      "critical_manual_actions_required": [
+        "1. April 17: Check KRE (6e732966) P&L. If profitable, close manually (pre-registered 10d but 5d is the correct exit to avoid rollback reversal)",
+        "2. April 10-11: Monitor REPL FDA announcement. If CRL: run activate_repl_trade.py",
+        "3. April 23-24: Monitor GRCE FDA announcement. If CRL: run activate_grce_trade.py",
+        "4. April 8: FedEx Freight Investor Day - get FDXF exact spin date, update trigger"
+      ],
+      "new_findings": [
+        "TVTX (Travere) April 13 PDUFA rejected as short candidate: not single-pipeline, $2.5B cap too large",
+        "ADBE, DPZ, OTIS, TDG all hit FIRST-EVER 52w lows during Liberation Day selloff",
+        "FXI China ETF signal (n=9) - Liberation Day 2026 will be 10th event. Observe as OOS, do not trade.",
+        "KRE 5d close warning added to knowledge base - do not wait for 20d"
+      ],
+      "blocked": [
+        "PICS insider cluster: VIX=31 Tier 4 + stock declining + recent IPO. Blocked until VIX<30 AND SPY stabilizes.",
+        "New insider clusters: scan pending. EDGAR scan tool available. Run insider_cluster_detector.py for Q1 2026 when capacity allows.",
+        "sp500_52w_low_momentum_short: Dead end confirmed. SYK is last active test (closes April 2)."
+      ],
+      "next_research_direction": "Post-Liberation Day (after April 7): Re-run all tariff signal backtests with 2026 OOS data. Check FXI n=10. Investigate first-ever 52w low bounce hypothesis for ADBE/TDG/OTIS if tariff clarity materializes."
     }
   }
 }
