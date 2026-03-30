@@ -681,13 +681,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 70842823,
+    "sessions_today": 10,
+    "tokens_today": 84822374,
     "sessions_by_day": [
       {
         "date": "2026-03-30",
-        "sessions": 8,
-        "tokens": 70842823
+        "sessions": 10,
+        "tokens": 84822374
       },
       {
         "date": "2026-03-29",
@@ -1880,6 +1880,18 @@
       "investigated": "Liberation Day pre-flight verification; Q2 PDUFA pipeline scan; 52w low casualty scan during tariff selloff; KRE exit strategy; PICS/FXI regime check",
       "findings": "Verified all trading setups for Liberation Day (April 2 US tariff announcement). Eight trades are staged to execute automatically over the next two weeks. Also found that several major tech and industrial companies hit new 52-week price lows ahead of the tariff announcement, suggesting the market is pricing in significant economic disruption.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-30",
+      "investigated": "first_ig_credit_upgrade OOS audit; Liberation Day outcome checker tool; IG upgrade weekly scan",
+      "findings": "Research into the first-ever investment grade credit rating signal found it performing at 50% accuracy on out-of-sample tests, below our 60% validation threshold. Two events gave mixed results this week: MercadoLibre 2024 Fitch upgrade was +2%, but Permian Resources 2025 Fitch upgrade was -1.5%. We also built a tool to automatically measure all Liberation Day trading positions when they expire.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-30",
+      "investigated": "Pre-Liberation Day setup review: verified all 8 triggered hypotheses (SPY, VGNT, WFC, AMD, QCOM, GLD, KRE, COST, AEP), checked market calendar, assessed VGNT availability, reviewed 2025 Liberation Day OOS results, explored new signals (ag_exporter, auto_import_tariff, 52w_low_long, FXI)",
+      "findings": "1. All 8 Liberation Day triggers verified correct. Good Friday April 3 causes WFC/AMD/QCOM to fire April 6 instead. 2. VGNT not yet in Alpaca; risk of non-execution April 1. 3. Pre-sold regime (SPY -7",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2044,38 +2056,10 @@
       }
     ],
     "handoff": {
-      "session_date": "2026-03-30",
-      "current_state": "Pre-Liberation Day. 1 active trade (SYK short, closes April 2). 8 Liberation Day trades queued (SPY, VGNT, WFC, AMD, QCOM, GLD, KRE, COST) plus AEP. All triggers verified.",
-      "verified_today": [
-        "SYK exit_deadline confirmed April 2 15:50",
-        "SPY long trigger = next_market_open (VIX=31.05 at Friday close = trigger condition MET)",
-        "VGNT fires April 1 15:55",
-        "WFC+AMD+QCOM fire April 3 09:30",
-        "GLD fires April 7 09:30",
-        "KRE fires April 10 09:30",
-        "COST fires April 11 09:30",
-        "AEP fires April 14 09:30",
-        "REPL activate_repl_trade.py script verified - ready for April 10",
-        "GRCE activate_grce_trade.py script verified - ready for April 23"
-      ],
-      "critical_manual_actions_required": [
-        "1. April 17: Check KRE (6e732966) P&L. If profitable, close manually (pre-registered 10d but 5d is the correct exit to avoid rollback reversal)",
-        "2. April 10-11: Monitor REPL FDA announcement. If CRL: run activate_repl_trade.py",
-        "3. April 23-24: Monitor GRCE FDA announcement. If CRL: run activate_grce_trade.py",
-        "4. April 8: FedEx Freight Investor Day - get FDXF exact spin date, update trigger"
-      ],
-      "new_findings": [
-        "TVTX (Travere) April 13 PDUFA rejected as short candidate: not single-pipeline, $2.5B cap too large",
-        "ADBE, DPZ, OTIS, TDG all hit FIRST-EVER 52w lows during Liberation Day selloff",
-        "FXI China ETF signal (n=9) - Liberation Day 2026 will be 10th event. Observe as OOS, do not trade.",
-        "KRE 5d close warning added to knowledge base - do not wait for 20d"
-      ],
-      "blocked": [
-        "PICS insider cluster: VIX=31 Tier 4 + stock declining + recent IPO. Blocked until VIX<30 AND SPY stabilizes.",
-        "New insider clusters: scan pending. EDGAR scan tool available. Run insider_cluster_detector.py for Q1 2026 when capacity allows.",
-        "sp500_52w_low_momentum_short: Dead end confirmed. SYK is last active test (closes April 2)."
-      ],
-      "next_research_direction": "Post-Liberation Day (after April 7): Re-run all tariff signal backtests with 2026 OOS data. Check FXI n=10. Investigate first-ever 52w low bounce hypothesis for ADBE/TDG/OTIS if tariff clarity materializes."
+      "current_investigation": "first_ig_credit_upgrade OOS audit. Signal WEAK at 2/4=50% direction. Events: MELI Oct2024+1.99%, VRT Feb2026+1.36% positive; ROL Feb2025-2.45%, PR_Fitch Jul2025-1.48% negative. CCL=fallen angel excluded. VST=run-up excluded.",
+      "intermediate_findings": "PR S&P March 2026 CONFIRMED follow-on (Fitch upgraded July 2025). BIRK is BB not BB+ (2 notches from IG, needs 2 upgrades). FLG March 2026 = deposit rating only, NOT qualifying. DTM mentioned in prior journal was error (not in data). liberation_day_outcome_checker.py tool built.",
+      "blockers": "Cannot measure Liberation Day outcomes until April 3+ when data is available.",
+      "next_step": "Priority 1: Verify all April 3 Liberation Day trades execute. Priority 2: Check all April 10 hypothesis outcomes (WFC/AMD/QCOM at 5d). Priority 3: Complete first_ig_credit_upgrade hypothesis if more OOS events found. Run tariff_oos_check.py April 3 entry after April 17 when 10d elapses."
     }
   }
 }
