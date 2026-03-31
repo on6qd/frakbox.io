@@ -268,7 +268,7 @@
       },
       {
         "name": "reverse_stock_split_short",
-        "reason": "Tested 10 reverse split events (AMC/BBBY/CLOV/KPLT/WKHS/GOEV/RIDE/MVST/TTCF/BBIG 2022-2023). 1d avg=-2.88% p=0.119, 3d avg=-2.18% p=0.572. Direction inconsistent (50% positive at 3d). High variance driven by meme stock dynamics. RIDE, GOEV reverse after split due to retail buying. Reverse splits signal distress but many are in heavily-retail-influenced stocks where dynamics are unpredictable. Not statistically significant."
+        "reason": "n=223 events (2018-2024, >M cap). Avg abnormal return POSITIVE +6-9% at all horizons, p=0.11-0.17 (not significant). Short direction 53-58% only. Root cause: ~6% meme/squeeze outliers (TECX +1050%, PROP +419%, SIDU +204%) overwhelm the signal. Removing top 10 outliers flips mean to -10%, but we cannot identify squeezes ex-ante without short interest data. Large-cap filtered (M+) version has n<10 (reverse splits are almost entirely micro-cap). Academic literature (Han 1995) is correct in direction but signal is not actionable with free data."
       },
       {
         "name": "dividend_initiation",
@@ -617,10 +617,14 @@
       {
         "name": "tariff_fxi_china_etf_short",
         "reason": "FXI backtest across 8 tariff events (2018-2026): n=8, all p>0.40. Mean abnormal at 3d=-0.99%, 5d=-0.89%, 20d=0.0%. Direction only 50-62%. Critical variance: 2025-01-21 Trump 10% EO = FXI OUTPERFORMED SPY by +12.35% at 20d (China stimulus response). 2025 Liberation Day = FXI underperformed by -8.49% at 3d. Signal is regime-dependent on Chinese government response to tariffs. Pre-event retaliation risk is unknowable. Cannot build systematic short strategy on FXI."
+      },
+      {
+        "name": "buyback_authorization_announcement",
+        "reason": "DEAD END. Share repurchase authorization 8-K filings show NO predictive power for S&P 500 large caps. Backtest n=121 discovery (2021-2022), n=93 validation (2023-2025). All horizons: 3d p=0.636 direction=48%, 5d p=0.841 direction=50%, 10d p=0.396 direction=51%, 20d p=0.188 direction=55%. Essentially random. Academic effect (Ikenberry 1995 +12% 4yr drift) does not manifest for large-caps in announcement window. Reason: authorizations are anticipated by analysts and priced in; companies often do not execute full authorized amount. The 4-year drift is about actual execution, not announcement."
       }
     ],
     "signal_count": 21,
-    "dead_end_count": 121,
+    "dead_end_count": 122,
     "literature_count": 25
   },
   "live_signals": [
@@ -675,13 +679,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 29932828,
+    "sessions_today": 9,
+    "tokens_today": 62091542,
     "sessions_by_day": [
       {
         "date": "2026-03-31",
-        "sessions": 5,
-        "tokens": 29932828
+        "sessions": 9,
+        "tokens": 62091542
       },
       {
         "date": "2026-03-30",
@@ -1921,6 +1925,36 @@
       "investigated": "Pre-Liberation Day final prep: VGNT spinoff handling, 52w low scan, insider cluster scan, NUE/STLD steel paradox investigation",
       "findings": "In preparation for Liberation Day (April 2 tariff announcements), we verified all trades are queued and found that domestic steel stocks show inconsistent responses to tariff news - a signal thought to be reliable for one company (STLD) did not repeat in a similar company (Nucor), raising questions about its validity.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-31",
+      "investigated": "Pre-Liberation Day prep: STLD OOS setup, S&P 500 removal VIX segmentation, insider cluster scan, liberation day outcome checker date fix",
+      "findings": "We found that stocks removed from the S&P 500 during high-fear markets drop much more than during calm markets - an average of 5.7% in 5 days with 90% consistency, likely because index funds are forced to sell when buyers are scarce. All Liberation Day trades are verified and ready to fire April 6.",
+      "tag": "discovery"
+    },
+    {
+      "date": "2026-03-31",
+      "investigated": "Buyback announcement signal (background task completed)",
+      "findings": "Share buyback announcements by large companies have no short-term predictive value for stock prices - the market prices in these announcements instantly and completely.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-31",
+      "investigated": "Liberation Day pre-event prep: trigger timing, position capacity, GO insider cluster, STLD OOS baseline",
+      "findings": "1. POSITION CAPACITY FIX: KRE trigger moved April 10 -> April 13 (after WFC/AMD/QCOM close ~April 11). COST moved April 11 -> April 14. This prevents exceeding 5-position cap on April 10. Final plan: ",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-31",
+      "investigated": "Pre-Liberation Day final prep: VGNT spinco tradeability, GO insider cluster trigger verification, IPX cluster qualification, KRE rollback risk assessment, STLD/NUE OOS baseline, auto tariff pre-event price logging, reverse stock split signal research",
+      "findings": "Everything is set up for Liberation Day (April 2), with 9 pre-registered trades across gold, utilities, regional banks, semiconductors, and consumer staples. We also spotted a risk: if the US quickly rolls back tariffs (as happened 7 days after Liberation Day 2025), a delayed bank trade could backfire - so we added a manual exit condition.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-03-31",
+      "investigated": "Reverse stock split short signal backtest; Liberation Day pre-event setup; DB integrity fix; analyst upgrade cluster data check",
+      "findings": "1. REVERSE SPLIT SIGNAL: DEAD END. n=223 events (2018-2024, >M cap). Avg abnormal return POSITIVE +6-9% at all horizons (OPPOSITE of hypothesis). p=0.11-0.17, not significant. Driven by ~6% meme/squee",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2003,6 +2037,12 @@
     ],
     "pending_triggers": [
       {
+        "symbol": "GO",
+        "direction": "long",
+        "trigger": "2026-04-01T09:30",
+        "event_type": "insider buying cluster n6to9"
+      },
+      {
         "symbol": "WFC",
         "direction": "short",
         "trigger": "2026-04-06T09:30",
@@ -2011,7 +2051,7 @@
       {
         "symbol": "COST",
         "direction": "long",
-        "trigger": "2026-04-11T09:30",
+        "trigger": "2026-04-14T09:30",
         "event_type": "tariff defensive retail long"
       },
       {
@@ -2023,7 +2063,7 @@
       {
         "symbol": "KRE",
         "direction": "short",
-        "trigger": "2026-04-10T09:30",
+        "trigger": "2026-04-13T09:30",
         "event_type": "tariff escalation kre bank short"
       },
       {
@@ -2072,6 +2112,11 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"April 6 is the critical session. Liberation Day (April 2) tariff announcement will dominate markets.\\nKEY PRICES PRE-LIBERATION DAY (March 30 close): SPY=631.97, QQQ=558.28, XLF=48.36, SOXX=309.79, GLD=414.58, TLT=86.78, KRE=63.61, XLU=45.92, VIX=30.61\\nINDIVIDUAL: WFC=76.80, AMD=196.04, QCOM=127.07, STLD=171.78, AEP=131.12, COST=996.58, NUE=164.75\\nSPY position: 15.63 shares long @ .88, entry March 31, deadline April 27, 8% stop (~)\\nSYK position: 15 shares short @ .23, deadline April 2 (auto-"
+    "handoff": {
+      "investigated": "Pre-Liberation Day final prep: VGNT spinco handling, GO insider cluster trigger verification, IPX insider cluster qualification check, KRE rollback risk assessment, STLD/NUE baseline recording, auto tariff pre-event price logging, reverse stock split signal research.",
+      "findings": "1. GO (416556df) properly triggered for April 1 09:30 with n=6 insider cluster (CEO+5, .9M, VIX=30.6). Regime: Tier 4A VIX 30-40, validated. 2. VGNT not in Alpaca, only VGNT.WI (when-issued). Tracking manually. 3. IPX has n=4 insiders (not 6), does not qualify for n=6-9 signal. Marked as skipped. 4. KRE (trigger April 13) has rollback abort condition added: if 2025-style rollback (7d after Liberation Day = April 9) occurs, abort KRE. 5. STLD=171.78, NUE=164.75 baseline prices recorded for OOS. 6. Auto tariff pre-event prices: F=11.21, HMC=23.65, TM=202.94 (monitoring for OOS #2). 7. Liberation day checker ready. 8. Reverse stock split academic evidence: -3.9 to -6.6% announcement day, continued drift. Needs empirical backtest.",
+      "blocked_by": "Liberation Day results (April 2) - most signals in monitoring state until April 2 outcomes are known.",
+      "next_specific_step": "April 1 morning: verify GO trigger fired. April 2 after-close: run liberation_day_outcome_checker.py. April 6: confirm WFC/AMD/QCOM fired. Throughout: monitor for tariff rollback that would abort KRE."
+    }
   }
 }
