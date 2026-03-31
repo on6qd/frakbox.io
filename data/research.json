@@ -440,7 +440,7 @@
       },
       {
         "name": "sp500_index_removal_short",
-        "reason": "Full sample (N=43, 2020-2025): 5d abnormal -2.40%, direction 72%, p=0.0098, passes MT. BUT OOS validation FAILS: validation period (N=13, 2024-2025) shows 5d -1.45%, direction 54%, p=0.33. Signal is REGIME-DEPENDENT: strong in bear/volatile markets (2020-2023, discovery=80% direction), weak in bull markets (2024-2025). Root cause: forced index fund selling overwhelmed by opportunistic buying in bull markets. NOTE: LW removed March 23 2026 (VIX~26) could be live test case in current regime. Possibly tradeable in VIX>25 environments \u2014 needs regime-stratified backtest. Backtest saved in tools/sp500_removal_backtest_results.json. Do NOT trade without regime validation."
+        "reason": "OOS FAILURE 2026-04-01: Discovery n=9, HIGH VIX direction=78%, p=0.0298 (2020-2023). OOS Q1 2026 (March 6 rebalance, 4 stocks, VIX=29.5): direction=50% (coin flip). MOH +4.77% WRONG, MTCH +2.55% WRONG. Signal fails OOS. Likely COVID-era artifact. Mass simultaneous removals with 17-day lead time kill forced-selling pressure."
       },
       {
         "name": "buyback_announcement_short_term",
@@ -625,10 +625,14 @@
       {
         "name": "homebuilder_tariff_short",
         "reason": "Homebuilder stocks (XHB/DHI/LEN/PHM) do not reliably underperform after US tariff escalation. n=8 events (2018-2025). 5d abnormal returns: XHB +0.09% dir=50% p=0.91, DHI +0.38% dir=50% p=0.81, LEN -0.49% dir=75% p=0.70 (NOT sig), PHM +0.31% dir=50% p=0.82. All horizons p>0.20. Mechanism confusion: homebuilders face input cost increases (steel/lumber) but also benefit from housing demand that tariffs do not directly suppress. DHI showed +8.88% 5d on 2025-03-04 event (housing demand surge interpretation). Cannot separate cost and demand effects."
+      },
+      {
+        "name": "turn_of_month_spy",
+        "reason": "DEAD END: TOM effect on SPY (2015-2025). Daily diff=+0.011% (p=0.816). Monthly consistency=52.3%. Economic magnitude too small (far below 0.5% threshold). Only 6-day compound window marginal (p=0.042) but artifact of positive market drift. Not tradeable. Tool: tools/tom_analysis.py"
       }
     ],
     "signal_count": 21,
-    "dead_end_count": 123,
+    "dead_end_count": 124,
     "literature_count": 25
   },
   "live_signals": [
@@ -683,9 +687,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 2,
+    "tokens_today": 19627801,
     "sessions_by_day": [
+      {
+        "date": "2026-04-01",
+        "sessions": 2,
+        "tokens": 19627801
+      },
       {
         "date": "2026-03-31",
         "sessions": 10,
@@ -1965,6 +1974,18 @@
       "investigated": "Pre-Liberation Day final verification: trade setup review, IPX insider cluster evaluation, homebuilder tariff backtest, session state audit",
       "findings": "We ran a new backtest on homebuilder stocks (DHI, Lennar, PHM) to see if they decline after tariff announcements \u2014 they don't. The signal showed coin-flip direction and no statistical significance. Liberation Day trades are set and ready for April 2.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-03-31",
+      "investigated": "Pre-Liberation Day baseline corrections; turn-of-month analysis; Q1->Q2 seasonal effect; monitoring setup",
+      "findings": "1. BASELINE CORRECTIONS: Prior sessions wrote March 30 closes as March 31 for liberation_day_2026_pre_event_prices and auto_tariff_april2_candidates. Corrected to true March 31 closes: SPY=650.34, GLD",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-01",
+      "investigated": "SP500 organic removal short OOS validation; GO/IPX/SBSW insider cluster review; first-IG credit upgrade candidates; Q1->Q2 OOS baseline; insider cluster landscape scan",
+      "findings": "1. SP500 REMOVAL SIGNAL DEAD END: OOS failed with Q1 2026 data (MTCH/MOH/LW/PAYC removed March 6). VIX=29.5 (qualifies HIGH VIX). Direction only 50% - coin flip. MOH+4.77% and MTCH+2.55% both wrong. D",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2047,12 +2068,6 @@
     ],
     "pending_triggers": [
       {
-        "symbol": "GO",
-        "direction": "long",
-        "trigger": "2026-04-01T09:30",
-        "event_type": "insider buying cluster n6to9"
-      },
-      {
         "symbol": "WFC",
         "direction": "short",
         "trigger": "2026-04-06T09:30",
@@ -2123,10 +2138,10 @@
       }
     ],
     "handoff": {
-      "investigated": "Pre-Liberation Day final prep: VGNT spinco handling, GO insider cluster trigger verification, IPX insider cluster qualification check, KRE rollback risk assessment, STLD/NUE baseline recording, auto tariff pre-event price logging, reverse stock split signal research.",
-      "findings": "1. GO (416556df) properly triggered for April 1 09:30 with n=6 insider cluster (CEO+5, .9M, VIX=30.6). Regime: Tier 4A VIX 30-40, validated. 2. VGNT not in Alpaca, only VGNT.WI (when-issued). Tracking manually. 3. IPX has n=4 insiders (not 6), does not qualify for n=6-9 signal. Marked as skipped. 4. KRE (trigger April 13) has rollback abort condition added: if 2025-style rollback (7d after Liberation Day = April 9) occurs, abort KRE. 5. STLD=171.78, NUE=164.75 baseline prices recorded for OOS. 6. Auto tariff pre-event prices: F=11.21, HMC=23.65, TM=202.94 (monitoring for OOS #2). 7. Liberation day checker ready. 8. Reverse stock split academic evidence: -3.9 to -6.6% announcement day, continued drift. Needs empirical backtest.",
-      "blocked_by": "Liberation Day results (April 2) - most signals in monitoring state until April 2 outcomes are known.",
-      "next_specific_step": "April 1 morning: verify GO trigger fired. April 2 after-close: run liberation_day_outcome_checker.py. April 6: confirm WFC/AMD/QCOM fired. Throughout: monitor for tariff rollback that would abort KRE."
+      "investigated": "SP500 removal short OOS validation; GO/IPX/SBSW insider cluster evaluation; credit upgrade signal (COIN assessment); Q1->Q2 OOS baseline; insider scanner landscape check.",
+      "findings": "1. SP500 REMOVAL SHORT: DEAD END. OOS Q1 2026 (MTCH/MOH/LW/PAYC, VIX=29.5): direction=50% (fail). MOH+4.77% and MTCH+2.55% wrong. Signal is COVID-era artifact. Recorded in dead_ends table and knowledge base. 2. GO (416556df): Missed window - symbol field was None (trade_loop couldnt execute). VIX also dropped from 30.6 to 25.25 on March 31 (below 30 threshold). Hypothesis notes updated. 3. Credit upgrade: COIN is BB- (too far from IG). No near-term first-ever candidates. BIRK (BB+ stable) most likely but needs Positive outlook first. 4. Q1->Q2 OOS baseline: SPY 650.34 on March 31. 5-day window April 1-7. Liberation Day is a major confound. 5. SBSW n=4 (not 6), below threshold. 6. Insider scanner: No qualifying n>=6 clusters with unexpired windows. GO (n=6, March 30) missed window.",
+      "blocked_by": "April 2 Liberation Day tariff announcement - all tariff hypothesis outcomes contingent on this.",
+      "next_specific_step": "April 3: Record SYK close, SPY open, VIX open. Complete SYK hypothesis. Run liberation_day_outcome_checker.py (it will have April 1-2 data by then). Check GO entry (the hypothesis fired? No - symbol was None, so it didnt). April 6: Confirm WFC/AMD/QCOM fired."
     }
   }
 }
