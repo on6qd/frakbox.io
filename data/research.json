@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 52,
-    "pending": 15,
+    "total_hypotheses": 53,
+    "pending": 16,
     "active": 2,
     "completed": 4,
     "invalidated": 2,
@@ -27,11 +27,6 @@
   },
   "knowledge": {
     "signals": [
-      {
-        "name": "sp500_index_removal_short",
-        "status": "conditionally_tradeable_vix_required",
-        "magnitude_pct": 2.4
-      },
       {
         "name": "sp500_52w_low_systemic_short",
         "status": "strong",
@@ -136,11 +131,6 @@
         "name": "tariff_xlu_utility_long_20d",
         "status": "strong",
         "magnitude_pct": 3.36
-      },
-      {
-        "name": "stld_domestic_steel_tariff_short",
-        "status": "needs_oos_validation",
-        "magnitude_pct": -2.58
       }
     ],
     "dead_ends": [
@@ -629,7 +619,7 @@
         "reason": "FXI backtest across 8 tariff events (2018-2026): n=8, all p>0.40. Mean abnormal at 3d=-0.99%, 5d=-0.89%, 20d=0.0%. Direction only 50-62%. Critical variance: 2025-01-21 Trump 10% EO = FXI OUTPERFORMED SPY by +12.35% at 20d (China stimulus response). 2025 Liberation Day = FXI underperformed by -8.49% at 3d. Signal is regime-dependent on Chinese government response to tariffs. Pre-event retaliation risk is unknowable. Cannot build systematic short strategy on FXI."
       }
     ],
-    "signal_count": 23,
+    "signal_count": 21,
     "dead_end_count": 121,
     "literature_count": 25
   },
@@ -680,18 +670,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 15,
+    "active_signal_types": 16,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 27268430,
+    "sessions_today": 5,
+    "tokens_today": 29932828,
     "sessions_by_day": [
       {
         "date": "2026-03-31",
-        "sessions": 4,
-        "tokens": 27268430
+        "sessions": 5,
+        "tokens": 29932828
       },
       {
         "date": "2026-03-30",
