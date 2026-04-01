@@ -657,10 +657,18 @@
       {
         "name": "short_interest_spike_short",
         "reason": "N=758 events across 34 large-cap symbols (2022-2023), 2-sigma spike in short interest ratio using FINRA data. Results: 5d avg=+0.207% p=0.22 (noise), 10d avg=+0.278% p=0.24 (noise), 20d avg=+0.964% p=0.0038 BUT Wilcoxon p=0.0661 (non-significant robust test). Fails multiple testing correction (only 1 horizon at p<0.05, and Wilcoxon disagrees). Direction barely above 50% (53.7% at 20d). SHORT SELLERS WRONG on average at 20d - if anything this is a LONG signal not short. Tool: tools/short_interest_spike_backtester.py"
+      },
+      {
+        "name": "post_crash_ceo_cfo_insider_buy_general",
+        "reason": "General post-crash CEO/CFO buying signal tested 2020-2022 (N=60). 5d: mean=+0.06% direction=41.7%; 10d: mean=-1.84% direction=31.7%; 20d: mean=-2.25% direction=38.3%. All horizons below 50% directional accuracy. 2020 COVID dominated: -11.1% avg. Mechanism flaw: general drops (macro/sector/COVID) unrelated to insider knowledge of earnings quality. Signal needs earnings-specific filtering to be valid causal test. See post_crash_insider_events.csv."
+      },
+      {
+        "name": "post_earnings_drop_ceo_cfo_insider_buy_largecap",
+        "reason": "Earnings-specific CEO/CFO buying after >5% earnings drop: 2020-2022 large-cap (>1B) N=10. 20d mean=+1.05%, direction=40.0%, p=0.71. No signal. Positive result in full sample (+5.09%) driven entirely by small/micro-cap outliers (XAIR +36.5% at 7.5M cap, NRDY +33.6% at 200M cap). Large-cap insider buying after earnings misses does not predict outperformance."
       }
     ],
     "signal_count": 21,
-    "dead_end_count": 131,
+    "dead_end_count": 133,
     "literature_count": 25
   },
   "live_signals": [
@@ -715,8 +723,8 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 71750075,
+    "sessions_today": 0,
+    "tokens_today": 0,
     "sessions_by_day": [
       {
         "date": "2026-04-01",
@@ -2056,6 +2064,12 @@
       "investigated": "Pre-Liberation Day state check; insider cluster scan for VIX>30 window; dividend cut short backtest; pre-earnings drift backtest for consistent beaters; REPL/GRCE PDUFA monitoring; new signal ideation",
       "findings": "We tested two new trading signals today: whether stocks with strong earnings track records drift up before their next report (no edge in 326 large-cap cases), and whether companies cutting dividends continue to fall (they actually recover). Both were ruled out. The team is fully prepared for tomorrow's US tariff announcement, with conditional trades ready across gold, banks, semiconductors, and utilities.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-02",
+      "investigated": "Post-earnings insider buying hypothesis; Liberation Day pre-event preparation",
+      "findings": "We tested whether company executives buying their own stock after an earnings miss predicts a recovery. For large companies, the answer is no \u2014 the signal vanishes when applied to stocks with over $1 billion market cap. However, smaller companies showed a possible (unconfirmed) pattern that warrants future study.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2207,6 +2221,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"Session April 1 2026 pre-market. KEY FINDINGS THIS SESSION: (1) No valid VIX>30 insider clusters (March 27-30 only had n=3 clusters - below threshold). (2) Dividend cut short = DEAD END (stocks bounce after cuts, OOS 5d avg=-0.04%). (3) Pre-earnings drift for consistent beaters = DEAD END (n=326, p=0.87, Bootstrap CI [-0.43%, +0.46%]). (4) VGNT not tradeable on Alpaca - hypothesis correctly abandoned. (5) REPL=$7.65, GRCE=$4.63 (daily vol $2.3M - tradeable). (6) All Liberation Day trade trigger"
+    "handoff": "\"Session April 2 pre-open (midnight CEST). Liberation Day NOT YET OPEN. KEY: SYK auto-closes April 2 15:50 ET. WFC/AMD/QCOM April 6 triggers conditional on Liberation Day. GLD/AEP/COST fire April 7 unconditional. POST-EARNINGS INSIDER BUY = DEAD END large-cap. NEXT: Run post_liberation_day_decision_tree.py AFTER April 2 4pm ET. Complete SYK hypothesis. Record STLD April 6 open vs 171.78. FDXF Investor Day April 8. REPL PDUFA April 10.\""
   }
 }
