@@ -408,7 +408,7 @@
       },
       {
         "name": "sp500_52w_high_breakout_long",
-        "reason": "Tested 52-week HIGH breakout LONG signal on 45 large-cap S&P 500 stocks, 2021-2022 discovery period. 118 events detected. 5d avg abnormal=+0.69%, positive_rate=59.3%, p=0.027, but fails multiple testing correction (p < 0.05 at only 1 horizon). avg_abnormal below 1.5% threshold. Consistent with academic literature showing momentum effects have decayed for large-cap stocks. Signal direction is correct (new high = continuation) but magnitude too small to trade after costs. Dead end."
+        "reason": "52-week high breakout effect: DEAD END. n=2059 events (61 large-cap S&P 500 stocks, 2015-2025). 5d avg=+0.02% p=0.717, 10d avg=-0.02% p=0.782, 20d avg=+0.24% p=0.061. All directions 41-47% (below 50% threshold). No significant abnormal returns at any horizon. Mechanism theory: momentum at 52w highs is already priced in for well-followed large caps. Contrasts with 52w low signal (which worked in specific regimes due to forced institutional selling). High-breakout efficiency vs low-dislocation asymmetry confirmed. Do not pursue for large-cap universe."
       },
       {
         "name": "spinco_parent_announcement_long",
@@ -637,10 +637,18 @@
       {
         "name": "analyst_initiation_large_cap_long",
         "reason": "n=186 events (2021-2026), 40 large-cap S&P 500 stocks. Major banks Buy/Outperform initiations. All horizons p>0.50 (1d: p=0.745, 3d: p=0.967, 5d: p=0.525, 10d: p=0.885, 20d: p=0.874). Avg abnormal return all <0.1%. Direction rate ~50%. Large-cap coverage saturation eliminates informational edge. Does not pass multiple testing. Could test mid/small-cap separately if focus gate allows."
+      },
+      {
+        "name": "vix_spike_sector_rotation_xlre",
+        "reason": "XLRE (Real Estate ETF) sector rotation after VIX>30 - DEAD END. Initial backtest (n=40, 2005-2026) showed strong signal: 5d abnormal=-0.91% p=0.010, 20d abnormal=-1.39% p=0.000. BUT: XLRE launched Oct 2015, pre-2015 data was INVALID (filled with constant 2.9% value). With valid n=19 events (2015-2026): 5d abnormal=-0.88% p=0.243 (NOT sig), 20d abnormal=-1.24% p=0.077 (NOT sig). ALSO: XLRE raw returns are positive (+2.76% avg) after VIX>30 events, so shorting XLRE would lose money in absolute terms. LESSON: Always check ETF launch date before backtesting. XLRE only 2015+."
+      },
+      {
+        "name": "vix_spike_sector_rotation_general",
+        "reason": "All 11 SPDR sector ETFs tested for outperformance vs SPY after VIX>30 events. Discovery backtest (n=40 events 2005-2026, 30-day clustering): NO sector ETF shows consistent significant outperformance vs SPY at any horizon. Best result: XLK at 5d (+0.58%, dir=50%, p=0.018) and 20d (+0.78%, dir=45%, p=0.040) - direction rate too low (50%/45%) to be tradeable. SPY itself: 5d +1.33% dir=65% p=0.013 (the validated signal). CONCLUSION: When VIX spikes above 30, SPY long is the optimal trade. No sector ETF provides consistent alpha vs SPY. Sector rotation adds no value."
       }
     ],
     "signal_count": 21,
-    "dead_end_count": 126,
+    "dead_end_count": 128,
     "literature_count": 25
   },
   "live_signals": [
@@ -695,13 +703,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 35454330,
+    "sessions_today": 6,
+    "tokens_today": 48947414,
     "sessions_by_day": [
       {
         "date": "2026-04-01",
-        "sessions": 4,
-        "tokens": 35454330
+        "sessions": 6,
+        "tokens": 48947414
       },
       {
         "date": "2026-03-31",
@@ -2012,6 +2020,18 @@
       "investigated": "Pre-Liberation Day final verification: trade trigger audit, BLCO insider cluster OOS check, CCL credit upgrade correction, REPL pre-PDUFA price check, April 2026 catalyst calendar review",
       "findings": "Confirmed all Liberation Day trade triggers are properly set. Discovered that Bausch & Lomb insider cluster (9 insiders, March 6) failed to generate returns because VIX was just 0.5 points below our required threshold \u2014 strong confirmation that the VIX>30 filter for insider signals has no grace zone.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-01",
+      "investigated": "Pre-Liberation Day sector rotation analysis; insider cluster scan; 52-week high breakout test",
+      "findings": "1. SECTOR ROTATION DEAD END: Tested all 11 SPDR sector ETFs for outperformance vs SPY after VIX>30 events (n=40, 2005-2026). No sector consistently outperforms. Best result: XLK Technology +0.58% at 5",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-01",
+      "investigated": "Background insider cluster scanner results: NCLH, NKE, EPAM 2025Q4 clusters",
+      "findings": "INSIDER SCANNER BACKGROUND AGENT RESULTS: (1) NCLH (Norwegian Cruise): n=7 insiders (CEO+CFO+5 board) bought Nov 2025 at $17.94-19.25. mktcap=$8.5B. Currently $18.70, near cost basis. MEETS n>=6 thres",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2163,6 +2183,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"Session focus: Pre-Liberation Day verification. All tariff trade triggers confirmed correct. WFC/AMD/QCOM conditional on April 2 outcome. BLCO borderline VIX case recorded (VIX=29.49 vs 30 threshold, signal failed, confirms hard threshold). CCL credit upgrade monitoring corrected (fallen angel, disqualified). New tools: post_liberation_day_decision_tree.py and cancel_trade.py created. REPL pre-PDUFA check: +9.6%, no abort condition. Insider scan: no new qualifying clusters (n>=6 with VIX>=30).\""
+    "handoff": "\"Session April 1 early-AM research complete. Status: (1) Liberation day tools verified ready. VIX=25.25, SPY=.34, market opens at 9:30 AM ET. (2) Sector rotation dead end: tested all 11 SPDR ETFs after VIX>30 events - no sector outperforms SPY. XLRE data was contaminated by pre-2015 invalid data. (3) 52-week high breakout dead end: n=2059 events, all p>0.06, direction 41-47%. (4) Insider scan: no large-cap n>=6 clusters within tradeable window. FMBM (n=6) disqualified by tiny mktcap (M). (5) SPY"
   }
 }
