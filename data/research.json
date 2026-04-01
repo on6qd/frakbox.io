@@ -1,7 +1,7 @@
 {
   "summary": {
     "total_hypotheses": 53,
-    "pending": 14,
+    "pending": 13,
     "active": 2,
     "completed": 4,
     "invalidated": 2,
@@ -665,10 +665,18 @@
       {
         "name": "post_earnings_drop_ceo_cfo_insider_buy_largecap",
         "reason": "Earnings-specific CEO/CFO buying after >5% earnings drop: 2020-2022 large-cap (>1B) N=10. 20d mean=+1.05%, direction=40.0%, p=0.71. No signal. Positive result in full sample (+5.09%) driven entirely by small/micro-cap outliers (XAIR +36.5% at 7.5M cap, NRDY +33.6% at 200M cap). Large-cap insider buying after earnings misses does not predict outperformance."
+      },
+      {
+        "name": "bank_q1_pre_earnings_drift",
+        "reason": "N=40 events (5 banks x 8 years). Avg abnormal: +0.23%, direction=42.5%, p=0.691. No signal. By year: highly variable (2023 outlier +5% due to regional bank crisis). Not tradeable."
+      },
+      {
+        "name": "tariff_domestic_steel_short_stld",
+        "reason": "OOS MISS 2026: STLD UP +6.4% from OOS baseline 171.78 (vs March31 180.00). Domestic steel manufacturers BENEFIT from steel tariffs (less foreign competition). Thesis was logically inverted. 2025 Liberation Day showed -3.2% abnormal at day 4 only (coincided with full market crash, not steel-specific). NOT a repeatable signal."
       }
     ],
     "signal_count": 21,
-    "dead_end_count": 133,
+    "dead_end_count": 135,
     "literature_count": 25
   },
   "live_signals": [
@@ -718,14 +726,19 @@
     }
   ],
   "focus": {
-    "active_signal_types": 14,
+    "active_signal_types": 13,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 2,
+    "tokens_today": 18647512,
     "sessions_by_day": [
+      {
+        "date": "2026-04-02",
+        "sessions": 2,
+        "tokens": 18647512
+      },
       {
         "date": "2026-04-01",
         "sessions": 10,
@@ -2070,6 +2083,12 @@
       "investigated": "Post-earnings insider buying hypothesis; Liberation Day pre-event preparation",
       "findings": "We tested whether company executives buying their own stock after an earnings miss predicts a recovery. For large companies, the answer is no \u2014 the signal vanishes when applied to stocks with over $1 billion market cap. However, smaller companies showed a possible (unconfirmed) pattern that warrants future study.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-02",
+      "investigated": "Liberation Day 2026 post-event actions: cancelled conditional tariff shorts, completed STLD OOS analysis, bank pre-earnings drift backtest, insider cluster scan",
+      "findings": "1. Liberation Day 2026 MILD: SPY +0.8% from March31 baseline (650.34->655.44), VIX=24.5. Market did NOT crash. Cancelled WFC/AMD/QCOM conditional shorts (conditions not met). GLD/AEP/COST remain April",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2152,12 +2171,6 @@
     ],
     "pending_triggers": [
       {
-        "symbol": "WFC",
-        "direction": "short",
-        "trigger": "2026-04-06T09:30",
-        "event_type": "tariff escalation bank short"
-      },
-      {
         "symbol": "COST",
         "direction": "long",
         "trigger": "2026-04-07T09:30",
@@ -2174,18 +2187,6 @@
         "direction": "short",
         "trigger": "2026-04-13T09:30",
         "event_type": "tariff escalation kre bank short"
-      },
-      {
-        "symbol": "AMD",
-        "direction": "short",
-        "trigger": "2026-04-06T09:30",
-        "event_type": "tariff escalation semiconductor short"
-      },
-      {
-        "symbol": "QCOM",
-        "direction": "short",
-        "trigger": "2026-04-06T09:30",
-        "event_type": "tariff escalation semiconductor short"
       },
       {
         "symbol": "AEP",
@@ -2221,6 +2222,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"Session April 2 pre-open (midnight CEST). Liberation Day NOT YET OPEN. KEY: SYK auto-closes April 2 15:50 ET. WFC/AMD/QCOM April 6 triggers conditional on Liberation Day. GLD/AEP/COST fire April 7 unconditional. POST-EARNINGS INSIDER BUY = DEAD END large-cap. NEXT: Run post_liberation_day_decision_tree.py AFTER April 2 4pm ET. Complete SYK hypothesis. Record STLD April 6 open vs 171.78. FDXF Investor Day April 8. REPL PDUFA April 10.\""
+    "handoff": "\"Session April 2 COMPLETE. Liberation Day 2026: market UP +0.8%, VIX=24.5. Cancelled WFC/AMD/QCOM. SYK close order placed (fills April 3). STLD abandoned (wrong direction). Background scanner found clusters: TSM(n=3,fresh), SBSW(n=4), but March clusters during selloff ALL failed (KKR -0.9%, POOL -3.0%, LOAR -9.2%). Macro filter essential. Dead ends: bank_q1_pre_earnings_drift, tariff_domestic_steel_short_stld. Key calendar: GLD/AEP/COST Apr7, REPL Apr10, KRE Apr13.\""
   }
 }
