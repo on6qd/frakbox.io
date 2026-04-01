@@ -360,7 +360,7 @@
       },
       {
         "name": "pre_earnings_drift_consistent_beaters",
-        "reason": "Tested pre-earnings drift for consistent EPS beaters (3+ consecutive beats) on 30 large-cap S&P 500 stocks, 2020-2024. N=325 beater events across 29 tickers. RESULTS: 1d avg_abnormal=+0.08% (p=0.339, wilcoxon_p=0.584), 3d avg_abnormal=+0.23% (p=0.095, wilcoxon_p=0.206), 5d avg_abnormal=+0.06% (p=0.798, wilcoxon_p=0.941). None significant. passes_multiple_testing=False (0 of 5 horizons at p<0.05). Bootstrap 95% CI at 5d: [-0.38%, +0.51%] \u2014 CI includes zero. CONTROL GROUP (N=147, mixed EPS history): 5d avg=+0.57% \u2014 HIGHER than beaters, confirming no differential signal. Two-sample t-test (beater vs control) at 1d: p=0.674, at 3d: p=0.337, at 5d: p=0.242. Mann-Whitney at 1d: p=0.161. No statistically or economically significant differential. MECHANISM FAILURE: The signal is efficiently priced for large-caps. Institutional desks and quants have been running this exact strategy for 20+ years \u2014 any predictable pre-earnings drift in mega-caps is arbitraged away instantly. NOISE LEVEL: stdev_5d=4.06% dwarfs avg=0.06%, requiring N~36,000 to detect a 0.06% effect. The 3d p=0.095 (borderline) reflects noise + high skewness (1.04), not a real signal. Recommended N for 80% power: 2,473 (1d), 898 (3d), 35,939 (5d) \u2014 far beyond achievable. DO NOT pursue this signal for large-cap S&P 500. May exist in small/micro-cap where it is less efficiently priced, but that population has data quality and survivorship bias issues."
+        "reason": "N=326 large-cap events (S&P500 with 3+ consecutive EPS beats, 2020-2024). 5d avg abnormal=+0.020%, positive_rate=48.5%, wilcoxon_p=0.8738. Bootstrap CI [-0.43%, +0.46%]. Fails multiple testing. Control group n=146 also no signal. No pre-earnings drift edge for consistent beaters in large-cap universe."
       },
       {
         "name": "strategic_alternatives_announcement",
@@ -468,7 +468,7 @@
       },
       {
         "name": "dividend_cut_short",
-        "reason": "Signal failed 5 check(s): passes_multiple_testing, direction>50pct, abnormal_return>0.5pct, return_after_costs>0, oos_direction>50pct. n=81, best_horizon=1d, avg_abnormal=0.250% (0.25 pct pts), p=0.2838, direction%=46.9%, passes_mt=False, oos_n=37, oos_neg_rate=45.9%. Universe: 205 S&P500 large-caps >$2B, 2015-01-01-2024-12-31."
+        "reason": "N=81 large-cap events (>B, S&P500, 2015-2024, >25% cut or suspension). Avg abnormal returns POSITIVE at all horizons (stocks BOUNCE after cuts). 5d avg=+1.15%, p=0.0501 (barely). OOS 5d avg=-0.04%, direction=45.9%. Signal goes WRONG direction - stocks recover after dividend cuts. Not a reliable short signal. Tool: tools/dividend_cut_backtest.py"
       },
       {
         "name": "sp500_52w_low_catalyst_short_repeat_touch",
@@ -653,10 +653,14 @@
       {
         "name": "txn_tariff_short",
         "reason": "TXN (Texas Instruments) tariff short: DEAD END. n=8 tariff events 2018-2026, 5d vs XLK: avg=+0.39% (WRONG direction!), direction SHORT=38% (below 50% baseline). TXN actually OUTPERFORMS XLK after tariff events at 5d. Mechanism does not hold: TXN analog chips go to China industrial/auto customers, but TXN is US-manufactured (Texas/Japan) so tariffs on imports may actually benefit vs China-manufactured competitors. 10d shows better stats (-1.76%, 75% direction, p=0.0973) but still not significant and only 1 horizon. NOT TRADEABLE. Events: 2018 events mostly wrong direction at 5d, 2019-08-01 and 2025-02-01 correct, others wrong."
+      },
+      {
+        "name": "short_interest_spike_short",
+        "reason": "N=758 events across 34 large-cap symbols (2022-2023), 2-sigma spike in short interest ratio using FINRA data. Results: 5d avg=+0.207% p=0.22 (noise), 10d avg=+0.278% p=0.24 (noise), 20d avg=+0.964% p=0.0038 BUT Wilcoxon p=0.0661 (non-significant robust test). Fails multiple testing correction (only 1 horizon at p<0.05, and Wilcoxon disagrees). Direction barely above 50% (53.7% at 20d). SHORT SELLERS WRONG on average at 20d - if anything this is a LONG signal not short. Tool: tools/short_interest_spike_backtester.py"
       }
     ],
     "signal_count": 21,
-    "dead_end_count": 130,
+    "dead_end_count": 131,
     "literature_count": 25
   },
   "live_signals": [
@@ -711,13 +715,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 60985702,
+    "sessions_today": 10,
+    "tokens_today": 71750075,
     "sessions_by_day": [
       {
         "date": "2026-04-01",
-        "sessions": 8,
-        "tokens": 60985702
+        "sessions": 10,
+        "tokens": 71750075
       },
       {
         "date": "2026-03-31",
@@ -2046,6 +2050,12 @@
       "investigated": "Pre-Liberation Day preparation, IG upgrade scan, post-Liberation Day first-touch watchlist",
       "findings": "Today we prepared for tomorrows Liberation Day tariff announcement by verifying all trade triggers are set correctly, identified four large-cap stocks that could become new short opportunities if the market sells off, and confirmed there are no actionable investment-grade credit upgrade candidates for the next few months.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-01",
+      "investigated": "Pre-Liberation Day state check; insider cluster scan for VIX>30 window; dividend cut short backtest; pre-earnings drift backtest for consistent beaters; REPL/GRCE PDUFA monitoring; new signal ideation",
+      "findings": "We tested two new trading signals today: whether stocks with strong earnings track records drift up before their next report (no edge in 326 large-cap cases), and whether companies cutting dividends continue to fall (they actually recover). Both were ruled out. The team is fully prepared for tomorrow's US tariff announcement, with conditional trades ready across gold, banks, semiconductors, and utilities.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2197,6 +2207,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"Session April 1 2026 (pre-Liberation Day). KEY FINDINGS: (1) SPY +2.91% on April 1 Q1 end rally, VIX=25.2 - elevated entry into Liberation Day. (2) REPL baseline $7.65 confirmed, activate_repl_trade.py ready. (3) IG upgrade: NO Q2 candidates - BIRK/BBWI stable outlook, LEVI already fired Feb 2025, COIN too far. Monitor BIRK H2 2026. (4) First-touch 52w low watchlist updated: FIS, CPT, PGR, MAS added (post-Liberation Day short candidates). (5) q1_q2_april_first_week contaminated by Liberation Da"
+    "handoff": "\"Session April 1 2026 pre-market. KEY FINDINGS THIS SESSION: (1) No valid VIX>30 insider clusters (March 27-30 only had n=3 clusters - below threshold). (2) Dividend cut short = DEAD END (stocks bounce after cuts, OOS 5d avg=-0.04%). (3) Pre-earnings drift for consistent beaters = DEAD END (n=326, p=0.87, Bootstrap CI [-0.43%, +0.46%]). (4) VGNT not tradeable on Alpaca - hypothesis correctly abandoned. (5) REPL=$7.65, GRCE=$4.63 (daily vol $2.3M - tradeable). (6) All Liberation Day trade trigger"
   }
 }
