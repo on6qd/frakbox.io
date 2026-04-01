@@ -633,10 +633,14 @@
       {
         "name": "spinco_vgnt_short_s_and_p_inclusion",
         "reason": "S&P SmallCap 600 inclusion effective day 2 of trading (April 2 2026) creates index buying demand that offsets spinco institutional selling. Always check S&P index announcements before shorting new spincos. VGNT/Versigent (Aptiv spinco) - short thesis invalidated."
+      },
+      {
+        "name": "analyst_initiation_large_cap_long",
+        "reason": "n=186 events (2021-2026), 40 large-cap S&P 500 stocks. Major banks Buy/Outperform initiations. All horizons p>0.50 (1d: p=0.745, 3d: p=0.967, 5d: p=0.525, 10d: p=0.885, 20d: p=0.874). Avg abnormal return all <0.1%. Direction rate ~50%. Large-cap coverage saturation eliminates informational edge. Does not pass multiple testing. Could test mid/small-cap separately if focus gate allows."
       }
     ],
     "signal_count": 21,
-    "dead_end_count": 125,
+    "dead_end_count": 126,
     "literature_count": 25
   },
   "live_signals": [
@@ -691,13 +695,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 28450196,
+    "sessions_today": 4,
+    "tokens_today": 35454330,
     "sessions_by_day": [
       {
         "date": "2026-04-01",
-        "sessions": 3,
-        "tokens": 28450196
+        "sessions": 4,
+        "tokens": 35454330
       },
       {
         "date": "2026-03-31",
@@ -1996,6 +2000,18 @@
       "investigated": "Liberation Day pre-event verification, trigger bug fixes, VGNT spinco investigation, GO missed window, insider cluster review, monitoring script creation",
       "findings": "Found and fixed a critical error: two defensive long trades (AEP utility and COST warehouse store) were scheduled to enter 8 days too late, missing the expected post-tariff rotation window. Also cancelled a planned short in a newly-listed spinoff after discovering the stock was being added to a major index on day 2 of trading, which would create buying pressure that conflicts with the short thesis.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-01",
+      "investigated": "Pre-Liberation Day research: analyst initiation backtest, UBER IG upgrade OOS verification, STLD baseline correction, pre-Liberation Day snapshot, dead end recording.",
+      "findings": "1. ANALYST INITIATION (large-cap) = DEAD END. N=186 events, all horizons p>0.50, direction=50%. Coverage saturation eliminates edge. 2. UBER IG upgrade OOS: near-zero result (3d=-0.57% by independent ",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-01",
+      "investigated": "Pre-Liberation Day final verification: trade trigger audit, BLCO insider cluster OOS check, CCL credit upgrade correction, REPL pre-PDUFA price check, April 2026 catalyst calendar review",
+      "findings": "Confirmed all Liberation Day trade triggers are properly set. Discovered that Bausch & Lomb insider cluster (9 insiders, March 6) failed to generate returns because VIX was just 0.5 points below our required threshold \u2014 strong confirmation that the VIX>30 filter for insider signals has no grace zone.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2147,12 +2163,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": {
-      "session_date": "2026-04-01",
-      "key_fixes": "CRITICAL: AEP and COST triggers fixed from April 14 to April 7 (were set to exit date, not entry date). VGNT short abandoned (S&P SmallCap 600 inclusion day 2 of trading = index buying contra-signal). GO hypothesis abandoned (missed trigger window, Liberation Day contamination).",
-      "all_triggers_verified": "WFC/AMD/QCOM: April 6 09:30. GLD/AEP/COST: April 7 09:30. KRE: April 13 09:30. All verified correct as of April 1.",
-      "baselines_recorded": "All pre-Liberation Day March 31 baselines recorded in liberation_day_2026_pre_event_prices: SPY=650.34, WFC=79.61, AMD=203.43, QCOM=128.78, GLD=430.29, KRE=65.15, AEP=131.08, COST=996.43, STLD=180.00, NUE=169.10, TM=206.09, HMC=24.31, F=11.54, GM=74.50, STLA=7.09",
-      "monitor_script": "python tools/liberation_day_monitor.py --tariff-rate RATE --universal --auto-tariff-pct PCT"
-    }
+    "handoff": "\"Session focus: Pre-Liberation Day verification. All tariff trade triggers confirmed correct. WFC/AMD/QCOM conditional on April 2 outcome. BLCO borderline VIX case recorded (VIX=29.49 vs 30 threshold, signal failed, confirms hard threshold). CCL credit upgrade monitoring corrected (fallen angel, disqualified). New tools: post_liberation_day_decision_tree.py and cancel_trade.py created. REPL pre-PDUFA check: +9.6%, no abort condition. Insider scan: no new qualifying clusters (n>=6 with VIX>=30).\""
   }
 }
