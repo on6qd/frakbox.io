@@ -468,7 +468,7 @@
       },
       {
         "name": "dividend_cut_short",
-        "reason": "Signal failed 5 check(s): passes_multiple_testing, direction>50pct, abnormal_return>0.5pct, return_after_costs>0, oos_direction>50pct. n=81, best_horizon=1d, avg_abnormal=0.250% (0.25 pct pts), p=0.2841, direction%=46.9%, passes_mt=False, oos_n=37, oos_neg_rate=45.9%. Universe: 205 S&P500 large-caps >$2B, 2015-01-01-2024-12-31."
+        "reason": "Signal failed 5 check(s): passes_multiple_testing, direction>50pct, abnormal_return>0.5pct, return_after_costs>0, oos_direction>50pct. n=81, best_horizon=1d, avg_abnormal=0.250% (0.25 pct pts), p=0.2838, direction%=46.9%, passes_mt=False, oos_n=37, oos_neg_rate=45.9%. Universe: 205 S&P500 large-caps >$2B, 2015-01-01-2024-12-31."
       },
       {
         "name": "sp500_52w_low_catalyst_short_repeat_touch",
@@ -711,13 +711,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 55231085,
+    "sessions_today": 8,
+    "tokens_today": 60985702,
     "sessions_by_day": [
       {
         "date": "2026-04-01",
-        "sessions": 7,
-        "tokens": 55231085
+        "sessions": 8,
+        "tokens": 60985702
       },
       {
         "date": "2026-03-31",
@@ -2040,6 +2040,12 @@
       "investigated": "Background insider cluster scanner results: NCLH, NKE, EPAM 2025Q4 clusters",
       "findings": "INSIDER SCANNER BACKGROUND AGENT RESULTS: (1) NCLH (Norwegian Cruise): n=7 insiders (CEO+CFO+5 board) bought Nov 2025 at $17.94-19.25. mktcap=$8.5B. Currently $18.70, near cost basis. MEETS n>=6 thres",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-01",
+      "investigated": "Pre-Liberation Day preparation, IG upgrade scan, post-Liberation Day first-touch watchlist",
+      "findings": "Today we prepared for tomorrows Liberation Day tariff announcement by verifying all trade triggers are set correctly, identified four large-cap stocks that could become new short opportunities if the market sells off, and confirmed there are no actionable investment-grade credit upgrade candidates for the next few months.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2191,6 +2197,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"Session April 1 early-AM research complete. Status: (1) Liberation day tools verified ready. VIX=25.25, SPY=.34, market opens at 9:30 AM ET. (2) Sector rotation dead end: tested all 11 SPDR ETFs after VIX>30 events - no sector outperforms SPY. XLRE data was contaminated by pre-2015 invalid data. (3) 52-week high breakout dead end: n=2059 events, all p>0.06, direction 41-47%. (4) Insider scan: no large-cap n>=6 clusters within tradeable window. FMBM (n=6) disqualified by tiny mktcap (M). (5) SPY"
+    "handoff": "\"Session April 1 2026 (pre-Liberation Day). KEY FINDINGS: (1) SPY +2.91% on April 1 Q1 end rally, VIX=25.2 - elevated entry into Liberation Day. (2) REPL baseline $7.65 confirmed, activate_repl_trade.py ready. (3) IG upgrade: NO Q2 candidates - BIRK/BBWI stable outlook, LEVI already fired Feb 2025, COIN too far. Monitor BIRK H2 2026. (4) First-touch 52w low watchlist updated: FIS, CPT, PGR, MAS added (post-Liberation Day short candidates). (5) q1_q2_april_first_week contaminated by Liberation Da"
   }
 }
