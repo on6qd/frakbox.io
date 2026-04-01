@@ -645,10 +645,18 @@
       {
         "name": "vix_spike_sector_rotation_general",
         "reason": "All 11 SPDR sector ETFs tested for outperformance vs SPY after VIX>30 events. Discovery backtest (n=40 events 2005-2026, 30-day clustering): NO sector ETF shows consistent significant outperformance vs SPY at any horizon. Best result: XLK at 5d (+0.58%, dir=50%, p=0.018) and 20d (+0.78%, dir=45%, p=0.040) - direction rate too low (50%/45%) to be tradeable. SPY itself: 5d +1.33% dir=65% p=0.013 (the validated signal). CONCLUSION: When VIX spikes above 30, SPY long is the optimal trade. No sector ETF provides consistent alpha vs SPY. Sector rotation adds no value."
+      },
+      {
+        "name": "tariff_aapl_china_short",
+        "reason": "CORRECTED ANALYSIS (April 1, 2026): Full backtest with formal API (n=8, benchmark=QQQ, entry=open) shows 5d avg abnormal=-1.08%, direction=62.5% (5/8), p=0.0933 - NOT SIGNIFICANT. CRITICAL: OOS validation (2025-2026, n=3) shows 1/3 correct direction (33%) = BELOW COIN FLIP. Discovery period (2018-2019, n=5): 4/5 correct = 80%. Events: 2018-03-01(-2.98%), 2018-07-06(-0.76%), 2018-09-17(-1.86%), 2019-05-05(+0.10%), 2019-08-01(-3.36%), 2025-02-01(-1.15%), 2025-03-04(+0.59%), 2026-03-06(+0.80%). Mechanism failure: AAPL supply chain diversification (India, Vietnam manufacturing since 2022) reduced China revenue exposure from ~18% to lower levels. Services revenue (less China-dependent) now 35%+ of total. Signal was real in 2018-2019 but regime changed. Bootstrap CI 5d: [-2.10, -0.10] barely excludes zero but OOS failure is decisive. PREVIOUS KNOWLEDGE ENTRY WAS WRONG: p=0.0078 was a calculation error (wrong benchmark or events). DO NOT trade AAPL on tariff announcements."
+      },
+      {
+        "name": "txn_tariff_short",
+        "reason": "TXN (Texas Instruments) tariff short: DEAD END. n=8 tariff events 2018-2026, 5d vs XLK: avg=+0.39% (WRONG direction!), direction SHORT=38% (below 50% baseline). TXN actually OUTPERFORMS XLK after tariff events at 5d. Mechanism does not hold: TXN analog chips go to China industrial/auto customers, but TXN is US-manufactured (Texas/Japan) so tariffs on imports may actually benefit vs China-manufactured competitors. 10d shows better stats (-1.76%, 75% direction, p=0.0973) but still not significant and only 1 horizon. NOT TRADEABLE. Events: 2018 events mostly wrong direction at 5d, 2019-08-01 and 2025-02-01 correct, others wrong."
       }
     ],
     "signal_count": 21,
-    "dead_end_count": 128,
+    "dead_end_count": 130,
     "literature_count": 25
   },
   "live_signals": [
@@ -703,13 +711,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 48947414,
+    "sessions_today": 7,
+    "tokens_today": 55231085,
     "sessions_by_day": [
       {
         "date": "2026-04-01",
-        "sessions": 6,
-        "tokens": 48947414
+        "sessions": 7,
+        "tokens": 55231085
       },
       {
         "date": "2026-03-31",
