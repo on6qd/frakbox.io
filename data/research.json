@@ -1,7 +1,7 @@
 {
   "summary": {
     "total_hypotheses": 53,
-    "pending": 16,
+    "pending": 14,
     "active": 2,
     "completed": 4,
     "invalidated": 2,
@@ -629,10 +629,14 @@
       {
         "name": "turn_of_month_spy",
         "reason": "DEAD END: TOM effect on SPY (2015-2025). Daily diff=+0.011% (p=0.816). Monthly consistency=52.3%. Economic magnitude too small (far below 0.5% threshold). Only 6-day compound window marginal (p=0.042) but artifact of positive market drift. Not tradeable. Tool: tools/tom_analysis.py"
+      },
+      {
+        "name": "spinco_vgnt_short_s_and_p_inclusion",
+        "reason": "S&P SmallCap 600 inclusion effective day 2 of trading (April 2 2026) creates index buying demand that offsets spinco institutional selling. Always check S&P index announcements before shorting new spincos. VGNT/Versigent (Aptiv spinco) - short thesis invalidated."
       }
     ],
     "signal_count": 21,
-    "dead_end_count": 124,
+    "dead_end_count": 125,
     "literature_count": 25
   },
   "live_signals": [
@@ -682,18 +686,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 16,
+    "active_signal_types": 14,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 19627801,
+    "sessions_today": 3,
+    "tokens_today": 28450196,
     "sessions_by_day": [
       {
         "date": "2026-04-01",
-        "sessions": 2,
-        "tokens": 19627801
+        "sessions": 3,
+        "tokens": 28450196
       },
       {
         "date": "2026-03-31",
@@ -1986,6 +1990,12 @@
       "investigated": "SP500 organic removal short OOS validation; GO/IPX/SBSW insider cluster review; first-IG credit upgrade candidates; Q1->Q2 OOS baseline; insider cluster landscape scan",
       "findings": "1. SP500 REMOVAL SIGNAL DEAD END: OOS failed with Q1 2026 data (MTCH/MOH/LW/PAYC removed March 6). VIX=29.5 (qualifies HIGH VIX). Direction only 50% - coin flip. MOH+4.77% and MTCH+2.55% both wrong. D",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-01",
+      "investigated": "Liberation Day pre-event verification, trigger bug fixes, VGNT spinco investigation, GO missed window, insider cluster review, monitoring script creation",
+      "findings": "Found and fixed a critical error: two defensive long trades (AEP utility and COST warehouse store) were scheduled to enter 8 days too late, missing the expected post-tariff rotation window. Also cancelled a planned short in a newly-listed spinoff after discovering the stock was being added to a major index on day 2 of trading, which would create buying pressure that conflicts with the short thesis.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2076,7 +2086,7 @@
       {
         "symbol": "COST",
         "direction": "long",
-        "trigger": "2026-04-14T09:30",
+        "trigger": "2026-04-07T09:30",
         "event_type": "tariff defensive retail long"
       },
       {
@@ -2106,7 +2116,7 @@
       {
         "symbol": "AEP",
         "direction": "long",
-        "trigger": "2026-04-14T09:30",
+        "trigger": "2026-04-07T09:30",
         "event_type": "tariff escalation utility long"
       }
     ],
@@ -2138,10 +2148,11 @@
       }
     ],
     "handoff": {
-      "investigated": "SP500 removal short OOS validation; GO/IPX/SBSW insider cluster evaluation; credit upgrade signal (COIN assessment); Q1->Q2 OOS baseline; insider scanner landscape check.",
-      "findings": "1. SP500 REMOVAL SHORT: DEAD END. OOS Q1 2026 (MTCH/MOH/LW/PAYC, VIX=29.5): direction=50% (fail). MOH+4.77% and MTCH+2.55% wrong. Signal is COVID-era artifact. Recorded in dead_ends table and knowledge base. 2. GO (416556df): Missed window - symbol field was None (trade_loop couldnt execute). VIX also dropped from 30.6 to 25.25 on March 31 (below 30 threshold). Hypothesis notes updated. 3. Credit upgrade: COIN is BB- (too far from IG). No near-term first-ever candidates. BIRK (BB+ stable) most likely but needs Positive outlook first. 4. Q1->Q2 OOS baseline: SPY 650.34 on March 31. 5-day window April 1-7. Liberation Day is a major confound. 5. SBSW n=4 (not 6), below threshold. 6. Insider scanner: No qualifying n>=6 clusters with unexpired windows. GO (n=6, March 30) missed window.",
-      "blocked_by": "April 2 Liberation Day tariff announcement - all tariff hypothesis outcomes contingent on this.",
-      "next_specific_step": "April 3: Record SYK close, SPY open, VIX open. Complete SYK hypothesis. Run liberation_day_outcome_checker.py (it will have April 1-2 data by then). Check GO entry (the hypothesis fired? No - symbol was None, so it didnt). April 6: Confirm WFC/AMD/QCOM fired."
+      "session_date": "2026-04-01",
+      "key_fixes": "CRITICAL: AEP and COST triggers fixed from April 14 to April 7 (were set to exit date, not entry date). VGNT short abandoned (S&P SmallCap 600 inclusion day 2 of trading = index buying contra-signal). GO hypothesis abandoned (missed trigger window, Liberation Day contamination).",
+      "all_triggers_verified": "WFC/AMD/QCOM: April 6 09:30. GLD/AEP/COST: April 7 09:30. KRE: April 13 09:30. All verified correct as of April 1.",
+      "baselines_recorded": "All pre-Liberation Day March 31 baselines recorded in liberation_day_2026_pre_event_prices: SPY=650.34, WFC=79.61, AMD=203.43, QCOM=128.78, GLD=430.29, KRE=65.15, AEP=131.08, COST=996.43, STLD=180.00, NUE=169.10, TM=206.09, HMC=24.31, F=11.54, GM=74.50, STLA=7.09",
+      "monitor_script": "python tools/liberation_day_monitor.py --tariff-rate RATE --universal --auto-tariff-pct PCT"
     }
   }
 }
