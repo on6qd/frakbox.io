@@ -1,10 +1,10 @@
 {
   "summary": {
     "total_hypotheses": 53,
-    "pending": 10,
+    "pending": 6,
     "active": 2,
     "completed": 4,
-    "invalidated": 2,
+    "invalidated": 6,
     "direction_accuracy": "2/4",
     "patterns_discovered": 2,
     "reliable_patterns": [
@@ -696,10 +696,14 @@
       {
         "name": "forward_stock_split_announcement_long",
         "reason": "UPDATED N=23: Announcement day +0.77% p=0.129 65% positive (NOT significant \u2014 N=10 result p=0.044 was small-sample fluke from 2020-21 bull market tech splits). Post-entry 1d=+0.42% 48%dir, 5d=+0.71% 39%dir, 10d=+2.18% 52%dir, 20d=+1.91% 61%dir. All p>0.3. No edge. Bull-market bias: AAPL/TSLA/NVDA 2020-21 inflated initial N=10 results. Announcing splits is correlated with strong prior performance (management confidence) but that prior performance is already priced in. DEAD END confirmed with N=23, 2020-2026."
+      },
+      {
+        "name": "domestic_steel_tariff_long",
+        "reason": "STLD/NUE long after tariff announcements: n=6 events 2018-2025. STLD 10d avg abnormal=-4.32%, p=0.025, direction=0/6. NUE 10d: -3.88%, p=0.044, dir=1/6. Steel underperforms even in Section 232 (domestic-protection) tariff events. Demand destruction and risk-off dominate over pricing power. DO NOT TRADE. See tools/domestic_steel_tariff_long_backtest.py"
       }
     ],
     "signal_count": 24,
-    "dead_end_count": 137,
+    "dead_end_count": 138,
     "literature_count": 25
   },
   "live_signals": [
@@ -749,18 +753,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 11,
+    "active_signal_types": 7,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 60140256,
+    "sessions_today": 8,
+    "tokens_today": 67417791,
     "sessions_by_day": [
       {
         "date": "2026-04-02",
-        "sessions": 7,
-        "tokens": 60140256
+        "sessions": 8,
+        "tokens": 67417791
       },
       {
         "date": "2026-04-01",
@@ -2142,6 +2146,12 @@
       "investigated": "Portfolio management + signal monitoring post-Liberation Day 2026",
       "findings": "Markets reacted mildly to Liberation Day 2026 tariff announcements (stocks up +0.8%). Gold surged suggesting investors expect tariff-driven inflation. The team is tracking how auto stocks (Toyota, Honda) perform over the next 5 days now that 25% auto import tariffs are official.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-02",
+      "investigated": "Post-Liberation Day portfolio management: SPY regime check, ZBIO timing update, insider cluster scan, domestic steel tariff long backtest",
+      "findings": "Researched whether domestic steel stocks (STLD, NUE) benefit from US tariffs - they don't in the short term. Despite being protected from foreign competition, markets immediately sell cyclical stocks during tariff uncertainty due to recession fears. Also confirmed our gold, retail defensive, and utility tariff trades are correctly set up for next week.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2226,32 +2236,8 @@
       {
         "symbol": "ZBIO",
         "direction": "long",
-        "trigger": "2026-04-07T09:30",
+        "trigger": "2026-04-14T09:30",
         "event_type": "insider buying cluster ceo cfo"
-      },
-      {
-        "symbol": "COST",
-        "direction": "long",
-        "trigger": "2026-04-07T09:30",
-        "event_type": "tariff defensive retail long"
-      },
-      {
-        "symbol": "GLD",
-        "direction": "long",
-        "trigger": "2026-04-07T09:30",
-        "event_type": "tariff escalation gld long"
-      },
-      {
-        "symbol": "KRE",
-        "direction": "short",
-        "trigger": "2026-04-13T09:30",
-        "event_type": "tariff escalation kre bank short"
-      },
-      {
-        "symbol": "AEP",
-        "direction": "long",
-        "trigger": "2026-04-07T09:30",
-        "event_type": "tariff escalation utility long"
       }
     ],
     "research_queue": [
