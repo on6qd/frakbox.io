@@ -758,13 +758,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 67417791,
+    "sessions_today": 10,
+    "tokens_today": 85313781,
     "sessions_by_day": [
       {
         "date": "2026-04-02",
-        "sessions": 8,
-        "tokens": 67417791
+        "sessions": 10,
+        "tokens": 85313781
       },
       {
         "date": "2026-04-01",
@@ -2152,6 +2152,24 @@
       "investigated": "Post-Liberation Day portfolio management: SPY regime check, ZBIO timing update, insider cluster scan, domestic steel tariff long backtest",
       "findings": "Researched whether domestic steel stocks (STLD, NUE) benefit from US tariffs - they don't in the short term. Despite being protected from foreign competition, markets immediately sell cyclical stocks during tariff uncertainty due to recession fears. Also confirmed our gold, retail defensive, and utility tariff trades are correctly set up for next week.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-02",
+      "investigated": "Post-Liberation Day regime assessment; tariff trade invalidations; Good Friday calendar correction; credit upgrade OOS testing; sector performance post-VIX spike",
+      "findings": "We discovered that April 3 is Good Friday (market closed), preventing an expected trade from executing as planned. We also invalidated four planned trading positions after confirming that no new major tariff escalation occurred on Liberation Day's anniversary. The tariff rules changed fundamentally in February 2026 when the Supreme Court struck down emergency tariff authority.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-02",
+      "investigated": "Credit upgrade OOS - VST Fitch March 2026 second data point",
+      "findings": "A stock we were monitoring for a credit rating upgrade signal fell sharply right after the upgrade, reinforcing a concerning pattern of failures for this research hypothesis.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-02",
+      "investigated": "Liberation Day 2026 OOS assessment, REPL FDA research, session queue setup for April 6+",
+      "findings": "1. Liberation Day 2026 (April 2) was a mild non-event: SPY -1.1% after-hours from $655.24 to $648.07. No new major tariff announcements. Post-SCOTUS regime (10% universal tariff) means 2025-calibrated",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2267,12 +2285,6 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": {
-      "attempted": "Investigated SOXX rebound after tariff shock, forward stock split signals, CEO/CFO insider clusters (ZBIO/SBSW/TSM), and PR IG upgrade OOS verification",
-      "accomplished": "1) SOXX rebound = dead end (recorded). 2) Forward stock split announcement = dead end (announced AH, not tradeable at open, N=10). 3) ZBIO/SBSW CEO/CFO clusters documented and added to watchlist for April 3. 4) PR IG excluded: Fitch rated IG July 2025 (8mo earlier) - first_ig hypothesis still has only 1 OOS point (VRT). 5) TSM skipped: n=4, no CEO/CFO, $0.7M too small for $1.77T company.",
-      "partial_results": "GDX gold miners: preliminary signal STILL not pre-registered. Note says 'after GLD April7 OOS result'. VRT is only clean first_ig_upgrade OOS event. ZBIO window expires April 30. PR +5.46% 5d is follow-on IG upgrade data, not first-ever.",
-      "blocked_by": "Liberation Day April 2 uncertainty: VIX could spike above 30 gate, blocking ZBIO/SBSW activation. Waiting for Liberation Day market reaction before committing to CEO/CFO cluster trade.",
-      "key_insight": "ZBIO is the primary CEO/CFO cluster to watch: CEO (highest-quality insider) bought $1M of his own company, 3 insiders total, $9.3M total - largest cluster since PICS. VIX gate met (24.5). Do NOT wait too long - window expires April 30. If Liberation Day is mild (VIX<30), activate ZBIO April 3-4."
-    }
+    "handoff": "\"\\nSESSION 2026-04-02 HANDOFF:\\nState: 2 active trades (SYK short close pending April 6, SPY VIX long active).\\nREPL FDA: Approval likely (updated from prior assessment). Keep pending, activate only on crash.\\nLiberation Day 2026: Non-event. SPY -1% after-hours. Post-SCOTUS 10% tariff regime.\\nZBIO: Trigger set April 14 but VIX=24.5 makes it coin flip. Plan to abandon April 13 if VIX >= 20.\\nCredit upgrades: Nothing new this week. Keep monitoring.\\nQ1/Q2 seasonal: Day 2 already negative (-1%). W"
   }
 }
