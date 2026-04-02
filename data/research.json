@@ -754,13 +754,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 35954790,
+    "sessions_today": 7,
+    "tokens_today": 60140256,
     "sessions_by_day": [
       {
         "date": "2026-04-02",
-        "sessions": 4,
-        "tokens": 35954790
+        "sessions": 7,
+        "tokens": 60140256
       },
       {
         "date": "2026-04-01",
@@ -2124,6 +2124,24 @@
       "investigated": "SOXX rebound post-tariff; forward stock split announcements; CEO/CFO insider clusters (ZBIO/SBSW/TSM); PR IG upgrade OOS verification",
       "findings": "Tested two potential signals: stock split announcements and semiconductor recovery after tariff shocks. Both came up empty for tradeable opportunities - the stock split jump happens overnight before markets open, and semiconductors continue underperforming after tariff news rather than recovering.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-02",
+      "investigated": "GDX formal backtest; JPM-KRE earnings correlation; auto-import tariff Liberation Day 2026; ZBIO insider cluster activation; REPL PDUFA monitoring; KRE trigger condition refinement",
+      "findings": "(1) GDX formal backtest DEAD END: discovery 2018-2024 direction=37.5% (below threshold). 2025 OOS looks good (2/2) but n=2. GLD is better tariff hedge. (2) JPM Q1 earnings NOT a predictor of KRE perfo",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-02",
+      "investigated": "Context review: SYK completion, ZBIO activation, Liberation Day 2026 tariff context, TSM insider cluster, CCL IG upgrade, AMD/QCOM basket",
+      "findings": "(1) SYK short: BUY close order accepted (db5e3b80), will fill at April 2 open. -2.4% loss. complete_syk.py script ready for post-fill. (2) ZBIO trigger set April 3 9:30, CEO+2 insiders $9.3M on $407M ",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-02",
+      "investigated": "Portfolio management + signal monitoring post-Liberation Day 2026",
+      "findings": "Markets reacted mildly to Liberation Day 2026 tariff announcements (stocks up +0.8%). Gold surged suggesting investors expect tariff-driven inflation. The team is tracking how auto stocks (Toyota, Honda) perform over the next 5 days now that 25% auto import tariffs are official.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2208,7 +2226,7 @@
       {
         "symbol": "ZBIO",
         "direction": "long",
-        "trigger": "2026-04-03T09:30",
+        "trigger": "2026-04-07T09:30",
         "event_type": "insider buying cluster ceo cfo"
       },
       {
