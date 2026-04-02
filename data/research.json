@@ -1,7 +1,7 @@
 {
   "summary": {
     "total_hypotheses": 53,
-    "pending": 13,
+    "pending": 10,
     "active": 2,
     "completed": 4,
     "invalidated": 2,
@@ -113,11 +113,6 @@
         "magnitude_pct": 2.27
       },
       {
-        "name": "tariff_gdx_gold_miners_long",
-        "status": "weak",
-        "magnitude_pct": 5.55
-      },
-      {
         "name": "tariff_ko_defensive_long_10d",
         "status": "strong",
         "magnitude_pct": 4.38
@@ -131,6 +126,26 @@
         "name": "tariff_xlu_utility_long_20d",
         "status": "strong",
         "magnitude_pct": 3.36
+      },
+      {
+        "name": "zbio_ceo_cluster_march2026",
+        "status": "MONITORING - enter April 3+ if VIX<30 post-Liberation Day. CEO bought $1.02M, total cluster $9.3M, $20.36/share, -54% from 52w high, $1.2B mktcap. Window expires April 30.",
+        "magnitude_pct": 5.0
+      },
+      {
+        "name": "sbsw_cfo_cluster_march2026",
+        "status": "SECONDARY - prefer ZBIO. CFO bought $1.83M, total $2M, $12.41/share, -42% from 52w high, $9B mktcap. Liberation Day gold miner tailwind. Window expires April 30.",
+        "magnitude_pct": 5.0
+      },
+      {
+        "name": "pr_ig_upgrade_march2026_oos",
+        "status": "EXCLUDED from f86dcb4e (first_ig_credit_upgrade). Second IG agency (Fitch was first, July 2025). +5.46% 5d still observed but contaminated by prior Fitch IG rating. Useful data point for follow_on_ig_upgrade_timing signal instead. First IG hypothesis still has only 1 clean OOS point (VRT +2.39% 3d Feb 2026).",
+        "magnitude_pct": 5.46
+      },
+      {
+        "name": "follow_on_ig_upgrade_timing",
+        "status": "UNDERPOWERED. Need n>=8 for proper test. PR adds 1 event. Still too few. Monitor: BIRK (BB+/Stable both agencies), BBWI (BB+ S&P), NCLH (recently IG from Fitch). Energy sector now on radar (oil/gas E&P companies near IG threshold).",
+        "magnitude_pct": 5.46
       }
     ],
     "dead_ends": [
@@ -673,10 +688,18 @@
       {
         "name": "tariff_domestic_steel_short_stld",
         "reason": "OOS MISS 2026: STLD UP +6.4% from OOS baseline 171.78 (vs March31 180.00). Domestic steel manufacturers BENEFIT from steel tariffs (less foreign competition). Thesis was logically inverted. 2025 Liberation Day showed -3.2% abnormal at day 4 only (coincided with full market crash, not steel-specific). NOT a repeatable signal."
+      },
+      {
+        "name": "soxx_tariff_rebound_long",
+        "reason": "SOXX long 5d after tariff shock: mean -1.99% to -1.83% (14-29% direction) across 5-20d. Continues underperforming SPY after initial crash. N=7 events 2018-2025. Direction 14-29% (not tradeable). Best signal remains SHORT at announcement, not LONG at day+5."
+      },
+      {
+        "name": "forward_stock_split_announcement_long",
+        "reason": "UPDATED N=23: Announcement day +0.77% p=0.129 65% positive (NOT significant \u2014 N=10 result p=0.044 was small-sample fluke from 2020-21 bull market tech splits). Post-entry 1d=+0.42% 48%dir, 5d=+0.71% 39%dir, 10d=+2.18% 52%dir, 20d=+1.91% 61%dir. All p>0.3. No edge. Bull-market bias: AAPL/TSLA/NVDA 2020-21 inflated initial N=10 results. Announcing splits is correlated with strong prior performance (management confidence) but that prior performance is already priced in. DEAD END confirmed with N=23, 2020-2026."
       }
     ],
-    "signal_count": 21,
-    "dead_end_count": 135,
+    "signal_count": 24,
+    "dead_end_count": 137,
     "literature_count": 25
   },
   "live_signals": [
@@ -726,18 +749,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 13,
+    "active_signal_types": 11,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 18647512,
+    "sessions_today": 4,
+    "tokens_today": 35954790,
     "sessions_by_day": [
       {
         "date": "2026-04-02",
-        "sessions": 2,
-        "tokens": 18647512
+        "sessions": 4,
+        "tokens": 35954790
       },
       {
         "date": "2026-04-01",
@@ -2089,6 +2112,18 @@
       "investigated": "Liberation Day 2026 post-event actions: cancelled conditional tariff shorts, completed STLD OOS analysis, bank pre-earnings drift backtest, insider cluster scan",
       "findings": "1. Liberation Day 2026 MILD: SPY +0.8% from March31 baseline (650.34->655.44), VIX=24.5. Market did NOT crash. Cancelled WFC/AMD/QCOM conditional shorts (conditions not met). GLD/AEP/COST remain April",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-02",
+      "investigated": "Post-Liberation Day portfolio management: Liberation Day OOS completion, WFC/AMD/QCOM disposition, insider cluster scan, GDX vs GLD analysis, IG upgrade pipeline check, PR missed opportunity identification",
+      "findings": "After Liberation Day tariffs were announced and markets barely moved, we cancelled our planned tariff-shock short positions and confirmed our defensive plays (gold, utilities, Costco) remain on track for April 7 entry. We also discovered a missed opportunity: Permian Resources got its first investment-grade credit upgrade in March and gained 5.5% in 5 days \u2014 exactly the pattern our validated signal predicts \u2014 but we had not yet added energy companies to our monitoring list.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-02",
+      "investigated": "SOXX rebound post-tariff; forward stock split announcements; CEO/CFO insider clusters (ZBIO/SBSW/TSM); PR IG upgrade OOS verification",
+      "findings": "Tested two potential signals: stock split announcements and semiconductor recovery after tariff shocks. Both came up empty for tradeable opportunities - the stock split jump happens overnight before markets open, and semiconductors continue underperforming after tariff news rather than recovering.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2171,6 +2206,12 @@
     ],
     "pending_triggers": [
       {
+        "symbol": "ZBIO",
+        "direction": "long",
+        "trigger": "2026-04-03T09:30",
+        "event_type": "insider buying cluster ceo cfo"
+      },
+      {
         "symbol": "COST",
         "direction": "long",
         "trigger": "2026-04-07T09:30",
@@ -2222,6 +2263,12 @@
         "category": "signal_continuation"
       }
     ],
-    "handoff": "\"Session April 2 COMPLETE. Liberation Day 2026: market UP +0.8%, VIX=24.5. Cancelled WFC/AMD/QCOM. SYK close order placed (fills April 3). STLD abandoned (wrong direction). Background scanner found clusters: TSM(n=3,fresh), SBSW(n=4), but March clusters during selloff ALL failed (KKR -0.9%, POOL -3.0%, LOAR -9.2%). Macro filter essential. Dead ends: bank_q1_pre_earnings_drift, tariff_domestic_steel_short_stld. Key calendar: GLD/AEP/COST Apr7, REPL Apr10, KRE Apr13.\""
+    "handoff": {
+      "attempted": "Investigated SOXX rebound after tariff shock, forward stock split signals, CEO/CFO insider clusters (ZBIO/SBSW/TSM), and PR IG upgrade OOS verification",
+      "accomplished": "1) SOXX rebound = dead end (recorded). 2) Forward stock split announcement = dead end (announced AH, not tradeable at open, N=10). 3) ZBIO/SBSW CEO/CFO clusters documented and added to watchlist for April 3. 4) PR IG excluded: Fitch rated IG July 2025 (8mo earlier) - first_ig hypothesis still has only 1 OOS point (VRT). 5) TSM skipped: n=4, no CEO/CFO, $0.7M too small for $1.77T company.",
+      "partial_results": "GDX gold miners: preliminary signal STILL not pre-registered. Note says 'after GLD April7 OOS result'. VRT is only clean first_ig_upgrade OOS event. ZBIO window expires April 30. PR +5.46% 5d is follow-on IG upgrade data, not first-ever.",
+      "blocked_by": "Liberation Day April 2 uncertainty: VIX could spike above 30 gate, blocking ZBIO/SBSW activation. Waiting for Liberation Day market reaction before committing to CEO/CFO cluster trade.",
+      "key_insight": "ZBIO is the primary CEO/CFO cluster to watch: CEO (highest-quality insider) bought $1M of his own company, 3 insiders total, $9.3M total - largest cluster since PICS. VIX gate met (24.5). Do NOT wait too long - window expires April 30. If Liberation Day is mild (VIX<30), activate ZBIO April 3-4."
+    }
   }
 }
