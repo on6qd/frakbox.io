@@ -768,13 +768,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 6660216,
+    "sessions_today": 3,
+    "tokens_today": 14387912,
     "sessions_by_day": [
       {
         "date": "2026-04-04",
-        "sessions": 2,
-        "tokens": 6660216
+        "sessions": 3,
+        "tokens": 14387912
       },
       {
         "date": "2026-04-02",
