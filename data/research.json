@@ -1,17 +1,17 @@
 {
   "summary": {
     "total_hypotheses": 53,
-    "pending": 6,
-    "active": 2,
-    "completed": 4,
+    "pending": 4,
+    "active": 1,
+    "completed": 5,
     "invalidated": 6,
-    "direction_accuracy": "2/4",
+    "direction_accuracy": "2/5",
     "patterns_discovered": 2,
     "reliable_patterns": [
       {
         "event_type": "sp500_52w_low_momentum_short",
-        "reliability": 0.33,
-        "tests": 3
+        "reliability": 0.25,
+        "tests": 4
       }
     ],
     "by_event_type": {
@@ -20,8 +20,8 @@
         "avg_confidence": 7.0
       },
       "sp500_52w_low_momentum_short": {
-        "accuracy": "1/3",
-        "avg_confidence": 6.7
+        "accuracy": "1/4",
+        "avg_confidence": 6.5
       }
     }
   },
@@ -700,20 +700,24 @@
       {
         "name": "domestic_steel_tariff_long",
         "reason": "STLD/NUE long after tariff announcements: n=6 events 2018-2025. STLD 10d avg abnormal=-4.32%, p=0.025, direction=0/6. NUE 10d: -3.88%, p=0.044, dir=1/6. Steel underperforms even in Section 232 (domestic-protection) tariff events. Demand destruction and risk-off dominate over pricing power. DO NOT TRADE. See tools/domestic_steel_tariff_long_backtest.py"
+      },
+      {
+        "name": "first_ig_credit_upgrade",
+        "reason": "3 OOS misses: UBER (+0.64%), VST Dec 2025 (-3.93%), VST March 2026 (-9.09%). 0/3 passed >0.5% threshold. Direction: 1/3. Signal invalid due to data mining bias."
       }
     ],
     "signal_count": 24,
-    "dead_end_count": 138,
+    "dead_end_count": 139,
     "literature_count": 25
   },
   "live_signals": [
     {
       "event_type": "sp500_52w_low_momentum_short",
       "state": "EXPLORING",
-      "total_experiments": 3,
-      "effective_independent_n": 1,
+      "total_experiments": 4,
+      "effective_independent_n": 2,
       "effective_correct_n": 0,
-      "last_updated": "2026-03-28T00:08:38.513359",
+      "last_updated": "2026-04-04T08:39:46.677761",
       "experiments": [
         {
           "symbol": "CTAS",
@@ -732,6 +736,12 @@
           "correct": false,
           "return_pct": 4.09,
           "date": "2026-03-28"
+        },
+        {
+          "symbol": "SYK",
+          "correct": false,
+          "return_pct": -0.33,
+          "date": "2026-04-04"
         }
       ]
     },
@@ -753,14 +763,19 @@
     }
   ],
   "focus": {
-    "active_signal_types": 7,
+    "active_signal_types": 4,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 2,
+    "tokens_today": 6660216,
     "sessions_by_day": [
+      {
+        "date": "2026-04-04",
+        "sessions": 2,
+        "tokens": 6660216
+      },
       {
         "date": "2026-04-02",
         "sessions": 10,
@@ -2170,84 +2185,96 @@
       "investigated": "Liberation Day 2026 OOS assessment, REPL FDA research, session queue setup for April 6+",
       "findings": "1. Liberation Day 2026 (April 2) was a mild non-event: SPY -1.1% after-hours from $655.24 to $648.07. No new major tariff announcements. Post-SCOTUS regime (10% universal tariff) means 2025-calibrated",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-04",
+      "investigated": "Weekend session: hypothesis triage, queue cleanup, Monday prep scripts",
+      "findings": "Cleaned up the research queue by retiring a credit rating upgrade signal that failed all three real-world tests. Prepared automated scripts for next week's trading tasks: closing a position Monday and tracking a seasonal market pattern.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-04",
+      "investigated": "Weekend housekeeping: SYK completion, run.py bug fix, watchlist/queue cleanup, portfolio review",
+      "findings": "Completed the SYK short trade (small loss) and cleaned up the research queue for the week ahead. The portfolio is up 0.7% with one active position in SPY. Key events this week: FDA decision on Replimune (April 10) and a scheduled insider-based trade on Zenas Biopharma (April 14).",
+      "tag": "infrastructure"
     }
   ],
   "pipeline": {
     "watchlist": [
       {
-        "event": "V (Visa) 52-week low first touch March 18, 2026 ($299.02). NOT traded (V not in scanner universe before this session). T",
-        "date": "2026-03-26",
-        "symbol": "V"
+        "event": "POOL (Pool Corp) insider cluster: 3 insiders bought ~March 13 (filed March 17). $7.6B cap, S&P 500. Window closed (12 da",
+        "date": "2026-04-06",
+        "symbol": "POOL"
       },
       {
-        "event": "KHC (Kraft Heinz) made new 52-week low on March 23 2026 at $21.33. First ever 52w low from this 52-week window (stock wa",
-        "date": "2026-03-26",
-        "symbol": "KHC"
+        "event": "NCLH insider cluster Nov 2025 (n=7, CEO+CFO+5 board, cost basis $17.94-19.25). Monitor post-Liberation Day: if VIX>30 an",
+        "date": "2026-04-06",
+        "symbol": "NCLH"
       },
       {
-        "event": "SYK (Stryker Corp) first crossed 52-week low on 2026-03-23 (close=$332.59, 52w low=$335.05, breach=-0.7%). \nMissed entry",
-        "date": "2026-03-26",
-        "symbol": "SYK"
+        "event": "NKE insider cluster Dec 2025 (n=4, CEO+Tim Cook+Robert Swan, cost basis $50-55). Below threshold (n<6). Post-Liberation ",
+        "date": "2026-04-06",
+        "symbol": "NKE"
       },
       {
-        "event": "SYK short - run activate_syk_trade.py at March 26 open IF SYK still below $335.05. Hypothesis 5b09b097 (sp500_52w_low_mo",
-        "date": "2026-03-26",
-        "symbol": "SYK"
+        "event": "FIS (Fidelity National Info Services) 1.1% above 52w low=46.40, last touch Feb 13 2026 (46d gap). POST-LIBERATION DAY WA",
+        "date": "2026-04-06",
+        "symbol": "FIS"
       },
       {
-        "event": "ADBE $238.87 vs 52w_low $237.41 (0.6% above). Never crossed 52w low in 2y. Cap $98B. If closes below $237.41, first sp50",
-        "date": "2026-03-26",
+        "event": "CPT (Camden Property Trust) 1.1% above 52w low=96.61, last touch Oct 2025 (153d gap). POST-LIBERATION DAY WATCH: REIT fi",
+        "date": "2026-04-06",
+        "symbol": "CPT"
+      },
+      {
+        "event": "PGR (Progressive Corp) 3.5% above 52w low=191.53, last touch Nov 3 2025 (148d gap). POST-LIBERATION DAY WATCH: Insurance",
+        "date": "2026-04-06",
+        "symbol": "PGR"
+      },
+      {
+        "event": "MAS (Masco Corp) 4.7% above 52w low=57.64, last touch Apr 8 2025 (357d gap). POST-LIBERATION DAY WATCH: Building product",
+        "date": "2026-04-06",
+        "symbol": "MAS"
+      },
+      {
+        "event": "TDG (TransDigm) FIRST-EVER 52w low at $1140.03 on March 27. During Liberation Day tariff selloff. 52w low momentum SHORT",
+        "date": "2026-04-07",
+        "symbol": "TDG"
+      },
+      {
+        "event": "ADBE (Adobe) FIRST-EVER 52w low at $234.84 on March 27. During Liberation Day tariff selloff. 52w low momentum SHORT = D",
+        "date": "2026-04-07",
         "symbol": "ADBE"
       },
       {
-        "event": "SBAC $166.76 vs 52w_low $166.58 (0.1% above). Never crossed 52w low in 2y. Cap $18B. REIT. If closes below $166.58, firs",
-        "date": "2026-03-26",
-        "symbol": "SBAC"
+        "event": "FedEx Freight Investor Day April 8, 2026. Will include firm spin-off date. Update trigger on hypothesis 60558434 if exac",
+        "date": "2026-04-08",
+        "symbol": "FDXF"
       },
       {
-        "event": "DPZ $360.09 vs 52w_low $359.67 (0.1% above). Never crossed 52w low in 2y. Cap $12B. If closes below $359.67, first sp500",
-        "date": "2026-03-26",
-        "symbol": "DPZ"
+        "event": "TM (Toyota) auto tariff Liberation Day OOS observation. Track 5d/10d abnormal returns post-April 2 for auto_import_tarif",
+        "date": "2026-04-09",
+        "symbol": "TM"
       },
       {
-        "event": "OTIS $77.99 vs 52w_low $77.80 (0.2% above). Never crossed 52w low in 2y. Cap $30B. If crosses 52w low this week \u2192 Q1 ear",
-        "date": "2026-03-26",
-        "symbol": "OTIS"
+        "event": "HMC (Honda) auto tariff Liberation Day OOS observation. Track 5d/10d abnormal returns post-April 2 for auto_import_tarif",
+        "date": "2026-04-09",
+        "symbol": "HMC"
       },
       {
-        "event": "BSX $68.15 vs 52w_low $67.56 (0.9% above). Never crossed 52w low in 2y. Cap $101B. If crosses 52w low this week \u2192 Q1 ear",
-        "date": "2026-03-26",
-        "symbol": "BSX"
+        "event": "REPL (Replimune) PDUFA April 10, 2026 \u2014 BLA RESUBMISSION for RP1 (vusolimogene oderparepvec) in advanced melanoma. FDA A",
+        "date": "2026-04-10",
+        "symbol": "REPL"
       },
       {
-        "event": "CPB (Campbells Company) at $20.91 vs close_52w_low $20.80 (0.5% above). Never closed below 52w low in 2y. Cap $6.2B. S&P",
-        "date": "2026-03-26",
-        "symbol": "CPB"
+        "event": "REPL (Replimune) PDUFA April 10 2026. BLA resubmission for RP1+nivolumab in advanced melanoma. Prior CRL July 2025 was E",
+        "date": "2026-04-10",
+        "symbol": "REPL"
       },
       {
-        "event": "TDG (TransDigm Group) first-ever 52w low approach. 52w low = $1,152.50. Currently $1,162.78 (+0.89% above). 0 crossings ",
-        "date": "2026-03-26",
-        "symbol": "TDG"
-      },
-      {
-        "event": "AMT (American Tower Corp, $79.8B REIT) first-ever 52w low approach. 52w low = $168.51. Currently $170.36 (+1.10% above).",
-        "date": "2026-03-26",
-        "symbol": "AMT"
-      },
-      {
-        "event": "TDG IMMINENT first-ever 52w low crossing. Close=$1,156.49 vs barrier=$1,152.50 (0.35% above). 0 crossings in 2yr history",
-        "date": "2026-03-26",
-        "symbol": "TDG"
-      },
-      {
-        "event": "TDG FIRST-EVER 52w low imminent. Currently $1,156.49 vs barrier=$1,152.50 (0.35% away).\nCONFIRMED: 0 crossings in 2-year",
-        "date": "2026-03-26",
-        "symbol": "TDG"
-      },
-      {
-        "event": "HD SHORT: Close at market close Friday March 27. Run: python tools/close_hd_trade.py. Verify position in Alpaca first.",
-        "date": "2026-03-27",
-        "symbol": "HD"
+        "event": "REPL (Replimune) PDUFA April 10: RP1 BLA resubmission for melanoma. If CRL with 40-55% crash -> 5f805860. If >55% crash ",
+        "date": "2026-04-10",
+        "symbol": "REPL"
       }
     ],
     "pending_triggers": [
@@ -2260,11 +2287,6 @@
     ],
     "research_queue": [
       {
-        "question": "Does congressional insider buying predict abnormal returns? Backtest the post-disclosure signal (txDate -> disclosure lag affects alpha).",
-        "priority": 8,
-        "category": "politician_trading"
-      },
-      {
         "question": "Merger arbitrage spread compression: after deal announcement, does the spread reliably compress over 20-30 days? Test on 2023-2025 announced deals wit",
         "priority": 7,
         "category": "ma_event"
@@ -2275,16 +2297,27 @@
         "category": "merger_arbitrage"
       },
       {
-        "question": "Search for Moody's and S&P \"rising stars\" (BB/Ba1 companies on positive watch) published Q1 2026. Any US-listed >B market cap company on all three age",
-        "priority": 7,
-        "category": "first_ig_credit_upgrade"
+        "question": "Wells Notice sub-hypothesis: Are financial fraud Wells Notices different from procedural ones? If yes, test 10+ fraud-specific Wells Notices (like BEN",
+        "priority": 4,
+        "category": "sec_wells_notice"
       },
       {
-        "question": "Validated signal 'test_signal' (4/5 correct). Scan for the next opportunity to trade this signal. Every trade is both profit and ongoing revalidation.",
-        "priority": 7,
-        "category": "signal_continuation"
+        "question": "Does ANY open-market share repurchase announcement in small-cap value stocks (P/B < 1.5) produce abnormal returns? Test N=50+ events. Different from f",
+        "priority": 3,
+        "category": "new_signal"
+      },
+      {
+        "question": "Test short-sale restriction lift (SSR reset) as a SHORT signal. When SEC applies SSR to a stock (down >10% in a day), short sellers cannot short on do",
+        "priority": 3,
+        "category": "signal_discovery"
       }
     ],
-    "handoff": "\"\\nSESSION 2026-04-02 HANDOFF:\\nState: 2 active trades (SYK short close pending April 6, SPY VIX long active).\\nREPL FDA: Approval likely (updated from prior assessment). Keep pending, activate only on crash.\\nLiberation Day 2026: Non-event. SPY -1% after-hours. Post-SCOTUS 10% tariff regime.\\nZBIO: Trigger set April 14 but VIX=24.5 makes it coin flip. Plan to abandon April 13 if VIX >= 20.\\nCredit upgrades: Nothing new this week. Keep monitoring.\\nQ1/Q2 seasonal: Day 2 already negative (-1%). W"
+    "handoff": {
+      "attempted": "Weekend session: queue cleanup, hypothesis triage, Monday prep",
+      "accomplished": "Abandoned f86dcb4e (first_ig_credit_upgrade, 3 OOS misses) and 0a093c90 (generic TBD insider). Cancelled 5 dead queue items. Updated Q1/Q2 OOS with April 2 close. Built Monday morning and daily OOS scripts.",
+      "blocked_on": "Market closed until Monday April 6",
+      "key_insight": "Portfolio clean: 2 active trades (SYK closing Monday, SPY VIX long on track), 4 pending hypotheses all event-driven with clear triggers. No open research threads consuming capacity.",
+      "context_for_next": "SYK buy order db5e3b80 fills at Monday open. SPY VIX long (b63a0168) target April 27. ZBIO regime filter may fail (SPY below 20d MA as of April 2). REPL approval likely 60-75% per FDA signals."
+    }
   }
 }
