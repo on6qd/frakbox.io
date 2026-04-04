@@ -2197,55 +2197,16 @@
       "investigated": "Weekend housekeeping: SYK completion, run.py bug fix, watchlist/queue cleanup, portfolio review",
       "findings": "Completed the SYK short trade (small loss) and cleaned up the research queue for the week ahead. The portfolio is up 0.7% with one active position in SPY. Key events this week: FDA decision on Replimune (April 10) and a scheduled insider-based trade on Zenas Biopharma (April 14).",
       "tag": "infrastructure"
+    },
+    {
+      "date": "2026-04-04",
+      "investigated": "Weekend session: verified Monday scripts, investigated insider buying clusters via web search and EDGAR EFTS, cleaned up stale watchlist items, verified ZBIO and SPY trade setups",
+      "findings": "Investigated insider buying clusters reported in financial media and found they were almost all stock grants, not genuine purchases. Cleaned up stale watchlist items. Our existing trades (SPY and upcoming ZBIO) are on track heading into a busy week.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
     "watchlist": [
-      {
-        "event": "POOL (Pool Corp) insider cluster: 3 insiders bought ~March 13 (filed March 17). $7.6B cap, S&P 500. Window closed (12 da",
-        "date": "2026-04-06",
-        "symbol": "POOL"
-      },
-      {
-        "event": "NCLH insider cluster Nov 2025 (n=7, CEO+CFO+5 board, cost basis $17.94-19.25). Monitor post-Liberation Day: if VIX>30 an",
-        "date": "2026-04-06",
-        "symbol": "NCLH"
-      },
-      {
-        "event": "NKE insider cluster Dec 2025 (n=4, CEO+Tim Cook+Robert Swan, cost basis $50-55). Below threshold (n<6). Post-Liberation ",
-        "date": "2026-04-06",
-        "symbol": "NKE"
-      },
-      {
-        "event": "FIS (Fidelity National Info Services) 1.1% above 52w low=46.40, last touch Feb 13 2026 (46d gap). POST-LIBERATION DAY WA",
-        "date": "2026-04-06",
-        "symbol": "FIS"
-      },
-      {
-        "event": "CPT (Camden Property Trust) 1.1% above 52w low=96.61, last touch Oct 2025 (153d gap). POST-LIBERATION DAY WATCH: REIT fi",
-        "date": "2026-04-06",
-        "symbol": "CPT"
-      },
-      {
-        "event": "PGR (Progressive Corp) 3.5% above 52w low=191.53, last touch Nov 3 2025 (148d gap). POST-LIBERATION DAY WATCH: Insurance",
-        "date": "2026-04-06",
-        "symbol": "PGR"
-      },
-      {
-        "event": "MAS (Masco Corp) 4.7% above 52w low=57.64, last touch Apr 8 2025 (357d gap). POST-LIBERATION DAY WATCH: Building product",
-        "date": "2026-04-06",
-        "symbol": "MAS"
-      },
-      {
-        "event": "TDG (TransDigm) FIRST-EVER 52w low at $1140.03 on March 27. During Liberation Day tariff selloff. 52w low momentum SHORT",
-        "date": "2026-04-07",
-        "symbol": "TDG"
-      },
-      {
-        "event": "ADBE (Adobe) FIRST-EVER 52w low at $234.84 on March 27. During Liberation Day tariff selloff. 52w low momentum SHORT = D",
-        "date": "2026-04-07",
-        "symbol": "ADBE"
-      },
       {
         "event": "FedEx Freight Investor Day April 8, 2026. Will include firm spin-off date. Update trigger on hypothesis 60558434 if exac",
         "date": "2026-04-08",
@@ -2275,6 +2236,51 @@
         "event": "REPL (Replimune) PDUFA April 10: RP1 BLA resubmission for melanoma. If CRL with 40-55% crash -> 5f805860. If >55% crash ",
         "date": "2026-04-10",
         "symbol": "REPL"
+      },
+      {
+        "event": "REPL PDUFA April 10 2026: RP1 + nivolumab melanoma BLA. Prior CRL July 2025. High rejection risk (same data, no new tria",
+        "date": "2026-04-10",
+        "symbol": "REPL"
+      },
+      {
+        "event": "REPL PDUFA April 10 (Thursday). FDA announces after 5pm ET. If CRL: use activate_repl_trade.py. If crash >55% use d302c8",
+        "date": "2026-04-10",
+        "symbol": "REPL"
+      },
+      {
+        "event": "PEAD monitoring - JPM Q1 2026 earnings. JPM Q1 2026 earnings. EPS est $5.50. PEAD fires if actual beat >10% ($6.05+). Mo",
+        "date": "2026-04-14",
+        "symbol": "JPM"
+      },
+      {
+        "event": "WFC tariff short timing check: WFC reports Q1 2026 earnings April 14. If tariff short (b73efac3) enters April 7 with 5d ",
+        "date": "2026-04-14",
+        "symbol": "WFC"
+      },
+      {
+        "event": "PGR Q1 2026 earnings \u2014 run activate_pgr_trade.py at April 15 open if PGR misses and opens below $197.92 (52w low). Hypot",
+        "date": "2026-04-15",
+        "symbol": "PGR"
+      },
+      {
+        "event": "PEAD monitoring - TSM Q1 2026 earnings. TSM Q1 2026 earnings. EPS est $3.30. PEAD fires if actual beat >10% ($3.63+). $1",
+        "date": "2026-04-16",
+        "symbol": "TSM"
+      },
+      {
+        "event": "PEAD monitoring - NFLX Q1 2026 earnings. NFLX Q1 2026 earnings. EPS est $0.77. PEAD fires if beat >10%. $391B cap qualif",
+        "date": "2026-04-16",
+        "symbol": "NFLX"
+      },
+      {
+        "event": "KRE SHORT MANUAL CLOSE: Hypothesis 6e732966 fires April 10 09:30. Pre-registered as 20d but MUST close at 5d (April 17) ",
+        "date": "2026-04-17",
+        "symbol": "KRE"
+      },
+      {
+        "event": "HDB (HDFC Bank ADR, $130B) Q4 FY2026 earnings ~April 18. Currently -3.86% BELOW 52w low ($26.42). NOT S&P 500. Check if ",
+        "date": "2026-04-18",
+        "symbol": "HDB"
       }
     ],
     "pending_triggers": [
