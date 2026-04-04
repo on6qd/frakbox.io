@@ -2246,46 +2246,6 @@
         "symbol": "REPL"
       },
       {
-        "event": "PEAD monitoring - JPM Q1 2026 earnings. JPM Q1 2026 earnings. EPS est $5.50. PEAD fires if actual beat >10% ($6.05+). Mo",
-        "date": "2026-04-14",
-        "symbol": "JPM"
-      },
-      {
-        "event": "PGR Q1 2026 earnings \u2014 run activate_pgr_trade.py at April 15 open if PGR misses and opens below $197.92 (52w low). Hypot",
-        "date": "2026-04-15",
-        "symbol": "PGR"
-      },
-      {
-        "event": "PEAD monitoring - TSM Q1 2026 earnings. TSM Q1 2026 earnings. EPS est $3.30. PEAD fires if actual beat >10% ($3.63+). $1",
-        "date": "2026-04-16",
-        "symbol": "TSM"
-      },
-      {
-        "event": "PEAD monitoring - NFLX Q1 2026 earnings. NFLX Q1 2026 earnings. EPS est $0.77. PEAD fires if beat >10%. $391B cap qualif",
-        "date": "2026-04-16",
-        "symbol": "NFLX"
-      },
-      {
-        "event": "KRE SHORT MANUAL CLOSE: Hypothesis 6e732966 fires April 10 09:30. Pre-registered as 20d but MUST close at 5d (April 17) ",
-        "date": "2026-04-17",
-        "symbol": "KRE"
-      },
-      {
-        "event": "HDB (HDFC Bank ADR, $130B) Q4 FY2026 earnings ~April 18. Currently -3.86% BELOW 52w low ($26.42). NOT S&P 500. Check if ",
-        "date": "2026-04-18",
-        "symbol": "HDB"
-      },
-      {
-        "event": "WRB (W.R. Berkley $24.5B) NEVER crossed 52w low in 2y. $64.49 vs 52wL $62.61 (3.0% above). Earnings April 20. MONITOR: I",
-        "date": "2026-04-20",
-        "symbol": "WRB"
-      },
-      {
-        "event": "OTIS Q1 FY2026 earnings April 22. Currently 1.02% above 52w low ($78.25). Entry condition: close < $78.25 AND abnormal <",
-        "date": "2026-04-22",
-        "symbol": "OTIS"
-      },
-      {
         "event": "BSX",
         "date": "2026-04-22",
         "symbol": "BSX touched 52w low intraday March 25 (low=67.56). Earnings April 22. Pre-reg 359e9e42. Activate if close<67.56 AND earnings miss >2% abnormal. Run activate_bsx_trade.py on earnings morning."
@@ -2296,9 +2256,24 @@
         "symbol": "OTIS touched exact 52w low intraday March 25 (low=77.80). Earnings April 22. Pre-reg dbedf16e. Activate if close<77.80 AND earnings miss >2% abnormal. Run activate_otis_trade.py on earnings morning."
       },
       {
-        "event": "CCI (Crown Castle, $34B REIT): 1.5% above 52w low ($77.40 first touched Feb 5 2026). Q1 2026 earnings April 22. Weak 202",
-        "date": "2026-04-22",
-        "symbol": "CCI"
+        "event": "GRCE PDUFA April 23 (Wednesday). GTx-104 NDA for aSAH. High rejection risk: 2:1 mortality imbalance (8 vs 4 deaths). If ",
+        "date": "2026-04-23",
+        "symbol": "GRCE"
+      },
+      {
+        "event": "VIX>30 spike recovery: buy SPY at next open, hold 20 days (hyp b63a0168). Monitor daily VIX close.",
+        "date": "2026-04-30",
+        "symbol": "SPY"
+      },
+      {
+        "event": "Middleby (MIDD) Food Processing spinoff expected Q2 2026. Revenue $850M, est market cap $2-3B. Parent MIDD is $5B, so sp",
+        "date": "2026-05-01",
+        "symbol": "MIDD"
+      },
+      {
+        "event": "TDG",
+        "date": "2026-05-05",
+        "symbol": "TDG (TransDigm Group) - NEVER crossed 52w low in 2 years (crossing_count=0). Currently $1162.78, 52w_low=$1107.45 (0.89% above). Earnings May 5, 2026 (41 days away). If TDG crosses 52w low before earnings - pre-register momentum_short. If within 30 days of earnings and crosses 52w low - catalyst_short candidate. Monitor weekly."
       }
     ],
     "pending_triggers": [],
