@@ -768,9 +768,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 2,
+    "tokens_today": 24620788,
     "sessions_by_day": [
+      {
+        "date": "2026-04-05",
+        "sessions": 2,
+        "tokens": 24620788
+      },
       {
         "date": "2026-04-04",
         "sessions": 6,
@@ -2221,6 +2226,18 @@
       "investigated": "System safety improvements: ZBIO auto-trigger removal, largecap_filter weekend bug, trading calendar, FDXF script guard, watchlist cleanup",
       "findings": "Fixed a safety issue where an insider-buying trade would have executed automatically without checking market volatility conditions. Also built tools to prevent scheduling trades on market holidays.",
       "tag": "infrastructure"
+    },
+    {
+      "date": "2026-04-05",
+      "investigated": "Insider cluster OOS validation (2024-2025 SEC EDGAR data), watchlist/queue cleanup, scanner tool build",
+      "findings": "Ran a comprehensive out-of-sample test of our best signal (insider buying clusters) using 2024-2025 SEC data. The signal held up strongly: when 3 or more corporate insiders buy their own stock, it tends to rise about 2-3% more than the market over 5 days. Also cleaned up our monitoring lists and started building a better insider detection tool.",
+      "tag": "discovery"
+    },
+    {
+      "date": "2026-04-05",
+      "investigated": "Built EDGAR insider scanner v2 to replace unreliable OpenInsider. Tested on 14-day window. Fixed largecap_filter bug in data_tasks.py. Verified Monday scripts and REPL PDUFA readiness.",
+      "findings": "Built a new tool that scans SEC filings directly for insider buying clusters, replacing the unreliable third-party data source. Found 11 clusters in the last two weeks. Also fixed a bug in the market cap filtering tool.",
+      "tag": "infrastructure"
     }
   ],
   "pipeline": {
@@ -2289,11 +2306,6 @@
         "category": "merger_arbitrage"
       },
       {
-        "question": "Wells Notice sub-hypothesis: Are financial fraud Wells Notices different from procedural ones? If yes, test 10+ fraud-specific Wells Notices (like BEN",
-        "priority": 4,
-        "category": "sec_wells_notice"
-      },
-      {
         "question": "Does ANY open-market share repurchase announcement in small-cap value stocks (P/B < 1.5) produce abnormal returns? Test N=50+ events. Different from f",
         "priority": 3,
         "category": "new_signal"
@@ -2302,6 +2314,11 @@
         "question": "Test short-sale restriction lift (SSR reset) as a SHORT signal. When SEC applies SSR to a stock (down >10% in a day), short sellers cannot short on do",
         "priority": 3,
         "category": "signal_discovery"
+      },
+      {
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       }
     ],
     "handoff": {
