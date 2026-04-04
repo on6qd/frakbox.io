@@ -768,13 +768,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 14387912,
+    "sessions_today": 6,
+    "tokens_today": 34638415,
     "sessions_by_day": [
       {
         "date": "2026-04-04",
-        "sessions": 3,
-        "tokens": 14387912
+        "sessions": 6,
+        "tokens": 34638415
       },
       {
         "date": "2026-04-02",
@@ -2203,12 +2203,30 @@
       "investigated": "Weekend session: verified Monday scripts, investigated insider buying clusters via web search and EDGAR EFTS, cleaned up stale watchlist items, verified ZBIO and SPY trade setups",
       "findings": "Investigated insider buying clusters reported in financial media and found they were almost all stock grants, not genuine purchases. Cleaned up stale watchlist items. Our existing trades (SPY and upcoming ZBIO) are on track heading into a busy week.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-04",
+      "investigated": "Performance retrospective, methodology enforcement improvements, REPL script date fix, tariff regime updates",
+      "findings": "Conducted a comprehensive performance review after 2.5 weeks of paper trading. The fund is up 0.68% with one strong win from an insider buying cluster signal. Added safeguards to prevent over-investigating dead-end signals, and prepared for next week's FDA decision on a biotech stock.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-04",
+      "investigated": "Insider cluster scan, watchlist cleanup, system verification, DNLI PDUFA resolution",
+      "findings": "Scanned for new insider buying clusters \u2014 none qualifying beyond existing ZBIO position. Cleaned up 66 stale/duplicate watchlist items. SPY trade up 2.5%, tracking above expectations. All automation verified for the week ahead.",
+      "tag": "infrastructure"
+    },
+    {
+      "date": "2026-04-04",
+      "investigated": "System safety improvements: ZBIO auto-trigger removal, largecap_filter weekend bug, trading calendar, FDXF script guard, watchlist cleanup",
+      "findings": "Fixed a safety issue where an insider-buying trade would have executed automatically without checking market volatility conditions. Also built tools to prevent scheduling trades on market holidays.",
+      "tag": "infrastructure"
     }
   ],
   "pipeline": {
     "watchlist": [
       {
-        "event": "FedEx Freight Investor Day April 8, 2026. Will include firm spin-off date. Update trigger on hypothesis 60558434 if exac",
+        "event": "FedEx Freight Investor Day April 8, 2026. Record equity value, distribution ratio, S&P index plans. Hypothesis 60558434 ",
         "date": "2026-04-08",
         "symbol": "FDXF"
       },
@@ -2223,26 +2241,6 @@
         "symbol": "HMC"
       },
       {
-        "event": "REPL (Replimune) PDUFA April 10, 2026 \u2014 BLA RESUBMISSION for RP1 (vusolimogene oderparepvec) in advanced melanoma. FDA A",
-        "date": "2026-04-10",
-        "symbol": "REPL"
-      },
-      {
-        "event": "REPL (Replimune) PDUFA April 10 2026. BLA resubmission for RP1+nivolumab in advanced melanoma. Prior CRL July 2025 was E",
-        "date": "2026-04-10",
-        "symbol": "REPL"
-      },
-      {
-        "event": "REPL (Replimune) PDUFA April 10: RP1 BLA resubmission for melanoma. If CRL with 40-55% crash -> 5f805860. If >55% crash ",
-        "date": "2026-04-10",
-        "symbol": "REPL"
-      },
-      {
-        "event": "REPL PDUFA April 10 2026: RP1 + nivolumab melanoma BLA. Prior CRL July 2025. High rejection risk (same data, no new tria",
-        "date": "2026-04-10",
-        "symbol": "REPL"
-      },
-      {
         "event": "REPL PDUFA April 10 (Thursday). FDA announces after 5pm ET. If CRL: use activate_repl_trade.py. If crash >55% use d302c8",
         "date": "2026-04-10",
         "symbol": "REPL"
@@ -2251,11 +2249,6 @@
         "event": "PEAD monitoring - JPM Q1 2026 earnings. JPM Q1 2026 earnings. EPS est $5.50. PEAD fires if actual beat >10% ($6.05+). Mo",
         "date": "2026-04-14",
         "symbol": "JPM"
-      },
-      {
-        "event": "WFC tariff short timing check: WFC reports Q1 2026 earnings April 14. If tariff short (b73efac3) enters April 7 with 5d ",
-        "date": "2026-04-14",
-        "symbol": "WFC"
       },
       {
         "event": "PGR Q1 2026 earnings \u2014 run activate_pgr_trade.py at April 15 open if PGR misses and opens below $197.92 (52w low). Hypot",
@@ -2281,16 +2274,34 @@
         "event": "HDB (HDFC Bank ADR, $130B) Q4 FY2026 earnings ~April 18. Currently -3.86% BELOW 52w low ($26.42). NOT S&P 500. Check if ",
         "date": "2026-04-18",
         "symbol": "HDB"
-      }
-    ],
-    "pending_triggers": [
+      },
       {
-        "symbol": "ZBIO",
-        "direction": "long",
-        "trigger": "2026-04-14T09:30",
-        "event_type": "insider buying cluster ceo cfo"
+        "event": "WRB (W.R. Berkley $24.5B) NEVER crossed 52w low in 2y. $64.49 vs 52wL $62.61 (3.0% above). Earnings April 20. MONITOR: I",
+        "date": "2026-04-20",
+        "symbol": "WRB"
+      },
+      {
+        "event": "OTIS Q1 FY2026 earnings April 22. Currently 1.02% above 52w low ($78.25). Entry condition: close < $78.25 AND abnormal <",
+        "date": "2026-04-22",
+        "symbol": "OTIS"
+      },
+      {
+        "event": "BSX",
+        "date": "2026-04-22",
+        "symbol": "BSX touched 52w low intraday March 25 (low=67.56). Earnings April 22. Pre-reg 359e9e42. Activate if close<67.56 AND earnings miss >2% abnormal. Run activate_bsx_trade.py on earnings morning."
+      },
+      {
+        "event": "OTIS",
+        "date": "2026-04-22",
+        "symbol": "OTIS touched exact 52w low intraday March 25 (low=77.80). Earnings April 22. Pre-reg dbedf16e. Activate if close<77.80 AND earnings miss >2% abnormal. Run activate_otis_trade.py on earnings morning."
+      },
+      {
+        "event": "CCI (Crown Castle, $34B REIT): 1.5% above 52w low ($77.40 first touched Feb 5 2026). Q1 2026 earnings April 22. Weak 202",
+        "date": "2026-04-22",
+        "symbol": "CCI"
       }
     ],
+    "pending_triggers": [],
     "research_queue": [
       {
         "question": "Merger arbitrage spread compression: after deal announcement, does the spread reliably compress over 20-30 days? Test on 2023-2025 announced deals wit",
