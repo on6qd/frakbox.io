@@ -768,9 +768,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 44121807,
+    "sessions_today": 2,
+    "tokens_today": 9118067,
     "sessions_by_day": [
+      {
+        "date": "2026-04-06",
+        "sessions": 2,
+        "tokens": 9118067
+      },
       {
         "date": "2026-04-05",
         "sessions": 6,
@@ -2262,6 +2267,18 @@
       "investigated": "Monday script consistency, REPL date correction, insider scan, week-ahead prep, credit upgrade signal review",
       "findings": "Fixed a script inconsistency that could have delayed our next insider cluster trade. Ran a fresh SEC insider scan \u2014 no new actionable clusters this week. All activation scripts verified for the busy week ahead (3 scheduled events).",
       "tag": "infrastructure"
+    },
+    {
+      "date": "2026-04-06",
+      "investigated": "Week-ahead prep: verified ZBIO/REPL/Q1Q2 scripts, ran EDGAR insider scan, checked STLD OOS, reviewed REPL bounce risk",
+      "findings": "Verified all trading scripts for the busy week ahead. ZBIO insider trade activation set for Monday morning. Updated the REPL FDA rejection script to require larger crashes before entering, based on analysis of prior bounce patterns.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-06",
+      "investigated": "Script verification for Monday: monday_april6_open.py, activate_zbio_trade.py, record_q1q2_oos_daily.py, activate_repl_trade.py, measure_auto_tariff_event2.py. EDGAR insider scan. Strategic signal portfolio review.",
+      "findings": "Fixed a critical bug in the trading system that would have caused crashes during trade exits. Verified all scripts for the upcoming week. No new insider buying clusters found. The tariff-related signals are weakening as expected after the Supreme Court ruling.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2340,6 +2357,6 @@
         "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": "\"Weekend session April 5 (evening): Fixed monday_april6_open.py SPY>MA inconsistency (was blocking at 0%, now warns at -5% aligned with activate_zbio_trade.py). Fixed REPL watchlist date error (was Thursday, is Friday). Fresh insider scan: no new actionable clusters. ZBIO already +5.4% from detection but within chase filter. VIX=23.87 (<25 gate), SPY -0.34% below MA (borderline OK). All scripts verified for week ahead.\""
+    "handoff": "\"Sunday evening April 6: Fixed 3 safe_download() bugs (critical trader.py fix). All scripts verified. ZBIO activation ready Monday 9:35 AM (VIX=23.9 passes). REPL PDUFA Friday April 10. Auto tariff event 2 measured early (weak: -1.05% vs expected -4.2%, post-SCOTUS weakening). Q1/Q2 OOS: 2/5 days done (+0.84%). No new insider clusters. Credit upgrade trending dead end (3 misses).\""
   }
 }
