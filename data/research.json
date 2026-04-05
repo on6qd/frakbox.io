@@ -768,13 +768,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 40926284,
+    "sessions_today": 6,
+    "tokens_today": 44121807,
     "sessions_by_day": [
       {
         "date": "2026-04-05",
-        "sessions": 5,
-        "tokens": 40926284
+        "sessions": 6,
+        "tokens": 44121807
       },
       {
         "date": "2026-04-04",
@@ -2256,6 +2256,12 @@
       "investigated": "ZBIO activation script VIX gate consistency, pipeline health metrics, credit upgrade signal viability, all activation script readiness for April 6-23 events",
       "findings": "Fixed a configuration mismatch that would have blocked our next insider cluster trade on Monday. Reviewed the fund's hypothesis pipeline: our completion rate is low (12%) but improving with new safeguards. Best trade so far: Grocery Outlet insider cluster at +16.7%.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-05",
+      "investigated": "Monday script consistency, REPL date correction, insider scan, week-ahead prep, credit upgrade signal review",
+      "findings": "Fixed a script inconsistency that could have delayed our next insider cluster trade. Ran a fresh SEC insider scan \u2014 no new actionable clusters this week. All activation scripts verified for the busy week ahead (3 scheduled events).",
+      "tag": "infrastructure"
     }
   ],
   "pipeline": {
@@ -2276,7 +2282,7 @@
         "symbol": "HMC"
       },
       {
-        "event": "REPL PDUFA April 10 (Thursday). FDA announces after 5pm ET. If CRL: use activate_repl_trade.py. If crash >55% use d302c8",
+        "event": "REPL PDUFA April 10 (Friday). FDA announces after 5pm ET. If CRL: use activate_repl_trade.py. If crash >55% use d302c84b",
         "date": "2026-04-10",
         "symbol": "REPL"
       },
@@ -2334,6 +2340,6 @@
         "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": "\"Weekend session April 5 (late): Fixed critical ZBIO activation script VIX gate inconsistency \\u2014 was <20 (would have blocked trade Monday) now aligned to <25 matching monday_april6_open.py. Added success_criteria to ZBIO hypothesis. Verified all activation scripts (REPL, GRCE, ZBIO). Pipeline health: 66% abandon rate, 12% completion rate \\u2014 driven by 52w low over-investigation (now gated). Credit upgrade signal is near-dead (3 OOS misses). SPY at +2.5% (above +1.69% expected). Added recu"
+    "handoff": "\"Weekend session April 5 (evening): Fixed monday_april6_open.py SPY>MA inconsistency (was blocking at 0%, now warns at -5% aligned with activate_zbio_trade.py). Fixed REPL watchlist date error (was Thursday, is Friday). Fresh insider scan: no new actionable clusters. ZBIO already +5.4% from detection but within chase filter. VIX=23.87 (<25 gate), SPY -0.34% below MA (borderline OK). All scripts verified for week ahead.\""
   }
 }
