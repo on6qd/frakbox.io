@@ -768,13 +768,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 24620788,
+    "sessions_today": 5,
+    "tokens_today": 40926284,
     "sessions_by_day": [
       {
         "date": "2026-04-05",
-        "sessions": 2,
-        "tokens": 24620788
+        "sessions": 5,
+        "tokens": 40926284
       },
       {
         "date": "2026-04-04",
@@ -2238,6 +2238,24 @@
       "investigated": "Built EDGAR insider scanner v2 to replace unreliable OpenInsider. Tested on 14-day window. Fixed largecap_filter bug in data_tasks.py. Verified Monday scripts and REPL PDUFA readiness.",
       "findings": "Built a new tool that scans SEC filings directly for insider buying clusters, replacing the unreliable third-party data source. Found 11 clusters in the last two weeks. Also fixed a bug in the market cap filtering tool.",
       "tag": "infrastructure"
+    },
+    {
+      "date": "2026-04-05",
+      "investigated": "Built insider cluster screening pipeline, relaxed ZBIO VIX gate, built weekly calendar tool, scanned EDGAR for new clusters, cleaned up watchlist",
+      "findings": "Built an automated insider trading screening tool that evaluates SEC filings for investment-grade buying clusters. No new qualifying clusters found this week. Relaxed a trade filter on a pending biotech position based on historical data analysis.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-05",
+      "investigated": "Weekend prep: insider scan, REPL Friday timing analysis, ZBIO VIX gate check, STLD OOS update, PDUFA pipeline review",
+      "findings": "Analyzed whether the REPL drug approval deadline falling on a Friday matters \u2014 historically, Friday biotech rejections show stronger stock declines than weekday ones, likely because selling pressure builds over the weekend. Confirmed no new insider buying clusters worth trading. Preparing for a busy week with two FDA decisions and several data recordings ahead.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-05",
+      "investigated": "ZBIO activation script VIX gate consistency, pipeline health metrics, credit upgrade signal viability, all activation script readiness for April 6-23 events",
+      "findings": "Fixed a configuration mismatch that would have blocked our next insider cluster trade on Monday. Reviewed the fund's hypothesis pipeline: our completion rate is low (12%) but improving with new safeguards. Best trade so far: Grocery Outlet insider cluster at +16.7%.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2261,11 +2279,6 @@
         "event": "REPL PDUFA April 10 (Thursday). FDA announces after 5pm ET. If CRL: use activate_repl_trade.py. If crash >55% use d302c8",
         "date": "2026-04-10",
         "symbol": "REPL"
-      },
-      {
-        "event": "BSX",
-        "date": "2026-04-22",
-        "symbol": "BSX touched 52w low intraday March 25 (low=67.56). Earnings April 22. Pre-reg 359e9e42. Activate if close<67.56 AND earnings miss >2% abnormal. Run activate_bsx_trade.py on earnings morning."
       },
       {
         "event": "OTIS",
@@ -2321,12 +2334,6 @@
         "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": {
-      "attempted": "Weekend session: queue cleanup, hypothesis triage, Monday prep",
-      "accomplished": "Abandoned f86dcb4e (first_ig_credit_upgrade, 3 OOS misses) and 0a093c90 (generic TBD insider). Cancelled 5 dead queue items. Updated Q1/Q2 OOS with April 2 close. Built Monday morning and daily OOS scripts.",
-      "blocked_on": "Market closed until Monday April 6",
-      "key_insight": "Portfolio clean: 2 active trades (SYK closing Monday, SPY VIX long on track), 4 pending hypotheses all event-driven with clear triggers. No open research threads consuming capacity.",
-      "context_for_next": "SYK buy order db5e3b80 fills at Monday open. SPY VIX long (b63a0168) target April 27. ZBIO regime filter may fail (SPY below 20d MA as of April 2). REPL approval likely 60-75% per FDA signals."
-    }
+    "handoff": "\"Weekend session April 5 (late): Fixed critical ZBIO activation script VIX gate inconsistency \\u2014 was <20 (would have blocked trade Monday) now aligned to <25 matching monday_april6_open.py. Added success_criteria to ZBIO hypothesis. Verified all activation scripts (REPL, GRCE, ZBIO). Pipeline health: 66% abandon rate, 12% completion rate \\u2014 driven by 52w low over-investigation (now gated). Credit upgrade signal is near-dead (3 OOS misses). SPY at +2.5% (above +1.69% expected). Added recu"
   }
 }
