@@ -768,13 +768,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 18071277,
+    "sessions_today": 6,
+    "tokens_today": 39078480,
     "sessions_by_day": [
       {
         "date": "2026-04-06",
-        "sessions": 4,
-        "tokens": 18071277
+        "sessions": 6,
+        "tokens": 39078480
       },
       {
         "date": "2026-04-05",
@@ -2291,6 +2291,18 @@
       "investigated": "Tariff OOS tool update, unified week tracker, EDGAR insider scan, ZBIO activation verification, trade performance review, signal pipeline assessment",
       "findings": "Prepared tools for this week's trading: updated tariff signal tracker, built a daily monitoring script for all active experiments, and verified that Monday's biotech trade activation is ready to go. Scanned for new insider buying clusters but found none meeting our size threshold.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-06",
+      "investigated": "Built insider cluster feature analysis tool and ran comprehensive study on N=5,364 clusters from SEC EDGAR Form 4 data (2020-2025). Analyzed CEO/CFO presence, cluster size, VIX regime, dollar value, prior drawdown, and interaction effects.",
+      "findings": "Analyzed 5,364 insider buying clusters from SEC filings to find what makes a good insider trade. Discovered that when a CEO buys alongside 3-5 other insiders, the stock averages +5% in the following week. Clusters with 6+ insiders actually perform worse. Also found that high-volatility markets aren't as bad for insider signals as previously thought.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-06",
+      "investigated": "Fixed critical trade loop crash (trader.py datetime bug), refactored insider cluster scanner from OpenInsider to EDGAR, ran multi-horizon analysis on CEO+3-5 insider clusters (5d/10d/20d)",
+      "findings": "Fixed a critical bug that was silently disabling stop-loss protection for our active trades. Also upgraded the insider trading scanner to use SEC data directly instead of an unreliable third-party source, and confirmed that our 5-day holding period is optimal \u2014 holding longer actually hurts returns.",
+      "tag": "infrastructure"
     }
   ],
   "pipeline": {
