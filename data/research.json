@@ -1,8 +1,8 @@
 {
   "summary": {
     "total_hypotheses": 53,
-    "pending": 4,
-    "active": 1,
+    "pending": 3,
+    "active": 2,
     "completed": 5,
     "invalidated": 6,
     "direction_accuracy": "2/5",
@@ -146,6 +146,11 @@
         "name": "follow_on_ig_upgrade_timing",
         "status": "UNDERPOWERED. Need n>=8 for proper test. PR adds 1 event. Still too few. Monitor: BIRK (BB+/Stable both agencies), BBWI (BB+ S&P), NCLH (recently IG from Fitch). Energy sector now on radar (oil/gas E&P companies near IG threshold).",
         "magnitude_pct": 5.46
+      },
+      {
+        "name": "tariff_panel_april2_oos_day5_update",
+        "status": "oos_in_progress_day5",
+        "magnitude_pct": 0.0
       }
     ],
     "dead_ends": [
@@ -706,7 +711,7 @@
         "reason": "3 consecutive OOS misses (UBER, VST Dec 2025, VST March 2026). Backtest p=0.021 did not replicate. Signal retired per 3-failure rule."
       }
     ],
-    "signal_count": 24,
+    "signal_count": 25,
     "dead_end_count": 139,
     "literature_count": 25
   },
@@ -768,9 +773,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 3,
+    "tokens_today": 13996763,
     "sessions_by_day": [
+      {
+        "date": "2026-04-07",
+        "sessions": 3,
+        "tokens": 13996763
+      },
       {
         "date": "2026-04-06",
         "sessions": 6,
@@ -2303,6 +2313,24 @@
       "investigated": "Fixed critical trade loop crash (trader.py datetime bug), refactored insider cluster scanner from OpenInsider to EDGAR, ran multi-horizon analysis on CEO+3-5 insider clusters (5d/10d/20d)",
       "findings": "Fixed a critical bug that was silently disabling stop-loss protection for our active trades. Also upgraded the insider trading scanner to use SEC data directly instead of an unreliable third-party source, and confirmed that our 5-day holding period is optimal \u2014 holding longer actually hurts returns.",
       "tag": "infrastructure"
+    },
+    {
+      "date": "2026-04-07",
+      "investigated": "Monday pre-open regime checks, ZBIO trade activation, insider cluster evaluator tool development",
+      "findings": "Activated a stock trade based on corporate insiders (CEO + 2 others) buying $9.3 million of their own company stock. Built an automated tool that evaluates insider buying patterns against validated statistical criteria, scoring each cluster for trade-readiness.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-07",
+      "investigated": "Week tracker day 1, EDGAR insider scan, ZBIO order verification, STLD OOS day 3, bug fixes",
+      "findings": "Monitored our active trades: SPY position up 3%, steel tariff signal already hit its target early. Found a promising-looking insider buying cluster but identified it as a new IPO \u2014 not a real signal. Added an automatic filter to catch IPOs in the future.",
+      "tag": "operational"
+    },
+    {
+      "date": "2026-04-07",
+      "investigated": "ZBIO order diagnosis and resubmit, daily insider scan, week tracker day 1-2, tariff panel OOS review, SPY trade field backfill",
+      "findings": "Direct tariff targets like steel and autos are behaving as expected with sharp declines, but the broader defensive rotation we saw last year \u2014 into gold, utilities, and staples \u2014 is not repeating, because the market already moved defensively before the new tariffs hit.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2382,11 +2410,11 @@
       }
     ],
     "handoff": {
-      "attempted": "Strategic portfolio review. EDGAR insider scan. Credit upgrade retirement. Tariff regime analysis.",
-      "accomplished": "Retired credit upgrade (3 OOS misses). Recorded JAN missed window. Analyzed 31 tariff entries \u2014 all regime-blocked. Created signal portfolio regime analysis.",
-      "partial_results": "STLD OOS flat at 2/5 days (cumulative abnormal +0.1% vs target -2.58%). Auto tariff event 2 weak (-1.05% vs expected -4.2%). Both suggest tariff signals weakened post-SCOTUS.",
-      "blocked_by": "Weekend \u2014 no market data. At max capacity (5 experiments). All tariff signals blocked by SCOTUS regime change.",
-      "key_insight": "Only 3 signal families are regime-independent and worth investing in: insider clusters (validated OOS), PDUFA/clinical failure (pending validation), VIX spike recovery (active). Everything else is either dead or regime-blocked. Narrow focus is correct."
+      "attempted": "Monday pre-open regime checks. ZBIO trade activation. HMH/TSM cluster evaluation. EDGAR insider scan. Built insider cluster evaluator tool.",
+      "accomplished": "Activated ZBIO long (hyp 2bbe0f04, ~224 shares @ $22.26). VIX 24.2 passes <25 gate. Skipped HMH (window expiring) and TSM (weak, window expired). Built insider_cluster_evaluator.py and scan-insiders-evaluate pipeline. Fixed activate_zbio_trade.py API call.",
+      "next_session_should": "Run after-close trackers (week_april7, Q1Q2 OOS, STLD). Check ZBIO position. Continue monitoring SPY VIX trade. Scan for new insider clusters.",
+      "blocked_on": "Market close data for daily trackers. REPL PDUFA is Friday April 10.",
+      "open_questions": "HMH evaluator said GO but we skipped due to window timing \u2014 consider faster activation workflow for CEO/CFO clusters."
     }
   }
 }

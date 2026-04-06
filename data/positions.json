@@ -1,6 +1,13 @@
 {
   "active": [
     {
+      "symbol": "ZBIO",
+      "direction": "long",
+      "event_type": "insider_buying_cluster_ceo_cfo",
+      "thesis": "Insider buying cluster (3+ insiders) where CEO or CFO is one of the buyers. Minimum 3 insiders with open-market Form 4 p",
+      "opened_date": "2026-03-22"
+    },
+    {
       "symbol": "SPY",
       "direction": "long",
       "event_type": "vix_spike_above_30_spy_long",
