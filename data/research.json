@@ -773,9 +773,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 19320205,
+    "sessions_today": 2,
+    "tokens_today": 9351819,
     "sessions_by_day": [
+      {
+        "date": "2026-04-08",
+        "sessions": 2,
+        "tokens": 9351819
+      },
       {
         "date": "2026-04-07",
         "sessions": 6,
@@ -2349,6 +2354,18 @@
       "investigated": "Insider cluster timing drift: measured abnormal returns at three entry points (trans_date+1, filing_date+1, filing_date+2) across 626 CEO/CFO EDGAR clusters 2024-2025 to test whether our scanner enters after alpha is already captured.",
       "findings": "Found that our insider-buying signal loses most of its advantage to the time it takes insiders to file their paperwork. When we can trade within a day of the filing, the signal still works; any longer and it essentially disappears.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-08",
+      "investigated": "Filing-lag drift remediation: patched edgar_insider_scanner_v2 to bubble up filing_date and compute days_since_latest_filing per cluster; patched insider_cluster_evaluator to hard-block clusters with lag>1 business day. Built insider_cluster_canonical_benchmark.py to derive the real-time-tradeable expected return. Ran daily insider scan + week_april7_tracker day 3.",
+      "findings": "Patched the insider-trading scanner so it now refuses to act on tips that are already a day old, because the price advantage disappears overnight. Even the strongest cluster of the week was correctly skipped, and benchmark testing shows the daily scan is too slow to capture the real edge \u2014 building a faster scanner is the next step.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-08",
+      "investigated": "Daily insider scan; insider cluster position size cap; week tracker day 2; FDXF investor day check; REPL/GRCE activator validation",
+      "findings": "Today the fund tightened its rules for insider-buying trades: when the signal comes from a delayed scanner, the bet size is now half of normal until a faster scanner is built. The week's tariff trades on autos and steel are tracking exactly as predicted while broader sector rotations are doing nothing.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2427,6 +2444,6 @@
         "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": "\"CRITICAL FINDING 2026-04-07 evening: insider cluster alpha decays sharply with Form 4 filing lag. Backtests using trans_date entry overstate real-time returns by 2-3%. At filing_date+1 entry: mean 2.21% abn, 51% pos. At filing_date+2: +0.37% mean, 39.8% pos (below directional threshold). Signal usable only if lag<=1 day (n=284, +2.71% mean, 54.9% pos). Scanner must enforce lag<=1 day filter. Tool: tools/insider_cluster_timing_drift.py. Knowledge: insider_cluster_filing_lag_drift (CRITICAL_METHO"
+    "handoff": "\"SESSION 2026-04-08 evening: (1) Insider cluster size cap shipped \\u2014 trade_loop.py caps any insider_cluster/insider_buying signal at $2,500 until intraday scanner is built. ZBIO unaffected (already active). (2) Daily scan: 6 clusters all NO_GO (lag, micro-cap, IPO). (3) Week tracker day 2: STLD/TM/HMC tariff direct-target shorts ON TRACK (-2.93%/-3.47%/-3.98% abnormal). Tariff panel weak overall (2/10 hits). SPY VIX-recovery long +3.04%. (4) FDXF investor day held today \\u2014 search not yet"
   }
 }
