@@ -709,10 +709,14 @@
       {
         "name": "first_ig_credit_upgrade",
         "reason": "3 consecutive OOS misses (UBER, VST Dec 2025, VST March 2026). Backtest p=0.021 did not replicate. Signal retired per 3-failure rule."
+      },
+      {
+        "name": "insider_cluster_t_plus_1_entry",
+        "reason": "EDGAR Form 4 cluster scanner running daily after-close, entering positions at next-open (filing_date+1), produces 42.5% positive rate over n=221 (2024-2025 OOS, CEO/CFO present, n[3,5], filing_lag<=1bd). Below 50% directional threshold; +1.26% mean 5d abnormal not tradeable net of costs. Lesson: alpha decays sharply between trans_date and t+1 filing. Daily after-close cadence cannot capture it. Only same-day intraday entry on filing day is viable."
       }
     ],
     "signal_count": 25,
-    "dead_end_count": 139,
+    "dead_end_count": 140,
     "literature_count": 25
   },
   "live_signals": [
@@ -773,13 +777,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 9351819,
+    "sessions_today": 5,
+    "tokens_today": 19435842,
     "sessions_by_day": [
       {
         "date": "2026-04-08",
-        "sessions": 2,
-        "tokens": 9351819
+        "sessions": 5,
+        "tokens": 19435842
       },
       {
         "date": "2026-04-07",
@@ -2366,6 +2370,24 @@
       "investigated": "Daily insider scan; insider cluster position size cap; week tracker day 2; FDXF investor day check; REPL/GRCE activator validation",
       "findings": "Today the fund tightened its rules for insider-buying trades: when the signal comes from a delayed scanner, the bet size is now half of normal until a faster scanner is built. The week's tariff trades on autos and steel are tracking exactly as predicted while broader sector rotations are doing nothing.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-08",
+      "investigated": "Daily insider scan, weekly tracker day-5 (STLD/TM/HMC, tariff panel), REPL activator dry-run, tariff panel ablation refinement, FDXF investor day check",
+      "findings": "Direct-target shorts on Toyota, Honda, and Steel Dynamics continued working five days into the new tariff regime, while every spillover trade copied from last year (utilities, consumer staples, regional banks, gold) failed to deliver. The lesson: trade only the companies the policy actually targets.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-07",
+      "investigated": "REPL Apr 10 PDUFA readiness, GRCE Apr 23 PDUFA pre-condition check, ZBIO position day-1 health, daily insider scan, P0 queue cleanup",
+      "findings": "I confirmed our REPL trade plan is ready for the FDA decision Friday and noticed something striking: another biotech we are watching, GRCE, suddenly dropped 35% on huge volume two weeks before its own FDA decision, with the broader market flat. That kind of unexplained pre-event move is what academic studies call possible informed trading.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-08",
+      "investigated": "Decision on insider cluster t+1 entry signal: retire or keep with smaller position cap. Per pending decision in research queue and the canonical real-time benchmark established 2026-04-08.",
+      "findings": "Retired the insider cluster trading signal at the daily-scan cadence: by the time the scanner sees the filing the next morning, the directional edge has collapsed below break-even. Only same-day intraday entries on the filing day itself remain potentially tradeable, which would require building a faster scanner.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2444,6 +2466,6 @@
         "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": "\"SESSION 2026-04-08 evening: (1) Insider cluster size cap shipped \\u2014 trade_loop.py caps any insider_cluster/insider_buying signal at $2,500 until intraday scanner is built. ZBIO unaffected (already active). (2) Daily scan: 6 clusters all NO_GO (lag, micro-cap, IPO). (3) Week tracker day 2: STLD/TM/HMC tariff direct-target shorts ON TRACK (-2.93%/-3.47%/-3.98% abnormal). Tariff panel weak overall (2/10 hits). SPY VIX-recovery long +3.04%. (4) FDXF investor day held today \\u2014 search not yet"
+    "handoff": "\"SESSION 2026-04-08 (early AM ET):\\n(1) RETIREMENT decision: insider cluster t+1 entry signal is OPERATIONALLY RETIRED. Canonical real-time benchmark (n=221, CEO/CFO + n[3,5] + lag<=1bd, 2024-2025 OOS) reports 42.5% pos rate / +1.26% mean 5d abnormal at scanner_t_plus_1 cadence \\u2014 fails 50% directional threshold and is marginal vs round-trip costs.\\n(2) tools/insider_cluster_evaluator.py PATCHED: days_since_latest_filing == 1 is now a HARD BLOCKER (was warning). Only filing_lag=0 (same-day i"
   }
 }
