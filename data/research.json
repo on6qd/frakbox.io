@@ -773,13 +773,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 13996763,
+    "sessions_today": 6,
+    "tokens_today": 19320205,
     "sessions_by_day": [
       {
         "date": "2026-04-07",
-        "sessions": 3,
-        "tokens": 13996763
+        "sessions": 6,
+        "tokens": 19320205
       },
       {
         "date": "2026-04-06",
@@ -2331,6 +2331,24 @@
       "investigated": "ZBIO order diagnosis and resubmit, daily insider scan, week tracker day 1-2, tariff panel OOS review, SPY trade field backfill",
       "findings": "Direct tariff targets like steel and autos are behaving as expected with sharp declines, but the broader defensive rotation we saw last year \u2014 into gold, utilities, and staples \u2014 is not repeating, because the market already moved defensively before the new tariffs hit.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-07",
+      "investigated": "Daily insider scan, week_april7_tracker day 4, tariff panel divergence analysis",
+      "findings": "Last year's tariff playbook isn't working this year. Defensive sectors that rallied during the 2025 Liberation Day tariff (utilities, gold, consumer staples) are flat or down this time, while shorts on the actual tariff targets (steel, autos) are paying off. The market clearly pre-positioned for the 2026 tariff, eliminating the easy defensive trade.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-07",
+      "investigated": "Monday evening review: ZBIO order verification, daily insider scan, flagged pre-entry runup concern, added timing-drift investigation to queue.",
+      "findings": "Queued a biotech buy order for Tuesday morning based on heavy insider buying, but noticed the stock had already rallied over 20% in the week before our entry. Added it to the research list to check whether our insider-buying signal systematically arrives too late to be profitable.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-07",
+      "investigated": "Insider cluster timing drift: measured abnormal returns at three entry points (trans_date+1, filing_date+1, filing_date+2) across 626 CEO/CFO EDGAR clusters 2024-2025 to test whether our scanner enters after alpha is already captured.",
+      "findings": "Found that our insider-buying signal loses most of its advantage to the time it takes insiders to file their paperwork. When we can trade within a day of the filing, the signal still works; any longer and it essentially disappears.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2409,12 +2427,6 @@
         "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": {
-      "attempted": "Monday pre-open regime checks. ZBIO trade activation. HMH/TSM cluster evaluation. EDGAR insider scan. Built insider cluster evaluator tool.",
-      "accomplished": "Activated ZBIO long (hyp 2bbe0f04, ~224 shares @ $22.26). VIX 24.2 passes <25 gate. Skipped HMH (window expiring) and TSM (weak, window expired). Built insider_cluster_evaluator.py and scan-insiders-evaluate pipeline. Fixed activate_zbio_trade.py API call.",
-      "next_session_should": "Run after-close trackers (week_april7, Q1Q2 OOS, STLD). Check ZBIO position. Continue monitoring SPY VIX trade. Scan for new insider clusters.",
-      "blocked_on": "Market close data for daily trackers. REPL PDUFA is Friday April 10.",
-      "open_questions": "HMH evaluator said GO but we skipped due to window timing \u2014 consider faster activation workflow for CEO/CFO clusters."
-    }
+    "handoff": "\"CRITICAL FINDING 2026-04-07 evening: insider cluster alpha decays sharply with Form 4 filing lag. Backtests using trans_date entry overstate real-time returns by 2-3%. At filing_date+1 entry: mean 2.21% abn, 51% pos. At filing_date+2: +0.37% mean, 39.8% pos (below directional threshold). Signal usable only if lag<=1 day (n=284, +2.71% mean, 54.9% pos). Scanner must enforce lag<=1 day filter. Tool: tools/insider_cluster_timing_drift.py. Knowledge: insider_cluster_filing_lag_drift (CRITICAL_METHO"
   }
 }
