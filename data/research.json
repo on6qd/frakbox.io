@@ -151,6 +151,11 @@
         "name": "tariff_panel_april2_oos_day5_update",
         "status": "oos_in_progress_day5",
         "magnitude_pct": 0.0
+      },
+      {
+        "name": "volatility_adjusted_position_sizing_rule",
+        "status": "moderate",
+        "magnitude_pct": 0.0
       }
     ],
     "dead_ends": [
@@ -715,7 +720,7 @@
         "reason": "EDGAR Form 4 cluster scanner running daily after-close, entering positions at next-open (filing_date+1), produces 42.5% positive rate over n=221 (2024-2025 OOS, CEO/CFO present, n[3,5], filing_lag<=1bd). Below 50% directional threshold; +1.26% mean 5d abnormal not tradeable net of costs. Lesson: alpha decays sharply between trans_date and t+1 filing. Daily after-close cadence cannot capture it. Only same-day intraday entry on filing day is viable."
       }
     ],
-    "signal_count": 25,
+    "signal_count": 26,
     "dead_end_count": 140,
     "literature_count": 25
   },
@@ -777,13 +782,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 7843705,
+    "sessions_today": 5,
+    "tokens_today": 27384435,
     "sessions_by_day": [
       {
         "date": "2026-04-09",
-        "sessions": 2,
-        "tokens": 7843705
+        "sessions": 5,
+        "tokens": 27384435
       },
       {
         "date": "2026-04-08",
@@ -2411,6 +2416,24 @@
       "investigated": "ZBIO position health day-1, REPL/GRCE pre-event helper re-verification, tariff direct-target panel day-6 observation, P1 activator retrofit audit, daily insider scan.",
       "findings": "A biotech trade we opened Tuesday is already down much more than the broad market on day 1, so we are watching it closely. Our automated safety checks for two upcoming drug decisions are working correctly and will block entry because the news looks leaked. A tariff-short trade that looked like a win last week collapsed in a single strong market day, suggesting the edge was really just market beta.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-09",
+      "investigated": "Overnight session (Apr 9 00:45 ET): pre-register ZBIO day-2 and day-3 decision thresholds before market open, verify REPL/GRCE activators still abort correctly, quantify whether the 15% raw stop is appropriately sized for ZBIO's realized volatility.",
+      "findings": "Our small-biotech position (Zenas Biopharma) is down 7% on day one while the broader biotech sector rallied. We locked in clear rules in advance for whether to hold or exit at tomorrow's close, and recorded a lesson: stop-losses calibrated for big steady stocks fire on normal noise for small volatile ones.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-09",
+      "investigated": "Started the session planning to retrofit P1 earnings-event activators (pg/pgr/sbac/syk/khc/adbe/amt/dpz/otis) per journal #253's next_step so they'd pass event_date into the pre-event contamination helper. Also audited BSX/OTIS earnings-day activators and the full set of live/pending activators. Then pivoted to investigate the ZBIO volatility mismatch identified in journal #255 \u2014 8.8% daily_std stock held with a stop calibrated for ~2% daily_std large caps.",
+      "findings": "We had been using the same $5,000 position size and 15% stop-loss for every trade, but the biotech position we opened this week moves about four times more per day than a typical large stock, so that stop sits inside its normal daily noise. Built a tool that sizes each position to the stock's own volatility \u2014 big steady stocks stay at the normal size, small jumpy ones get smaller positions with wider stops. On this week's biotech trade the new rule would already have cut the day-one loss by about sixty percent and the worst-case stop loss by a third.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-09",
+      "investigated": "Intraday insider cluster poller build \u2014 the canonical benchmark established 2026-04-08 retired the t+1 entry cadence (42.5% pos rate, +1.26% mean) for insider clusters and flagged filing_day_intraday (58.8%, +3.28%) as the only path forward. This session built the infrastructure to actually capture that cadence.",
+      "findings": "Built a scanner that watches SEC filings throughout the trading day so we can react to insider buying clusters the moment they form, rather than waiting until the next day when the edge has already decayed.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2489,6 +2512,12 @@
         "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": "\"SESSION 2026-04-09 (late ET):\\n\\nSUMMARY\\n- ZBIO day-1 (Apr 7 entry -> Apr 8 close): raw -6.87%, SPY +2.55% rally, abnormal = -9.42%.\\n  Very close to the -10% abnormal by day-3 early-close threshold \\u2014 watch day-2 closely.\\n- REPL + GRCE pre-event contamination helper works correctly in pre-event mode.\\n  Both abort (REPL -31.8%, GRCE -30.4% below 30d peak).\\n- Tariff direct-target panel (STLD/TM/HMC) day-6 basket mean abnormal = -0.92% after\\n  a single +2.55% SPY day erased the day-5 edg"
+    "handoff": {
+      "attempted": "Audit and retrofit earnings-event activators per journal #253 next_step (pg/pgr/sbac/syk/khc/adbe/amt/dpz/otis) to pass event_date into the pre-event contamination helper.",
+      "accomplished": "Found that retrofit was moot \u2014 all 9 P1 activators are DEPRECATED and their hypotheses are abandoned. Also verified BSX (Apr 22) and OTIS (Apr 22) activators and hypotheses are likewise abandoned. Only pending hypotheses are REPL/GRCE, and both activators already have pre-event contamination checks coded (REPL's is PDUFA-date-aware from the Apr 9 fix, GRCE's uses the crash_pct=None pre-event path which also counts leak bars). PIVOTED to a higher-impact task: the ZBIO volatility mismatch identified in journal #255. Built tools/volatility_sizing.py that computes vol-adjusted position size + stop for any symbol. Validated on 7 symbols: large caps (MSFT/AAPL/NVDA/SPY) stay at $5K default; small-cap high-vol (ZBIO/REPL/GRCE) get reduced to $1.8-2.4K with wider stops that respect noise envelope. Recorded known_effect `volatility_adjusted_position_sizing_rule`. Retrospective on ZBIO: vol-sized would have cut day-1 unrealized loss from $345 to $129 and max stop loss from $753 to $501.",
+      "partial_results": "Vol-sizing rule is recorded as known_effect but NOT yet wired into any activator. Adoption is P2 \u2014 apply next time we wire a new activator. The existing ZBIO position stays at $5,017/15% stop; changing size mid-trade would leak the size change into the signal's realized return.",
+      "blocked_by": "Nothing. Rule is ready to use via `python3 tools/volatility_sizing.py SYMBOL --horizon N`.",
+      "key_insight": "The 15% raw stop and $5K notional are calibrated for ~2% daily_std. On ~6-9% daily_std stocks they are BOTH wrong in opposite directions \u2014 stop too tight (fires on 1.5\u03c3 noise), notional too large (3-5x the dollar variance). Vol-sizing fixes both simultaneously with a single risk_budget parameter ($500 per experiment)."
+    }
   }
 }
