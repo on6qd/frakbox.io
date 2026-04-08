@@ -777,9 +777,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 24171268,
+    "sessions_today": 2,
+    "tokens_today": 7843705,
     "sessions_by_day": [
+      {
+        "date": "2026-04-09",
+        "sessions": 2,
+        "tokens": 7843705
+      },
       {
         "date": "2026-04-08",
         "sessions": 6,
@@ -2394,6 +2399,18 @@
       "investigated": "Pre-event contamination audit of GRCE/REPL activators ahead of this week's PDUFA decisions (REPL Apr 10, GRCE Apr 23). Verified coded abort conditions match docstring abort conditions.",
       "findings": "We found and fixed a silent bug in our biotech trade automation: two upcoming FDA-decision trades had 'don't enter if the stock already dropped' rules written in comments but never actually coded. We replaced them with a real check that also caught a wider problem affecting GRCE, which was already -35% from its peak before the FDA even decided.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-09",
+      "investigated": "REPL/GRCE pre-event contamination check; weekly tracker day-6 STLD/TM/HMC tariff observation; daily insider cluster scan; ZBIO position health; SPY VIX-spike position health.",
+      "findings": "Caught a bug that was hiding contamination in our pre-event check \u2014 biotech REPL has quietly fallen 31% below its monthly peak ahead of tomorrow's FDA decision and we now correctly refuse to trade it. Also watched a one-day market rally erase three days of apparent gains in our tariff-driven shorts, a reminder that short-window signals can be wiped out by a single move.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-09",
+      "investigated": "ZBIO position health day-1, REPL/GRCE pre-event helper re-verification, tariff direct-target panel day-6 observation, P1 activator retrofit audit, daily insider scan.",
+      "findings": "A biotech trade we opened Tuesday is already down much more than the broad market on day 1, so we are watching it closely. Our automated safety checks for two upcoming drug decisions are working correctly and will block entry because the news looks leaked. A tariff-short trade that looked like a win last week collapsed in a single strong market day, suggesting the edge was really just market beta.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2472,6 +2489,6 @@
         "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": "\"SESSION 2026-04-08 (late ET):\\nCRITICAL FIX: Both GRCE and REPL activators had the \\\">20% 10d pre-decline abort rule\\\" only in docstring comments, not in code. GRCE is currently -35% below its 30d peak (leak in progress Apr 6-7 on 11x volume, 16 days pre-PDUFA). Without the fix, activator would have entered a contaminated short on Apr 23.\\n\\nReplaced with 30-day max-drawdown-from-peak check (more robust than rolling 10d window \\u2014 catches older leaks too). Verified: GRCE dry-run now ABORTS ("
+    "handoff": "\"SESSION 2026-04-09 (late ET):\\n\\nSUMMARY\\n- ZBIO day-1 (Apr 7 entry -> Apr 8 close): raw -6.87%, SPY +2.55% rally, abnormal = -9.42%.\\n  Very close to the -10% abnormal by day-3 early-close threshold \\u2014 watch day-2 closely.\\n- REPL + GRCE pre-event contamination helper works correctly in pre-event mode.\\n  Both abort (REPL -31.8%, GRCE -30.4% below 30d peak).\\n- Tariff direct-target panel (STLD/TM/HMC) day-6 basket mean abnormal = -0.92% after\\n  a single +2.55% SPY day erased the day-5 edg"
   }
 }
