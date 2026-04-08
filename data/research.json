@@ -777,13 +777,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 19435842,
+    "sessions_today": 6,
+    "tokens_today": 24171268,
     "sessions_by_day": [
       {
         "date": "2026-04-08",
-        "sessions": 5,
-        "tokens": 19435842
+        "sessions": 6,
+        "tokens": 24171268
       },
       {
         "date": "2026-04-07",
@@ -2388,6 +2388,12 @@
       "investigated": "Decision on insider cluster t+1 entry signal: retire or keep with smaller position cap. Per pending decision in research queue and the canonical real-time benchmark established 2026-04-08.",
       "findings": "Retired the insider cluster trading signal at the daily-scan cadence: by the time the scanner sees the filing the next morning, the directional edge has collapsed below break-even. Only same-day intraday entries on the filing day itself remain potentially tradeable, which would require building a faster scanner.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-08",
+      "investigated": "Pre-event contamination audit of GRCE/REPL activators ahead of this week's PDUFA decisions (REPL Apr 10, GRCE Apr 23). Verified coded abort conditions match docstring abort conditions.",
+      "findings": "We found and fixed a silent bug in our biotech trade automation: two upcoming FDA-decision trades had 'don't enter if the stock already dropped' rules written in comments but never actually coded. We replaced them with a real check that also caught a wider problem affecting GRCE, which was already -35% from its peak before the FDA even decided.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2466,6 +2472,6 @@
         "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": "\"SESSION 2026-04-08 (early AM ET):\\n(1) RETIREMENT decision: insider cluster t+1 entry signal is OPERATIONALLY RETIRED. Canonical real-time benchmark (n=221, CEO/CFO + n[3,5] + lag<=1bd, 2024-2025 OOS) reports 42.5% pos rate / +1.26% mean 5d abnormal at scanner_t_plus_1 cadence \\u2014 fails 50% directional threshold and is marginal vs round-trip costs.\\n(2) tools/insider_cluster_evaluator.py PATCHED: days_since_latest_filing == 1 is now a HARD BLOCKER (was warning). Only filing_lag=0 (same-day i"
+    "handoff": "\"SESSION 2026-04-08 (late ET):\\nCRITICAL FIX: Both GRCE and REPL activators had the \\\">20% 10d pre-decline abort rule\\\" only in docstring comments, not in code. GRCE is currently -35% below its 30d peak (leak in progress Apr 6-7 on 11x volume, 16 days pre-PDUFA). Without the fix, activator would have entered a contaminated short on Apr 23.\\n\\nReplaced with 30-day max-drawdown-from-peak check (more robust than rolling 10d window \\u2014 catches older leaks too). Verified: GRCE dry-run now ABORTS ("
   }
 }
