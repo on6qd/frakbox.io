@@ -718,10 +718,62 @@
       {
         "name": "insider_cluster_t_plus_1_entry",
         "reason": "EDGAR Form 4 cluster scanner running daily after-close, entering positions at next-open (filing_date+1), produces 42.5% positive rate over n=221 (2024-2025 OOS, CEO/CFO present, n[3,5], filing_lag<=1bd). Below 50% directional threshold; +1.26% mean 5d abnormal not tradeable net of costs. Lesson: alpha decays sharply between trans_date and t+1 filing. Daily after-close cadence cannot capture it. Only same-day intraday entry on filing day is viable."
+      },
+      {
+        "name": "oil_spike_airline_short_event",
+        "reason": "Oil->airline exposure is statistically real (OOS beta -0.16 to -0.23, all 4 airlines p<0.001 post-2024) but NOT tradeable as discrete events. Threshold: oil >3% daily moves produce airline basket abnormal returns of 0.13% (p=0.70). Direction 52-56%. No lead-lag. Structural break: zero exposure 2020-2023 (fuel hedges), emerged 2024+. Tested: regression, Granger, threshold event study (288 oil events)."
+      },
+      {
+        "name": "rates_defensive_sector_exposure_event",
+        "reason": "Treasury rates (10Y DGS10) -> defensive sectors (XLU/XLP/XLRE) exposure is real OOS (beta -0.15 to -0.30, all significant post-2024) but like oil->airlines, NOT event-tradeable. IS shows zero sensitivity (2020-2023). Structural break pattern. Tested 2026-04-09."
+      },
+      {
+        "name": "equity_pairs_cointegration",
+        "reason": "Tested 5 classic equity pairs cointegration: V/MA (p=0.033 IS, 0.505 OOS), KO/PEP (p=0.074 IS), XOM/CVX (p=0.269), TLT/XLU (p=0.421), HD/LOW (p=0.242). 0 of 5 pass OOS stationarity. Current macro regime (tariff era 2024+) has disrupted traditional pair relationships. Not viable for pairs trading in our framework."
+      },
+      {
+        "name": "tariff_aep_utility_long_2026_oos",
+        "reason": "AEP long: -1.55% abn at day-7 (expected +3.79%). Cross-sector tariff spillover DOES NOT replicate in 2026."
+      },
+      {
+        "name": "tariff_ko_defensive_long_2026_oos",
+        "reason": "KO long: -2.33% abn at day-7 (expected +4.4%). FAIL."
+      },
+      {
+        "name": "tariff_xlu_utility_long_2026_oos",
+        "reason": "XLU long: -2.13% abn at day-7 (expected +3.4%). FAIL."
+      },
+      {
+        "name": "tariff_gld_gold_long_2026_oos",
+        "reason": "GLD long: -1.88% abn at day-7 (expected +3.87%). FAIL."
+      },
+      {
+        "name": "tariff_gdx_gold_miners_long_2026_oos",
+        "reason": "GDX long: +0.72% at day-7 (expected +5.5%). Effectively FAIL."
+      },
+      {
+        "name": "tariff_semiconductor_basket_short_2026_oos",
+        "reason": "AMD/QCOM basket: QCOM wrong direction, basket -0.49% (expected -2.03%). FAIL."
+      },
+      {
+        "name": "tariff_direct_target_short_2026_oos",
+        "reason": "STLD/TM/HMC: Worked day-5 but reversed day-6 on SPY rally. Not robust 5-10d horizon."
+      },
+      {
+        "name": "fomc_pre_announcement_drift",
+        "reason": "FOMC decision day drift: Discovery (2010-2019 N=80) day-0 abnormal +0.067% p=0.55, 2-day +0.018% p=0.89. OOS (2020-2024 N=39) day-0 +0.167% p=0.47. Holdout (2025-2026 N=10) NEGATIVE -0.047%. Lucca & Moench (2015) effect is fully arbed away or sample-specific. Not tradeable. Direction ~50% in all periods."
+      },
+      {
+        "name": "day_of_week_spy_calendar",
+        "reason": "Day-of-week effect for SPY: Kruskal-Wallis H=1.28, p=0.864, N=5282. Mon=0.034%, Tue=0.078%, Wed=0.068%, Thu=0.021%. No significant day-of-week anomaly. Fully arbed."
+      },
+      {
+        "name": "vix30_sector_rotation_xlk_outperformance",
+        "reason": "XLK does NOT reliably outperform SPY after VIX>30. OOS (2022-2026 N=7): median excess -0.20%, direction 43%, p=0.50. In-sample illusion from COVID-era tech dominance."
       }
     ],
     "signal_count": 26,
-    "dead_end_count": 140,
+    "dead_end_count": 153,
     "literature_count": 25
   },
   "live_signals": [
@@ -782,13 +834,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 31234505,
+    "sessions_today": 8,
+    "tokens_today": 46359253,
     "sessions_by_day": [
       {
         "date": "2026-04-09",
-        "sessions": 6,
-        "tokens": 31234505
+        "sessions": 8,
+        "tokens": 46359253
       },
       {
         "date": "2026-04-08",
@@ -2440,6 +2492,18 @@
       "investigated": "Overnight session (Apr 9 ~01:45 ET): historical OOS replay of tools/intraday_insider_poller.py against the canonical 2024-2025 benchmark (n=221 CEO/CFO + filing_lag<=1 + n_insiders[3,5] clusters). Question: of the canonical-positive clusters, what fraction would the new intraday poller infrastructure have actually been able to catch at a tradeable trigger time, and does the catchable subset retain the headline +3.28%/58.8% alpha?",
       "findings": "Tested whether our brand-new infrastructure for catching insider buying clusters in real time would have actually worked on two years of past data. Surprising answer: it can detect 95% of clusters but only 25% of them are filed during market hours when we can trade them \u2014 the rest are filed after the closing bell, by which point most of the price reaction is gone. We'd been overestimating our edge by averaging across both groups. The infrastructure is sound; we now flag each detected cluster as STRONG or WEAK so we only act on the ones we can realistically profit from.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-09",
+      "investigated": "Non-event hypothesis exploration: oil\u2192airlines factor exposure (AAL/DAL/UAL/LUV vs CL=F), rates\u2192defensives (XLU/XLP/XLRE vs 10Y yield), 5 cointegration pairs (V/MA, KO/PEP, XOM/CVX, TLT/XLU, HD/LOW). Also: FDXF investor day follow-up, GRCE contamination check, queue housekeeping.",
+      "findings": "Tested whether oil price spikes could predict airline stock moves \u2014 the relationship is real (airlines became more oil-sensitive after fuel hedges expired in 2024) but too noisy to trade on individual days. Also tested five classic stock pairs for mean-reversion trading \u2014 none held up in the current volatile market regime. Filed both as dead ends.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-09",
+      "investigated": "Tariff panel day-7 formal retirement, non-event hypothesis exploration (FOMC drift, day-of-week, VIX>30 sector rotation, credit spread threshold), STLD OOS 5d final, REPL abort verification, ZBIO day-2 health check",
+      "findings": "Formally retired the entire tariff trading signal panel after tracking it for a full week \u2014 none of the 10 positions worked. Also tested the famous FOMC meeting drift, day-of-week patterns, sector rotation after VIX spikes, and credit spread signals \u2014 all turned out to be dead ends. Our live VIX recovery trade on SPY is up +5.7%, while our insider-cluster trade on ZBIO is down and being watched closely.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2508,31 +2572,22 @@
         "category": "new_signal"
       },
       {
-        "question": "Test short-sale restriction lift (SSR reset) as a SHORT signal. When SEC applies SSR to a stock (down >10% in a day), short sellers cannot short on do",
-        "priority": 3,
-        "category": "signal_discovery"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
+      },
+      {
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       }
     ],
     "handoff": {
-      "session": "2026-04-09 overnight",
-      "summary": "Ran intraday_insider_poller historical OOS replay across n=221 canonical 2024-25 clusters (CEO/CFO + lag<=1 + n[3,5]). Result: 95.5% catch rate but only 25% (n=55) are intraday/pre_open quality (+2.08%/62%). 70% file after-close (n=156) and decay to t+1 alpha (+0.67%/39.7% \u2014 fails). Refines canonical benchmark; poller now tags STRONG vs WEAK trigger tiers.",
-      "key_finding": "After-close insider filings (70% of CEO/CFO clusters) cannot capture the canonical +3.28% alpha \u2014 they're functionally identical to the retired t+1 cadence. The real exploitable subset is the ~25% that file during market hours or pre-open, n~27/year.",
-      "open_positions": "ZBIO (insider cluster, day-1 -6.87%, day-2 health check tomorrow), SPY VIX-spike recovery (+5.5%)",
-      "pending_hypotheses": "REPL/GRCE PDUFA shorts (both pre-event contaminated, expected to abort)",
-      "files_changed": [
-        "tools/intraday_poller_historical_replay.py (new)",
-        "tools/intraday_insider_poller.py (added trigger_quality_tier output field)",
-        "data/cache/intraday_poller_historical_replay.json (replay output)",
-        "data/cache/intraday_poller_historical_replay.csv (per-cluster detail)",
-        "data/cache/sec_company_tickers.json (cached)",
-        "data/cache/intraday_replay_submissions_cache.json (cached)"
-      ],
-      "knowledge_recorded": "insider_cluster_intraday_replay_2026_04_09"
+      "attempted": "Tariff panel day-7 formal retirement, non-event hypothesis exploration (4 tests), STLD OOS final, REPL abort verification",
+      "accomplished": "Tariff panel formally retired (7 dead ends). STLD OOS 5d MISS confirmed (hit day-3 then reversed). FOMC drift, day-of-week, VIX sector rotation all dead ends. Credit spread >6% interesting but underpowered (N=10). REPL activator verified to correctly abort. Orphaned pre-reg cleaned.",
+      "partial_results": "Credit spread HY OAS >6% shows +2.82% SPY 20d (p=0.016 N=10) but underpowered and redundant with VIX>30.",
+      "blocked_by": "Non-event hypothesis space largely exhausted for simple tests. Calendar anomalies (FOMC, DOW, TOM) all dead. Factor models dead in current regime. Threshold signals either redundant with VIX>30 or underpowered.",
+      "key_insight": "The tariff signal family is completely dead in 2026 \u2014 even direct-target shorts that hit at day-3 reverse by day-5 on SPY rallies. Our validated edge is narrow: insider clusters + VIX>30 recovery. Accept this and focus on execution quality."
     }
   }
 }
