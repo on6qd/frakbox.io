@@ -145,11 +145,11 @@ h1 { font-size: 26px; letter-spacing: 5px; color: var(--accent); font-weight: 70
 .stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
 .stat-value { font-size: 20px; font-weight: 600; }
 
-/* Now grid */
+/* Now grid — stacked, not side by side */
 .now-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* Today's research */
