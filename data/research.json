@@ -1,7 +1,7 @@
 {
   "summary": {
     "total_hypotheses": 53,
-    "pending": 3,
+    "pending": 0,
     "active": 2,
     "completed": 5,
     "invalidated": 6,
@@ -869,18 +869,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 4,
+    "active_signal_types": 2,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 8530700,
+    "sessions_today": 3,
+    "tokens_today": 24081787,
     "sessions_by_day": [
       {
         "date": "2026-04-10",
-        "sessions": 1,
-        "tokens": 8530700
+        "sessions": 3,
+        "tokens": 24081787
       },
       {
         "date": "2026-04-09",
@@ -2573,6 +2573,12 @@
       "investigated": "P0 position checks (ZBIO day-3, REPL PDUFA, GRCE contamination), IPO lockup expiration backtest (22 IPOs), SEO bought-deal backtest review, ZBIO trade dict fix for auto-close Monday",
       "findings": "Tested whether stocks drop when IPO lockup periods expire (a well-known academic effect from the 2000s). Found the effect has completely reversed \u2014 stocks now actually rise after lockup expiry. Recorded as a dead end. Managed existing positions: insider buying trade held steady, FDA decision pending.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-10",
+      "investigated": "Abandoned 3 contaminated hypotheses (REPL x2, GRCE). Short seller report post-drift backtest (N=40 events across 5 firms). Insider poller scan.",
+      "findings": "Tested whether stocks drop further after activist short sellers publish critical reports. Found the signal depends entirely on who publishes: fraud-focused firms like Hindenburg see a -6.7% continued decline, while accounting-focused firms like Spruce Point see no effect at all. Also cleared out three pending trade ideas that became contaminated by pre-event price crashes.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2651,12 +2657,6 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": {
-      "attempted": "P0 position checks (ZBIO, auto tariff OOS, REPL dry-run), insider poller, LW cluster evaluation, IPO lockup lit review",
-      "accomplished": "All P0 items done. Timezone bug fixed. LW NO_GO recorded. IPO lockup added to queue. Weekly tracker updated.",
-      "partial_results": "IPO lockup needs S-1 parser build (next session). GRCE borderline contamination may clear by Apr 23.",
-      "blocked_by": "Pipeline thin \u2014 3 pending hypotheses all contaminated. No new insider clusters qualifying.",
-      "key_insight": "Timezone bug in poller was causing after-close filings to be classified as stale. Now fixed. IPO lockup expiration is a promising new signal class to diversify the pipeline."
-    }
+    "handoff": "\"Session 2026-04-10c: Abandoned all 3 pending hypotheses (REPL x2, GRCE) due to pre-event contamination. Pipeline now EMPTY. Discovered short seller report post-drift signal: fraud-focused sellers (Hindenburg, MW) show -6.6% avg 5d drift with 70-86% direction, but accounting-focused sellers (Spruce Point) show zero signal. Signal underpowered (N=7-13 per source) and hard to monitor (Hindenburg shut down Jan 2025). Insider poller: 0 GO clusters. REPL FDA decision pending.\""
   }
 }
