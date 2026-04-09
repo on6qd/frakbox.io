@@ -728,6 +728,8 @@
     "active": 2,
     "pending": 3,
     "completed": 5,
-    "invalidated": 6
+    "abandoned": 35,
+    "invalidated": 6,
+    "superseded": 2
   }
 }
