@@ -770,10 +770,50 @@
       {
         "name": "vix30_sector_rotation_xlk_outperformance",
         "reason": "XLK does NOT reliably outperform SPY after VIX>30. OOS (2022-2026 N=7): median excess -0.20%, direction 43%, p=0.50. In-sample illusion from COVID-era tech dominance."
+      },
+      {
+        "name": "copper_industrials_lead_lag",
+        "reason": "Granger causality at lag 7 IS (F=2.85, p=0.006) but OOS fails (p=0.146). Lag 7 suspiciously long."
+      },
+      {
+        "name": "gld_gdx_cointegration",
+        "reason": "Engle-Granger p=0.657. Half-life 71.3d. OOS spread ADF p=0.925. Not cointegrated."
+      },
+      {
+        "name": "xom_cvx_cointegration",
+        "reason": "Engle-Granger p=0.269. Half-life 73.1d. OOS spread ADF p=0.188. Not cointegrated."
+      },
+      {
+        "name": "ko_pep_cointegration",
+        "reason": "Engle-Granger p=0.074. OOS spread ADF p=0.643. Borderline IS, fails OOS."
+      },
+      {
+        "name": "turn_of_month_spy_calendar",
+        "reason": "TOM vs non-TOM: diff 0.01pct/day, p=0.80. Annual direction wildly inconsistent."
+      },
+      {
+        "name": "monthly_seasonality_spy",
+        "reason": "Kruskal-Wallis p=0.721. January effect dead in modern data."
+      },
+      {
+        "name": "dxy_spike_eem_short_event",
+        "reason": "DXY spikes >0.5pct (n=189): all horizons p>0.40. Exposure does not concentrate into spike events."
+      },
+      {
+        "name": "dxy_106_threshold_eem",
+        "reason": "DXY>106 threshold: EEM goes UP (+1.03pct), wrong direction, p=0.22, n=15."
+      },
+      {
+        "name": "vix_term_structure_inversion_spy_long",
+        "reason": "VIX/VIX3M crossing above 1.0 (backwardation): Strong pre-2018 signal (n=38, 20d=+3.24%, p=0.0001, direction=84%). Post-2018: DEAD (n=38, 20d=-0.23%, p=0.82, direction=53%). Signal was arbitraged away. Low-VIX (<30) inversions also fail OOS. With 30d dedup: OOS n=16, 20d=+0.57%, p=0.48. Not tradeable in modern era."
+      },
+      {
+        "name": "spy_5d_drawdown_mean_reversion",
+        "reason": "SPY 5d drawdown < -3pct: Full sample (n=84, 30d dedup) shows +1.65pct 20d (p=0.019). OOS (2020+) underpowered: n=27, +1.98pct, p=0.228. Larger drawdowns (-5pct, -7pct) have NO signal \u2014 moderate corrections bounce but severe ones continue. VIX>30 is strictly superior (validated OOS p=0.027, +2.92pct 20d). Likely captures the same fear/mean-reversion as VIX>30 but noisier."
       }
     ],
     "signal_count": 26,
-    "dead_end_count": 153,
+    "dead_end_count": 163,
     "literature_count": 25
   },
   "live_signals": [
@@ -834,13 +874,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 46359253,
+    "sessions_today": 10,
+    "tokens_today": 61798922,
     "sessions_by_day": [
       {
         "date": "2026-04-09",
-        "sessions": 8,
-        "tokens": 46359253
+        "sessions": 10,
+        "tokens": 61798922
       },
       {
         "date": "2026-04-08",
@@ -2504,6 +2544,18 @@
       "investigated": "Tariff panel day-7 formal retirement, non-event hypothesis exploration (FOMC drift, day-of-week, VIX>30 sector rotation, credit spread threshold), STLD OOS 5d final, REPL abort verification, ZBIO day-2 health check",
       "findings": "Formally retired the entire tariff trading signal panel after tracking it for a full week \u2014 none of the 10 positions worked. Also tested the famous FOMC meeting drift, day-of-week patterns, sector rotation after VIX spikes, and credit spread signals \u2014 all turned out to be dead ends. Our live VIX recovery trade on SPY is up +5.7%, while our insider-cluster trade on ZBIO is down and being watched closely.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-09",
+      "investigated": "Comprehensive non-event hypothesis exploration: 12 tests across 6 classes (exposure, lead_lag, cointegration, calendar, threshold, structural_break). Tested copper\u2192industrials, treasury\u2192REITs, dollar\u2192EM, GLD/GDX, XOM/CVX, KO/PEP, monthly seasonality, turn-of-month, VIX term structure inversion, SPY drawdown mean-reversion. Also checked ZBIO day-2, TM/HMC auto tariff OOS, ran insider poller.",
+      "findings": "Tested 12 different non-event market hypotheses across 6 categories (factor exposure, lead-lag, pairs trading, calendar effects, volatility signals, and price drawdowns). Found zero new tradeable signals. The key insight: real statistical relationships between assets (like the dollar hurting emerging markets) exist but cannot be exploited through one-shot trades \u2014 the effect is spread too thinly across all days. A historical volatility signal that worked before 2018 has been completely eliminated by other traders recognizing it. Classic pairs trades (Coke/Pepsi, gold/gold miners) do not actually work.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-09",
+      "investigated": "PDUFA pipeline expansion scan (H2 2026), insider cluster poller run, ZBIO/SPY trade health check, MIDCO spinoff monitoring update, auto tariff OOS tracking",
+      "findings": "Scanned the entire FDA approval calendar through December 2026 looking for opportunities to use our validated biotech short signal. Only one small company qualifies \u2014 the signal works but fires rarely by design. Our two active trades (an insider-buying play and a volatility-recovery trade) are performing within expectations.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2544,7 +2596,7 @@
         "symbol": "SPY"
       },
       {
-        "event": "Middleby (MIDD) Food Processing spinoff expected Q2 2026. Revenue $850M, est market cap $2-3B. Parent MIDD is $5B, so sp",
+        "event": "Middleby (MIDD) Food Processing spinoff Investor Day May 12, 2026. Form 10 NOT yet filed (as of April 9). Separation exp",
         "date": "2026-05-01",
         "symbol": "MIDD"
       },
@@ -2582,12 +2634,6 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": {
-      "attempted": "Tariff panel day-7 formal retirement, non-event hypothesis exploration (4 tests), STLD OOS final, REPL abort verification",
-      "accomplished": "Tariff panel formally retired (7 dead ends). STLD OOS 5d MISS confirmed (hit day-3 then reversed). FOMC drift, day-of-week, VIX sector rotation all dead ends. Credit spread >6% interesting but underpowered (N=10). REPL activator verified to correctly abort. Orphaned pre-reg cleaned.",
-      "partial_results": "Credit spread HY OAS >6% shows +2.82% SPY 20d (p=0.016 N=10) but underpowered and redundant with VIX>30.",
-      "blocked_by": "Non-event hypothesis space largely exhausted for simple tests. Calendar anomalies (FOMC, DOW, TOM) all dead. Factor models dead in current regime. Threshold signals either redundant with VIX>30 or underpowered.",
-      "key_insight": "The tariff signal family is completely dead in 2026 \u2014 even direct-target shorts that hit at day-3 reverse by day-5 on SPY rallies. Our validated edge is narrow: insider clusters + VIX>30 recovery. Accept this and focus on execution quality."
-    }
+    "handoff": "\"ZBIO is at day-2 with -6.87% raw, -9.82% abn (SPY). Very close to -10% gate. Must check post-close today. REPL PDUFA Apr 10 is contaminated (-31.8% from peak), activator will abort. SPY VIX trade healthy at +5.4%, day 5 of 20, deadline Apr 27. Auto tariff OOS day-5 final reading Friday. PDUFA pipeline scan: only CING (May 31) qualifies for clinical_efficacy_failure_short in all H2 2026. Added INO (Oct 30, monitor only) and SVRA (Aug 22, monitor only) to watchlist. MIDCO spinoff Investor Day May"
   }
 }
