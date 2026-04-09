@@ -782,13 +782,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 27384435,
+    "sessions_today": 6,
+    "tokens_today": 31234505,
     "sessions_by_day": [
       {
         "date": "2026-04-09",
-        "sessions": 5,
-        "tokens": 27384435
+        "sessions": 6,
+        "tokens": 31234505
       },
       {
         "date": "2026-04-08",
@@ -2434,6 +2434,12 @@
       "investigated": "Intraday insider cluster poller build \u2014 the canonical benchmark established 2026-04-08 retired the t+1 entry cadence (42.5% pos rate, +1.26% mean) for insider clusters and flagged filing_day_intraday (58.8%, +3.28%) as the only path forward. This session built the infrastructure to actually capture that cadence.",
       "findings": "Built a scanner that watches SEC filings throughout the trading day so we can react to insider buying clusters the moment they form, rather than waiting until the next day when the edge has already decayed.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-09",
+      "investigated": "Overnight session (Apr 9 ~01:45 ET): historical OOS replay of tools/intraday_insider_poller.py against the canonical 2024-2025 benchmark (n=221 CEO/CFO + filing_lag<=1 + n_insiders[3,5] clusters). Question: of the canonical-positive clusters, what fraction would the new intraday poller infrastructure have actually been able to catch at a tradeable trigger time, and does the catchable subset retain the headline +3.28%/58.8% alpha?",
+      "findings": "Tested whether our brand-new infrastructure for catching insider buying clusters in real time would have actually worked on two years of past data. Surprising answer: it can detect 95% of clusters but only 25% of them are filed during market hours when we can trade them \u2014 the rest are filed after the closing bell, by which point most of the price reaction is gone. We'd been overestimating our edge by averaging across both groups. The infrastructure is sound; we now flag each detected cluster as STRONG or WEAK so we only act on the ones we can realistically profit from.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2513,11 +2519,20 @@
       }
     ],
     "handoff": {
-      "attempted": "Audit and retrofit earnings-event activators per journal #253 next_step (pg/pgr/sbac/syk/khc/adbe/amt/dpz/otis) to pass event_date into the pre-event contamination helper.",
-      "accomplished": "Found that retrofit was moot \u2014 all 9 P1 activators are DEPRECATED and their hypotheses are abandoned. Also verified BSX (Apr 22) and OTIS (Apr 22) activators and hypotheses are likewise abandoned. Only pending hypotheses are REPL/GRCE, and both activators already have pre-event contamination checks coded (REPL's is PDUFA-date-aware from the Apr 9 fix, GRCE's uses the crash_pct=None pre-event path which also counts leak bars). PIVOTED to a higher-impact task: the ZBIO volatility mismatch identified in journal #255. Built tools/volatility_sizing.py that computes vol-adjusted position size + stop for any symbol. Validated on 7 symbols: large caps (MSFT/AAPL/NVDA/SPY) stay at $5K default; small-cap high-vol (ZBIO/REPL/GRCE) get reduced to $1.8-2.4K with wider stops that respect noise envelope. Recorded known_effect `volatility_adjusted_position_sizing_rule`. Retrospective on ZBIO: vol-sized would have cut day-1 unrealized loss from $345 to $129 and max stop loss from $753 to $501.",
-      "partial_results": "Vol-sizing rule is recorded as known_effect but NOT yet wired into any activator. Adoption is P2 \u2014 apply next time we wire a new activator. The existing ZBIO position stays at $5,017/15% stop; changing size mid-trade would leak the size change into the signal's realized return.",
-      "blocked_by": "Nothing. Rule is ready to use via `python3 tools/volatility_sizing.py SYMBOL --horizon N`.",
-      "key_insight": "The 15% raw stop and $5K notional are calibrated for ~2% daily_std. On ~6-9% daily_std stocks they are BOTH wrong in opposite directions \u2014 stop too tight (fires on 1.5\u03c3 noise), notional too large (3-5x the dollar variance). Vol-sizing fixes both simultaneously with a single risk_budget parameter ($500 per experiment)."
+      "session": "2026-04-09 overnight",
+      "summary": "Ran intraday_insider_poller historical OOS replay across n=221 canonical 2024-25 clusters (CEO/CFO + lag<=1 + n[3,5]). Result: 95.5% catch rate but only 25% (n=55) are intraday/pre_open quality (+2.08%/62%). 70% file after-close (n=156) and decay to t+1 alpha (+0.67%/39.7% \u2014 fails). Refines canonical benchmark; poller now tags STRONG vs WEAK trigger tiers.",
+      "key_finding": "After-close insider filings (70% of CEO/CFO clusters) cannot capture the canonical +3.28% alpha \u2014 they're functionally identical to the retired t+1 cadence. The real exploitable subset is the ~25% that file during market hours or pre-open, n~27/year.",
+      "open_positions": "ZBIO (insider cluster, day-1 -6.87%, day-2 health check tomorrow), SPY VIX-spike recovery (+5.5%)",
+      "pending_hypotheses": "REPL/GRCE PDUFA shorts (both pre-event contaminated, expected to abort)",
+      "files_changed": [
+        "tools/intraday_poller_historical_replay.py (new)",
+        "tools/intraday_insider_poller.py (added trigger_quality_tier output field)",
+        "data/cache/intraday_poller_historical_replay.json (replay output)",
+        "data/cache/intraday_poller_historical_replay.csv (per-cluster detail)",
+        "data/cache/sec_company_tickers.json (cached)",
+        "data/cache/intraday_replay_submissions_cache.json (cached)"
+      ],
+      "knowledge_recorded": "insider_cluster_intraday_replay_2026_04_09"
     }
   }
 }
