@@ -289,7 +289,7 @@
       },
       {
         "name": "ipo_lockup_expiration_short",
-        "reason": "Tested 13 high-profile IPO lockup expirations (2019-2022). 3d avg=-1.87% pos_rate=46.2% p=0.385. RIVN (-23.93%) is extreme outlier driven by EV sector crash May 2022. Without RIVN: avg_3d=-0.66%. Direction inconsistent. High-profile IPO lockup expirations are widely anticipated and efficiently priced. Academic effect (Field & Hanka 2001: -1.5%) concentrated in smaller IPOs with less investor awareness of the lockup date. Not testable at scale with free data."
+        "reason": "IPO lockup expiration short: DEAD END. Backtested 22 IPOs (2023-2024) at 180-day lockup expiry. Academic expectation: -1.5% abnormal, 60% negative (Field & Hanka 2001). Actual 5d result: +3.26% avg abnormal, 27% negative (p=0.027 \u2014 significant but WRONG DIRECTION). Pre-lockup T-10 to T-1: -1.58% avg but p=0.45, not significant. Signal has been completely arbitraged away. Likely causes: short-seller front-running, staggered lockups, options hedging, improved market microstructure. Individual outliers (TEM -13.7%, SARO -5.8%) are stock-specific, not lockup-driven."
       },
       {
         "name": "reverse_stock_split_short",
@@ -874,9 +874,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 61798922,
+    "sessions_today": 1,
+    "tokens_today": 8530700,
     "sessions_by_day": [
+      {
+        "date": "2026-04-10",
+        "sessions": 1,
+        "tokens": 8530700
+      },
       {
         "date": "2026-04-09",
         "sessions": 10,
@@ -2556,6 +2561,18 @@
       "investigated": "PDUFA pipeline expansion scan (H2 2026), insider cluster poller run, ZBIO/SPY trade health check, MIDCO spinoff monitoring update, auto tariff OOS tracking",
       "findings": "Scanned the entire FDA approval calendar through December 2026 looking for opportunities to use our validated biotech short signal. Only one small company qualifies \u2014 the signal works but fires rarely by design. Our two active trades (an insider-buying play and a volatility-recovery trade) are performing within expectations.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-10",
+      "investigated": "P0 position checks (ZBIO day-2, auto tariff TM/HMC 5d OOS, REPL activation dry-run), insider cluster poller with timezone fix, LW $10M insider cluster evaluation, IPO lockup expiration signal research",
+      "findings": "Fixed a timezone bug that could have caused us to miss insider trading signals. Investigated a $10 million insider purchase at Lamb Weston but passed \u2014 it was an activist hedge fund, not company executives. Started researching a new strategy based on IPO lockup expirations. Current trades: SPY up 6%, ZBIO down 5% and being watched closely.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-10",
+      "investigated": "P0 position checks (ZBIO day-3, REPL PDUFA, GRCE contamination), IPO lockup expiration backtest (22 IPOs), SEO bought-deal backtest review, ZBIO trade dict fix for auto-close Monday",
+      "findings": "Tested whether stocks drop when IPO lockup periods expire (a well-known academic effect from the 2000s). Found the effect has completely reversed \u2014 stocks now actually rise after lockup expiry. Recorded as a dead end. Managed existing positions: insider buying trade held steady, FDA decision pending.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2634,6 +2651,12 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": "\"ZBIO is at day-2 with -6.87% raw, -9.82% abn (SPY). Very close to -10% gate. Must check post-close today. REPL PDUFA Apr 10 is contaminated (-31.8% from peak), activator will abort. SPY VIX trade healthy at +5.4%, day 5 of 20, deadline Apr 27. Auto tariff OOS day-5 final reading Friday. PDUFA pipeline scan: only CING (May 31) qualifies for clinical_efficacy_failure_short in all H2 2026. Added INO (Oct 30, monitor only) and SVRA (Aug 22, monitor only) to watchlist. MIDCO spinoff Investor Day May"
+    "handoff": {
+      "attempted": "P0 position checks (ZBIO, auto tariff OOS, REPL dry-run), insider poller, LW cluster evaluation, IPO lockup lit review",
+      "accomplished": "All P0 items done. Timezone bug fixed. LW NO_GO recorded. IPO lockup added to queue. Weekly tracker updated.",
+      "partial_results": "IPO lockup needs S-1 parser build (next session). GRCE borderline contamination may clear by Apr 23.",
+      "blocked_by": "Pipeline thin \u2014 3 pending hypotheses all contaminated. No new insider clusters qualifying.",
+      "key_insight": "Timezone bug in poller was causing after-close filings to be classified as stale. Now fixed. IPO lockup expiration is a promising new signal class to diversify the pipeline."
+    }
   }
 }
