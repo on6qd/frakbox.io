@@ -160,11 +160,11 @@ h1 { font-size: 26px; letter-spacing: 5px; color: var(--accent); font-weight: 70
 .today-investigated { font-weight: 600; margin-bottom: 6px; font-size: 13px; }
 .today-findings { color: var(--muted); font-size: 12px; line-height: 1.6; }
 
-/* Pipeline grid */
+/* Pipeline grid — stacked */
 .pipeline-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr 1fr;
-    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* Pipeline items */
