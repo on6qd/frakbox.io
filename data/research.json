@@ -810,10 +810,34 @@
       {
         "name": "spy_5d_drawdown_mean_reversion",
         "reason": "SPY 5d drawdown < -3pct: Full sample (n=84, 30d dedup) shows +1.65pct 20d (p=0.019). OOS (2020+) underpowered: n=27, +1.98pct, p=0.228. Larger drawdowns (-5pct, -7pct) have NO signal \u2014 moderate corrections bounce but severe ones continue. VIX>30 is strictly superior (validated OOS p=0.027, +2.92pct 20d). Likely captures the same fear/mean-reversion as VIX>30 but noisier."
+      },
+      {
+        "name": "elliott_13d_filing_long",
+        "reason": "N=25, 3d=-0.31% p=0.85. No signal. Starboard-only effect confirmed."
+      },
+      {
+        "name": "icahn_13d_filing_long",
+        "reason": "N=79, 3d=+0.42% p=0.51. Despite good power, no signal. Direction=52%."
+      },
+      {
+        "name": "third_point_13d_filing_long",
+        "reason": "N=21, 3d=+0.89% p=0.53. No signal. Dominated by repeat SentinelOne filings."
+      },
+      {
+        "name": "trian_13d_filing_long",
+        "reason": "N=51, 3d=+0.21% p=0.73. No signal. Direction=45% below coin flip."
+      },
+      {
+        "name": "convertible_note_offering_short",
+        "reason": "No signal. Full dataset N=165 (2021-2025, >$1B market cap): 5d avg=-0.16%, p=0.59. IS (2021-2023, N=68): 5d -1.02% p=0.45. OOS (2024-2025, N=97): 5d +0.44% p=0.98 WRONG DIRECTION. Original preliminary finding (N=38, -1.9% 5d, p=0.018) was false positive from outlier sensitivity (SMCI +20% excluded). Compared to SEO bought-deal (-2.4% 5d, N=110) which survived expansion: convertibles are less dilutive so weaker effect expected and confirmed null."
+      },
+      {
+        "name": "share_repurchase_announcement_long",
+        "reason": "Academic anomaly fully arbitraged. Full N=248 (2021-2025, >$1B): 5d +0.11% p=0.88, 20d +0.26% p=0.98. OOS (2024-2025, N=250): 20d -0.88% p=0.047 WRONG DIRECTION. Mega-cap (>$10B): 3d +0.48% p=0.051 borderline but fails MT correction. Mid-cap ($1-10B): no signal. Ikenberry et al 1995 anomaly dead in liquid stocks. EDGAR 8-K search for \"share/stock repurchase program\" + \"authorized/approved\". 6 query variants, deduplicated by ticker-quarter."
       }
     ],
     "signal_count": 26,
-    "dead_end_count": 163,
+    "dead_end_count": 169,
     "literature_count": 25
   },
   "live_signals": [
@@ -874,13 +898,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 47003885,
+    "sessions_today": 7,
+    "tokens_today": 54268812,
     "sessions_by_day": [
       {
         "date": "2026-04-10",
-        "sessions": 6,
-        "tokens": 47003885
+        "sessions": 7,
+        "tokens": 54268812
       },
       {
         "date": "2026-04-09",
@@ -2597,6 +2621,12 @@
       "investigated": "Starboard 13D signal expansion (2020-2021 pre-discovery backtest), short seller report feasibility, position/scanner checks",
       "findings": "Validated that Starboard Value activist campaigns consistently boost stock prices by about 4% over three days, confirmed across five years of data. Also found that Hindenburg Research (short seller) shut down in 2025, closing that trading opportunity.",
       "tag": "discovery"
+    },
+    {
+      "date": "2026-04-10",
+      "investigated": "Individual activist 13D backtests (Elliott N=25, Icahn N=79, Third Point N=21, Trian N=51). Convertible note offering short signal exploration (N=39 large-cap events 2024-2025). Daily scanner runs (SEO, activist, insider).",
+      "findings": "Tested whether other major activist investors (Elliott, Icahn, Third Point, Trian) produce stock price reactions when they file 13D ownership forms \u2014 none do. Only Starboard Value has a real effect. Also discovered a promising new short signal: when companies announce convertible note offerings, their stock tends to drop about 2% over the following week.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2665,11 +2695,6 @@
         "category": "merger_arbitrage"
       },
       {
-        "question": "Does ANY open-market share repurchase announcement in small-cap value stocks (P/B < 1.5) produce abnormal returns? Test N=50+ events. Different from f",
-        "priority": 3,
-        "category": "new_signal"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -2678,6 +2703,11 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       }
     ],
     "handoff": {
