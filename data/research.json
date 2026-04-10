@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 55,
-    "pending": 2,
+    "total_hypotheses": 56,
+    "pending": 3,
     "active": 2,
     "completed": 5,
     "invalidated": 6,
@@ -834,10 +834,18 @@
       {
         "name": "share_repurchase_announcement_long",
         "reason": "Academic anomaly fully arbitraged. Full N=248 (2021-2025, >$1B): 5d +0.11% p=0.88, 20d +0.26% p=0.98. OOS (2024-2025, N=250): 20d -0.88% p=0.047 WRONG DIRECTION. Mega-cap (>$10B): 3d +0.48% p=0.051 borderline but fails MT correction. Mid-cap ($1-10B): no signal. Ikenberry et al 1995 anomaly dead in liquid stocks. EDGAR 8-K search for \"share/stock repurchase program\" + \"authorized/approved\". 6 query variants, deduplicated by ticker-quarter."
+      },
+      {
+        "name": "tnx5_xlu_short_threshold",
+        "reason": "TNX >= 5.0 first-cross -> XLU 20d forward: mean +1.09% (p=0.08, n=18). Hypothesized short direction INVERTED: utilities rise modestly on rate shocks instead of falling. Not tradeable. Recorded 2026-04-11."
+      },
+      {
+        "name": "vix40_spy_distinct_threshold",
+        "reason": "VIX >= 40 first-cross -> SPY 20d forward: mean +2.75% (p=0.14, n=29). Weaker than validated VIX>30 signal. Do not pursue as distinct threshold. Recorded 2026-04-11."
       }
     ],
     "signal_count": 26,
-    "dead_end_count": 169,
+    "dead_end_count": 171,
     "literature_count": 25
   },
   "live_signals": [
@@ -893,14 +901,19 @@
     }
   ],
   "focus": {
-    "active_signal_types": 4,
+    "active_signal_types": 5,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 3,
+    "tokens_today": 19713416,
     "sessions_by_day": [
+      {
+        "date": "2026-04-11",
+        "sessions": 3,
+        "tokens": 19713416
+      },
       {
         "date": "2026-04-10",
         "sessions": 10,
@@ -2639,6 +2652,24 @@
       "investigated": "NT 10-K (late annual report filing) short signal \u2014 reviewer's #1 highest-value new signal. Built EDGAR scanner, backtested 2022-2025 discovery/OOS, separated NT 10-K from NT 10-Q.",
       "findings": "Discovered and validated a new trading signal: when a company files a late annual report (NT 10-K form), its stock drops an average of 4% over the following 10 days. Built an automated scanner to detect these filings in real-time. Quarterly late filings show no effect \u2014 only annual filings matter.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-11",
+      "investigated": "P0 OOS tracking (MNR SEO day2, auto tariff TM/HMC day7, ZBIO day8). All scanners (NT 10-K, SEO, insider, Starboard 13D). SEO multihorizon mean-reversion test. Configured 3 pending hypotheses. FDXF spinco prep.",
+      "findings": "Tracked ongoing paper trades: auto import tariff short on Toyota/Honda is showing strong results at day 7 (-4% abnormal vs S&P 500). Tested whether stocks bounce back after secondary offerings \u2014 they do not, confirming our 5-day holding period. Set up three new trading signals for automated activation.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-11",
+      "investigated": "Strategic review execution (R3 VIX gate, R5 SEO biotech split), daily P1 scanners (NT 10-K, SEO, activist 13D, insider), and pending hypothesis state check.",
+      "findings": "Re-examined a recent recommendation to add a volatility filter to an insider trading signal and rejected it \u2014 the underlying data showed the filter wasn't justified. Separately tested whether biotech stock offerings behave differently from non-biotech offerings in a short-selling signal: early evidence suggests biotech is weaker but the sample is too small to exclude them.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-11",
+      "investigated": "Supersede NT 10-K hypothesis horizon 10d->3d (P0 methodology fix). Run daily scanners (NT 10-K, SEO, insider cluster). Non-event exploration: 4 threshold tests - VIX>=40/SPY, DXY>=108/GLD, TNX>=5.0/XLU, plus DXY>=105 and DXY>=110 sensitivity checks.",
+      "findings": "Fixed a holding-period mismatch in our late-filing short signal so the trade exits when the effect actually happens. Tested four new threshold-based signals - one looked statistically interesting (gold rising when the dollar spikes above 108) but turned out to be a quirk of two specific macro regimes, not a repeatable pattern.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2694,6 +2725,11 @@
         "symbol": "MIDD"
       },
       {
+        "event": "MIDCO (Middleby Food Processing spinco) check Form 10 filing status. Strong spinco short candidate.",
+        "date": "2026-05-01",
+        "symbol": "MIDCO"
+      },
+      {
         "event": "TDG",
         "date": "2026-05-05",
         "symbol": "TDG (TransDigm Group) - NEVER crossed 52w low in 2 years (crossing_count=0). Currently $1162.78, 52w_low=$1107.45 (0.89% above). Earnings May 5, 2026 (41 days away). If TDG crosses 52w low before earnings - pre-register momentum_short. If within 30 days of earnings and crosses 52w low - catalyst_short candidate. Monitor weekly."
@@ -2727,12 +2763,6 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": {
-      "attempted": "P0 monitoring, P1 scanners, convertible note backtest, share repurchase backtest, reviewer strategic analysis, proxy contest exploration.",
-      "accomplished": "2 DEAD ENDS confirmed (convertible notes N=165, share repurchase N=498+). REPL outcome recorded. MNR OOS tracking. Reviewer completed strategic portfolio analysis with annual return estimates ($5,635/yr = 5.6% equity at current signal rates). NT 10-K/10-Q identified as #1 priority new signal.",
-      "partial_results": "Reviewer analysis shows NT 10-K non-timely filing is highest-value unexplored signal. Annual contribution if validated: $1,500-3,000. Also: SEO is highest earner ($2,124/yr). ZBIO expected to lose (wrong cadence).",
-      "blocked_by": "Nothing. Good Friday Apr 11 \u2014 market closed. Next trading day Monday Apr 14.",
-      "key_insight": "The fund's 5.6% expected annual return from current signals is real but thin. NT 10-K filings are the single highest-value signal to test next \u2014 EDGAR-native, high frequency (40-80/yr), strong academic support for negative returns. Unlike share repurchases (fully arbitraged), late filings are a genuinely negative event with no buy-side constituency."
-    }
+    "handoff": "[\"P0: ZBIO auto-closes Mon Apr 14 via trade_loop. Verify it fired. Record final P&L.\", \"P0: MNR SEO 5d close Apr 15. Compute final abnormal return vs SPY. Record OOS result.\", \"P0: TM/HMC auto tariff 10d close Apr 16. Record final OOS.\", \"P1: Run NT 10-K scanner daily. 3db5eb00 now has 3d horizon + 4.5% target. Activate on large-cap hit.\", \"P1: Run SEO scanner daily. Non-biotech only (weaker for biotech).\", \"P1: Run insider cluster scanner daily. Look for CEO/CFO + 3-5 clusters at VIX<30.\", \"P2:"
   }
 }
