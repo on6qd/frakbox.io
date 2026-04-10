@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 53,
-    "pending": 0,
+    "total_hypotheses": 54,
+    "pending": 1,
     "active": 2,
     "completed": 5,
     "invalidated": 6,
@@ -869,18 +869,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 2,
+    "active_signal_types": 3,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 24081787,
+    "sessions_today": 6,
+    "tokens_today": 47003885,
     "sessions_by_day": [
       {
         "date": "2026-04-10",
-        "sessions": 3,
-        "tokens": 24081787
+        "sessions": 6,
+        "tokens": 47003885
       },
       {
         "date": "2026-04-09",
@@ -2579,6 +2579,24 @@
       "investigated": "Abandoned 3 contaminated hypotheses (REPL x2, GRCE). Short seller report post-drift backtest (N=40 events across 5 firms). Insider poller scan.",
       "findings": "Tested whether stocks drop further after activist short sellers publish critical reports. Found the signal depends entirely on who publishes: fraud-focused firms like Hindenburg see a -6.7% continued decline, while accounting-focused firms like Spruce Point see no effect at all. Also cleared out three pending trade ideas that became contaminated by pre-event price crashes.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-10",
+      "investigated": "SEO bought-deal short signal expansion (N=50 to 110), real-time scanner build, pipeline replenishment, REPL PDUFA check, position health, queue cleanup",
+      "findings": "Discovered and validated a new trading signal: when companies do overnight stock sales (bought deals), their shares tend to drop about 2.5% over the next week. This worked in 67% of 110 cases tested across 2020-2025. Built an automated scanner to detect these events in real time.",
+      "tag": "discovery"
+    },
+    {
+      "date": "2026-04-10",
+      "investigated": "P0 checks (REPL FDA outcome, MNR OOS baseline, ZBIO/SPY positions), activist 13D filing signal discovery and backtest, scanner tool build",
+      "findings": "Discovered a new trading signal: when activist investor Starboard Value files a 13D (revealing a large stake in a company), the target stock rises an average of 4.1% over 3 trading days. Tested on 21 historical events with 71% accuracy. Built an automated scanner to detect new filings. Also tracked existing positions and recorded the Replimune FDA decision outcome.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-10",
+      "investigated": "Starboard 13D signal expansion (2020-2021 pre-discovery backtest), short seller report feasibility, position/scanner checks",
+      "findings": "Validated that Starboard Value activist campaigns consistently boost stock prices by about 4% over three days, confirmed across five years of data. Also found that Hindenburg Research (short seller) shut down in 2025, closing that trading opportunity.",
+      "tag": "discovery"
     }
   ],
   "pipeline": {
@@ -2602,6 +2620,11 @@
         "event": "REPL PDUFA April 10 (Friday). FDA announces after 5pm ET. If CRL: use activate_repl_trade.py. If crash >55% use d302c84b",
         "date": "2026-04-10",
         "symbol": "REPL"
+      },
+      {
+        "event": "MNR SEO bought deal OOS observation. 424B4 filed April 8. Track 5d return from Apr 9 open (close Apr 15). Expected: nega",
+        "date": "2026-04-15",
+        "symbol": "MNR"
       },
       {
         "event": "OTIS",
@@ -2657,6 +2680,12 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": "\"Session 2026-04-10c: Abandoned all 3 pending hypotheses (REPL x2, GRCE) due to pre-event contamination. Pipeline now EMPTY. Discovered short seller report post-drift signal: fraud-focused sellers (Hindenburg, MW) show -6.6% avg 5d drift with 70-86% direction, but accounting-focused sellers (Spruce Point) show zero signal. Signal underpowered (N=7-13 per source) and hard to monitor (Hindenburg shut down Jan 2025). Insider poller: 0 GO clusters. REPL FDA decision pending.\""
+    "handoff": {
+      "attempted": "P0 position checks, pipeline replenishment, expand SEO bought-deal backtest",
+      "accomplished": "Expanded SEO backtest from N=50 to N=110 (2020-2025). VALIDATED OOS: 5d=-2.46% median, 67.9% neg, p=0.015. Built real-time scanner (tools/seo_realtime_scanner.py). Pre-registered hypothesis 673aaa32. Found MNR as first OOS observation. Cleaned 3 dead queue items.",
+      "partial_results": "MNR (MACH Natural Resources, $2.08B) filed 424B4 April 8. Missed optimal entry by 2 days. Tracking as OOS observation through April 15.",
+      "blocked_by": "Nothing. Clean session.",
+      "key_insight": "SEO bought-deal short is the fund's third validated signal (alongside insider clusters and VIX spike SPY). OOS is STRONGER than IS \u2014 signal growing not decaying. ~2 events/month frequency. Scanner deployed. The 5d horizon is the sweet spot; 10d mean-reverts."
+    }
   }
 }

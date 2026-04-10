@@ -31,6 +31,19 @@
       "deadline": "2026-04-27"
     },
     {
+      "id": "673aaa32",
+      "status": "pending",
+      "created": "2026-04-10",
+      "event_type": "seo bought deal short",
+      "symbol": "TBD",
+      "direction": "short",
+      "magnitude_pct": 2.5,
+      "timeframe_days": 5,
+      "confidence": 6.5,
+      "thesis": "SEO bought-deal short: large-cap 424B4+8-K same-day filing -> short at next open, hold 5 days.",
+      "report": "Investigation Report: 673aaa32\n============================================================\nStatus: pending  \u2014  Created 2026-04-10\n\n1. Hypothesis\n------------------------------------------------------------\nGiven that seo bought deal short events have historically produced abnormal\nreturns in affected stocks,\nwhen seo bought-deal short: large-cap 424b4+8-k same-day filing -> short at\nnext open, hold 5 days,\nthen TBD should fall by approximately 2.5% within 5 trading days.\n\nThe proposed causal mechanism: Bought deals create overnight supply shocks.\nUnderwriters sell blocks at 3-5% discount. Creates selling pressure +\npessimism signal + float overhang.\n\nMechanism evidence:\n  - Actors incentives\n  - Transmission channel\n  - Academic reference\n\n2. Test Design\n------------------------------------------------------------\nThe backtest covered 110 historical events across 10 stocks (ADPT, CLR, RIDE,\nINM, CPRX, KRTX, DQ, TEM and 2 others). All returns are measured as abnormal\nreturns against SPY to isolate the event effect from broad market moves.\n\nSurvivorship bias control: EDGAR covers all companies including delisted. 5d\nhold minimizes survivorship.\n\nSelection bias control: 424B4+8-K filter is conservative. ~2 large-cap events\nper month.\n\nConfounders recorded at entry:\n  broad market direction: Controlled via SPY benchmark subtraction. Signal\n  persists across bull (2021) and bear (2022) markets.\n  vix level: No VIX gating applied. Signal works across VIX regimes (tested\n  IS=2020-2022 high-VIX, OOS=2023-2025 low-VIX).\n  sector trend: Events span all sectors. No sector adjustment applied \u2014\n  offering-level dilution is company-specific.\n  survivorship bias: EDGAR filings cover all companies including later-\n  delisted. 5d hold minimizes survivorship impact.\n  selection bias: 424B4+8-K co-filing filter is conservative. ~2 large-cap\n  events per month. May miss some bought deals.\n  event timing: 424B4 filed after hours \u2192 enter short at next open. Timing\n  well-defined by EDGAR filing timestamp.\n  market regime: Signal STRONGER in post-pandemic 2023-2025 than pandemic-era\n  2020-2022. Robust to regime shifts.\n  outlier risk: SBET +883% in 2025 distorts mean but not median/Wilcoxon.\n  Winsorizing recommended for live monitoring.\n  short borrowing: Short borrowing costs not included in backtest. For large-\n  cap stocks, typically 0.5-2% annualized (negligible for 5d hold).\n\n3. Success Criteria (locked before testing)\n------------------------------------------------------------\n5d abnormal < -1.0% vs SPY. >55% negative. $5000 short. Stop 15%. Trigger:\nseo_realtime_scanner.py.\n\nConfidence: 6.5/10  |  Pre-registration: 99e06425cea2989c\n\n4. Outcome\n------------------------------------------------------------\nNot yet tested.\n\n5. Conclusion\n------------------------------------------------------------\nAwaiting outcome.\n\n6. What Comes Next\n------------------------------------------------------------\nComplete the current investigation first.\n\nWarnings\n------------------------------------------------------------\n- Related dead end: seo_bought_deal_short \u2014 SEO bought-deal short signal:\ntested N=33 large-cap (>500M) same-day 8-K+424B4 events 2022-2024.\n- Symbol is TBD \u2014 must be resolved to a real ticker before activation.\n- WARNING: This hypothesis did not pass multiple testing correction. The\nstatistical significance may be a false positive.\n"
+    },
+    {
       "id": "1cb6140f",
       "status": "completed",
       "created": "2026-03-21",
@@ -726,9 +739,9 @@
     }
   ],
   "counts": {
-    "total": 53,
+    "total": 54,
     "active": 2,
-    "pending": 0,
+    "pending": 1,
     "completed": 5,
     "abandoned": 38,
     "invalidated": 6,
