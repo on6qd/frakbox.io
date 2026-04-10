@@ -898,13 +898,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 87409741,
+    "sessions_today": 10,
+    "tokens_today": 87654818,
     "sessions_by_day": [
       {
         "date": "2026-04-10",
-        "sessions": 9,
-        "tokens": 87409741
+        "sessions": 10,
+        "tokens": 87654818
       },
       {
         "date": "2026-04-09",
