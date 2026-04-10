@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 54,
-    "pending": 1,
+    "total_hypotheses": 55,
+    "pending": 2,
     "active": 2,
     "completed": 5,
     "invalidated": 6,
@@ -893,18 +893,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 3,
+    "active_signal_types": 4,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 54268812,
+    "sessions_today": 9,
+    "tokens_today": 87409741,
     "sessions_by_day": [
       {
         "date": "2026-04-10",
-        "sessions": 7,
-        "tokens": 54268812
+        "sessions": 9,
+        "tokens": 87409741
       },
       {
         "date": "2026-04-09",
@@ -2627,6 +2627,18 @@
       "investigated": "Individual activist 13D backtests (Elliott N=25, Icahn N=79, Third Point N=21, Trian N=51). Convertible note offering short signal exploration (N=39 large-cap events 2024-2025). Daily scanner runs (SEO, activist, insider).",
       "findings": "Tested whether other major activist investors (Elliott, Icahn, Third Point, Trian) produce stock price reactions when they file 13D ownership forms \u2014 none do. Only Starboard Value has a real effect. Also discovered a promising new short signal: when companies announce convertible note offerings, their stock tends to drop about 2% over the following week.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-10",
+      "investigated": "P0 monitoring (ZBIO -5% raw, MNR SEO OOS Day1 -2.83%, REPL PDUFA approved). P1 scanners (SEO: MNR only, 13D: none). Two new signal backtests: convertible note offering (N=165) and share repurchase announcements (N=498+). Proxy contest (DFAN14A) feasibility check.",
+      "findings": "Tested two more investment signals today \u2014 convertible note offerings and share buyback announcements \u2014 both turned out to be dead ends with no tradeable edge in modern markets. Meanwhile, our first real-time test of the secondary offering short signal is showing a strong start at -2.8% on day one.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-10",
+      "investigated": "NT 10-K (late annual report filing) short signal \u2014 reviewer's #1 highest-value new signal. Built EDGAR scanner, backtested 2022-2025 discovery/OOS, separated NT 10-K from NT 10-Q.",
+      "findings": "Discovered and validated a new trading signal: when a company files a late annual report (NT 10-K form), its stock drops an average of 4% over the following 10 days. Built an automated scanner to detect these filings in real-time. Quarterly late filings show no effect \u2014 only annual filings matter.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2672,6 +2684,11 @@
         "symbol": "SPY"
       },
       {
+        "event": "Daily NT 10-K scanner check. Run: python tools/nt_filing_scanner.py --days 3. Hypothesis 3db5eb00. Peak: March-April.",
+        "date": "2026-04-30",
+        "symbol": "NT10K"
+      },
+      {
         "event": "Middleby (MIDD) Food Processing spinoff Investor Day May 12, 2026. Form 10 NOT yet filed (as of April 9). Separation exp",
         "date": "2026-05-01",
         "symbol": "MIDD"
@@ -2695,6 +2712,11 @@
         "category": "merger_arbitrage"
       },
       {
+        "question": "Test whether DFAN14A proxy contest filings (dissident solicitation material) produce abnormal returns for the target company. EDGAR shows ~89-100 uniq",
+        "priority": 4,
+        "category": "proxy_contest_dfan14a"
+      },
+      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -2703,19 +2725,14 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
-      },
-      {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
       }
     ],
     "handoff": {
-      "attempted": "P0 position checks, pipeline replenishment, expand SEO bought-deal backtest",
-      "accomplished": "Expanded SEO backtest from N=50 to N=110 (2020-2025). VALIDATED OOS: 5d=-2.46% median, 67.9% neg, p=0.015. Built real-time scanner (tools/seo_realtime_scanner.py). Pre-registered hypothesis 673aaa32. Found MNR as first OOS observation. Cleaned 3 dead queue items.",
-      "partial_results": "MNR (MACH Natural Resources, $2.08B) filed 424B4 April 8. Missed optimal entry by 2 days. Tracking as OOS observation through April 15.",
-      "blocked_by": "Nothing. Clean session.",
-      "key_insight": "SEO bought-deal short is the fund's third validated signal (alongside insider clusters and VIX spike SPY). OOS is STRONGER than IS \u2014 signal growing not decaying. ~2 events/month frequency. Scanner deployed. The 5d horizon is the sweet spot; 10d mean-reverts."
+      "attempted": "P0 monitoring, P1 scanners, convertible note backtest, share repurchase backtest, reviewer strategic analysis, proxy contest exploration.",
+      "accomplished": "2 DEAD ENDS confirmed (convertible notes N=165, share repurchase N=498+). REPL outcome recorded. MNR OOS tracking. Reviewer completed strategic portfolio analysis with annual return estimates ($5,635/yr = 5.6% equity at current signal rates). NT 10-K/10-Q identified as #1 priority new signal.",
+      "partial_results": "Reviewer analysis shows NT 10-K non-timely filing is highest-value unexplored signal. Annual contribution if validated: $1,500-3,000. Also: SEO is highest earner ($2,124/yr). ZBIO expected to lose (wrong cadence).",
+      "blocked_by": "Nothing. Good Friday Apr 11 \u2014 market closed. Next trading day Monday Apr 14.",
+      "key_insight": "The fund's 5.6% expected annual return from current signals is real but thin. NT 10-K filings are the single highest-value signal to test next \u2014 EDGAR-native, high frequency (40-80/yr), strong academic support for negative returns. Unlike share repurchases (fully arbitraged), late filings are a genuinely negative event with no buy-side constituency."
     }
   }
 }
