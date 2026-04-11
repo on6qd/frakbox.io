@@ -842,10 +842,30 @@
       {
         "name": "vix40_spy_distinct_threshold",
         "reason": "VIX >= 40 first-cross -> SPY 20d forward: mean +2.75% (p=0.14, n=29). Weaker than validated VIX>30 signal. Do not pursue as distinct threshold. Recorded 2026-04-11."
+      },
+      {
+        "name": "aapl_supplier_network_propagation",
+        "reason": "Discovery 2020-2023: AAPL->AVGO,TXN,SWKS Granger significant (p=0.0002,0.0009,0.011). But best-lag correlations NEGATIVE (-0.10 to -0.17) = mean-reversion not propagation. OOS 2024-04-10: 0/5 spokes significant (all p=0.16-0.33, corr near zero). Effect fully fails OOS. Lesson: Cohen-Frazzini 2008 economic-link momentum did NOT replicate in large-cap tech supply chains 2024+. Suppliers and AAPL share common factor (SOX/SPY) so residual lag is zero."
+      },
+      {
+        "name": "soxx_leads_aapl_network",
+        "reason": "Reverse test: SOXX hub, AAPL spoke. 2020-2023 not significant. 2024-2026 marginally significant (p=0.034, lag=2, corr=0.09). Inconsistent across periods, single spoke, weak effect. Noise, not signal."
+      },
+      {
+        "name": "copper_hgf_leads_dgs10_lead_lag",
+        "reason": "HG=F (copper) does NOT Granger-cause FRED:DGS10 at lags 1-5. In-sample F=2.58, p=0.108 (lag 1). OOS p=0.387 at lag 5. Tested 2018-2024 IS / 2024+ OOS, n=1496. Gundlach copper/gold indicator failed as univariate lead-lag. Gold-adjusted ratio not tested here. session 2026-04-11 result T-355c47da"
+      },
+      {
+        "name": "xle_dxy_exposure_controlled_spy",
+        "reason": "XLE has no significant exposure to DXY (DX-Y.NYB) when controlling for SPY. beta=-0.021 p=0.84 in-sample, beta=+0.228 p=0.064 OOS (sign flipped). R2=0.40. Dollar strength does not reliably pass through to energy sector returns once market beta is removed. session 2026-04-11 result T-08a52af4"
+      },
+      {
+        "name": "goodwill_impairment_8k_item_206_short",
+        "reason": "Single-year regime artifact. IS 2022-2024-06 (n=58): 3d -2.93% p=0.004 dir 65.5%, 20d -4.84% p=0.0002. OOS 2024-07 to 2025-12 (n=46): 3d -0.01% p=0.992, dir 54%, 10d sign flip. Year-by-year: 2022 flat (+0.33%), 2023 STRONG (-5.30% 3d p=0.009 dir 72%), 2024 weak 3d only (-1.60% p=0.056, dissolves by 5d), 2025 dead (-0.06% p=0.938 dir 50%). Effect lives in 2023 post-pandemic M&A reckoning regime. Do not pre-register."
       }
     ],
     "signal_count": 26,
-    "dead_end_count": 171,
+    "dead_end_count": 176,
     "literature_count": 25
   },
   "live_signals": [
@@ -906,13 +926,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 19713416,
+    "sessions_today": 7,
+    "tokens_today": 36476018,
     "sessions_by_day": [
       {
         "date": "2026-04-11",
-        "sessions": 3,
-        "tokens": 19713416
+        "sessions": 7,
+        "tokens": 36476018
       },
       {
         "date": "2026-04-10",
@@ -2670,6 +2690,30 @@
       "investigated": "Supersede NT 10-K hypothesis horizon 10d->3d (P0 methodology fix). Run daily scanners (NT 10-K, SEO, insider cluster). Non-event exploration: 4 threshold tests - VIX>=40/SPY, DXY>=108/GLD, TNX>=5.0/XLU, plus DXY>=105 and DXY>=110 sensitivity checks.",
       "findings": "Fixed a holding-period mismatch in our late-filing short signal so the trade exits when the effect actually happens. Tested four new threshold-based signals - one looked statistically interesting (gold rising when the dollar spikes above 108) but turned out to be a quirk of two specific macro regimes, not a repeatable pattern.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-11",
+      "investigated": "P0 monitoring (ZBIO day6, MNR SEO day2, TM/HMC auto tariff day6). Daily scanners (NT 10-K, SEO, insider cluster, activist 13D). Non-event network test: AAPL leads suppliers (AVGO,QCOM,TXN,SWKS,CRUS) 2020-2026 with 2024-01 OOS split. Fixed data integrity verify bug (handoff list vs dict).",
+      "findings": "Fund checked on three open trades (a biotech with insider buying, Toyota and Honda trade-war shorts, and a natural resources stock short) \u2014 all are losing ground as the broader market rallies. Also tested whether Apple's daily moves predict next-day moves in its chip suppliers. They don't in recent data, so that idea is shelved.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-11",
+      "investigated": "Non-event hypothesis exploration (exposure class): tested 4 factor/sector relationships via data_tasks.py regression \u2014 copper\u2192DGS10 lead-lag, XLU\u2192TLT, XLE\u2192DXY, XLK\u2192DGS10, IBB\u2192DGS10. All with 2018-2024 IS / 2024-2026 OOS split and SPY controls.",
+      "findings": "Tested how different stock sectors move with interest rates and bonds. Found two reliable relationships: utility stocks track long-term treasuries, and biotech stocks get hurt when yields rise. Big tech no longer behaves like a bond-sensitive sector the way it used to \u2014 the AI boom seems to have broken that old rule.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-11",
+      "investigated": "Non-event exposure to event conversion tests (XLU~TLT, IBB~DGS10). Plus XLE crude exposure discovery and structural break test.",
+      "findings": "Found that the energy sector became 10x more sensitive to crude oil prices after the Russia-Ukraine war in 2022, a major structural shift that should reshape how we model oil-driven trades. Also learned that factor exposures (like utilities reacting to bond yields) price in within the same day, which means they need to be pair-traded rather than chased on next-day reactions.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-11",
+      "investigated": "Rank-2 new signal from reviewer strategic review: goodwill impairment 8-K (Item 2.06) as a short signal. Built tools/goodwill_impairment_scanner.py (EDGAR EFTS full-text for 8-K Item 2.06), scanned 2022-2025, pre-registered IS/OOS test with large-cap (>$500M) filter.",
+      "findings": "Tested whether big-company goodwill write-downs reliably predict short-term stock drops. Looked like a real signal at first, but a year-by-year check revealed the whole effect came from 2023 \u2014 every other year was either flat or moved the wrong way. Not tradeable, and a reminder to always check whether an 'average' result is really driven by one unusual year.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2763,6 +2807,6 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": "[\"P0: ZBIO auto-closes Mon Apr 14 via trade_loop. Verify it fired. Record final P&L.\", \"P0: MNR SEO 5d close Apr 15. Compute final abnormal return vs SPY. Record OOS result.\", \"P0: TM/HMC auto tariff 10d close Apr 16. Record final OOS.\", \"P1: Run NT 10-K scanner daily. 3db5eb00 now has 3d horizon + 4.5% target. Activate on large-cap hit.\", \"P1: Run SEO scanner daily. Non-biotech only (weaker for biotech).\", \"P1: Run insider cluster scanner daily. Look for CEO/CFO + 3-5 clusters at VIX<30.\", \"P2:"
+    "handoff": "\"Session 2026-04-11 weekend-overnight completed.\\n\\nFocus: Validate rank-2 new signal from reviewer strategic review (goodwill impairment 8-K Item 2.06 short).\\n\\nBuilt tools/goodwill_impairment_scanner.py (EDGAR EFTS full-text search for 8-K Item 2.06). Scanned 2022-2025, 104 large-cap events. Pre-registered test (IS 2022-01..2024-06 n=58, OOS 2024-07..2025-12 n=46, entry next open after file_date).\\n\\nRESULT: DEAD END. IS looked strong (3d -2.93% p=0.004 dir 66%, 20d -4.84% p=0.0002) but OOS c"
   }
 }
