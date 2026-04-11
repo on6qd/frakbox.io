@@ -155,6 +155,12 @@
       "equity": 100608.73,
       "cash": 85411.7,
       "position_count": 2
+    },
+    {
+      "date": "2026-04-12",
+      "equity": 100608.73,
+      "cash": 85411.7,
+      "position_count": 2
     }
   ],
   "current": {
@@ -172,7 +178,7 @@
     "direction_accuracy": "2/5",
     "total_return_pct": 0.61,
     "max_drawdown_pct": 0.2,
-    "sharpe_estimate": 3.72
+    "sharpe_estimate": 3.65
   },
   "risk": {
     "drawdown_pct": 0.5,

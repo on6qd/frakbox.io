@@ -156,6 +156,11 @@
         "name": "volatility_adjusted_position_sizing_rule",
         "status": "moderate",
         "magnitude_pct": 0.0
+      },
+      {
+        "name": "granger_false_positive_xcorr_sanity_check",
+        "status": "methodology_operational",
+        "magnitude_pct": 0.0
       }
     ],
     "dead_ends": [
@@ -890,10 +895,30 @@
       {
         "name": "calendar_dow_spy_2026",
         "reason": "Day-of-week effect on SPY: Mon=0.034%, Tue=0.078%, Wed=0.068%, Thu=0.021%, H=1.28, p=0.86, n=5282. Classic Monday effect is gone. No tradeable DOW anomaly."
+      },
+      {
+        "name": "hyg_iwm_credit_leads_smallcap_lead_lag",
+        "reason": "Granger IS p<0.0001 at lag 4, OOS p=0.428. xcorr at lag 4=+0.011 (near-zero), lag 0 xcorr=+0.715. Pure Granger false positive \u2014 relationship is contemporaneous not predictive. (result T-8233e8dc)"
+      },
+      {
+        "name": "dxy_eem_dollar_leads_em_lead_lag",
+        "reason": "Granger IS p=0.0009 at lag 5, OOS p=0.169. xcorr all positive lags <0.05 absolute, lag 0 xcorr=-0.298. Contemporaneous only. (result T-7487da97)"
+      },
+      {
+        "name": "copper_xli_dr_copper_lead_lag",
+        "reason": "Granger IS p<0.0001 at lag 5, OOS p=0.078. xcorr lag 0=+0.365, positive lags all <0.04 absolute. Dr. Copper lead signal is contemporaneous, not predictive. (result T-418a3502)"
+      },
+      {
+        "name": "dgs10_leads_reits_lead_lag_regime_artifact",
+        "reason": "Previously validated DGS10 Granger-causes XLRE/IYR at lag 4 (T-09a92085, T-4eda945b) turns out to be a regime artifact. Clean post-2022-break reruns (IS and OOS both within regime) fail all three tests: T-d049f90f, T-8f897a79, T-be18cf71 \u2014 IS p=0.15-0.33, OOS p=0.13-0.23, xcorr guard trips in all three. Relationship is purely contemporaneous (lag0 xcorr -0.29 to -0.36, best-lag xcorr within noise). Exposure remains valid; lead-lag does not."
+      },
+      {
+        "name": "xli_hgf_copper_industrials_lead_lag",
+        "reason": "Copper Granger-causes XLI at lag 5 appeared significant on 2020-2024/OOS 2024 (T-1f32c097, p=0.006). Clean post-break rerun 2022-06/2024-10 (T-05059dc1) fails: IS p=0.051, xcorr guard trips with best_lag_5 xcorr=-0.005 vs lag_0 xcorr=+0.244. Relationship is purely contemporaneous. No predictive lead-lag."
       }
     ],
-    "signal_count": 26,
-    "dead_end_count": 183,
+    "signal_count": 27,
+    "dead_end_count": 188,
     "literature_count": 25
   },
   "live_signals": [
@@ -954,9 +979,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 49577700,
+    "sessions_today": 2,
+    "tokens_today": 10578989,
     "sessions_by_day": [
+      {
+        "date": "2026-04-12",
+        "sessions": 2,
+        "tokens": 10578989
+      },
       {
         "date": "2026-04-11",
         "sessions": 10,
@@ -2760,6 +2790,18 @@
       "investigated": "Saturday non-event exploration continued. Tested hypothesis classes not yet covered: calendar (TOM, DOW), regime (VIX, DGS10, DXY as tercile factors), and network (TSM -> semi suppliers). Built new tool: tools/regime_forward_returns.py for forward-return regime testing with OOS regime coverage validation.",
       "findings": "Tested several ways of predicting market returns: calendar patterns like turn-of-month and Monday effects are dead in modern data. A promising finding about fear-gauge regimes turned out to be an artifact of when the test period started. Our active fear-spike trade uses a different rule and is still valid.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-12",
+      "investigated": "Sunday weekend session. (1) Closed the P2 carried-over methodology task from 2026-04-11: retrofitted data_tasks.py regime test and tools/regime_forward_returns.py to fit tercile thresholds on IS factor levels only and refuse sign-preservation validation when any OOS regime bucket has <15% of OOS observations. Verified on SPY~VIX (passes, OOS low regime 16%) and QQQ~DGS10 (correctly flagged, OOS high regime 94%). (2) Non-event exploration: ran 3 fresh lead-lag tests on popular credit/dollar/copper hypotheses (HYG->IWM, DXY->EEM, HG=F->XLI).",
+      "findings": "Spent the weekend tightening how the system validates lead-lag relationships after discovering that three popular market patterns (junk bonds leading small caps, the dollar leading emerging markets, and copper leading industrials) all looked statistically significant in the data but were actually just contemporaneous co-movements in disguise. Added a sanity check to prevent the same mistake in the future.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-12",
+      "investigated": "Sunday session continuation. Executed the carried-over task from the morning: built tools/lead_lag_retroactive_audit.py and ran a retroactive sweep across all 13 stored Granger lead-lag results under the new xcorr guard added yesterday AND a newly added regime-spanning detector for pairs that include a known 2022 structural break. Investigated why DGS10->XLRE/IYR were flagged as 'PASSES_GUARD' despite a known rate regime break, and ran clean post-2022 IS/OOS reruns to confirm or falsify. Also verified the sole BORDERLINE case (XLI~HG=F copper-industrials) with a clean post-break rerun.",
+      "findings": "Audited yesterday's 'lead-lag' discoveries and discovered the most celebrated finding (that 10-year Treasury yields predict real-estate ETF movements a few days in advance) was actually a statistical illusion caused by mixing two very different rate regimes in the test window. When you restrict the test to pure post-2022 data, the predictive effect completely disappears \u2014 it was purely a same-day correlation all along.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2823,6 +2865,11 @@
         "event": "TDG",
         "date": "2026-05-05",
         "symbol": "TDG (TransDigm Group) - NEVER crossed 52w low in 2 years (crossing_count=0). Currently $1162.78, 52w_low=$1107.45 (0.89% above). Earnings May 5, 2026 (41 days away). If TDG crosses 52w low before earnings - pre-register momentum_short. If within 30 days of earnings and crosses 52w low - catalyst_short candidate. Monitor weekly."
+      },
+      {
+        "event": "MIDCO Food Processing (Middleby MIDD spinoff) - STRONG CANDIDATE for spinco short. Revenue $850M, EBITDA $172M, est mktc",
+        "date": "2026-05-12",
+        "symbol": "MIDD"
       }
     ],
     "pending_triggers": [],
@@ -2853,6 +2900,6 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": "\"Session 2026-04-11 Saturday completed. Non-event exploration in regime + calendar + network classes. 5 dead ends, 4 methodology findings. CRITICAL: VIX regime tercile sign-flip finding is IS-window artifact (disappears when IS starts 2005). VIX>30 first-cross event signal (b63a0168 active SPY trade) is DIFFERENT and remains valid (OOS +2.81% 20d, p=0.063). Active SPY position is safe. New tool: tools/regime_forward_returns.py with OOS regime coverage validation.\""
+    "handoff": "\"Session 2026-04-12 (Sunday): retroactive lead-lag audit completed. Built tools/lead_lag_retroactive_audit.py which applies the xcorr guard AND a regime-spanning check. Of 13 stored lead-lag results: 7 RETIRED_XCORR_GUARD (previously known), 4 REGIME_SPANNING_INVALID (rate-sensitive pairs with IS pre-2022 break), 1 BORDERLINE_REGIME_RECHECK (XLI~HG=F) verified as dead end via clean post-break test. Previously 'validated' DGS10->XLRE/IYR lead-lag (recorded 2026-04-11) is now retired \\u2014 the 20"
   }
 }
