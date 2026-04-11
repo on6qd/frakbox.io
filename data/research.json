@@ -862,10 +862,38 @@
       {
         "name": "goodwill_impairment_8k_item_206_short",
         "reason": "Single-year regime artifact. IS 2022-2024-06 (n=58): 3d -2.93% p=0.004 dir 65.5%, 20d -4.84% p=0.0002. OOS 2024-07 to 2025-12 (n=46): 3d -0.01% p=0.992, dir 54%, 10d sign flip. Year-by-year: 2022 flat (+0.33%), 2023 STRONG (-5.30% 3d p=0.009 dir 72%), 2024 weak 3d only (-1.60% p=0.056, dissolves by 5d), 2025 dead (-0.06% p=0.938 dir 50%). Effect lives in 2023 post-pandemic M&A reckoning regime. Do not pre-register."
+      },
+      {
+        "name": "rate_lead_reit_threshold_short",
+        "reason": "DGS10 Granger-causes XLRE/IYR at lag 3-4 (validated IS+OOS) but conversion to threshold signal fails: daily 10bp shock -> XLRE 3d abnormal +0.05%, dir 46%. 5d cumulative regression slope 0.000061/bp (p=0.088). Information flow too weak per-event. Adds to meta: exposure->event conversion fails."
+      },
+      {
+        "name": "classic_pairs_cointegration_engle_granger",
+        "reason": "Tested XOM/CVX, KO/PEP, HD/LOW, TLT/IEF, XLU/TLT, GDX/GLD, XOP/CL=F for Engle-Granger cointegration on 5-year windows with IS/OOS splits (both pre-2022 and post-2022). NONE passed rigorous OOS validation. XOM/CVX pre-2022 crossed IS threshold (p=0.041) but OOS spread ADF p=0.628. XLE/CL=F appeared significant (p=0.013) but hedge ratio -0.091 economically nonsensical (spurious). Conclusion: Engle-Granger cointegration of classic pairs on 5y windows is not a viable signal discovery method. Published pairs-trading results likely use rolling recalibration or shorter windows that inflate apparent significance."
+      },
+      {
+        "name": "vix_regime_tercile_spy_forward",
+        "reason": "IS window artifact: 2010-2021 IS showed VIX tercile predicting SPY 20d forward (high-low spread +1.72%, p=2e-43). OOS 2022-2026 sign-flipped (-0.67%). Extending IS to 2005 (including 2008 GFC) collapsed IS spread to 20bps. Signal only appears post-GFC start. Distinct from VIX>30 first-cross event which remains valid (b63a0168). Regime tercile != first-touch event."
+      },
+      {
+        "name": "dgs10_regime_tercile_xlu_returns",
+        "reason": "10Y yield level terciles do NOT predict XLU daily returns (H=0.25, p=0.88, spread=1.5bps/day, n=2812). Rate CHANGES drive utility sensitivity, not rate LEVELS. Consistent with validated TLT/XLU exposure beta."
+      },
+      {
+        "name": "dgs10_regime_tercile_qqq_forward_ooscoverage",
+        "reason": "Invalidated by OOS regime coverage imbalance. OOS (2022-2026) put 939/1063 days in IS-derived 'high' tercile, leaving n=30/34 for low/mid. Cannot fairly validate sign preservation. Methodology finding: tercile regime tests on trending factors fail OOS."
+      },
+      {
+        "name": "calendar_tom_spy_iwm_2026",
+        "reason": "Turn-of-month effect: not significant on SPY (p=0.79) or IWM (p=0.78), n=5282. 3-6bps/day edge below noise. Confirms prior monthly_seasonality_spy dead end. Modern institutional flow arbitraged this away."
+      },
+      {
+        "name": "calendar_dow_spy_2026",
+        "reason": "Day-of-week effect on SPY: Mon=0.034%, Tue=0.078%, Wed=0.068%, Thu=0.021%, H=1.28, p=0.86, n=5282. Classic Monday effect is gone. No tradeable DOW anomaly."
       }
     ],
     "signal_count": 26,
-    "dead_end_count": 176,
+    "dead_end_count": 183,
     "literature_count": 25
   },
   "live_signals": [
@@ -926,13 +954,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 36476018,
+    "sessions_today": 10,
+    "tokens_today": 49577700,
     "sessions_by_day": [
       {
         "date": "2026-04-11",
-        "sessions": 7,
-        "tokens": 36476018
+        "sessions": 10,
+        "tokens": 49577700
       },
       {
         "date": "2026-04-10",
@@ -2714,6 +2742,24 @@
       "investigated": "Rank-2 new signal from reviewer strategic review: goodwill impairment 8-K (Item 2.06) as a short signal. Built tools/goodwill_impairment_scanner.py (EDGAR EFTS full-text for 8-K Item 2.06), scanned 2022-2025, pre-registered IS/OOS test with large-cap (>$500M) filter.",
       "findings": "Tested whether big-company goodwill write-downs reliably predict short-term stock drops. Looked like a real signal at first, but a year-by-year check revealed the whole effect came from 2023 \u2014 every other year was either flat or moved the wrong way. Not tradeable, and a reminder to always check whether an 'average' result is really driven by one unusual year.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-11",
+      "investigated": "Saturday weekend research session. Daily scanners (NT 10-K, SEO, insider clusters) picked up no tradable candidates for pending hypotheses. Focused on non-event exploration: 5 new factor exposures (IYT~crude, SMH~DXY, XLRE~DGS10, HYG~VIX, XLF~DGS10), then structural break follow-ups, then Granger lead-lag confirmation, then threshold conversion attempt.",
+      "findings": "Found that the relationship between interest rates and rate-sensitive sectors (REITs, banks) completely changed in January 2022 when the Fed started hiking. REITs actually reversed sign \u2014 they now fall when rates rise, the opposite of the pre-2022 pattern. While the finding is statistically strong, our tests show it can't be turned into a simple trading rule yet.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-11",
+      "investigated": "Saturday evening non-event exploration session. Focused on converting validated exposures (XLU~TLT, XLE~CL=F, IBB~DGS10) into tradeable strategies via cointegration and spread z-score mean-reversion. Tested 7 classic pairs for Engle-Granger cointegration. Built tools/spread_zscore_backtest.py for rolling-beta z-score pair backtesting and tools/single_asset_zscore.py for confound checking.",
+      "findings": "Weekend research tried to turn a pair of matched assets into a trading strategy. After testing seven classic pairs, none actually held together under strict out-of-sample tests. One candidate looked great until a sanity check revealed most of its gains came from just one of the two assets on its own, not the pair. Chalked it up as a dead end and added a new rule to catch this mistake in future tests.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-11",
+      "investigated": "Saturday non-event exploration continued. Tested hypothesis classes not yet covered: calendar (TOM, DOW), regime (VIX, DGS10, DXY as tercile factors), and network (TSM -> semi suppliers). Built new tool: tools/regime_forward_returns.py for forward-return regime testing with OOS regime coverage validation.",
+      "findings": "Tested several ways of predicting market returns: calendar patterns like turn-of-month and Monday effects are dead in modern data. A promising finding about fear-gauge regimes turned out to be an artifact of when the test period started. Our active fear-spike trade uses a different rule and is still valid.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2807,6 +2853,6 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": "\"Session 2026-04-11 weekend-overnight completed.\\n\\nFocus: Validate rank-2 new signal from reviewer strategic review (goodwill impairment 8-K Item 2.06 short).\\n\\nBuilt tools/goodwill_impairment_scanner.py (EDGAR EFTS full-text search for 8-K Item 2.06). Scanned 2022-2025, 104 large-cap events. Pre-registered test (IS 2022-01..2024-06 n=58, OOS 2024-07..2025-12 n=46, entry next open after file_date).\\n\\nRESULT: DEAD END. IS looked strong (3d -2.93% p=0.004 dir 66%, 20d -4.84% p=0.0002) but OOS c"
+    "handoff": "\"Session 2026-04-11 Saturday completed. Non-event exploration in regime + calendar + network classes. 5 dead ends, 4 methodology findings. CRITICAL: VIX regime tercile sign-flip finding is IS-window artifact (disappears when IS starts 2005). VIX>30 first-cross event signal (b63a0168 active SPY trade) is DIFFERENT and remains valid (OOS +2.81% 20d, p=0.063). Active SPY position is safe. New tool: tools/regime_forward_returns.py with OOS regime coverage validation.\""
   }
 }
