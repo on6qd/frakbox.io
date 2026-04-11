@@ -762,14 +762,27 @@
       "confidence": 7,
       "thesis": "When a major tariff escalation event occurs (Liberation Day April 2 2026), short Steel Dynamics (STLD). OBSERVATIONAL - no Alpaca trade due to capacit",
       "report": "Investigation Report: c2eeee84\n============================================================\nStatus: abandoned  \u2014  Created 2026-03-31\n\n1. Hypothesis\n------------------------------------------------------------\nGiven that tariff escalation stld short events have historically produced\nabnormal returns in affected stocks,\nwhen a major tariff escalation event occurs (liberation day april 2 2026),\nshort steel dynamics (stld). observational - no alpaca trade due to capacity\nconstraints. liberation day is the 11th backtest event and first pre-\nregistered oos test,\nthen STLD should fall by approximately 2.58% within 5 trading days.\n\nThe proposed causal mechanism: Tariff escalation on manufactured goods reduces\ndemand for domestic steel. STLD customer mix is primarily automotive and\nindustrial manufacturers (most tariff-sensitive) vs Nucor (NUE) which serves\nconstruction sector. Mechanism: tariffs on downstream goods -> lower\nauto/industrial production -> lower STLD steel demand -> price decline. NUE\ndoes NOT replicate confirming specificity.\n\nMechanism evidence:\n  - Actors incentives\n  - Transmission channel\n  - Academic reference\n\n2. Test Design\n------------------------------------------------------------\nThe backtest covered 10 historical events across 1 stocks (STLD). All returns\nare measured as abnormal returns against SPY to isolate the event effect from\nbroad market moves.\n\nSurvivorship bias control: STLD publicly traded since 1996. All backtest\nevents post-listing. No survivorship bias.\n\nSelection bias control: STLD selected from steel sector universe for showing a\npattern. Partially controlled by verifying NUE does NOT replicate, supporting\nSTLD-specific mechanism.\n\nConfounders recorded at entry:\n  broad market direction: mixed - both bull and bear periods in backtest\n  sector trend: steel sector broadly flat but STLD underperforms NUE on tariff\n  events\n  survivorship bias: STLD listed 1996, all events post-listing, no\n  survivorship bias\n  selection bias: STLD selected because it differs from NUE; partial control\n  by testing NUE which does not replicate\n  event timing: pre_market\n  market regime: elevated\n\n3. Success Criteria (locked before testing)\n------------------------------------------------------------\nValid if: STLD 5d abnormal return < -0.5% vs SPY following Liberation Day 2026\n(April 2 announcement). Entry baseline = STLD April 1 close (pre-Liberation\nDay). Exit = April 8 close (5 trading days after event). OBSERVATIONAL - no\nAlpaca position due to capacity constraints. If success: promotes to validated\nsignal for future tariff events.\n\nConfidence: 7/10  |  Pre-registration: c31032aa6f85e46c\n\n4. Outcome\n------------------------------------------------------------\nNot yet tested.\n\n5. Conclusion\n------------------------------------------------------------\nAwaiting outcome.\n\n6. What Comes Next\n------------------------------------------------------------\nComplete the current investigation first.\n\nWarnings\n------------------------------------------------------------\n- Related dead end: tariff_soxx_semiconductor_etf_short \u2014 FAILS multiple\ntesting with clean N=7 China-targeted tariff dataset.\n- Related dead end: tariff_sector_etf_shorts \u2014 Sector ETFs (XLI +0.25%, XLY\n+0.06%, XLB +0.16%, XLE -0.03%, XLK -0.04%) show NO meaningful downward signal\nat 5d after tariff escalations (all p>0.60).\n- Related dead end: tariff_china_adr_short \u2014 Chinese ADRs (BABA, JD, KWEB,\nFXI, MCHI) show NO consistent underperformance after US tariff escalations.\n- Related dead end: tariff_xle_energy_sector \u2014 XLE showed no signal during\ntariff events: 5d=-0.22% p=0.79, 10d=+0.14% p=0.92, 20d=+0.10% p=0.96 (n=10,\n2018-2025).\n- Related dead end: tariff_xlf_financial_sector \u2014 XLF financials pooled showed\nno consistent signal: 5d=+0.54% p=0.26, 10d=+0.04% p=0.96, 20d=-0.44% p=0.54.\n- Related dead end: tariff_xlb_materials_sector \u2014 XLB materials ETF: 5d=-0.10%\np=0.81, 10d=-0.37% p=0.36, 20d=-0.35% p=0.74.\n- Related dead end: tariff_xli_industrials_sector \u2014 XLI industrials: 5d=-0.03%\np=0.94, 10d=-0.49% p=0.34, 20d=-0.43% p=0.44.\n- Related dead end: tariff_rollback_reversal \u2014 Tariff pause/rollback not a\nreliable exit signal for defensive positions.\n- Related dead end: tariff_fxi_china_etf_short \u2014 FXI backtest across 8 tariff\nevents (2018-2026): n=8, all p>0.40.\n"
+    },
+    {
+      "id": "e3456392",
+      "status": "abandoned",
+      "created": "2026-04-12",
+      "event_type": "xle crude factor timing pair trade",
+      "symbol": "XLE",
+      "direction": "long",
+      "magnitude_pct": 5.0,
+      "timeframe_days": 504,
+      "confidence": 6,
+      "thesis": "Continuous pair-trade using XLE~CL=F validated post-2022 exposure. Long XLE/short SPY when oil 20d momentum up; flip when down. First continuous-strat",
+      "report": null
     }
   ],
   "counts": {
-    "total": 56,
+    "total": 57,
     "active": 2,
     "pending": 3,
     "completed": 5,
-    "abandoned": 38,
+    "abandoned": 39,
     "invalidated": 6,
     "superseded": 2
   }

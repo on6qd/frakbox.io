@@ -1,6 +1,6 @@
 {
   "summary": {
-    "total_hypotheses": 56,
+    "total_hypotheses": 57,
     "pending": 3,
     "active": 2,
     "completed": 5,
@@ -160,6 +160,21 @@
       {
         "name": "granger_false_positive_xcorr_sanity_check",
         "status": "methodology_operational",
+        "magnitude_pct": 0.0
+      },
+      {
+        "name": "cross_section_momentum_largecap_broader_regime_dep",
+        "status": "disproven",
+        "magnitude_pct": 0.0
+      },
+      {
+        "name": "cross_section_low_vol_sharpe_edge_2016_2026",
+        "status": "weak",
+        "magnitude_pct": 0.0
+      },
+      {
+        "name": "cross_section_class_second_experiment_2026_04_12",
+        "status": "methodology",
         "magnitude_pct": 0.0
       }
     ],
@@ -915,10 +930,26 @@
       {
         "name": "xli_hgf_copper_industrials_lead_lag",
         "reason": "Copper Granger-causes XLI at lag 5 appeared significant on 2020-2024/OOS 2024 (T-1f32c097, p=0.006). Clean post-break rerun 2022-06/2024-10 (T-05059dc1) fails: IS p=0.051, xcorr guard trips with best_lag_5 xcorr=-0.005 vs lag_0 xcorr=+0.244. Relationship is purely contemporaneous. No predictive lead-lag."
+      },
+      {
+        "name": "cross_section_momentum_12_1_largecap_60stocks",
+        "reason": "Regime-flipping: 2016-19 spread=-3.2%/y (reversal regime), 2020-23 flat, 2024-26 +14.8%/y monotonic (likely AI mega-cap concentration). No persistent signal. 60-stock universe too narrow for real momentum \u2014 classic papers use 1000+ stocks. Survivorship-biased. Use as regime probe, not tradeable."
+      },
+      {
+        "name": "cross_section_momentum_12_1_broader_200stocks",
+        "reason": "Pre-registered success criteria failed. IS 2016-2023 non-crash regime REVERSAL -4.1%/yr (p=0.58, sharpe=-0.20, n=93). OOS 2024-2026 non-crash MOMENTUM +12.2%/yr (sharpe=0.64, n=26). Sign-flip across regimes is persistent \u2014 broader 200-stock universe did not fix the regime-dependence seen in first experiment (60 stocks). IS quintiles Q0..Q4 annualized: 20.4, 17.4, 16.6, 13.3, 16.9 (non-monotonic reversal). OOS quintiles: 9.9, 12.6, 14.5, 18.0, 23.2 (clean momentum). Regime filter excluded only 3 crash rebalances. Conclusion: 12-1 momentum on US large/mid-caps is not generalizable across 2016-2026. Tool: tools/cross_section_momentum_broader.py. Result ID: T-xsmom2-1885f2f0."
+      },
+      {
+        "name": "cross_section_low_vol_anomaly_real_etfs",
+        "reason": "Theoretical low-vol Sharpe edge from 200-stock equal-weight quintile sort (Q0-Q4 gap +0.12 IS, +0.15 OOS) does NOT translate to real tradeable ETFs. SPY vs SPLV vs USMV 2016-2023: SPY Sharpe 0.68, return 12.6%; SPLV Sharpe 0.52, return 8.4%; USMV Sharpe 0.64, return 9.9%. SPY WINS on both Sharpe and raw return. OOS 2024-2026 same pattern: SPY 1.07, SPLV 0.81, USMV 0.84 \u2014 SPY wins. The quintile-sort edge was an artifact of (a) equal weighting vs cap weighting, (b) 200-stock survivorship biased universe, (c) 21-day rebalance frequency. Net conclusion: the low-vol anomaly is not tradable with existing cap-weighted low-vol ETFs over 2016-2026. Supersedes earlier weak-finding record cross_section_low_vol_sharpe_edge_2016_2026."
+      },
+      {
+        "name": "xle_crude_factor_timing_pair_trade",
+        "reason": "Factor-timing pair-trade (long XLE/short SPY when CL=F 20d momentum positive, flip otherwise) failed all 5 pre-registered criteria. Hypothesis e3456392. 20d IS: Sharpe 0.472, OOS: Sharpe -0.028 (sign flip, underperforms SPY by 32%). 60d robustness check sign-flipped the whole pattern (IS -0.16bp, OOS +3.52bp) \u2014 confirming hyperparameter-dependent noise, not stable alpha. Transaction cost drag 11-22% per window (28-55 flips in ~500 days) overwhelms any genuine edge. The validated XLE~CL=F exposure is genuinely contemporaneous with zero predictive edge."
       }
     ],
-    "signal_count": 27,
-    "dead_end_count": 188,
+    "signal_count": 30,
+    "dead_end_count": 192,
     "literature_count": 25
   },
   "live_signals": [
@@ -979,13 +1010,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 10578989,
+    "sessions_today": 5,
+    "tokens_today": 21562035,
     "sessions_by_day": [
       {
         "date": "2026-04-12",
-        "sessions": 2,
-        "tokens": 10578989
+        "sessions": 5,
+        "tokens": 21562035
       },
       {
         "date": "2026-04-11",
@@ -2802,6 +2833,24 @@
       "investigated": "Sunday session continuation. Executed the carried-over task from the morning: built tools/lead_lag_retroactive_audit.py and ran a retroactive sweep across all 13 stored Granger lead-lag results under the new xcorr guard added yesterday AND a newly added regime-spanning detector for pairs that include a known 2022 structural break. Investigated why DGS10->XLRE/IYR were flagged as 'PASSES_GUARD' despite a known rate regime break, and ran clean post-2022 IS/OOS reruns to confirm or falsify. Also verified the sole BORDERLINE case (XLI~HG=F copper-industrials) with a clean post-break rerun.",
       "findings": "Audited yesterday's 'lead-lag' discoveries and discovered the most celebrated finding (that 10-year Treasury yields predict real-estate ETF movements a few days in advance) was actually a statistical illusion caused by mixing two very different rate regimes in the test window. When you restrict the test to pure post-2022 data, the predictive effect completely disappears \u2014 it was purely a same-day correlation all along.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-12",
+      "investigated": "Sunday night non-event exploration (session 3). Ran the first-ever experiment in the cross_section hypothesis class: 12-1 momentum quintile sort on a 60-stock US large-cap universe. Built reusable tool (tools/cross_section_momentum.py) with IS/OOS split, then ran a 3-period regime-sliced variant (2016-19 / 2020-23 / 2024-26) to check whether the Daniel-Moskowitz momentum-crashes pattern explained the IS vs OOS divergence.",
+      "findings": "Tested the classic 'winners keep winning' pattern on 60 big US stocks from 2016 to today and found it doesn't actually work \u2014 the direction of the effect flipped across different market regimes. The only period that looked clean was the recent AI boom, which is probably just a few giant tech companies dominating rather than a real pattern worth trading.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-12",
+      "investigated": "Sunday night non-event exploration (session 4). Continued cross_section class work after yesterday's dead end on 60-stock 12-1 momentum. Built two new experiments: (1) tools/cross_section_momentum_broader.py \u2014 same 12-1 momentum but on a 200-stock large/mid-cap universe with a SPY 6m drawdown regime filter (addresses the first experiment's two main weaknesses: narrow universe and Daniel-Moskowitz momentum-crashes); (2) tools/cross_section_low_vol.py \u2014 a fundamentally different cross_section factor (60-day realized volatility quintile sort, academic Baker-Bradley-Wurgler low-vol anomaly). Then did a real-ETF sanity check (SPY vs SPLV vs USMV) to see if the theoretical low-vol edge translates into something tradable.",
+      "findings": "Tried to find a tradable pattern in how different groups of big US stocks behave \u2014 tested 'winners keep winning' on a broader universe and tested the famous 'low-volatility stocks do better on a risk-adjusted basis' theory. The winners test kept showing opposite results in different market eras. The low-vol theory looked promising in the raw backtest but completely fell apart when compared against real low-volatility ETFs you could actually buy \u2014 plain S&P 500 still beat them in every period tested.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-12",
+      "investigated": "Sunday session 5 (final of the day). Pre-registered and tested the first continuous-strategy conversion for a validated factor exposure: XLE~CL=F \"factor-timing pair-trade\" where the strategy holds long XLE / short SPY when CL=F 20-day momentum is positive and flips when negative. This was the explicit follow-through on yesterday's exposure_to_event_conversion_meta_finding which said \"the alpha lives in continuous factor exposure, not discrete events \u2014 design a pair-trading methodology for validated exposure pairs.\" Pre-registered 5 success criteria (IS Sharpe>=0.8, OOS Sharpe>=0.5, OOS sign consistency, OOS beats SPY on Sharpe AND total return, OOS max DD<15%). Hypothesis e3456392, tool tools/factor_timing_xle_crude.py. Ran 20d primary, 60d robustness, then a continuous long-XLE/short-SPY no-timing sanity check to diagnose root cause.",
+      "findings": "Tested whether a simple \"follow crude oil momentum\" rule could systematically profit from the known link between energy stocks and oil prices. It failed every pre-registered test, and a cleaner sanity check revealed the deeper reason: over the past four years the energy sector has not actually outperformed the broad market on a risk-adjusted basis at all, so there was never any base-rate edge for the rule to amplify.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2900,6 +2949,6 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": "\"Session 2026-04-12 (Sunday): retroactive lead-lag audit completed. Built tools/lead_lag_retroactive_audit.py which applies the xcorr guard AND a regime-spanning check. Of 13 stored lead-lag results: 7 RETIRED_XCORR_GUARD (previously known), 4 REGIME_SPANNING_INVALID (rate-sensitive pairs with IS pre-2022 break), 1 BORDERLINE_REGIME_RECHECK (XLI~HG=F) verified as dead end via clean post-break test. Previously 'validated' DGS10->XLRE/IYR lead-lag (recorded 2026-04-11) is now retired \\u2014 the 20"
+    "handoff": "\"2026-04-12 orchestrator session 5: Pre-registered and falsified the first continuous-strategy conversion attempt for a validated factor exposure (XLE~CL=F). Hypothesis e3456392 abandoned. Extended exposure_to_event_conversion_meta_finding with a stronger claim: threshold-on-momentum of the factor also fails, not just threshold-on-daily-return. Discovered the root cause via a separate continuous beta-harvest check: there is no XLE-vs-SPY sector alpha to harvest (t-stat 0.03 over 947 days). This "
   }
 }
