@@ -964,10 +964,14 @@
       {
         "name": "xle_crude_factor_timing_pair_trade",
         "reason": "Factor-timing pair-trade (long XLE/short SPY when CL=F 20d momentum positive, flip otherwise) failed all 5 pre-registered criteria. Hypothesis e3456392. 20d IS: Sharpe 0.472, OOS: Sharpe -0.028 (sign flip, underperforms SPY by 32%). 60d robustness check sign-flipped the whole pattern (IS -0.16bp, OOS +3.52bp) \u2014 confirming hyperparameter-dependent noise, not stable alpha. Transaction cost drag 11-22% per window (28-55 flips in ~500 days) overwhelms any genuine edge. The validated XLE~CL=F exposure is genuinely contemporaneous with zero predictive edge."
+      },
+      {
+        "name": "buyback_announcement_long",
+        "reason": "Share buyback announcements: DEAD END as long signal. H1 2024 N=101 large-cap. Close-entry 1d +1.11% p=0.036 but priced in by next open. Open-entry: 3d +0.16% p=0.79, 5d -0.04% p=0.95, 10d -1.60% p=0.053, 20d -2.32% p=0.017. Academic anomaly (Ikenberry 1995) operates over years not days. Scanner: tools/buyback_scanner.py. Result IDs: T-3b1253bf, T-59521cdf"
       }
     ],
     "signal_count": 32,
-    "dead_end_count": 192,
+    "dead_end_count": 193,
     "literature_count": 25
   },
   "live_signals": [
@@ -1044,9 +1048,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 2,
+    "tokens_today": 14756807,
     "sessions_by_day": [
+      {
+        "date": "2026-04-13",
+        "sessions": 2,
+        "tokens": 14756807
+      },
       {
         "date": "2026-04-12",
         "sessions": 10,
@@ -2909,6 +2918,18 @@
       "investigated": "Saturday session 8 (orchestrator). Verified both tool bugs flagged in recent friction (fetch-series TypeError, activist_13d_scanner form encoding) are ALREADY FIXED \u2014 confirmed live with fetch-series across SPY/^VIX/CL=F/FRED:DGS10. Pre-registered and ran a 5th 2022 structural-break test: XLI (industrials) \u2192 HG=F (copper) controlling for SPY, break at 2022-01-01, 2010-2026 panel. Added falsification tests at alternative break dates (2016/2018/2020). Annotated pending NT 10-K hypothesis 3db5eb00 with validated effect size from the first-time filer subgroup work.",
       "findings": "I tested whether a big 2022 shift in how industrial stocks track copper prices was a clean regime change or part of a longer trend. It turned out to be both \u2014 2022 was the sharpest step, but the relationship had been quietly fading for a decade.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-13",
+      "investigated": "Weekend session: OOS closeouts (ZBIO, MNR SEO, TM/HMC tariff), 4 daily scanner runs, comprehensive structural break alt-date falsification across all validated pairs.",
+      "findings": "Tested whether previously-discovered market regime changes were real breaks or gradual trends. All four turned out to be slow-moving shifts, not sudden changes. Our active insider-cluster trade (ZBIO) is losing and will close Monday. SPY recovery trade continues performing well at +6%.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-13",
+      "investigated": "Pre-market Monday session: verified trade_loop auto-close setup for ZBIO (deadline 3:55 PM today), computed MNR SEO abnormal returns through Day 2 (corrected timeline error in previous handoff), ran all 4 daily scanners (clean), recorded ALKT JANA 13D OOS observation (+1.16% 5d), wrote strategic portfolio assessment.",
+      "findings": "Ran pre-market checks: one trade (ZBIO) auto-closes today at a loss, another (SPY) is up 6.2% and holding. All event scanners came up empty over the weekend. Completed a strategic review showing the fund's edge comes from event-driven signals \u2014 non-event statistical approaches have been exhaustively tested and don't work.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2917,16 +2938,6 @@
         "event": "FedEx Freight Investor Day April 8, 2026. Record equity value, distribution ratio, S&P index plans. Hypothesis 60558434 ",
         "date": "2026-04-08",
         "symbol": "FDXF"
-      },
-      {
-        "event": "TM (Toyota) auto tariff Liberation Day OOS observation. Track 5d/10d abnormal returns post-April 2 for auto_import_tarif",
-        "date": "2026-04-09",
-        "symbol": "TM"
-      },
-      {
-        "event": "HMC (Honda) auto tariff Liberation Day OOS observation. Track 5d/10d abnormal returns post-April 2 for auto_import_tarif",
-        "date": "2026-04-09",
-        "symbol": "HMC"
       },
       {
         "event": "REPL PDUFA April 10 (Friday). FDA announces after 5pm ET. If CRL: use activate_repl_trade.py. If crash >55% use d302c84b",
@@ -3012,12 +3023,6 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": {
-      "attempted": "Saturday session 8: (1) verify fetch-series and activist_13d_scanner bug fixes from friction; (2) pre-register and test a 5th 2022 structural-break pair (XLI\u2192HG=F, with SPY control) to check whether the 2022 meta-regime extends from commodity-producer sectors to diversified industrials; (3) annotate NT 10-K pending hypothesis with validated effect size.",
-      "accomplished": "All three. Both bugs confirmed already fixed (fetch-series works with FRED/futures; activist scanner fixed session 6). XLI-HG=F structural break at 2022-01-01 pre-registered (h=120f6318), ran, PASSED all 4 criteria: F=32.08, p=1.5e-14, pre-beta=0.326, post-beta=0.128, |\u0394\u03b2|=0.198. Completed hypothesis as supported with nuance. Falsification at 2016/2018/2020 break dates ALL ALSO significant with same direction; 2022 remains 3x strongest F. Recorded 2 known effects: xli_hgf_copper_structural_break_2022 (moderate) and structural_break_secular_trend_vs_regime_methodology (canonical meta-rule). Annotated 3db5eb00 with 2% validated effect and 2.5% TP operational note.",
-      "partial_results": "XLI-HG=F alt-date break table (all significant, same direction): 2016 F=10.37 \u0394\u03b2=-0.114, 2018 F=6.24 \u0394\u03b2=-0.084, 2020 F=7.10 \u0394\u03b2=-0.090, 2022 F=32.08 \u0394\u03b2=-0.198. Post-beta sequence: 0.214 \u2192 0.218 \u2192 0.209 \u2192 0.128. Monotonic decay with sharp 2022 step.",
-      "blocked_by": "Nothing. Saturday market-closed, scanners quiet \u2014 no operational trading possible. Research-only session.",
-      "key_insight": "Prior 4 '2022 structural break validated' claims (xle_crude, xlu_tlt, xme_copper, rate_sensitive) may need revision: they were NEVER stress-tested at alternative break dates. The XLI result shows that when you DO stress-test, what looks like a discrete 2022 regime often turns out to be a secular trend with 2022 as its sharpest step. New canonical rule: always run 2-4 alt-date Chow tests before calling a date a 'regime change.' Only claim discrete regime if target F is 3x+ strongest."
-    }
+    "handoff": "\"Monday: ZBIO auto-closes 3:55 PM via trade_loop. Verify exit. MNR SEO Day3 = Monday close (corrected from prev handoff). All 4 scanners clean this weekend. ALKT JANA 13D OOS recorded (+1.16% 5d). Strategic assessment: fund alpha is event-driven only. 20+ non-event experiments all dead ends. After ZBIO closes: 1 active (SPY), 3 pending templates. Capacity for 4 new experiments.\""
   }
 }
