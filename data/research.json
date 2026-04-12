@@ -1,12 +1,12 @@
 {
   "summary": {
-    "total_hypotheses": 57,
+    "total_hypotheses": 59,
     "pending": 3,
     "active": 2,
-    "completed": 5,
+    "completed": 7,
     "invalidated": 6,
-    "direction_accuracy": "2/5",
-    "patterns_discovered": 2,
+    "direction_accuracy": "2/7",
+    "patterns_discovered": 3,
     "reliable_patterns": [
       {
         "event_type": "sp500_52w_low_momentum_short",
@@ -22,6 +22,14 @@
       "sp500_52w_low_momentum_short": {
         "accuracy": "1/4",
         "avg_confidence": 6.5
+      },
+      "xme_copper_hgf_exposure_apr2026": {
+        "accuracy": "0/1",
+        "avg_confidence": 6.5
+      },
+      "xli_hgf_copper_structural_break_2022": {
+        "accuracy": "0/1",
+        "avg_confidence": 6.0
       }
     }
   },
@@ -175,6 +183,16 @@
       {
         "name": "cross_section_class_second_experiment_2026_04_12",
         "status": "methodology",
+        "magnitude_pct": 0.0
+      },
+      {
+        "name": "xli_hgf_copper_structural_break_2022",
+        "status": "moderate",
+        "magnitude_pct": -0.198
+      },
+      {
+        "name": "structural_break_secular_trend_vs_regime_methodology",
+        "status": "moderate",
         "magnitude_pct": 0.0
       }
     ],
@@ -948,7 +966,7 @@
         "reason": "Factor-timing pair-trade (long XLE/short SPY when CL=F 20d momentum positive, flip otherwise) failed all 5 pre-registered criteria. Hypothesis e3456392. 20d IS: Sharpe 0.472, OOS: Sharpe -0.028 (sign flip, underperforms SPY by 32%). 60d robustness check sign-flipped the whole pattern (IS -0.16bp, OOS +3.52bp) \u2014 confirming hyperparameter-dependent noise, not stable alpha. Transaction cost drag 11-22% per window (28-55 flips in ~500 days) overwhelms any genuine edge. The validated XLE~CL=F exposure is genuinely contemporaneous with zero predictive edge."
       }
     ],
-    "signal_count": 30,
+    "signal_count": 32,
     "dead_end_count": 192,
     "literature_count": 25
   },
@@ -1002,6 +1020,22 @@
           "date": "2026-03-26"
         }
       ]
+    },
+    {
+      "event_type": "xme_copper_hgf_exposure_apr2026",
+      "state": "EXPLORING",
+      "total_experiments": 1,
+      "effective_independent_n": 1,
+      "effective_correct_n": 0,
+      "last_updated": "2026-04-12T03:18:36.062910",
+      "experiments": [
+        {
+          "symbol": "XME",
+          "correct": false,
+          "return_pct": 0,
+          "date": "2026-04-12"
+        }
+      ]
     }
   ],
   "focus": {
@@ -1010,13 +1044,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 31449028,
+    "sessions_today": 10,
+    "tokens_today": 56313189,
     "sessions_by_day": [
       {
         "date": "2026-04-12",
-        "sessions": 7,
-        "tokens": 31449028
+        "sessions": 10,
+        "tokens": 56313189
       },
       {
         "date": "2026-04-11",
@@ -2857,6 +2891,24 @@
       "investigated": "Weekend event-class pivot session 6. Ran the 4 daily event scanners (NT 10-K, activist 13D, SEO bought-deal, insider cluster) looking for qualifying candidates for the 3 pending TBD hypotheses (SEO, NT 10-K, Starboard 13D). Stress-tested the activist 13D scanner when 60 days returned zero hits.",
       "findings": "Found and fixed a silent bug in our activist-investor filing scanner \u2014 it had been returning zero results for months because it used the wrong form code when querying the SEC. After the fix, we spotted one genuine filing from earlier this month but decided not to trade it, since our research has shown this particular investor doesn't produce tradeable signals.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-12",
+      "investigated": "NT 10-K first-time vs repeat filer subgroup analysis. Pulled all NT 10-K filings 2022-01 to 2025-12 (raw N=2444), filtered to large-cap via cached market caps (N=116), classified each by whether the same ticker had filed NT 10-K within the prior 730 days. Ran backtests on each subgroup at 1d/3d/5d/10d with SPY benchmark and temporal split (discovery 2022-01 to 2024-06, OOS 2024-07 to 2025-12). Tool: tools/nt_10k_first_vs_repeat.py.",
+      "findings": "Looked at companies that tell the SEC they're going to miss their annual report deadline. The short trade we already knew about works -- but only when a company is filing that warning for the first time in at least two years. Repeat late-filers give no edge; the market has already priced them in.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-12",
+      "investigated": "Saturday-night orchestrator session. (1) Closed out operational state: ZBIO active trade day4 abnormal = -11.29%, MNR SEO OOS day2 abnormal = -0.90% (reverting). (2) Ran all four daily scanners (NT 10-K, SEO bought deal, activist 13D, insider cluster) \u2014 all returned 0 candidates, EDGAR was quiet. (3) Pre-registered and tested a new non-event exposure hypothesis: XME (metals & mining ETF) -> HG=F (copper futures) -> controlling for SPY. (4) Ran a follow-on structural break test at 2022-01-01. (5) While completing the hypothesis, discovered and fixed a real bug in research.complete_hypothesis().",
+      "findings": "Tonight confirmed that copper prices reliably drive the returns of metals-mining stocks, and we also found the same \"relationship weakened around early 2022\" pattern we have now seen in four separate commodity/sector pairings \u2014 strong evidence that something structural shifted in 2022 across many markets at once.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-12",
+      "investigated": "Saturday session 8 (orchestrator). Verified both tool bugs flagged in recent friction (fetch-series TypeError, activist_13d_scanner form encoding) are ALREADY FIXED \u2014 confirmed live with fetch-series across SPY/^VIX/CL=F/FRED:DGS10. Pre-registered and ran a 5th 2022 structural-break test: XLI (industrials) \u2192 HG=F (copper) controlling for SPY, break at 2022-01-01, 2010-2026 panel. Added falsification tests at alternative break dates (2016/2018/2020). Annotated pending NT 10-K hypothesis 3db5eb00 with validated effect size from the first-time filer subgroup work.",
+      "findings": "I tested whether a big 2022 shift in how industrial stocks track copper prices was a clean regime change or part of a longer trend. It turned out to be both \u2014 2022 was the sharpest step, but the relationship had been quietly fading for a decade.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -2960,6 +3012,12 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": "\"2026-04-12 orchestrator session 6 (weekend event-class pivot): Abandoned non-event exploration per session-5 recommendation. Ran all 4 daily event scanners (NT 10-K, activist 13D, SEO bought-deal, insider cluster) and found a CRITICAL bug: activist_13d_scanner.py used forms=SC%2013D in the EDGAR EFTS URL, but EDGAR form codes require SCHEDULE 13D \\u2014 the scanner has returned zero hits since inception. Fixed to forms=SCHEDULE+13D plus a form==SCHEDULE 13D filter to drop amendments (/A). Post-"
+    "handoff": {
+      "attempted": "Saturday session 8: (1) verify fetch-series and activist_13d_scanner bug fixes from friction; (2) pre-register and test a 5th 2022 structural-break pair (XLI\u2192HG=F, with SPY control) to check whether the 2022 meta-regime extends from commodity-producer sectors to diversified industrials; (3) annotate NT 10-K pending hypothesis with validated effect size.",
+      "accomplished": "All three. Both bugs confirmed already fixed (fetch-series works with FRED/futures; activist scanner fixed session 6). XLI-HG=F structural break at 2022-01-01 pre-registered (h=120f6318), ran, PASSED all 4 criteria: F=32.08, p=1.5e-14, pre-beta=0.326, post-beta=0.128, |\u0394\u03b2|=0.198. Completed hypothesis as supported with nuance. Falsification at 2016/2018/2020 break dates ALL ALSO significant with same direction; 2022 remains 3x strongest F. Recorded 2 known effects: xli_hgf_copper_structural_break_2022 (moderate) and structural_break_secular_trend_vs_regime_methodology (canonical meta-rule). Annotated 3db5eb00 with 2% validated effect and 2.5% TP operational note.",
+      "partial_results": "XLI-HG=F alt-date break table (all significant, same direction): 2016 F=10.37 \u0394\u03b2=-0.114, 2018 F=6.24 \u0394\u03b2=-0.084, 2020 F=7.10 \u0394\u03b2=-0.090, 2022 F=32.08 \u0394\u03b2=-0.198. Post-beta sequence: 0.214 \u2192 0.218 \u2192 0.209 \u2192 0.128. Monotonic decay with sharp 2022 step.",
+      "blocked_by": "Nothing. Saturday market-closed, scanners quiet \u2014 no operational trading possible. Research-only session.",
+      "key_insight": "Prior 4 '2022 structural break validated' claims (xle_crude, xlu_tlt, xme_copper, rate_sensitive) may need revision: they were NEVER stress-tested at alternative break dates. The XLI result shows that when you DO stress-test, what looks like a discrete 2022 regime often turns out to be a secular trend with 2022 as its sharpest step. New canonical rule: always run 2-4 alt-date Chow tests before calling a date a 'regime change.' Only claim discrete regime if target F is 3x+ strongest."
+    }
   }
 }
