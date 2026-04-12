@@ -1010,13 +1010,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 21562035,
+    "sessions_today": 7,
+    "tokens_today": 31449028,
     "sessions_by_day": [
       {
         "date": "2026-04-12",
-        "sessions": 5,
-        "tokens": 21562035
+        "sessions": 7,
+        "tokens": 31449028
       },
       {
         "date": "2026-04-11",
@@ -2851,6 +2851,12 @@
       "investigated": "Sunday session 5 (final of the day). Pre-registered and tested the first continuous-strategy conversion for a validated factor exposure: XLE~CL=F \"factor-timing pair-trade\" where the strategy holds long XLE / short SPY when CL=F 20-day momentum is positive and flips when negative. This was the explicit follow-through on yesterday's exposure_to_event_conversion_meta_finding which said \"the alpha lives in continuous factor exposure, not discrete events \u2014 design a pair-trading methodology for validated exposure pairs.\" Pre-registered 5 success criteria (IS Sharpe>=0.8, OOS Sharpe>=0.5, OOS sign consistency, OOS beats SPY on Sharpe AND total return, OOS max DD<15%). Hypothesis e3456392, tool tools/factor_timing_xle_crude.py. Ran 20d primary, 60d robustness, then a continuous long-XLE/short-SPY no-timing sanity check to diagnose root cause.",
       "findings": "Tested whether a simple \"follow crude oil momentum\" rule could systematically profit from the known link between energy stocks and oil prices. It failed every pre-registered test, and a cleaner sanity check revealed the deeper reason: over the past four years the energy sector has not actually outperformed the broad market on a risk-adjusted basis at all, so there was never any base-rate edge for the rule to amplify.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-12",
+      "investigated": "Weekend event-class pivot session 6. Ran the 4 daily event scanners (NT 10-K, activist 13D, SEO bought-deal, insider cluster) looking for qualifying candidates for the 3 pending TBD hypotheses (SEO, NT 10-K, Starboard 13D). Stress-tested the activist 13D scanner when 60 days returned zero hits.",
+      "findings": "Found and fixed a silent bug in our activist-investor filing scanner \u2014 it had been returning zero results for months because it used the wrong form code when querying the SEC. After the fix, we spotted one genuine filing from earlier this month but decided not to trade it, since our research has shown this particular investor doesn't produce tradeable signals.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2879,6 +2885,11 @@
         "event": "MNR SEO bought deal OOS observation. 424B4 filed April 8. Track 5d return from Apr 9 open (close Apr 15). Expected: nega",
         "date": "2026-04-15",
         "symbol": "MNR"
+      },
+      {
+        "event": "ALKT \u2014 JANA Partners filed initial SCHEDULE 13D on 2026-04-01 (target: Alkami Technology, $1.7B mkt cap, $16.13). NOT TR",
+        "date": "2026-04-20",
+        "symbol": "ALKT"
       },
       {
         "event": "OTIS",
@@ -2949,6 +2960,6 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": "\"2026-04-12 orchestrator session 5: Pre-registered and falsified the first continuous-strategy conversion attempt for a validated factor exposure (XLE~CL=F). Hypothesis e3456392 abandoned. Extended exposure_to_event_conversion_meta_finding with a stronger claim: threshold-on-momentum of the factor also fails, not just threshold-on-daily-return. Discovered the root cause via a separate continuous beta-harvest check: there is no XLE-vs-SPY sector alpha to harvest (t-stat 0.03 over 947 days). This "
+    "handoff": "\"2026-04-12 orchestrator session 6 (weekend event-class pivot): Abandoned non-event exploration per session-5 recommendation. Ran all 4 daily event scanners (NT 10-K, activist 13D, SEO bought-deal, insider cluster) and found a CRITICAL bug: activist_13d_scanner.py used forms=SC%2013D in the EDGAR EFTS URL, but EDGAR form codes require SCHEDULE 13D \\u2014 the scanner has returned zero hits since inception. Fixed to forms=SCHEDULE+13D plus a form==SCHEDULE 13D filter to drop amendments (/A). Post-"
   }
 }
