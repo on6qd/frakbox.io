@@ -531,7 +531,7 @@
       },
       {
         "name": "dividend_cut_short",
-        "reason": "N=81 large-cap events (>B, S&P500, 2015-2024, >25% cut or suspension). Avg abnormal returns POSITIVE at all horizons (stocks BOUNCE after cuts). 5d avg=+1.15%, p=0.0501 (barely). OOS 5d avg=-0.04%, direction=45.9%. Signal goes WRONG direction - stocks recover after dividend cuts. Not a reliable short signal. Tool: tools/dividend_cut_backtest.py"
+        "reason": "Signal failed 5 check(s): passes_multiple_testing, direction>50pct, abnormal_return>0.5pct, return_after_costs>0, oos_direction>50pct. n=81, best_horizon=1d, avg_abnormal=0.250% (0.25 pct pts), p=0.2851, direction%=46.9%, passes_mt=False, oos_n=37, oos_neg_rate=45.9%. Universe: 205 S&P500 large-caps >$2B, 2015-01-01-2024-12-31."
       },
       {
         "name": "sp500_52w_low_catalyst_short_repeat_touch",
@@ -976,10 +976,18 @@
       {
         "name": "auditor_change_8k_item_401_short",
         "reason": "~1600 Item 4.01 filings/yr but dominated by micro/small-cap. Less than 5-10 large-cap auditor changes per year. Insufficient frequency for statistical power. Not viable."
+      },
+      {
+        "name": "pead_earnings_miss_short",
+        "reason": "No significant abnormal return at any horizon (1d/3d/5d/10d). p-values 0.07-0.93. OOS direction = 37.5% at 5d (wrong way). PEAD fully arbitraged in large-cap universe. N=112 discovery, N=24 OOS."
+      },
+      {
+        "name": "cybersecurity_8k_item_105_short",
+        "reason": "Signal failed check(s): n_sufficient, passes_mt, direction_correct, abnormal_above_threshold, return_after_costs. n=0, best_horizon=None, avg_abnormal=0.000%, p=1.0000, neg_rate=0.0%, passes_mt=False."
       }
     ],
     "signal_count": 32,
-    "dead_end_count": 195,
+    "dead_end_count": 197,
     "literature_count": 25
   },
   "live_signals": [
@@ -1056,13 +1064,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 44857720,
+    "sessions_today": 6,
+    "tokens_today": 65728287,
     "sessions_by_day": [
       {
         "date": "2026-04-13",
-        "sessions": 4,
-        "tokens": 44857720
+        "sessions": 6,
+        "tokens": 65728287
       },
       {
         "date": "2026-04-12",
@@ -2950,6 +2958,18 @@
       "investigated": "Insider evaluator improvement (prior drawdown scoring), trade PnL backfill, 3 new signal explorations (DFAN14A, 8-K Item 4.01, VIX>30 QQQ/IWM extension), watchlist cleanup",
       "findings": "The fund explored three new signal ideas this session (proxy contests, auditor changes, extending the VIX fear signal to other ETFs) and all turned out to be dead ends. Improved the insider trading detector with a price-drop filter that makes it smarter about which insider buying clusters to trade. The portfolio is up about half a percent overall.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-13",
+      "investigated": "Session housekeeping: ran all 4 daily scanners (nothing new \u2014 weekend), verified ZBIO auto-close, fixed data_tasks.py fetch-series hardcoded end date bug (5 occurrences), verified 13D scanner EFTS encoding fix working, cleaned 5 stale watchlist entries (abandoned hypotheses), checked MIDCO Form 10 (not filed), reviewed fund strategy and confirmed ZBIO failure explained by retired t+1 methodology.",
+      "findings": "Ran routine scanner checks (nothing new over the weekend) and fixed a date-handling bug that was breaking some analysis tools. Cleaned stale items from the research watchlist. All automated trade management is ready for Monday market open.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-13",
+      "investigated": "Post-earnings miss drift backtest (SP100, -10% threshold), insider cluster evaluator trigger_class gate implementation, scanner readiness verification",
+      "findings": "Tested whether stocks drift after missing earnings expectations \u2014 they do not, confirming this classic academic anomaly is now fully eliminated by algorithmic trading. Also improved our insider-trade evaluation system to account for filing timing: most insider filings happen after market close, changing expected returns.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -2985,7 +3005,7 @@
         "symbol": "MIDD"
       },
       {
-        "event": "MIDCO (Middleby Food Processing spinco) check Form 10 filing status. Strong spinco short candidate.",
+        "event": "MIDCO (Middleby Food Processing spinco) check Form 10 filing status. Strong spinco short candidate. | CHECKED April 13: ",
         "date": "2026-05-01",
         "symbol": "MIDCO"
       },
@@ -3023,6 +3043,12 @@
         "category": "activist_13d_filing_long"
       }
     ],
-    "handoff": "\"Sunday session: Improved insider evaluator (prior-drawdown scoring). Backfilled trade PnL. Explored DFAN14A, 8-K 4.01, VIX>30 extension (all dead ends). Cleaned 21 stale watchlist entries. Pipeline: ZBIO closes Mon, MNR day3 Mon, daily scanners. Signal exploration hitting diminishing returns for large-cap EDGAR signals.\""
+    "handoff": {
+      "attempted": "Session housekeeping, watchlist cleanup, bug fix, spinoff research",
+      "accomplished": "Fixed fetch-series date bug (5 hardcoded 2026-01-01 defaults). Cleaned 5 stale watchlist entries. Ran all 4 scanners. Verified ZBIO auto-close and 13D EFTS fix. Checked MIDCO Form 10 (not filed).",
+      "partial_results": "MIDCO spinoff confirmed strong candidate \u2014 non-core divestiture, est $1-2B mktcap, too small for S&P 500, desirability filter = PASS for short signal. But Form 10 not filed.",
+      "blocked_by": "Weekend \u2014 market closed, scanners quiet. Deal flow is the bottleneck (8.7% utilization).",
+      "key_insight": "ZBIO failure fully explained by retired t+1 methodology. Current evaluator (filing lag hard block) is correct. Pipeline is sound, just needs events to fire."
+    }
   }
 }
