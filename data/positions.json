@@ -44,7 +44,7 @@
       "exit_reason": "",
       "closed_date": "2026-03-28",
       "thesis": "When an S&P 500 large-cap stock (>500M market cap) first crosses below its 52-week low on a close basis, SHORT at next-d",
-      "direction_correct": true
+      "direction_correct": false
     },
     {
       "symbol": "ABT",
@@ -74,7 +74,7 @@
       "exit_reason": "",
       "closed_date": "2026-03-24",
       "thesis": "When an S&P 500 large-cap stock (>500M market cap) first crosses below its 52-week low (after 30+ days above that level)",
-      "direction_correct": false
+      "direction_correct": true
     },
     {
       "symbol": "XLI",

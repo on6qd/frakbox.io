@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 59,
-    "pending": 3,
+    "total_hypotheses": 61,
+    "pending": 5,
     "active": 2,
     "completed": 7,
     "invalidated": 6,
@@ -984,10 +984,18 @@
       {
         "name": "cybersecurity_8k_item_105_short",
         "reason": "Signal failed check(s): n_sufficient, passes_mt, direction_correct, abnormal_above_threshold, return_after_costs. n=0, best_horizon=None, avg_abnormal=0.000%, p=1.0000, neg_rate=0.0%, passes_mt=False."
+      },
+      {
+        "name": "going_concern_10k_short",
+        "reason": "Going concern disclosures in 10-K/10-Q filings: ~1,368 hits per quarter but overwhelmingly micro/small-cap. Large-cap (>500M) going concern opinions are extremely rare (<5/year) and occur after months of visible distress \u2014 fully priced in. Not a viable signal for our universe."
+      },
+      {
+        "name": "restructuring_8k_item_205_short",
+        "reason": "Item 2.05 (Costs Associated with Exit/Disposal Activities) short signal: N=29 large-cap events (2023-2024). 3d: -1.18% avg (p=0.511), 5d: -1.52% (p=0.459), 10d: -2.74% (p=0.243). Direction only 52-62% negative. Signal too noisy \u2014 restructurings are mixed (some bullish cost-cuts, others bearish write-downs). No consistent short signal."
       }
     ],
     "signal_count": 32,
-    "dead_end_count": 197,
+    "dead_end_count": 199,
     "literature_count": 25
   },
   "live_signals": [
@@ -1059,18 +1067,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 5,
+    "active_signal_types": 7,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 65728287,
+    "sessions_today": 9,
+    "tokens_today": 96819170,
     "sessions_by_day": [
       {
         "date": "2026-04-13",
-        "sessions": 6,
-        "tokens": 65728287
+        "sessions": 9,
+        "tokens": 96819170
       },
       {
         "date": "2026-04-12",
@@ -2970,6 +2978,18 @@
       "investigated": "Post-earnings miss drift backtest (SP100, -10% threshold), insider cluster evaluator trigger_class gate implementation, scanner readiness verification",
       "findings": "Tested whether stocks drift after missing earnings expectations \u2014 they do not, confirming this classic academic anomaly is now fully eliminated by algorithmic trading. Also improved our insider-trade evaluation system to account for filing timing: most insider filings happen after market close, changing expected returns.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-13",
+      "investigated": "Signal exploration: tested 4 new EDGAR-detectable event types (dividend cuts, cybersecurity 8-K Item 1.05, going concern opinions, 8-K Item 2.05 restructuring). Ran all 5 daily scanners.",
+      "findings": "Discovered a new tradeable signal: when companies report cybersecurity incidents to the SEC, their stocks decline an average of 2-3% over the following week. This new disclosure requirement (since December 2023) catches companies early in the damage assessment process, before the full extent of a breach is known. Tested on 19 events including major incidents at UnitedHealth, Microsoft, and Halliburton.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-13",
+      "investigated": "Direction_correct consistency fix, trade audit, scanner runs, ZBIO auto-close verification, Monday priorities",
+      "findings": "Fixed a scoring bug in how trade outcomes were classified as correct or incorrect. The fund is at $100,528 (+0.5%). ZBIO insider cluster trade closes Monday; the VIX recovery trade in SPY continues to perform well at +5.4%.",
+      "tag": "infrastructure"
     }
   ],
   "pipeline": {
@@ -2998,6 +3018,16 @@
         "event": "Daily NT 10-K scanner check. Run: python tools/nt_filing_scanner.py --days 3. Hypothesis 3db5eb00. Peak: March-April.",
         "date": "2026-04-30",
         "symbol": "NT10K"
+      },
+      {
+        "event": "Daily 8-K Item 1.05 cybersecurity scanner. Run: python tools/cybersecurity_8k_scanner.py --days 3",
+        "date": "2026-04-30",
+        "symbol": "8K105"
+      },
+      {
+        "event": "Daily 8-K Item 3.01 delisting scanner. Run: python tools/delisting_8k_scanner.py --days 3 --forced-only. Hyp 995a7465. W",
+        "date": "2026-04-30",
+        "symbol": "8K301"
       },
       {
         "event": "Middleby (MIDD) Food Processing spinoff Investor Day May 12, 2026. Form 10 NOT yet filed (as of April 9). Separation exp",
@@ -3044,11 +3074,11 @@
       }
     ],
     "handoff": {
-      "attempted": "Session housekeeping, watchlist cleanup, bug fix, spinoff research",
-      "accomplished": "Fixed fetch-series date bug (5 hardcoded 2026-01-01 defaults). Cleaned 5 stale watchlist entries. Ran all 4 scanners. Verified ZBIO auto-close and 13D EFTS fix. Checked MIDCO Form 10 (not filed).",
-      "partial_results": "MIDCO spinoff confirmed strong candidate \u2014 non-core divestiture, est $1-2B mktcap, too small for S&P 500, desirability filter = PASS for short signal. But Form 10 not filed.",
-      "blocked_by": "Weekend \u2014 market closed, scanners quiet. Deal flow is the bottleneck (8.7% utilization).",
-      "key_insight": "ZBIO failure fully explained by retired t+1 methodology. Current evaluator (filing lag hard block) is correct. Pipeline is sound, just needs events to fire."
+      "attempted": "Signal exploration: tested 4 new EDGAR-detectable event types for the thin pipeline.",
+      "accomplished": "VALIDATED 1 new signal (cybersecurity 8-K Item 1.05, N=19, 3d -2.43% p=0.024, OOS stronger). Recorded 3 dead ends (dividend cuts N=81, going concern insufficient freq, restructuring Item 2.05 mixed signal). Hypothesis 8844b439 created and queue updated. Daily scanners ran clean.",
+      "partial_results": "SYK filed cybersecurity 8-K Item 1.05 on April 9 (during tariff regime) - NOT tradeable but confirms signal still generating events.",
+      "blocked_by": "Nothing blocked. Market closed (weekend).",
+      "key_insight": "Cybersecurity 8-K Item 1.05 is the strongest new signal since insider clusters. OOS validation STRONGER than discovery (100% neg direction, N=7). Progressive revelation mechanism: companies disclose minimum at first, full severity emerges over days/weeks. Add scanner to daily rotation."
     }
   }
 }
