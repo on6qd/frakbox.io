@@ -30,7 +30,7 @@
       "symbol": "SYK",
       "direction": "short",
       "event_type": "sp500_52w_low_momentum_short",
-      "result_pct": -0.33,
+      "result_pct": -0.13,
       "exit_reason": "",
       "closed_date": "2026-04-04",
       "thesis": "SYK (Stryker Corp) first crossed below 52-week low on 2026-03-23 (close=$332.59, 52w low=$335.05, breach=-0.7%). Large-c",
@@ -40,17 +40,17 @@
       "symbol": "BAX",
       "direction": "short",
       "event_type": "sp500_52w_low_momentum_short",
-      "result_pct": 0.84,
+      "result_pct": 0.06,
       "exit_reason": "",
       "closed_date": "2026-03-28",
       "thesis": "When an S&P 500 large-cap stock (>500M market cap) first crosses below its 52-week low on a close basis, SHORT at next-d",
-      "direction_correct": false
+      "direction_correct": true
     },
     {
       "symbol": "ABT",
       "direction": "short",
       "event_type": "sp500_52w_low_momentum_short",
-      "result_pct": -0.23,
+      "result_pct": -0.41,
       "exit_reason": "",
       "closed_date": "2026-03-28",
       "thesis": "When an S&P 500 large-cap stock (>500M market cap) first crosses below its 52-week low (after 30+ days above that level)",
@@ -60,7 +60,7 @@
       "symbol": "GO",
       "direction": "long",
       "event_type": "insider_buying_cluster",
-      "result_pct": 8.36,
+      "result_pct": 8.18,
       "exit_reason": "DEADLINE: GO held past deadline (2026-03-26), return +8.4%",
       "closed_date": "2026-03-26",
       "thesis": "When 3+ corporate insiders (officers/directors) make open-market stock purchases within 30 days of each other (each >$50",
@@ -70,11 +70,11 @@
       "symbol": "CTAS",
       "direction": "short",
       "event_type": "sp500_52w_low_momentum_short",
-      "result_pct": -0.2822357498616599,
+      "result_pct": -1.07,
       "exit_reason": "",
       "closed_date": "2026-03-24",
       "thesis": "When an S&P 500 large-cap stock (>500M market cap) first crosses below its 52-week low (after 30+ days above that level)",
-      "direction_correct": true
+      "direction_correct": false
     },
     {
       "symbol": "XLI",

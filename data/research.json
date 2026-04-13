@@ -968,10 +968,18 @@
       {
         "name": "buyback_announcement_long",
         "reason": "Share buyback announcements: DEAD END as long signal. H1 2024 N=101 large-cap. Close-entry 1d +1.11% p=0.036 but priced in by next open. Open-entry: 3d +0.16% p=0.79, 5d -0.04% p=0.95, 10d -1.60% p=0.053, 20d -2.32% p=0.017. Academic anomaly (Ikenberry 1995) operates over years not days. Scanner: tools/buyback_scanner.py. Result IDs: T-3b1253bf, T-59521cdf"
+      },
+      {
+        "name": "proxy_contest_dfan14a",
+        "reason": "Only ~9 large-cap DFAN14A events/year (2023-2025). Need 25+ for statistical power. Dominated by closed-end fund activists. Not viable as standalone scanner."
+      },
+      {
+        "name": "auditor_change_8k_item_401_short",
+        "reason": "~1600 Item 4.01 filings/yr but dominated by micro/small-cap. Less than 5-10 large-cap auditor changes per year. Insufficient frequency for statistical power. Not viable."
       }
     ],
     "signal_count": 32,
-    "dead_end_count": 193,
+    "dead_end_count": 195,
     "literature_count": 25
   },
   "live_signals": [
@@ -1048,13 +1056,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 14756807,
+    "sessions_today": 4,
+    "tokens_today": 44857720,
     "sessions_by_day": [
       {
         "date": "2026-04-13",
-        "sessions": 2,
-        "tokens": 14756807
+        "sessions": 4,
+        "tokens": 44857720
       },
       {
         "date": "2026-04-12",
@@ -2930,20 +2938,22 @@
       "investigated": "Pre-market Monday session: verified trade_loop auto-close setup for ZBIO (deadline 3:55 PM today), computed MNR SEO abnormal returns through Day 2 (corrected timeline error in previous handoff), ran all 4 daily scanners (clean), recorded ALKT JANA 13D OOS observation (+1.16% 5d), wrote strategic portfolio assessment.",
       "findings": "Ran pre-market checks: one trade (ZBIO) auto-closes today at a loss, another (SPY) is up 6.2% and holding. All event scanners came up empty over the weekend. Completed a strategic review showing the fund's edge comes from event-driven signals \u2014 non-event statistical approaches have been exhaustively tested and don't work.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-13",
+      "investigated": "New signal exploration: share buyback announcements (H1 2024 N=101 large-cap) and 8-K Item 4.02 restatements (2023-2024 N=33 large-cap). Built buyback_scanner.py and activate_nt10k_trade.py. Updated NT 10-K hypothesis parameters. Cleaned 9 stale watchlist entries.",
+      "findings": "Tested two new trading signals: share buyback announcements and financial restatements. Buybacks showed no tradeable short-term effect \u2014 the market prices them in within hours. Restatements showed huge drops for some companies but were too unpredictable to trade reliably. Built automated tools for our validated late-filing signal.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-13",
+      "investigated": "Insider evaluator improvement (prior drawdown scoring), trade PnL backfill, 3 new signal explorations (DFAN14A, 8-K Item 4.01, VIX>30 QQQ/IWM extension), watchlist cleanup",
+      "findings": "The fund explored three new signal ideas this session (proxy contests, auditor changes, extending the VIX fear signal to other ETFs) and all turned out to be dead ends. Improved the insider trading detector with a price-drop filter that makes it smarter about which insider buying clusters to trade. The portfolio is up about half a percent overall.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
     "watchlist": [
-      {
-        "event": "FedEx Freight Investor Day April 8, 2026. Record equity value, distribution ratio, S&P index plans. Hypothesis 60558434 ",
-        "date": "2026-04-08",
-        "symbol": "FDXF"
-      },
-      {
-        "event": "REPL PDUFA April 10 (Friday). FDA announces after 5pm ET. If CRL: use activate_repl_trade.py. If crash >55% use d302c84b",
-        "date": "2026-04-10",
-        "symbol": "REPL"
-      },
       {
         "event": "MNR SEO bought deal OOS observation. 424B4 filed April 8. Track 5d return from Apr 9 open (close Apr 15). Expected: nega",
         "date": "2026-04-15",
@@ -2953,11 +2963,6 @@
         "event": "ALKT \u2014 JANA Partners filed initial SCHEDULE 13D on 2026-04-01 (target: Alkami Technology, $1.7B mkt cap, $16.13). NOT TR",
         "date": "2026-04-20",
         "symbol": "ALKT"
-      },
-      {
-        "event": "OTIS",
-        "date": "2026-04-22",
-        "symbol": "OTIS touched exact 52w low intraday March 25 (low=77.80). Earnings April 22. Pre-reg dbedf16e. Activate if close<77.80 AND earnings miss >2% abnormal. Run activate_otis_trade.py on earnings morning."
       },
       {
         "event": "GRCE PDUFA April 23 (Wednesday). GTx-104 NDA for aSAH. High rejection risk: 2:1 mortality imbalance (8 vs 4 deaths). If ",
@@ -2985,11 +2990,6 @@
         "symbol": "MIDCO"
       },
       {
-        "event": "TDG",
-        "date": "2026-05-05",
-        "symbol": "TDG (TransDigm Group) - NEVER crossed 52w low in 2 years (crossing_count=0). Currently $1162.78, 52w_low=$1107.45 (0.89% above). Earnings May 5, 2026 (41 days away). If TDG crosses 52w low before earnings - pre-register momentum_short. If within 30 days of earnings and crosses 52w low - catalyst_short candidate. Monitor weekly."
-      },
-      {
         "event": "MIDCO Food Processing (Middleby MIDD spinoff) - STRONG CANDIDATE for spinco short. Revenue $850M, EBITDA $172M, est mktc",
         "date": "2026-05-12",
         "symbol": "MIDD"
@@ -3008,11 +3008,6 @@
         "category": "merger_arbitrage"
       },
       {
-        "question": "Test whether DFAN14A proxy contest filings (dissident solicitation material) produce abnormal returns for the target company. EDGAR shows ~89-100 uniq",
-        "priority": 4,
-        "category": "proxy_contest_dfan14a"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -3021,8 +3016,13 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       }
     ],
-    "handoff": "\"Monday: ZBIO auto-closes 3:55 PM via trade_loop. Verify exit. MNR SEO Day3 = Monday close (corrected from prev handoff). All 4 scanners clean this weekend. ALKT JANA 13D OOS recorded (+1.16% 5d). Strategic assessment: fund alpha is event-driven only. 20+ non-event experiments all dead ends. After ZBIO closes: 1 active (SPY), 3 pending templates. Capacity for 4 new experiments.\""
+    "handoff": "\"Sunday session: Improved insider evaluator (prior-drawdown scoring). Backfilled trade PnL. Explored DFAN14A, 8-K 4.01, VIX>30 extension (all dead ends). Cleaned 21 stale watchlist entries. Pipeline: ZBIO closes Mon, MNR day3 Mon, daily scanners. Signal exploration hitting diminishing returns for large-cap EDGAR signals.\""
   }
 }
