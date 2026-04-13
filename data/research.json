@@ -996,10 +996,18 @@
       {
         "name": "restructuring_8k_item_205_short",
         "reason": "Item 2.05 (Costs Associated with Exit/Disposal Activities) short signal: N=29 large-cap events (2023-2024). 3d: -1.18% avg (p=0.511), 5d: -1.52% (p=0.459), 10d: -2.74% (p=0.243). Direction only 52-62% negative. Signal too noisy \u2014 restructurings are mixed (some bullish cost-cuts, others bearish write-downs). No consistent short signal."
+      },
+      {
+        "name": "contract_termination_8k_item_102_unfiltered",
+        "reason": "N=69 discovery backtest: avg +1.22% 5d (wrong direction for short), median -0.20%, p=0.30. Event type too heterogeneous. Positive outliers (merger terminations, crypto events) overwhelm negative signal. Would need NLP to classify termination type."
+      },
+      {
+        "name": "debt_covenant_8k_item_204_short",
+        "reason": "Only 7 large-cap companies filed 8-K Item 2.04 (debt covenant triggering events) across 2023-2025 out of 63 total events. Too rare for large-cap universe (~2-3/year). Minimum 15-20 needed for statistical power. Most filings are micro/small-cap companies already in distress."
       }
     ],
     "signal_count": 32,
-    "dead_end_count": 199,
+    "dead_end_count": 201,
     "literature_count": 25
   },
   "live_signals": [
@@ -1092,9 +1100,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 2,
+    "tokens_today": 26672081,
     "sessions_by_day": [
+      {
+        "date": "2026-04-14",
+        "sessions": 2,
+        "tokens": 26672081
+      },
       {
         "date": "2026-04-13",
         "sessions": 9,
@@ -3010,6 +3023,18 @@
       "investigated": "Direction_correct consistency fix, trade audit, scanner runs, ZBIO auto-close verification, Monday priorities",
       "findings": "Fixed a scoring bug in how trade outcomes were classified as correct or incorrect. The fund is at $100,528 (+0.5%). ZBIO insider cluster trade closes Monday; the VIX recovery trade in SPY continues to perform well at +5.4%.",
       "tag": "infrastructure"
+    },
+    {
+      "date": "2026-04-14",
+      "investigated": "Scanner runs (all clear), OOS tracking (MNR Day3, auto tariff Day8, STLD/Q1Q2 closeout), duplicate order bug fix, 8-K Item 1.02 investigation, unified daily scanner tool",
+      "findings": "Fixed a bug that doubled the size of our SPY trade, and investigated a new signal (contract terminations) that looked very promising with 16 events but turned out to be noise when tested on 69 events \u2014 a lesson in why large sample sizes matter.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-14",
+      "investigated": "Ran all 6 daily scanners (nothing actionable), tracked OOS observations (MNR Day3 -0.94% abnormal, auto tariff Day8 -3.54%, SPY VIX>30 +7.2%), explored Item 2.04 debt covenant signal, investigated delisting OOS events, reviewed insider cluster feature analysis",
+      "findings": "Ran daily scanners (no new events). Found that 3 delisting notice observations were actually merger-related delistings, not distress-related \u2014 discarded them. Tested debt covenant filings as a new signal but too rare for large companies. SPY recovery trade still strong at +7.2%.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3093,12 +3118,6 @@
         "category": "activist_13d_filing_long"
       }
     ],
-    "handoff": {
-      "attempted": "Signal exploration: tested 4 new EDGAR-detectable event types for the thin pipeline.",
-      "accomplished": "VALIDATED 1 new signal (cybersecurity 8-K Item 1.05, N=19, 3d -2.43% p=0.024, OOS stronger). Recorded 3 dead ends (dividend cuts N=81, going concern insufficient freq, restructuring Item 2.05 mixed signal). Hypothesis 8844b439 created and queue updated. Daily scanners ran clean.",
-      "partial_results": "SYK filed cybersecurity 8-K Item 1.05 on April 9 (during tariff regime) - NOT tradeable but confirms signal still generating events.",
-      "blocked_by": "Nothing blocked. Market closed (weekend).",
-      "key_insight": "Cybersecurity 8-K Item 1.05 is the strongest new signal since insider clusters. OOS validation STRONGER than discovery (100% neg direction, N=7). Progressive revelation mechanism: companies disclose minimum at first, full severity emerges over days/weeks. Add scanner to daily rotation."
-    }
+    "handoff": "\"Scanners all clear. Delisting OOS events (HOLX/AL/SEE) DISCARDED \\u2014 all were merger completions, not forced delistings. Item 2.04 (debt covenants) DEAD END \\u2014 too rare for large cap. VIX gate R3 correctly rejected. Pipeline healthy: 5 validated signals waiting for triggers.\""
   }
 }
