@@ -198,6 +198,26 @@
         "name": "structural_break_secular_trend_vs_regime_methodology",
         "status": "moderate",
         "magnitude_pct": 0.0
+      },
+      {
+        "name": "sp500_scanner_rss_403_apr2026",
+        "status": "unknown",
+        "magnitude_pct": 0
+      },
+      {
+        "name": "weekly_tracker_2026-04-14",
+        "status": "unknown",
+        "magnitude_pct": 0
+      },
+      {
+        "name": "sp500_addition_2026_q1_oos_validation",
+        "status": "VALIDATED_OOS_QUARTERLY_ONLY",
+        "magnitude_pct": 8.89
+      },
+      {
+        "name": "sp500_index_addition",
+        "status": "VALIDATED_OOS_QUARTERLY_FOCUS",
+        "magnitude_pct": 5.2
       }
     ],
     "dead_ends": [
@@ -831,7 +851,7 @@
       },
       {
         "name": "turn_of_month_spy_calendar",
-        "reason": "TOM vs non-TOM: diff 0.01pct/day, p=0.80. Annual direction wildly inconsistent."
+        "reason": "Turn-of-month effect (last day + first 3 of month) on SPY. Discovery 2015-2022 (N=388 TOM days): abnormal +0.007%, p=0.91. OOS 2023-2026 (N=160): abnormal -0.03%, p=0.69. Ariel 1987 / Lakonishok-Smidt 1988 anomaly fully arbitraged. DEAD END."
       },
       {
         "name": "monthly_seasonality_spy",
@@ -1008,10 +1028,22 @@
       {
         "name": "merger_agreement_termination_item102_short",
         "reason": "N=24 large-cap events (2020-2025). Bimodal distribution: targets drop (MXL -28%, ROG -20%, URI -9%) while acquirers rise (TPR +9%, JBLU +11%). Aggregate: 5d avg=-1.88% p=0.29, positive_rate=50%. Too heterogeneous for automated trading. Correctly classifying target vs acquirer requires NLP + deal context. Low frequency (~5/yr large-cap). Even among targets, direction is inconsistent (ACI +4%, CPRI +3% \u2014 sometimes target rises when deal break removes uncertainty)."
+      },
+      {
+        "name": "fomc_announcement_day_spy_calendar",
+        "reason": "FOMC day SPY calendar anomaly DEAD END. Discovery (2015-2022, N=65): FOMC day mean=-0.07%, abn=-0.12%, p=0.42. Pre-FOMC day abn=+0.27%, p=0.061 borderline. OOS (2023-2026, N=26): FOMC day abn=-0.18%, p=0.35. Pre-FOMC day abn=+0.01%, p=0.95. Lucca and Moench 2015 pre-FOMC drift fully arbitraged post-publication."
+      },
+      {
+        "name": "vix25_threshold_spy",
+        "reason": "VIX>25 threshold SPY: 10d mean=+1.19% (p=0.041, N=56), 20d=+1.65% (p=0.079). Marginally significant but magnitude too small and 5d=+0.29% p=0.51. VIX>30 is strictly superior (+3.35% at 20d, N=29). VIX>25 mostly captures the SAME events at earlier stage. Not worth a separate signal."
+      },
+      {
+        "name": "gld_equity_drop_hedge",
+        "reason": "Gold (GLD) as hedge after SPY >2% drop. Discovery 2010-2022 (N=121): GLD 5d mean=-0.07% p=0.80, 10d +0.58% p=0.12. NO signal. OOS 2023-2026 (N=14): GLD 5d +2.51% p=0.010, 10d +2.89% p=0.022. OOS appears significant but N=14 too small and likely CONFOUNDED by tariff regime (already validated tariff_gld_gold_long_20d +4.3%). TLT also not a reliable hedge at any horizon. Gold is NOT a systematic short-term hedge for equity drops. Consistent with Baur and Lucey 2010."
       }
     ],
-    "signal_count": 32,
-    "dead_end_count": 202,
+    "signal_count": 36,
+    "dead_end_count": 205,
     "literature_count": 25
   },
   "live_signals": [
@@ -1104,13 +1136,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 42429500,
+    "sessions_today": 6,
+    "tokens_today": 59449324,
     "sessions_by_day": [
       {
         "date": "2026-04-14",
-        "sessions": 4,
-        "tokens": 42429500
+        "sessions": 6,
+        "tokens": 59449324
       },
       {
         "date": "2026-04-13",
@@ -3051,6 +3083,18 @@
       "investigated": "Scanner runs (all clear), MNR SEO OOS Day3 recomputed, auto tariff Day8 verified, MIDD Form 10 check, Item 2.03 signal feasibility, queue cleanup, 13D scanner run, infrastructure verification",
       "findings": "All daily scanners were clear. Continued tracking two OOS experiments: a secondary offering short signal is borderline (Day3 -0.94% vs benchmark), while an auto tariff short signal remains strong (Day8 -3.5% vs benchmark). Our VIX-based SPY trade is up 7.2%.",
       "tag": "operational"
+    },
+    {
+      "date": "2026-04-14",
+      "investigated": "Daily scanners (all clear). OOS tracking (MNR Day3=-0.94%, auto tariff Day8=-3.54%). Calendar anomaly tests: FOMC day returns, turn-of-month effect. VIX threshold sweep (20, 25, 30). Gold as equity drop hedge.",
+      "findings": "Tested whether stocks rally on Federal Reserve meeting days and month-ends \u2014 both academic anomalies appear fully arbitraged in modern markets. Gold does not consistently serve as a short-term hedge during stock drops. Continued monitoring existing trades.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-14",
+      "investigated": "Fixed S&P 500 scanner (P2 priority). Validated S&P 500 addition signal with 2026 OOS data. Verified all monitoring items (GRCE PDUFA, MNR SEO, auto tariff, SPY trade).",
+      "findings": "Fixed the S&P 500 index scanner that had been broken for weeks. Tested whether stocks added to the S&P 500 in March still show price gains \u2014 they do, averaging +8.9% abnormal return, even stronger than the historical average of +5.2%. Found that off-schedule additions show no premium.",
+      "tag": "discovery"
     }
   ],
   "pipeline": {
