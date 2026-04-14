@@ -1142,13 +1142,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 84086369,
+    "sessions_today": 10,
+    "tokens_today": 89722237,
     "sessions_by_day": [
       {
         "date": "2026-04-14",
-        "sessions": 9,
-        "tokens": 84086369
+        "sessions": 10,
+        "tokens": 89722237
       },
       {
         "date": "2026-04-13",
@@ -3113,6 +3113,12 @@
       "investigated": "End-of-day scanner sweep (7 scanners all clear), pending hypothesis verification, MIDCO Form 10 check, delisting confidence fix",
       "findings": "Ran end-of-day scanners \u2014 no new trading signals detected. Verified all pending hypotheses are properly configured for their triggers. The auto import tariff short trade is tracking at -3.5% abnormal after 8 days, on schedule for Day 10 final measurement Wednesday.",
       "tag": "operational"
+    },
+    {
+      "date": "2026-04-14",
+      "investigated": "Multi-theme scan: Calendar anomaly (14 tests), Cointegration pairs (14 tests), Factor exposure sector x macro (20+ tests), Threshold commodity/rate (10 tests), Structural breaks (14 tests), Lead-lag (5 tests). Total: ~80 tests.",
+      "findings": "Screened ~80 cross-asset relationships across calendar patterns, cointegration pairs, factor exposures, thresholds, and structural breaks. Found 10 statistically significant hits (p<0.05): commodity mean-reversion thresholds (oil<$70->XLE, copper<$4->XLI/XME), dollar-exposure plays (XLB and EEM both strongly negatively exposed to DXY, OOS validated), the 2022 rate hike structural break extending to ALL 11 sectors (XLRE strongest at F=77), TLT losing safe-haven status post-2022, and gold becoming MORE dollar-sensitive post-Liberation Day tariffs. All queued for deep investigation.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3171,29 +3177,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "Merger arbitrage spread compression: after deal announcement, does the spread reliably compress over 20-30 days? Test on 2023-2025 announced deals wit",
-        "priority": 7,
-        "category": "ma_event"
+        "question": "[SCAN HIT] Oil<$70 threshold -> XLE long: effect=+1.84% (10d), p=0.017, n=34 crossings. Investigate as tradeable mean-reversion when crude falls below",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Build EDGAR-based merger catalyst dataset: for each DEFM14A filing (2019-2024), extract acquiree ticker + vote date. For each early-termination 8-K, e",
-        "priority": 7,
-        "category": "merger_arbitrage"
+        "question": "[SCAN HIT] Copper<$4 -> XLI long: effect=+2.14% (10d), p=0.009, n=15 crossings. Investigate as commodity mean-reversion threshold for industrials.",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] XLB/DXY validated exposure: beta=-0.311 (IS p=2.6e-8), OOS beta=-0.399 also significant. Materials ETF strongly negatively exposed to the d",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] EEM/DXY validated exposure: beta=-0.503 (IS p=1.9e-14), OOS beta=-0.884 significant. EM equities strongly negatively exposed to the dollar ",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] XLRE/DGS10 massive structural break at 2022 rate hike: F=77.53, p\u22480. Pre-beta=+0.127, Post-beta=-0.220. REIT sector flipped from rate-posit",
+        "priority": 8,
+        "category": "scan_hit"
       }
     ],
     "handoff": {
