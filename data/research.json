@@ -1136,13 +1136,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 59449324,
+    "sessions_today": 9,
+    "tokens_today": 84086369,
     "sessions_by_day": [
       {
         "date": "2026-04-14",
-        "sessions": 6,
-        "tokens": 59449324
+        "sessions": 9,
+        "tokens": 84086369
       },
       {
         "date": "2026-04-13",
@@ -3095,6 +3095,18 @@
       "investigated": "Fixed S&P 500 scanner (P2 priority). Validated S&P 500 addition signal with 2026 OOS data. Verified all monitoring items (GRCE PDUFA, MNR SEO, auto tariff, SPY trade).",
       "findings": "Fixed the S&P 500 index scanner that had been broken for weeks. Tested whether stocks added to the S&P 500 in March still show price gains \u2014 they do, averaging +8.9% abnormal return, even stronger than the historical average of +5.2%. Found that off-schedule additions show no premium.",
       "tag": "discovery"
+    },
+    {
+      "date": "2026-04-14",
+      "investigated": "Built S&P 500 addition candidate screener for Q2 2026 rebalance. Updated S&P 500 cache with Q1 additions (VRT, LITE, COHR, SATS). Ran all 7 daily scanners (nothing actionable). Completed ZBIO trade record ($-365, -7.28%). Analyzed fund P&L breakdown by signal type. Retired mandatory non-event research allocation based on 20+ failed experiments.",
+      "findings": "Built a screener to predict which companies might be added to the S&P 500 in June \u2014 our strongest validated signal shows +8.9% average returns for new additions. Found 8 eligible candidates. Also analyzed fund performance: nearly all gains come from one well-timed trade during a market fear spike.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-14",
+      "investigated": "End-of-day scanner sweep (7 scanners all clear), pending hypothesis verification, MIDCO Form 10 check, delisting confidence fix",
+      "findings": "Ran end-of-day scanners \u2014 no new trading signals detected. Verified all pending hypotheses are properly configured for their triggers. The auto import tariff short trade is tracking at -3.5% abnormal after 8 days, on schedule for Day 10 final measurement Wednesday.",
+      "tag": "operational"
     }
   ],
   "pipeline": {
@@ -3179,11 +3191,10 @@
       }
     ],
     "handoff": {
-      "attempted": "Scanner runs, OOS interim tracking, MIDD Form 10 check, Item 2.03 signal exploration, queue cleanup",
-      "accomplished": "All scanners clear. MNR Day3=-0.94% abnormal (recovering). Auto tariff Day8=-3.54% (strong). MIDD Form 10 not filed. Item 2.03 rejected (5K filings/yr too noisy). Closed 3 stale queue items (contract_termination, duplicate NT 10-K). Confirmed all scanners and trade_loop operational.",
-      "partial_results": "MNR SEO OOS recovering from Day1 -3.33% toward flat. Auto tariff still strongly negative. VIX at 19.12 (insider cluster gate clear).",
-      "blocked_by": "Nothing blocked. System in scanning/monitoring mode. Tomorrow data needed for Day5/Day10 closes.",
-      "key_insight": "System is operating well in monitoring mode. 5 validated scanner templates ready. Event frequency is the bottleneck, not methodology. Next impactful work: close out MNR and auto tariff OOS, then look for next research angle."
+      "attempted": "End-of-day scanner sweep, pending hypothesis verification, MIDCO check, confidence fix",
+      "accomplished": "All 7 scanners clear. 5 pending hypotheses verified. Delisting confidence fixed (0.7->7). MIDCO Form 10 not yet filed. fetch-series bug confirmed already fixed.",
+      "blocked_on": "Waiting for market open for MNR Day5, auto tariff Day9 price data.",
+      "key_context": "Auto tariff Day8=-3.54% abnormal (strong). MNR Day3=-0.94% (recovering from -3.33% Day1). SPY VIX trade +7.3% unrealized."
     }
   }
 }
