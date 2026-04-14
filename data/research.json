@@ -1080,10 +1080,14 @@
       {
         "name": "xlb_copper_exposure_scan_hit",
         "reason": "RESOLVED per non_event_allocation_retirement. XLB/copper validated exposure (beta=+0.172 IS, +0.107 OOS). Well-known materials-commodity relationship."
+      },
+      {
+        "name": "defm14a_merger_target_long",
+        "reason": "DEFM14A proxy filing does NOT produce abnormal returns for merger targets. n=30, 2024-2025. 1d: +0.18% p=0.60, 3d: +0.57% p=0.24, 5d: +0.48% p=0.39, 10d: +0.90% p=0.36, 20d: +0.81% p=0.56. Direction rates 47-57%. By DEFM14A filing time, merger is fully priced in. The spread is too small for meaningful alpha. No further investigation warranted on this filing type."
       }
     ],
     "signal_count": 36,
-    "dead_end_count": 215,
+    "dead_end_count": 216,
     "literature_count": 25
   },
   "live_signals": [
@@ -1182,9 +1186,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 12,
-    "tokens_today": 100663967,
+    "sessions_today": 1,
+    "tokens_today": 9228929,
     "sessions_by_day": [
+      {
+        "date": "2026-04-15",
+        "sessions": 1,
+        "tokens": 9228929
+      },
       {
         "date": "2026-04-14",
         "sessions": 12,
@@ -3171,6 +3180,12 @@
       "investigated": "Daily scanner sweep (all 7 scanners: 0 actionable events). OOS tracking: MNR SEO Day 3 = -0.94% abnormal, auto tariff Day 7 = -3.53% avg abnormal. SPY VIX>30 trade at +7.4% Day 12. GRCE PDUFA contaminated. MIDCO Form 10 not filed. ALKT JANA 13D observation complete (n=1, no conclusion). Checked PDUFA pipeline (only CING May 31 qualifies). Verified fetch-series bug already fixed.",
       "findings": "Quiet day \u2014 all 7 automated scanners clear, no new trading opportunities. Our SPY bet from the VIX fear spike is up 7.4%, well above the 1.7% we expected. Monitoring two other experiments that conclude this week.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-15",
+      "investigated": "OOS tracking (MNR SEO Day4, auto tariff Day7), daily scanner (8 scanners), DEFM14A merger arbitrage feasibility (dead end), intraday poller integration into daily scanner",
+      "findings": "Tracked two ongoing paper trades: an SEO short signal on MNR is exceeding its success threshold at Day 4, and auto tariff shorts are deepening. Investigated merger proxy filings as a trading signal but found it is a dead end. Integrated a same-day insider trading detector into the daily scanner to catch opportunities faster.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3229,16 +3244,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "Merger arbitrage spread compression: after deal announcement, does the spread reliably compress over 20-30 days? Test on 2023-2025 announced deals wit",
-        "priority": 7,
-        "category": "ma_event"
-      },
-      {
-        "question": "Build EDGAR-based merger catalyst dataset: for each DEFM14A filing (2019-2024), extract acquiree ticker + vote date. For each early-termination 8-K, e",
-        "priority": 7,
-        "category": "merger_arbitrage"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -3252,14 +3257,35 @@
         "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
         "priority": 2,
         "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
+      },
+      {
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": {
-      "attempted": "Investigate P8 scan hits from multi-theme scan; run daily scanners; track OOS observations",
-      "accomplished": "Resolved ALL 10 P8 scan hits (2 fully investigated with temporal OOS splits, 8 resolved per non-event retirement methodology). Ran 7 daily scanners (all clear). Updated OOS tracking for MNR (Day3), auto tariff (Day6), SPY VIX>30 (Day12).",
-      "partial_results": "Oil<$70->XLE threshold: discovery fails (p=0.268, n=13), OOS appears significant but is structural break artifact (XLE-crude beta jumped 10x in 2022). Copper<$4->XLI: discovery n=4 pathological, OOS fails (p=0.091). All exposure/structural break hits resolved per non-event retirement.",
-      "blocked_by": "Nothing blocked. Market was pre-open so no live data.",
-      "key_insight": "Commodity threshold -> sector ETF scan hits are structural break artifacts. The scanner finds significance in recent periods where sector-factor beta is high due to 2022 rate regime change, NOT genuine threshold effects. Created methodology rule (threshold_structural_break_filter_rule) to prevent future false positives. Scanner agent should implement this filter."
+      "session_date": "2026-04-15",
+      "completed": [
+        "MNR SEO Day4 interim: -3.12% abnormal (exceeds -2.5% threshold)",
+        "Auto tariff Day7: -4.77% avg abnormal (deepening)",
+        "Daily scanner: NKE 4-insider cluster NO_GO (t+1 expired), all else clear",
+        "DEFM14A merger arb: DEAD END (n=30, all p>0.24, deal priced in by filing time)",
+        "Integrated intraday insider poller into daily scanner (8th scanner step)",
+        "SPY VIX>30 trade: +8.5% Day10/20, VIX=18.36, on track"
+      ],
+      "key_findings": [
+        "MNR SEO at Day4 already exceeds -2.5% threshold \u2014 strong OOS validation signal",
+        "Auto tariff deepening at Day7 (-4.77%), was -3.53% at Day6",
+        "NKE CEO buying (4 insiders, $2.7M) but missed intraday window \u2014 poller integration should help",
+        "DEFM14A filing is NOT a trading signal \u2014 merger already priced in by proxy filing time"
+      ],
+      "next_session_focus": "Complete MNR SEO Day5 FINAL and auto tariff Day8. Run upgraded scanner with intraday poller."
     }
   }
 }
