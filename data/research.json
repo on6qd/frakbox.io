@@ -5,7 +5,7 @@
     "active": 1,
     "completed": 8,
     "invalidated": 6,
-    "direction_accuracy": "2/8",
+    "direction_accuracy": "3/8",
     "patterns_discovered": 4,
     "reliable_patterns": [
       {
@@ -24,7 +24,7 @@
         "avg_confidence": 7.0
       },
       "sp500_52w_low_momentum_short": {
-        "accuracy": "1/4",
+        "accuracy": "2/4",
         "avg_confidence": 6.5
       },
       "xme_copper_hgf_exposure_apr2026": {
@@ -1049,34 +1049,34 @@
   "live_signals": [
     {
       "event_type": "sp500_52w_low_momentum_short",
-      "state": "EXPLORING",
+      "state": "FAILING",
       "total_experiments": 4,
       "effective_independent_n": 2,
       "effective_correct_n": 0,
       "last_updated": "2026-04-04T08:39:46.677761",
       "experiments": [
         {
-          "symbol": "CTAS",
-          "correct": true,
-          "return_pct": -1.33,
-          "date": "2026-03-24"
-        },
-        {
           "symbol": "ABT",
           "correct": false,
-          "return_pct": 3.02,
+          "return_pct": -0.41,
           "date": "2026-03-28"
+        },
+        {
+          "symbol": "CTAS",
+          "correct": true,
+          "return_pct": -1.07,
+          "date": "2026-03-24"
         },
         {
           "symbol": "BAX",
           "correct": false,
-          "return_pct": 4.09,
+          "return_pct": 0.06,
           "date": "2026-03-28"
         },
         {
           "symbol": "SYK",
-          "correct": false,
-          "return_pct": -0.33,
+          "correct": true,
+          "return_pct": -0.13,
           "date": "2026-04-04"
         }
       ]
@@ -1092,8 +1092,14 @@
         {
           "symbol": "GO",
           "correct": true,
-          "return_pct": 8.36,
+          "return_pct": 8.18,
           "date": "2026-03-26"
+        },
+        {
+          "symbol": "ZBIO",
+          "correct": false,
+          "return_pct": -6.3,
+          "date": "2026-04-13"
         }
       ]
     },
