@@ -1004,10 +1004,14 @@
       {
         "name": "debt_covenant_8k_item_204_short",
         "reason": "Only 7 large-cap companies filed 8-K Item 2.04 (debt covenant triggering events) across 2023-2025 out of 63 total events. Too rare for large-cap universe (~2-3/year). Minimum 15-20 needed for statistical power. Most filings are micro/small-cap companies already in distress."
+      },
+      {
+        "name": "merger_agreement_termination_item102_short",
+        "reason": "N=24 large-cap events (2020-2025). Bimodal distribution: targets drop (MXL -28%, ROG -20%, URI -9%) while acquirers rise (TPR +9%, JBLU +11%). Aggregate: 5d avg=-1.88% p=0.29, positive_rate=50%. Too heterogeneous for automated trading. Correctly classifying target vs acquirer requires NLP + deal context. Low frequency (~5/yr large-cap). Even among targets, direction is inconsistent (ACI +4%, CPRI +3% \u2014 sometimes target rises when deal break removes uncertainty)."
       }
     ],
     "signal_count": 32,
-    "dead_end_count": 201,
+    "dead_end_count": 202,
     "literature_count": 25
   },
   "live_signals": [
@@ -1100,13 +1104,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 26672081,
+    "sessions_today": 4,
+    "tokens_today": 42429500,
     "sessions_by_day": [
       {
         "date": "2026-04-14",
-        "sessions": 2,
-        "tokens": 26672081
+        "sessions": 4,
+        "tokens": 42429500
       },
       {
         "date": "2026-04-13",
@@ -3035,6 +3039,18 @@
       "investigated": "Ran all 6 daily scanners (nothing actionable), tracked OOS observations (MNR Day3 -0.94% abnormal, auto tariff Day8 -3.54%, SPY VIX>30 +7.2%), explored Item 2.04 debt covenant signal, investigated delisting OOS events, reviewed insider cluster feature analysis",
       "findings": "Ran daily scanners (no new events). Found that 3 delisting notice observations were actually merger-related delistings, not distress-related \u2014 discarded them. Tested debt covenant filings as a new signal but too rare for large companies. SPY recovery trade still strong at +7.2%.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-14",
+      "investigated": "Ran daily scanners (all clear). Verified OOS tracking: MNR Day3=-1.12%, auto tariff Day8=-3.54%. Explored M&A deal break (8-K Item 1.02 + merger agreement) as new signal type. Built merger_break_scanner.py.",
+      "findings": "Explored whether failed corporate mergers create a tradeable short signal. Found the pattern is too mixed \u2014 sometimes the target stock drops as expected, but other times it rises when the market had already priced in the failure. Recorded as dead end. All daily monitoring scanners came back clean.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-14",
+      "investigated": "Scanner runs (all clear), MNR SEO OOS Day3 recomputed, auto tariff Day8 verified, MIDD Form 10 check, Item 2.03 signal feasibility, queue cleanup, 13D scanner run, infrastructure verification",
+      "findings": "All daily scanners were clear. Continued tracking two OOS experiments: a secondary offering short signal is borderline (Day3 -0.94% vs benchmark), while an auto tariff short signal remains strong (Day8 -3.5% vs benchmark). Our VIX-based SPY trade is up 7.2%.",
+      "tag": "operational"
     }
   ],
   "pipeline": {
@@ -3118,6 +3134,12 @@
         "category": "activist_13d_filing_long"
       }
     ],
-    "handoff": "\"Scanners all clear. Delisting OOS events (HOLX/AL/SEE) DISCARDED \\u2014 all were merger completions, not forced delistings. Item 2.04 (debt covenants) DEAD END \\u2014 too rare for large cap. VIX gate R3 correctly rejected. Pipeline healthy: 5 validated signals waiting for triggers.\""
+    "handoff": {
+      "attempted": "Scanner runs, OOS interim tracking, MIDD Form 10 check, Item 2.03 signal exploration, queue cleanup",
+      "accomplished": "All scanners clear. MNR Day3=-0.94% abnormal (recovering). Auto tariff Day8=-3.54% (strong). MIDD Form 10 not filed. Item 2.03 rejected (5K filings/yr too noisy). Closed 3 stale queue items (contract_termination, duplicate NT 10-K). Confirmed all scanners and trade_loop operational.",
+      "partial_results": "MNR SEO OOS recovering from Day1 -3.33% toward flat. Auto tariff still strongly negative. VIX at 19.12 (insider cluster gate clear).",
+      "blocked_by": "Nothing blocked. System in scanning/monitoring mode. Tomorrow data needed for Day5/Day10 closes.",
+      "key_insight": "System is operating well in monitoring mode. 5 validated scanner templates ready. Event frequency is the bottleneck, not methodology. Next impactful work: close out MNR and auto tariff OOS, then look for next research angle."
+    }
   }
 }
