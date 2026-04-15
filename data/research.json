@@ -1186,13 +1186,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 9228929,
+    "sessions_today": 3,
+    "tokens_today": 23216885,
     "sessions_by_day": [
       {
         "date": "2026-04-15",
-        "sessions": 1,
-        "tokens": 9228929
+        "sessions": 3,
+        "tokens": 23216885
       },
       {
         "date": "2026-04-14",
@@ -3186,6 +3186,18 @@
       "investigated": "OOS tracking (MNR SEO Day4, auto tariff Day7), daily scanner (8 scanners), DEFM14A merger arbitrage feasibility (dead end), intraday poller integration into daily scanner",
       "findings": "Tracked two ongoing paper trades: an SEO short signal on MNR is exceeding its success threshold at Day 4, and auto tariff shorts are deepening. Investigated merger proxy filings as a trading signal but found it is a dead end. Integrated a same-day insider trading detector into the daily scanner to catch opportunities faster.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-15",
+      "investigated": "Daily scanner sweep (8 scanners), OOS tracking (MNR SEO Day4, auto tariff Day7), new signal investigation (8-K Item 4.01 auditor changes)",
+      "findings": "Ran all 8 event scanners \u2014 no actionable signals today. Built a new scanner for auditor changes and tested 176 events: small negative returns but not statistically significant. Two ongoing experiments tracking well: a stock offering short at -3.1% and an auto tariff trade at -4.8%.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-15",
+      "investigated": "Lead-lag screen (DGS10 vs all sectors + other factors), cointegration pairs screen (18 sector peer pairs), calendar anomaly screen (13 tests across SPY/QQQ/GLD/TLT/XLE/IWM patterns). Total: ~52 tests.",
+      "findings": "Scanned 52 tests across 3 themes. KEY FINDING: DGS10 (10Y Treasury yield) Granger-causes 4 sectors IS+OOS confirmed: XLU (p=4.7e-7), TLT (p=1.7e-5), XLB (p=0.0009), XLC (p=0.013). This is a systematic rate-leads-equity pattern queued for deep investigation. All 13 calendar patterns null. All 18 cointegration pairs null in IS.",
+      "tag": "validation"
     }
   ],
   "pipeline": {
@@ -3244,29 +3256,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] DGS10 Granger-causes XLC at lag 1: F=6.15, p=0.013, n=1095. OOS CONFIRMED at lag 4. 10Y yield leads communications sector. PATTERN: DGS10 c",
+        "priority": 9,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] DGS10 Granger-causes XLU at lag 4: F=8.88, p=4.7e-7, n=1095. OOS CONFIRMED at lag 2. 10Y Treasury yield leads utilities sector with predict",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] DGS10 Granger-causes TLT at lag 5: F=6.00, p=1.7e-5, n=1095. OOS CONFIRMED at lag 3. 10Y Treasury yield leads TLT bond ETF \u2014 possible predi",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] DGS10 Granger-causes XLB at lag 5: F=4.18, p=0.0009, n=1095. OOS CONFIRMED at lag 2. 10Y Treasury yield leads materials sector \u2014 investigat",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
+        "question": "[SCAN HIT] DGS10 Granger-causes XLP at lag 4: F=9.52, p=1.4e-7, n=1095. OOS p=0.052 (borderline near-miss). DGS10 leads consumer staples \u2014 part of bro",
+        "priority": 7,
+        "category": "scan_hit"
       }
     ],
     "handoff": {
