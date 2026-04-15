@@ -1140,10 +1140,22 @@
       {
         "name": "nt_10q_late_filing_short_3d",
         "reason": "{\"reason\": \"IS failure (mean=+0.48%, wrong direction). Subgroup pattern flips between IS and OOS. Not a stable signal.\", \"date\": \"2026-04-15\", \"attempted_by\": \"orchestrator\"}"
+      },
+      {
+        "name": "aal_crude_structural_break_event_conversion",
+        "reason": "AAL/crude oil structural break real (post-2022 beta=-0.146, p=0.006) but event conversion fails. Oil>=3%: AAL abnormal -0.18% (p=0.65). Oil>=5%: -1.53% same-day (p=0.055, n=15), zero drift. SNR=0.22."
+      },
+      {
+        "name": "fcx_copper_oos_beta_instability",
+        "reason": "FCX copper IS beta=1.058 -> OOS beta=0.524 (halved). Already captured by XME/copper. Single-stock not worth separate signal."
+      },
+      {
+        "name": "vix25_threshold_extension",
+        "reason": "VIX 25-30 band: mean=+0.16%@5d (p=0.65), +0.26%@10d (p=0.63), +0.12%@20d (p=0.89). NO signal. Scan hit pooling artifact from VIX>30."
       }
     ],
     "signal_count": 36,
-    "dead_end_count": 230,
+    "dead_end_count": 233,
     "literature_count": 25
   },
   "live_signals": [
@@ -3368,24 +3380,24 @@
         "category": "oos_tracking"
       },
       {
-        "question": "[SCAN HIT] VIX>25 threshold extension: SPY+1.21%(p=0.038,n=56), QQQ+1.64%(p=0.013), IWM+1.67%(p=0.031) at 10d. Lower threshold than validated VIX>30 s",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] AAL crude structural break 2022: pre-beta=+0.021, post-beta=-0.128 (p=0.012, F=4.48). Airlines shifted from neutral to strong NEGATIVE oil ",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] GC=F/DXY negative exposure: beta=-0.902, p=1.9e-39, OOS confirmed (OOS beta=-1.124, significant). Gold has strong inverse relationship to U",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] FXI/DXY negative exposure: beta=-0.658, p=1.3e-7, OOS confirmed (OOS beta=-1.068). China ETF has strong inverse USD exposure, stronger than",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
     "handoff": "\"Session 2026-04-15 morning: Ran all 8 daily scanners (quiet day - no qualifying events). NKE 4-insider cluster (CEO, $2.7M) detected but NO_GO (t+1 retired). Investigated NT 10-Q at 3d horizon in depth - DEAD END (IS failure, subgroup pattern flips between periods). Checked 4 informal OOS NT 10-K events from March: 2/4 correct direction (CLUS -9.89%, MUX -14.55% winners). SPY VIX>30 trade at +8.55%, holding to deadline. Next session must fetch Apr 15 closes for MNR Day5 and Tariff Day8 tracking"
