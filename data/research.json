@@ -218,6 +218,26 @@
         "name": "sp500_index_addition",
         "status": "VALIDATED_OOS_QUARTERLY_FOCUS",
         "magnitude_pct": 5.2
+      },
+      {
+        "name": "casy_sp500_interim_addition_oos_april2026",
+        "status": "OOS_MISS_INTERIM_ADDITION",
+        "magnitude_pct": -7.3
+      },
+      {
+        "name": "sp500_addition_scope_restriction_april2026",
+        "status": "SCOPE_RESTRICTED",
+        "magnitude_pct": 8.9
+      },
+      {
+        "name": "sp500_scanner_feed_restored_april2026",
+        "status": "OPERATIONAL_FIX",
+        "magnitude_pct": 0
+      },
+      {
+        "name": "nke_insider_cluster_april2026_oos_entry",
+        "status": "MONITORING_THEORETICAL",
+        "magnitude_pct": 5.0
       }
     ],
     "dead_ends": [
@@ -1154,7 +1174,7 @@
         "reason": "VIX 25-30 band: mean=+0.16%@5d (p=0.65), +0.26%@10d (p=0.63), +0.12%@20d (p=0.89). NO signal. Scan hit pooling artifact from VIX>30."
       }
     ],
-    "signal_count": 36,
+    "signal_count": 40,
     "dead_end_count": 233,
     "literature_count": 25
   },
@@ -1254,13 +1274,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 89662904,
+    "sessions_today": 10,
+    "tokens_today": 98916846,
     "sessions_by_day": [
       {
         "date": "2026-04-15",
-        "sessions": 9,
-        "tokens": 89662904
+        "sessions": 10,
+        "tokens": 98916846
       },
       {
         "date": "2026-04-14",
@@ -3301,6 +3321,12 @@
       "date": "2026-04-15",
       "investigated": "High-throughput scan: 48 tests across 5 themes. Cointegration pairs (21): V/MA(p=0.033*), T/VZ(p=0.015*), 19 null. Factor exposures (16): XLF/DGS10(p=2.4e-29*), XLC/DGS10(p=3e-6*), XLI/DGS10(p=4.8e-13*), XLY/DGS10(p=7e-7*), EEM/DXY(OOS*), FXI/DXY(OOS*), GC=F/DXY(p=1.9e-39* OOS*), FCX/HG=F(p=3e-98* OOS*), HYG/VIX(IS sig OOS conflict). Calendar anomalies (10): ALL NULL - monthly/DOW/TOM patterns absent for SPY/QQQ/GLD/XLE/IWM/XLB. Threshold events (13): VIX>25->SPY(p=0.038*), VIX>25->QQQ(p=0.013*), VIX>25->IWM(p=0.031*), VIX>30->IWM(p=0.004*), VIX>30->QQQ(p=0.003*), rest null/underpowered. Structural breaks (7): AAL/oil 2022(p=0.012*), XLRE/DGS10 2022(p=7.5e-33*), XLF/DGS10 2022(p=1.3e-13*), XLB/DGS10 2022(p=3.2e-17*), XLK/DGS10 2022(p=2.4e-6*), UAL/oil(p=0.055 near miss).",
       "findings": "Screened 48 tests: cointegration pairs (21), factor exposures (16), calendar anomalies (10), threshold events (13), structural breaks (7). Found 8 significant hits queued: VIX>25 broad market extension, gold/dollar OOS-confirmed, airlines 2022 oil sensitivity flip, bank rate sensitivity regime change, V/MA and T/VZ pairs candidates, FXI/FCX as leveraged dollar/copper proxies. Calendar anomalies comprehensively null.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-15",
+      "investigated": "Resolved 8 scan hits (VIX>25, AAL crude break, GC/DXY, FXI/DXY, FCX/copper, T/VZ cointegration, V/MA cointegration, XLF/DGS10 break). Investigated VIX>25 threshold and AAL crude structural break in depth. Discovered CASY SP500 interim addition miss. Ran daily scanners (quiet day). Analyzed VIX>30 return curve.",
+      "findings": "Investigated 8 scan hits from earlier scans \u2014 all resolved as dead ends or already captured. Key finding: S&P 500 index additions only work for quarterly rebalances, not interim changes. The VIX>25 threshold does not extend the validated VIX>30 trading signal. Daily scanners found no new actionable events.",
       "tag": "dead_end"
     }
   ],
