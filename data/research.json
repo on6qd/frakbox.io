@@ -1084,10 +1084,30 @@
       {
         "name": "defm14a_merger_target_long",
         "reason": "DEFM14A proxy filing does NOT produce abnormal returns for merger targets. n=30, 2024-2025. 1d: +0.18% p=0.60, 3d: +0.57% p=0.24, 5d: +0.48% p=0.39, 10d: +0.90% p=0.36, 20d: +0.81% p=0.56. Direction rates 47-57%. By DEFM14A filing time, merger is fully priced in. The spread is too small for meaningful alpha. No further investigation warranted on this filing type."
+      },
+      {
+        "name": "dgs10_xlc_lead_lag_scan_hit",
+        "reason": "DGS10->XLC Granger lead-lag: DEAD END. IS p=0.019 (fails p<0.01 threshold), OOS p=0.062 (fails p<0.05). Lags inconsistent (1/9/4). Structural break at 2022-03-16: beta flipped +0.098 to -0.071. Same regime artifact as DGS10->REITs, DGS10->XLK."
+      },
+      {
+        "name": "dgs10_xlu_lead_lag_scan_hit",
+        "reason": "DGS10->XLU Granger lead-lag: DEAD END. Structural break at 2022-03-16: beta flipped +0.111 to -0.165 (F=54.80, p=9.9e-24). Granger test averaged across opposite-sign regimes. XLU-DGS10 exposure already validated separately."
+      },
+      {
+        "name": "dgs10_tlt_lead_lag_scan_hit",
+        "reason": "DGS10->TLT Granger lead-lag: DEAD END. TLT-DGS10 relationship is bond math (definitional), not a discovery. Structural break shows magnitude tripled post-2022 (-0.195 to -0.520). Any Granger lag is measurement delay between FRED and market close, not predictive."
+      },
+      {
+        "name": "dgs10_xlb_lead_lag_scan_hit",
+        "reason": "DGS10->XLB Granger lead-lag: DEAD END. Structural break at 2022-03-16: beta flipped +0.158 to -0.083 (F=38.93, p=3.2e-17). Same regime artifact invalidating all DGS10 lead-lag scan hits."
+      },
+      {
+        "name": "dgs10_xlp_lead_lag_scan_hit",
+        "reason": "DGS10->XLP Granger lead-lag: DEAD END. Structural break at 2022-03-16: beta flipped +0.084 to -0.081 (F=34.49, p=2.2e-15). OOS was already borderline (p=0.052). Same regime artifact."
       }
     ],
     "signal_count": 36,
-    "dead_end_count": 216,
+    "dead_end_count": 221,
     "literature_count": 25
   },
   "live_signals": [
@@ -3256,29 +3276,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] DGS10 Granger-causes XLC at lag 1: F=6.15, p=0.013, n=1095. OOS CONFIRMED at lag 4. 10Y yield leads communications sector. PATTERN: DGS10 c",
-        "priority": 9,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] DGS10 Granger-causes XLU at lag 4: F=8.88, p=4.7e-7, n=1095. OOS CONFIRMED at lag 2. 10Y Treasury yield leads utilities sector with predict",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] DGS10 Granger-causes TLT at lag 5: F=6.00, p=1.7e-5, n=1095. OOS CONFIRMED at lag 3. 10Y Treasury yield leads TLT bond ETF \u2014 possible predi",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] DGS10 Granger-causes XLB at lag 5: F=4.18, p=0.0009, n=1095. OOS CONFIRMED at lag 2. 10Y Treasury yield leads materials sector \u2014 investigat",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       },
       {
-        "question": "[SCAN HIT] DGS10 Granger-causes XLP at lag 4: F=9.52, p=1.4e-7, n=1095. OOS p=0.052 (borderline near-miss). DGS10 leads consumer staples \u2014 part of bro",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": {
