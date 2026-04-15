@@ -1172,10 +1172,14 @@
       {
         "name": "vix25_threshold_extension",
         "reason": "VIX 25-30 band: mean=+0.16%@5d (p=0.65), +0.26%@10d (p=0.63), +0.12%@20d (p=0.89). NO signal. Scan hit pooling artifact from VIX>30."
+      },
+      {
+        "name": "restatement_8k_item_402_short",
+        "reason": "{\"description\": \"8-K Item 4.02 (non-reliance on financials / restatement) tested as short signal.\", \"period\": \"2023-2024 large-cap (>500M)\", \"n\": 46, \"expected\": \"Abnormal -2% at 5d per Palmrose 2004\", \"actual_5d\": {\"avg\": -0.5, \"p\": 0.8, \"positive_rate\": 54.3}, \"actual_10d\": {\"avg\": -3.42, \"p\": 0.26, \"positive_rate\": 41.3}, \"conclusion\": \"Academic effect fully arbitraged in modern large-cap markets. No horizon significant at p<0.05. Full-text EFTS search may also introduce false positives (filings referencing 4.02 without being actual restatements).\", \"task_result\": \"T-8cd844d3\"}"
       }
     ],
     "signal_count": 40,
-    "dead_end_count": 233,
+    "dead_end_count": 234,
     "literature_count": 25
   },
   "live_signals": [
@@ -3334,6 +3338,12 @@
       "investigated": "Built automated OOS tracker, fixed yfinance reliability, validated MNR SEO signal, tracked auto tariff OOS, ran daily scanners",
       "findings": "Built an automated system for tracking out-of-sample signal observations with daily price updates. Validated the SEO bought deal short signal (stock dropped -4% vs market after a secondary offering). Two auto tariff observations tracking well.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-16",
+      "investigated": "OOS tracking (MNR SEO, auto tariff Day8, NKE insider), daily scanners, restatement 8-K investigation, delisting going-private analysis, scanner improvements",
+      "findings": "Discovered that about a quarter of delisting notices on stock exchanges are actually mergers where the stock stops trading, making them impossible to short. Fixed the scanner to filter these out. Also tested whether companies restating their financials create a short opportunity \u2014 they don't anymore (the effect documented in 2004 has been fully exploited by modern markets).",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
