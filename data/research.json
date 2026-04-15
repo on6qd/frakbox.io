@@ -1242,13 +1242,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 85398940,
+    "sessions_today": 9,
+    "tokens_today": 89662904,
     "sessions_by_day": [
       {
         "date": "2026-04-15",
-        "sessions": 8,
-        "tokens": 85398940
+        "sessions": 9,
+        "tokens": 89662904
       },
       {
         "date": "2026-04-14",
@@ -3284,6 +3284,12 @@
       "investigated": "Ran 8 daily scanners, investigated NT 10-Q at 3d horizon, checked 4 informal NT 10-K OOS events from March, NKE insider cluster monitoring setup, SPY VIX>30 trade assessment",
       "findings": "Investigated whether late quarterly SEC filings predict stock drops. The signal looked promising at first (71% negative direction) but deeper analysis revealed the pattern is unstable across time periods \u2014 a dead end. Meanwhile, our VIX-spike trade on SPY is up 8.6%, in the top 7% of historical outcomes.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-15",
+      "investigated": "High-throughput scan: 48 tests across 5 themes. Cointegration pairs (21): V/MA(p=0.033*), T/VZ(p=0.015*), 19 null. Factor exposures (16): XLF/DGS10(p=2.4e-29*), XLC/DGS10(p=3e-6*), XLI/DGS10(p=4.8e-13*), XLY/DGS10(p=7e-7*), EEM/DXY(OOS*), FXI/DXY(OOS*), GC=F/DXY(p=1.9e-39* OOS*), FCX/HG=F(p=3e-98* OOS*), HYG/VIX(IS sig OOS conflict). Calendar anomalies (10): ALL NULL - monthly/DOW/TOM patterns absent for SPY/QQQ/GLD/XLE/IWM/XLB. Threshold events (13): VIX>25->SPY(p=0.038*), VIX>25->QQQ(p=0.013*), VIX>25->IWM(p=0.031*), VIX>30->IWM(p=0.004*), VIX>30->QQQ(p=0.003*), rest null/underpowered. Structural breaks (7): AAL/oil 2022(p=0.012*), XLRE/DGS10 2022(p=7.5e-33*), XLF/DGS10 2022(p=1.3e-13*), XLB/DGS10 2022(p=3.2e-17*), XLK/DGS10 2022(p=2.4e-6*), UAL/oil(p=0.055 near miss).",
+      "findings": "Screened 48 tests: cointegration pairs (21), factor exposures (16), calendar anomalies (10), threshold events (13), structural breaks (7). Found 8 significant hits queued: VIX>25 broad market extension, gold/dollar OOS-confirmed, airlines 2022 oil sensitivity flip, bank rate sensitivity regime change, V/MA and T/VZ pairs candidates, FXI/FCX as leveraged dollar/copper proxies. Calendar anomalies comprehensively null.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3362,24 +3368,24 @@
         "category": "oos_tracking"
       },
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] VIX>25 threshold extension: SPY+1.21%(p=0.038,n=56), QQQ+1.64%(p=0.013), IWM+1.67%(p=0.031) at 10d. Lower threshold than validated VIX>30 s",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] AAL crude structural break 2022: pre-beta=+0.021, post-beta=-0.128 (p=0.012, F=4.48). Airlines shifted from neutral to strong NEGATIVE oil ",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] GC=F/DXY negative exposure: beta=-0.902, p=1.9e-39, OOS confirmed (OOS beta=-1.124, significant). Gold has strong inverse relationship to U",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] FXI/DXY negative exposure: beta=-0.658, p=1.3e-7, OOS confirmed (OOS beta=-1.068). China ETF has strong inverse USD exposure, stronger than",
+        "priority": 8,
+        "category": "scan_hit"
       }
     ],
     "handoff": "\"Session 2026-04-15 morning: Ran all 8 daily scanners (quiet day - no qualifying events). NKE 4-insider cluster (CEO, $2.7M) detected but NO_GO (t+1 retired). Investigated NT 10-Q at 3d horizon in depth - DEAD END (IS failure, subgroup pattern flips between periods). Checked 4 informal OOS NT 10-K events from March: 2/4 correct direction (CLUS -9.89%, MUX -14.55% winners). SPY VIX>30 trade at +8.55%, holding to deadline. Next session must fetch Apr 15 closes for MNR Day5 and Tariff Day8 tracking"
