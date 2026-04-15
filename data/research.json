@@ -1108,10 +1108,38 @@
       {
         "name": "commodity_shock_nextday_sector_lag",
         "reason": "Tested CL=F->XLE, HG=F->XME, GC=F->GDX. When commodity moves >2% in a day, next-day sector abnormal returns are indistinguishable from zero. All 3 pairs, both IS (2022-2024) and OOS (2025-2026), all p-values > 0.20. Confirms meta-finding: factor exposures are contemporaneous, not predictive. No institutional rebalancing lag exists at daily frequency for commodity-sector pairs."
+      },
+      {
+        "name": "gold_gc_granger_xlre_lead_lag",
+        "reason": "GC=F Granger-causes XLRE at lag 1-2 (F=8.13, p=0.0003, OOS confirmed). BUT economically untradeable: lag coefficient only 5-9 bps per 1% gold move. Strategy simulation in OOS shows NEGATIVE abnormal returns (-3.9% at 2d, 47% direction). SPY rises more than XLRE on gold-up days. Lag instability: best lag shifts from 2 (IS) to 1 (OOS). Controlled for DGS10. Exposure is real, lead-lag too small to trade."
+      },
+      {
+        "name": "gold_sector_exposure_cluster_no_trade",
+        "reason": "Gold sector exposure cluster: XLU/XLB/XLRE positive gold beta, XLF negative. Validated exposures but exposure_to_event conversion fails systematically \u2014 same as oil/copper/rate exposure findings."
+      },
+      {
+        "name": "iwm_vix_exposure_scan_hit",
+        "reason": "IWM/VIX negative exposure: known relationship. VIX>30 IWM already dead-ended."
+      },
+      {
+        "name": "iwm_dxy_exposure_scan_hit",
+        "reason": "IWM/DXY negative exposure: known relationship. Cant convert exposure to trade."
+      },
+      {
+        "name": "dxy100_threshold_iwm_rally",
+        "reason": "DXY>100 -> IWM rally signal decomposes into VIX interaction. DXY>100+VIX>25 (n=8): +6.26% but too few observations. DXY>100+VIX<=25 (n=40): +0.16%, no signal. Not independent of existing VIX>30 trade."
+      },
+      {
+        "name": "dxy100_threshold_broad_rally",
+        "reason": "DXY>100 -> broad equity rally: same VIX interaction as IWM version. Signal driven by VIX subset. Not independent."
+      },
+      {
+        "name": "auditor_change_8k_item_401_short_final",
+        "reason": "Auditor change 8-K Item 4.01: DEAD END. Discovery (2024, n=83): 1d p=0.133, 3d p=0.255, 5d p=0.415, 10d p=0.558. Validation (2025, n=90): 1d p=0.114, 3d p=0.087, 5d p=0.385, 10d p=0.137. No horizon passes p<0.05 in either period. Direction consistently negative (~36-45% positive) but magnitude too small (-0.5 to -1.7%) for the variance. No-disagreement subgroup (p=0.045, n=55) is a multiple testing artifact (10 subgroup tests). Not tradeable."
       }
     ],
     "signal_count": 36,
-    "dead_end_count": 222,
+    "dead_end_count": 229,
     "literature_count": 25
   },
   "live_signals": [
@@ -1210,13 +1238,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 51490872,
+    "sessions_today": 7,
+    "tokens_today": 76105562,
     "sessions_by_day": [
       {
         "date": "2026-04-15",
-        "sessions": 6,
-        "tokens": 51490872
+        "sessions": 7,
+        "tokens": 76105562
       },
       {
         "date": "2026-04-14",
@@ -3240,6 +3268,12 @@
       "investigated": "Multi-theme scan: Calendar anomaly (14 tests: monthly/DOW/TOM across SPY/QQQ/GLD/XLE/TLT/XLF/IWM), Cointegration pairs (20 tests: KO/PEP, XOM/CVX, V/MA, HD/LOW, GLD/GDX, BAC/JPM, WMT/TGT, FCX/XLB, TLT/IEF, etc.), Factor exposure VIX vs 11 sectors, Factor exposure GOLD (GC=F) vs 12 assets, Factor exposure DXY/dollar vs 4 assets, Lead-lag for gold/HYG/DXY, Threshold tests (VIX/oil/DXY/gold), Structural break tests",
       "findings": "Screened ~65 tests across 6 themes (calendar, cointegration, VIX exposure, gold factor, dollar exposure, lead-lag). Found 6 significant hits: gold leads REITs/materials by 2 days (OOS confirmed); 3 defensive sectors have positive gold exposure (OOS confirmed); IWM negatively exposed to both VIX and DXY; DXY>100 predicts broad market rally. Calendar anomaly theme entirely null across all patterns/assets. Queued 5 research tasks.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-15",
+      "investigated": "Resolved 6 scan hits (gold-XLRE lead-lag, gold sector exposure, IWM/VIX, IWM/DXY, DXY>100 threshold). Widened delisting scanner. Investigated NT 10-Q extension. Found 2 voluntary delisting OOS events.",
+      "findings": "Investigated 6 scan hits from automated screening \u2014 all turned out to be dead ends. Widened our delisting event scanner to capture 3x more events (28/year vs 8). Found that late quarterly filing notifications (NT 10-Q) have correct direction 71% of the time but extreme outliers make them unprofitable to trade.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3255,9 +3289,19 @@
         "symbol": "ALKT"
       },
       {
+        "event": "AL",
+        "date": "2026-04-22",
+        "symbol": "AL voluntary 3.01 OOS: track 10d abnormal return"
+      },
+      {
         "event": "GRCE PDUFA April 23 (Wednesday). GTx-104 NDA for aSAH. High rejection risk: 2:1 mortality imbalance (8 vs 4 deaths). If ",
         "date": "2026-04-23",
         "symbol": "GRCE"
+      },
+      {
+        "event": "SEE",
+        "date": "2026-04-23",
+        "symbol": "SEE voluntary 3.01 OOS: track 10d abnormal return"
       },
       {
         "event": "VIX>30 spike recovery: buy SPY at next open, hold 20 days (hyp b63a0168). Monitor daily VIX close.",
@@ -3275,7 +3319,7 @@
         "symbol": "8K105"
       },
       {
-        "event": "Daily 8-K Item 3.01 delisting scanner. Run: python tools/delisting_8k_scanner.py --days 3 --forced-only. Hyp 995a7465. W",
+        "event": "Daily 8-K Item 3.01 delisting scanner (ALL filings, not forced-only). Run: python tools/delisting_8k_scanner.py --days 3",
         "date": "2026-04-30",
         "symbol": "8K301"
       },
@@ -3298,29 +3342,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] GC=F (gold) Granger-causes XLRE at lag 2: F=6.96, p=0.001, OOS confirmed at lag 1 (n=1103). Gold leads REIT ETF returns by 1-2 days. No xco",
-        "priority": 9,
-        "category": "scan_hit"
+        "question": "Track AL (Day10=Apr 22) and SEE (Day10=Apr 23) voluntary delisting OOS. Validates widened scanner.",
+        "priority": 8,
+        "category": "oos_tracking"
       },
       {
-        "question": "[SCAN HIT] GOLD SECTOR EXPOSURE CLUSTER: XLU/GC=F beta=+0.190 p=2.6e-8 OOS-confirmed; XLB/GC=F beta=+0.122 p=3.9e-7 OOS-confirmed; XLRE/GC=F beta=+0.0",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] IWM/VIX negative exposure: beta=-0.015, p=0.0019, OOS beta=-0.024 confirmed significant (n=1005). Small caps underperform relative to SPY w",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] IWM/DXY negative exposure: beta=-0.200, p=0.0009, OOS beta=-0.251 confirmed significant (n=1005). Small caps underperform when US dollar st",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] DXY crosses above 100 -> IWM +5.71% (20d): t=3.83, p=0.0008, n=26 crossings. Counter-intuitive: dollar strengthening above 100 predicts IWM",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
     "handoff": {
