@@ -1210,13 +1210,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 45101330,
+    "sessions_today": 6,
+    "tokens_today": 51490872,
     "sessions_by_day": [
       {
         "date": "2026-04-15",
-        "sessions": 5,
-        "tokens": 45101330
+        "sessions": 6,
+        "tokens": 51490872
       },
       {
         "date": "2026-04-14",
@@ -3234,6 +3234,12 @@
       "investigated": "Signal frequency analysis (all 8 validated signals), delisting 8-K forced-only classifier bug fix, daily scanner sweep (8 scanners, 0 actionable), OOS tracking blocked (Apr 15 market data unavailable pre-open).",
       "findings": "Analyzed how often each of our 8 trading signals fires per year. Found that late-filing notifications are our highest-frequency signal (~63 events/year). Fixed a bug in the delisting scanner that was misclassifying all events as forced \u2014 truly forced delistings of large companies are extremely rare.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-15",
+      "investigated": "Multi-theme scan: Calendar anomaly (14 tests: monthly/DOW/TOM across SPY/QQQ/GLD/XLE/TLT/XLF/IWM), Cointegration pairs (20 tests: KO/PEP, XOM/CVX, V/MA, HD/LOW, GLD/GDX, BAC/JPM, WMT/TGT, FCX/XLB, TLT/IEF, etc.), Factor exposure VIX vs 11 sectors, Factor exposure GOLD (GC=F) vs 12 assets, Factor exposure DXY/dollar vs 4 assets, Lead-lag for gold/HYG/DXY, Threshold tests (VIX/oil/DXY/gold), Structural break tests",
+      "findings": "Screened ~65 tests across 6 themes (calendar, cointegration, VIX exposure, gold factor, dollar exposure, lead-lag). Found 6 significant hits: gold leads REITs/materials by 2 days (OOS confirmed); 3 defensive sectors have positive gold exposure (OOS confirmed); IWM negatively exposed to both VIX and DXY; DXY>100 predicts broad market rally. Calendar anomaly theme entirely null across all patterns/assets. Queued 5 research tasks.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3292,29 +3298,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] GC=F (gold) Granger-causes XLRE at lag 2: F=6.96, p=0.001, OOS confirmed at lag 1 (n=1103). Gold leads REIT ETF returns by 1-2 days. No xco",
+        "priority": 9,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] GOLD SECTOR EXPOSURE CLUSTER: XLU/GC=F beta=+0.190 p=2.6e-8 OOS-confirmed; XLB/GC=F beta=+0.122 p=3.9e-7 OOS-confirmed; XLRE/GC=F beta=+0.0",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] IWM/VIX negative exposure: beta=-0.015, p=0.0019, OOS beta=-0.024 confirmed significant (n=1005). Small caps underperform relative to SPY w",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] IWM/DXY negative exposure: beta=-0.200, p=0.0009, OOS beta=-0.251 confirmed significant (n=1005). Small caps underperform when US dollar st",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
+        "question": "[SCAN HIT] DXY crosses above 100 -> IWM +5.71% (20d): t=3.83, p=0.0008, n=26 crossings. Counter-intuitive: dollar strengthening above 100 predicts IWM",
+        "priority": 8,
+        "category": "scan_hit"
       }
     ],
     "handoff": {
