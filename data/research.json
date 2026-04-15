@@ -1210,13 +1210,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 31619370,
+    "sessions_today": 5,
+    "tokens_today": 45101330,
     "sessions_by_day": [
       {
         "date": "2026-04-15",
-        "sessions": 4,
-        "tokens": 31619370
+        "sessions": 5,
+        "tokens": 45101330
       },
       {
         "date": "2026-04-14",
@@ -3228,6 +3228,12 @@
       "investigated": "Investigated 5 DGS10 Granger lead-lag scan hits (P9/P8). Tested commodity shock next-day sector lag (CL=F->XLE, HG=F->XME, GC=F->GDX). Ran all 8 daily scanners. Tracked MNR SEO OOS and auto tariff OOS.",
       "findings": "Investigated 5 rate-related lead-lag signals from yesterday's scan \u2014 all are dead ends due to a structural regime change in 2022. Also confirmed that commodity price shocks don't predict next-day sector returns. MNR secondary offering trade observation continues to look promising before final measurement tomorrow.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-15",
+      "investigated": "Signal frequency analysis (all 8 validated signals), delisting 8-K forced-only classifier bug fix, daily scanner sweep (8 scanners, 0 actionable), OOS tracking blocked (Apr 15 market data unavailable pre-open).",
+      "findings": "Analyzed how often each of our 8 trading signals fires per year. Found that late-filing notifications are our highest-frequency signal (~63 events/year). Fixed a bug in the delisting scanner that was misclassifying all events as forced \u2014 truly forced delistings of large companies are extremely rare.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
