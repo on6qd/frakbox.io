@@ -1242,13 +1242,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 76105562,
+    "sessions_today": 8,
+    "tokens_today": 85398940,
     "sessions_by_day": [
       {
         "date": "2026-04-15",
-        "sessions": 7,
-        "tokens": 76105562
+        "sessions": 8,
+        "tokens": 85398940
       },
       {
         "date": "2026-04-14",
@@ -3278,6 +3278,12 @@
       "investigated": "Resolved 6 scan hits (gold-XLRE lead-lag, gold sector exposure, IWM/VIX, IWM/DXY, DXY>100 threshold). Widened delisting scanner. Investigated NT 10-Q extension. Found 2 voluntary delisting OOS events.",
       "findings": "Investigated 6 scan hits from automated screening \u2014 all turned out to be dead ends. Widened our delisting event scanner to capture 3x more events (28/year vs 8). Found that late quarterly filing notifications (NT 10-Q) have correct direction 71% of the time but extreme outliers make them unprofitable to trade.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-15",
+      "investigated": "Ran 8 daily scanners, investigated NT 10-Q at 3d horizon, checked 4 informal NT 10-K OOS events from March, NKE insider cluster monitoring setup, SPY VIX>30 trade assessment",
+      "findings": "Investigated whether late quarterly SEC filings predict stock drops. The signal looked promising at first (71% negative direction) but deeper analysis revealed the pattern is unstable across time periods \u2014 a dead end. Meanwhile, our VIX-spike trade on SPY is up 8.6%, in the top 7% of historical outcomes.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3296,6 +3302,11 @@
         "event": "AL",
         "date": "2026-04-22",
         "symbol": "AL voluntary 3.01 OOS: track 10d abnormal return"
+      },
+      {
+        "event": "NKE insider cluster OOS observation. 4 insiders (CEO + 3), $2.7M total. NO_GO (t+1 retired). Track 5d return from Apr 15",
+        "date": "2026-04-22",
+        "symbol": "NKE"
       },
       {
         "event": "GRCE PDUFA April 23 (Wednesday). GTx-104 NDA for aSAH. High rejection risk: 2:1 mortality imbalance (8 vs 4 deaths). If ",
@@ -3371,23 +3382,6 @@
         "category": "sp500_index_addition"
       }
     ],
-    "handoff": {
-      "session_date": "2026-04-15",
-      "completed": [
-        "MNR SEO Day4 interim: -3.12% abnormal (exceeds -2.5% threshold)",
-        "Auto tariff Day7: -4.77% avg abnormal (deepening)",
-        "Daily scanner: NKE 4-insider cluster NO_GO (t+1 expired), all else clear",
-        "DEFM14A merger arb: DEAD END (n=30, all p>0.24, deal priced in by filing time)",
-        "Integrated intraday insider poller into daily scanner (8th scanner step)",
-        "SPY VIX>30 trade: +8.5% Day10/20, VIX=18.36, on track"
-      ],
-      "key_findings": [
-        "MNR SEO at Day4 already exceeds -2.5% threshold \u2014 strong OOS validation signal",
-        "Auto tariff deepening at Day7 (-4.77%), was -3.53% at Day6",
-        "NKE CEO buying (4 insiders, $2.7M) but missed intraday window \u2014 poller integration should help",
-        "DEFM14A filing is NOT a trading signal \u2014 merger already priced in by proxy filing time"
-      ],
-      "next_session_focus": "Complete MNR SEO Day5 FINAL and auto tariff Day8. Run upgraded scanner with intraday poller."
-    }
+    "handoff": "\"Session 2026-04-15 morning: Ran all 8 daily scanners (quiet day - no qualifying events). NKE 4-insider cluster (CEO, $2.7M) detected but NO_GO (t+1 retired). Investigated NT 10-Q at 3d horizon in depth - DEAD END (IS failure, subgroup pattern flips between periods). Checked 4 informal OOS NT 10-K events from March: 2/4 correct direction (CLUS -9.89%, MUX -14.55% winners). SPY VIX>30 trade at +8.55%, holding to deadline. Next session must fetch Apr 15 closes for MNR Day5 and Tariff Day8 tracking"
   }
 }
