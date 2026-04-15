@@ -1136,10 +1136,14 @@
       {
         "name": "auditor_change_8k_item_401_short_final",
         "reason": "Auditor change 8-K Item 4.01: DEAD END. Discovery (2024, n=83): 1d p=0.133, 3d p=0.255, 5d p=0.415, 10d p=0.558. Validation (2025, n=90): 1d p=0.114, 3d p=0.087, 5d p=0.385, 10d p=0.137. No horizon passes p<0.05 in either period. Direction consistently negative (~36-45% positive) but magnitude too small (-0.5 to -1.7%) for the variance. No-disagreement subgroup (p=0.045, n=55) is a multiple testing artifact (10 subgroup tests). Not tradeable."
+      },
+      {
+        "name": "nt_10q_late_filing_short_3d",
+        "reason": "{\"reason\": \"IS failure (mean=+0.48%, wrong direction). Subgroup pattern flips between IS and OOS. Not a stable signal.\", \"date\": \"2026-04-15\", \"attempted_by\": \"orchestrator\"}"
       }
     ],
     "signal_count": 36,
-    "dead_end_count": 229,
+    "dead_end_count": 230,
     "literature_count": 25
   },
   "live_signals": [
