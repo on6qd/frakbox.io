@@ -1274,13 +1274,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 98916846,
+    "sessions_today": 11,
+    "tokens_today": 119664625,
     "sessions_by_day": [
       {
         "date": "2026-04-15",
-        "sessions": 10,
-        "tokens": 98916846
+        "sessions": 11,
+        "tokens": 119664625
       },
       {
         "date": "2026-04-14",
@@ -3328,6 +3328,12 @@
       "investigated": "Resolved 8 scan hits (VIX>25, AAL crude break, GC/DXY, FXI/DXY, FCX/copper, T/VZ cointegration, V/MA cointegration, XLF/DGS10 break). Investigated VIX>25 threshold and AAL crude structural break in depth. Discovered CASY SP500 interim addition miss. Ran daily scanners (quiet day). Analyzed VIX>30 return curve.",
       "findings": "Investigated 8 scan hits from earlier scans \u2014 all resolved as dead ends or already captured. Key finding: S&P 500 index additions only work for quarterly rebalances, not interim changes. The VIX>25 threshold does not extend the validated VIX>30 trading signal. Daily scanners found no new actionable events.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-15",
+      "investigated": "Built automated OOS tracker, fixed yfinance reliability, validated MNR SEO signal, tracked auto tariff OOS, ran daily scanners",
+      "findings": "Built an automated system for tracking out-of-sample signal observations with daily price updates. Validated the SEO bought deal short signal (stock dropped -4% vs market after a secondary offering). Two auto tariff observations tracking well.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3426,6 +3432,38 @@
         "category": "sp500_index_addition"
       }
     ],
-    "handoff": "\"Session 2026-04-15 morning: Ran all 8 daily scanners (quiet day - no qualifying events). NKE 4-insider cluster (CEO, $2.7M) detected but NO_GO (t+1 retired). Investigated NT 10-Q at 3d horizon in depth - DEAD END (IS failure, subgroup pattern flips between periods). Checked 4 informal OOS NT 10-K events from March: 2/4 correct direction (CLUS -9.89%, MUX -14.55% winners). SPY VIX>30 trade at +8.55%, holding to deadline. Next session must fetch Apr 15 closes for MNR Day5 and Tariff Day8 tracking"
+    "handoff": {
+      "session": "2026-04-15 morning (orchestrator)",
+      "priorities": [
+        {
+          "priority": "P0",
+          "task": "MNR SEO Day5 FINAL: Confirmed -4.01% abnormal at intraday. Wait for Apr 15 close to finalize. Close MNR observation if final close still exceeds -2.5%. Signal VALIDATED."
+        },
+        {
+          "priority": "P0",
+          "task": "Auto tariff TM Day10 (Apr 17) and HMC Day10 (Apr 17): Run python3 data_tasks.py oos update after market close Apr 15, 16, 17. TM at -3.51% Day8, HMC at -5.85% Day7. Both exceed -3.0% threshold."
+        },
+        {
+          "priority": "P0",
+          "task": "Run daily scanners: python3 tools/daily_scanner.py (now includes OOS update automatically)"
+        },
+        {
+          "priority": "P1",
+          "task": "NKE insider cluster theoretical OOS: Apr 14 close = $44.20. Entry proxy. Check Apr 22 for 5d result."
+        },
+        {
+          "priority": "P1",
+          "task": "Track AL voluntary delisting (Day10=Apr 22) and SEE (Day10=Apr 23). Prices flat at acquisition price, no signal expected (informational)."
+        },
+        {
+          "priority": "P1",
+          "task": "GRCE PDUFA Apr 23: CONTAMINATED (-30.4% drawdown). Micro-cap. Likely ABORT. Check if recovery before Apr 22."
+        },
+        {
+          "priority": "P2",
+          "task": "SPY VIX>30 trade: +8.6% P&L, deadline Apr 27. 8% stop. Monitor daily."
+        }
+      ]
+    }
   }
 }
