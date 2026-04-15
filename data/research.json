@@ -1104,10 +1104,14 @@
       {
         "name": "dgs10_xlp_lead_lag_scan_hit",
         "reason": "DGS10->XLP Granger lead-lag: DEAD END. Structural break at 2022-03-16: beta flipped +0.084 to -0.081 (F=34.49, p=2.2e-15). OOS was already borderline (p=0.052). Same regime artifact."
+      },
+      {
+        "name": "commodity_shock_nextday_sector_lag",
+        "reason": "Tested CL=F->XLE, HG=F->XME, GC=F->GDX. When commodity moves >2% in a day, next-day sector abnormal returns are indistinguishable from zero. All 3 pairs, both IS (2022-2024) and OOS (2025-2026), all p-values > 0.20. Confirms meta-finding: factor exposures are contemporaneous, not predictive. No institutional rebalancing lag exists at daily frequency for commodity-sector pairs."
       }
     ],
     "signal_count": 36,
-    "dead_end_count": 221,
+    "dead_end_count": 222,
     "literature_count": 25
   },
   "live_signals": [
@@ -1206,13 +1210,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 23216885,
+    "sessions_today": 4,
+    "tokens_today": 31619370,
     "sessions_by_day": [
       {
         "date": "2026-04-15",
-        "sessions": 3,
-        "tokens": 23216885
+        "sessions": 4,
+        "tokens": 31619370
       },
       {
         "date": "2026-04-14",
@@ -3218,6 +3222,12 @@
       "investigated": "Lead-lag screen (DGS10 vs all sectors + other factors), cointegration pairs screen (18 sector peer pairs), calendar anomaly screen (13 tests across SPY/QQQ/GLD/TLT/XLE/IWM patterns). Total: ~52 tests.",
       "findings": "Scanned 52 tests across 3 themes. KEY FINDING: DGS10 (10Y Treasury yield) Granger-causes 4 sectors IS+OOS confirmed: XLU (p=4.7e-7), TLT (p=1.7e-5), XLB (p=0.0009), XLC (p=0.013). This is a systematic rate-leads-equity pattern queued for deep investigation. All 13 calendar patterns null. All 18 cointegration pairs null in IS.",
       "tag": "validation"
+    },
+    {
+      "date": "2026-04-15",
+      "investigated": "Investigated 5 DGS10 Granger lead-lag scan hits (P9/P8). Tested commodity shock next-day sector lag (CL=F->XLE, HG=F->XME, GC=F->GDX). Ran all 8 daily scanners. Tracked MNR SEO OOS and auto tariff OOS.",
+      "findings": "Investigated 5 rate-related lead-lag signals from yesterday's scan \u2014 all are dead ends due to a structural regime change in 2022. Also confirmed that commodity price shocks don't predict next-day sector returns. MNR secondary offering trade observation continues to look promising before final measurement tomorrow.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
