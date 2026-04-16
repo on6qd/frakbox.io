@@ -1286,13 +1286,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 85664117,
+    "sessions_today": 11,
+    "tokens_today": 89508113,
     "sessions_by_day": [
       {
         "date": "2026-04-16",
-        "sessions": 10,
-        "tokens": 85664117
+        "sessions": 11,
+        "tokens": 89508113
       },
       {
         "date": "2026-04-15",
@@ -3411,6 +3411,12 @@
       "investigated": "Two deliverables: (1) implemented the pre-event 30d drawdown gate in daily_scanner.evaluate_nt10k_events, encoding yesterday's discovery that the large-cap NT 10-K short signal is concentrated in the -20% to -5% pre-event 30d return bucket (disc 10d -6.48% p=0.0043, OOS 10d -5.04%). (2) Investigated top P8 scan hit XLB/gold exposure (beta=0.12 IS, 0.17 OOS, Granger lag-2 p=0.006 IS+OOS).",
       "findings": "Built an automated filter into the late-filing scanner that only flags companies whose stock dropped a moderate amount (5-20%) before filing late \u2014 deeper crashes tend to bounce, and stocks that are up reverse course. Also confirmed that a promising-looking gold-vs-materials-stocks signal does not actually predict future moves.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-16",
+      "investigated": "Triaged 5 scan hits (XLRE/DGS10, XLV/DGS10, XME/gold, GLD/DGS10 exposures + VIX>30 XLK/XLF rotation). Cross-tabulated NT 10-K cap tier (large vs mid) with pre-event drawdown buckets to test whether todays filter should add up_gt_5 as second trigger.",
+      "findings": "Cleared out five scanner alerts that were rediscovering relationships the fund had already tested and retired. Also stress-tested a tempting pattern in late-filing stocks that looked strong in the historical data but failed in fresh data \u2014 confirming the filter added earlier today was drawn at the right boundary.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3459,29 +3465,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] XLRE (Real Estate) DGS10 exposure: IS not significant (beta=-0.010, p=0.185) but OOS 2024+ is EXTREMELY significant (beta=-0.303). REITs ar",
-        "priority": 8,
+        "question": "[SCAN HIT] Cointegration cluster: IS significant but OOS fails pattern across 3 within-sector pairs: V/MA (p=0.033, half-life=19.5d), T/VZ (p=0.015, h",
+        "priority": 6,
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] VIX>30 threshold on XLK: +4.73% 20d avg (t=4.00, p=0.0004, n=30 crossings). VIX>30 on XLF: +4.34% 20d avg (p=0.0018). Both significant. NOT",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] XLV/DGS10: IS not significant (beta=+0.007 p=0.195 full period; beta=+0.002 p=0.739 post-2022 window) but OOS 2024+ IS SIGNIFICANT (beta=-0",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] XME/gold (GC=F) exposure: beta=0.489 IS (p<0.0001), beta=0.547 OOS (strengthening). Metals & mining ETF has strong validated gold exposure ",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] GLD has strong negative DGS10 exposure: IS beta=-0.082 (p<0.0001), OOS beta=-0.160 (strengthening, significant). Gold benefits from rate de",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
     "handoff": {
