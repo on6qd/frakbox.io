@@ -3358,11 +3358,6 @@
   "pipeline": {
     "watchlist": [
       {
-        "event": "ALKT \u2014 JANA Partners filed initial SCHEDULE 13D on 2026-04-01 (target: Alkami Technology, $1.7B mkt cap, $16.13). NOT TR",
-        "date": "2026-04-20",
-        "symbol": "ALKT"
-      },
-      {
         "event": "AL",
         "date": "2026-04-22",
         "symbol": "AL voluntary 3.01 OOS: track 10d abnormal return"
