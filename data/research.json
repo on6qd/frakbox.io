@@ -1282,13 +1282,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 40589753,
+    "sessions_today": 3,
+    "tokens_today": 42682026,
     "sessions_by_day": [
       {
         "date": "2026-04-16",
-        "sessions": 2,
-        "tokens": 40589753
+        "sessions": 3,
+        "tokens": 42682026
       },
       {
         "date": "2026-04-15",
@@ -3359,6 +3359,12 @@
       "investigated": "Daily scanner run, auto tariff OOS tracking, NKE insider OOS, Item 2.04 8-K signal exploration, auto-queueing infrastructure for 4 EDGAR-based scanners",
       "findings": "Explored debt covenant breach filings as a potential new short signal \u2014 no tradeable pattern found. Built automated alert systems for four validated signals so the fund catches every qualifying event without delay.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-16",
+      "investigated": "Multi-theme scan: (1) Calendar anomalies \u2014 monthly, dow, tom patterns for 8+ symbols; (2) Cointegration pairs \u2014 16 within-sector pairs across energy, financials, retail, tech, pharma, metals, bonds; (3) Factor exposures \u2014 remaining sectors x rates/gold/copper/dollar; (4) Structural breaks \u2014 8 sectors at 2022-03-16 rate hike date; (5) Threshold tests \u2014 gold levels, rate levels. Total: ~90 tests across 5 themes.",
+      "findings": "Screened ~90 tests across 5 themes: calendar anomalies, cointegration pairs, factor exposures, structural breaks, thresholds. Found 6 significant hits \u2014 queued 5 for deep investigation. Key discovery: calendar anomalies are dead ends for major ETFs; virtually all sector/rate relationships inverted at the 2022 rate hike. Three notable exceptions (stable across regimes): XLF/DGS2, XLB/gold, EEM/dollar \u2014 these may be the most causally robust relationships found this session.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3412,24 +3418,24 @@
         "category": "oos_tracking"
       },
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] GLD/DGS2 negative exposure: IS beta=-0.034 (p<0.0001), OOS beta=-0.198 (confirmed). Structural break at 2022: F=38.42 (p<0.0001), pre-beta=",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] XLB (Materials ETF) multi-factor OOS-confirmed exposures: (1) GC=F gold beta=+0.122 IS / +0.166 OOS, no structural break; (2) HG=F copper b",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] EEM/DXY negative exposure: IS beta=-0.503 (p<0.0001), OOS beta=-0.885 (confirmed, intensified). Structural break test: F=1.11, p=0.33 \u2014 NO ",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] XLRE/DGS10 structural break at 2022-03-16: F=77.75 (p<0.0001) \u2014 STRONGEST break of all sectors scanned. Pre-2022 beta=+0.127 (rate-POSITIVE",
+        "priority": 7,
+        "category": "scan_hit"
       }
     ],
     "handoff": {
