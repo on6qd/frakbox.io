@@ -1286,13 +1286,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 66676672,
+    "sessions_today": 8,
+    "tokens_today": 71597022,
     "sessions_by_day": [
       {
         "date": "2026-04-16",
-        "sessions": 7,
-        "tokens": 66676672
+        "sessions": 8,
+        "tokens": 71597022
       },
       {
         "date": "2026-04-15",
@@ -3393,6 +3393,12 @@
       "investigated": "Top priority-9 scan hit claimed DXY<100 triggers EWJ/EWG/EEM rally (+3.59%/+5.05%/+3.99% raw 20d returns, all p<0.002, n=26). Ran 6-step investigation: abnormal returns vs SPY, discovery/OOS split (pre-2022 vs 2022+), VIX stratification, DXY momentum contamination. Also resolved 7 remaining scan hits (COVID dollar sign-flip, XLY/DGS10 2022 break, GDX/DXY, XLB/DXY, dollar metal ladder, HYG/DGS10, EWJ/EWG cointegration, DXY-both-directions).",
       "findings": "Tested a promising signal that said international stocks rally when the dollar index drops below 100. The raw numbers looked strong, but once compared against the broader US market, the entire effect disappeared \u2014 it was just a dollar-weak-means-global-bull-market pattern. Dead end recorded; no trade taken.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-16",
+      "investigated": "NT 10-K pre-event drawdown refinement. Built tools/nt_10k_pre_event_drawdown.py to test whether the validated NT 10-K short signal varies with the 30-day pre-event raw return. N=1425 first-time filers 2022-2025, bucketed into deep drawdown (<-20%), moderate (-20% to -5%), flat (-5% to +5%), up (>+5%). Split discovery/OOS at 2024-07-01.",
+      "findings": "We found that companies filing late annual reports are best shorted when the stock has only modestly declined in the prior month (5% to 20%). Stocks that had already crashed before filing tend to bounce back, and stocks still rising into the filing keep rising. This refinement should double the reliability of our late-filing short signal.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
