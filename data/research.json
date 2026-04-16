@@ -1282,13 +1282,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 23203154,
+    "sessions_today": 2,
+    "tokens_today": 40589753,
     "sessions_by_day": [
       {
         "date": "2026-04-16",
-        "sessions": 1,
-        "tokens": 23203154
+        "sessions": 2,
+        "tokens": 40589753
       },
       {
         "date": "2026-04-15",
@@ -3353,29 +3353,20 @@
       "investigated": "OOS tracking (MNR SEO, auto tariff Day8, NKE insider), daily scanners, restatement 8-K investigation, delisting going-private analysis, scanner improvements",
       "findings": "Discovered that about a quarter of delisting notices on stock exchanges are actually mergers where the stock stops trading, making them impossible to short. Fixed the scanner to filter these out. Also tested whether companies restating their financials create a short opportunity \u2014 they don't anymore (the effect documented in 2004 has been fully exploited by modern markets).",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-16",
+      "investigated": "Daily scanner run, auto tariff OOS tracking, NKE insider OOS, Item 2.04 8-K signal exploration, auto-queueing infrastructure for 4 EDGAR-based scanners",
+      "findings": "Explored debt covenant breach filings as a potential new short signal \u2014 no tradeable pattern found. Built automated alert systems for four validated signals so the fund catches every qualifying event without delay.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
     "watchlist": [
       {
-        "event": "AL",
-        "date": "2026-04-22",
-        "symbol": "AL voluntary 3.01 OOS: track 10d abnormal return"
-      },
-      {
         "event": "NKE insider cluster OOS observation. 4 insiders (CEO + 3), $2.7M total. NO_GO (t+1 retired). Track 5d return from Apr 15",
         "date": "2026-04-22",
         "symbol": "NKE"
-      },
-      {
-        "event": "GRCE PDUFA April 23 (Wednesday). GTx-104 NDA for aSAH. High rejection risk: 2:1 mortality imbalance (8 vs 4 deaths). If ",
-        "date": "2026-04-23",
-        "symbol": "GRCE"
-      },
-      {
-        "event": "SEE",
-        "date": "2026-04-23",
-        "symbol": "SEE voluntary 3.01 OOS: track 10d abnormal return"
       },
       {
         "event": "VIX>30 spike recovery: buy SPY at next open, hold 20 days (hyp b63a0168). Monitor daily VIX close.",
