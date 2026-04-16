@@ -1286,13 +1286,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 13,
-    "tokens_today": 95964039,
+    "sessions_today": 14,
+    "tokens_today": 104731909,
     "sessions_by_day": [
       {
         "date": "2026-04-16",
-        "sessions": 13,
-        "tokens": 95964039
+        "sessions": 14,
+        "tokens": 104731909
       },
       {
         "date": "2026-04-15",
@@ -3429,6 +3429,12 @@
       "investigated": "Top scan hit VIX>20 XLK mean-reversion (claimed +1.43% 10d, n=97). Applied 5-day cluster buffer to ensure window independence, temporal split IS/OOS at 2020-01-01, tested XLK/QQQ/XLF/XLI at VIX>20/25/30. Audited dates. Reconciled with prior vix30_qqq_iwm_extension_dead_end.",
       "findings": "Investigated a signal claiming that when market fear (VIX) crosses above 20, the tech sector tends to outperform the broader market over the next two weeks. Found the effect is real only since 2020 \u2014 prior decades show no such pattern \u2014 so we're treating it as unproven and monitoring it live rather than trading on it.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-16",
+      "investigated": "Built tools/cybersec_8k_cap_tier_backtest.py to test cap-tier extension of validated cybersec 8-K Item 1.05 short signal. Fetched all Item 1.05 filings 2023-12-18 to 2026-04-15 (N=66 raw, 57 with ticker), bucketed by current market cap tier. Backtested each tier with abnormal returns vs SPY. Discovery/OOS split at 2025-01-01. Dedup by company verification. Then dismissed P6 cointegration scan hit (V/MA, T/VZ, XLU/TLT) as time-varying cointegration data-mining.",
+      "findings": "Tested whether the validated cybersecurity-breach short trade extends to smaller companies. It does not \u2014 the signal is strongest in the largest companies. Mid-sized companies actually drift up after a breach, suggesting the market already prices cybersecurity risk into smaller names but is repeatedly surprised by breaches at the giants.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3477,11 +3483,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] Cointegration cluster: IS significant but OOS fails pattern across 3 within-sector pairs: V/MA (p=0.033, half-life=19.5d), T/VZ (p=0.015, h",
-        "priority": 6,
-        "category": "scan_hit"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -3500,8 +3501,13 @@
         "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
         "priority": 1,
         "category": "sp500_index_addition"
+      },
+      {
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-16 summary:\\n- Triaged 7 P7-P8 scan hits. Top hit VIX>20 XLK investigated: post-2020 OOS is strong (n=28, +1.02% 10d abn, 75% dir, p=0.0042) but pre-2020 IS fails (p=0.29). Pre-registered 'both-regimes' criterion FAILS -> PRELIMINARY_REGIME_SPECIFIC only. Not tradeable yet; need 5 forward OOS observations.\\n- 5 other scan hits closed as rediscoveries of known structural_break_2022 / exposure_to_event_conversion_meta dead ends.\\n- 1 NG=F<$2 scan hit closed as regime-confounded (d"
+    "handoff": "\"Session 2026-04-16 (research): Built tools/cybersec_8k_cap_tier_backtest.py to test if validated cybersec 8-K Item 1.05 short signal extends across cap tiers (analogous to NT 10-K). Counter-finding: signal concentrated in mega-cap (>10B), NOT mid-cap. Mid-cap (2B-10B) has NO signal (directionally positive). Mega-cap N=10 deduped: 5d -3.73% p=0.032, 80% neg. OOS still small (N=5 deduped, 7 with repeats). Recorded conservative recommendation: do NOT yet tighten scanner from 500M, but track mega-c"
   }
 }
