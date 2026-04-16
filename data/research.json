@@ -1286,13 +1286,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 78357906,
+    "sessions_today": 10,
+    "tokens_today": 85664117,
     "sessions_by_day": [
       {
         "date": "2026-04-16",
-        "sessions": 9,
-        "tokens": 78357906
+        "sessions": 10,
+        "tokens": 85664117
       },
       {
         "date": "2026-04-15",
@@ -3405,6 +3405,12 @@
       "investigated": "Calendar anomaly screen (20 tests: monthly/DOW/TOM across SPY/QQQ/IWM/GLD/XLE/TLT/XLF/XLK); Cointegration pairs screen (15 pairs: KO/PEP, XOM/CVX, V/MA, HD/LOW, JPM/BAC, WMT/TGT, GLD/GDX, UPS/FDX, T/VZ, MU/INTC, LLY/PFE, C/JPM, NVDA/AMD, AMZN/EBAY, MSFT/ORCL, SLV/GLD, IAU/SLV, XLU/TLT, XLY/XLP, EWJ/EWG, XLF/XLRE, SPY/QQQ); VIX regime tests (5 assets); VIX threshold extensions (QQQ/IWM/XLF/XLK at 20/25/30); Factor exposure grid (XLB/gold, XME/gold, GDX/gold, SLV/gold, GLD/DGS10, XLRE/DGS10, XLV/DGS10, XLP/DGS10, XLC/DGS10, XLI/copper, XLI/gold, AAL+DAL/crude, XLB/copper, XLC/crude, XLV/gold); Structural breaks (XLC/XLV/IBB/XLI at 2022; GLD/XLRE/XLB at 2022+2025); Network (AAPL->AVGO/TSM). Total: ~85 tests.",
       "findings": "Screened ~85 combinations across calendar anomalies, cointegration pairs, VIX regimes, factor exposures, and structural breaks. Calendar anomalies all null (20 tests). Top 7 findings queued: XLB/gold dual-validated exposure, XLRE/DGS10 extreme OOS sensitivity (-0.303), GLD/DGS10 tripling post-2022, XLP/DGS10 OOS flip, VIX>30 XLK recovery (+4.73%), XME dual-commodity exposure, XLRE structural break F=77.75 (strongest in scan).",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-16",
+      "investigated": "Two deliverables: (1) implemented the pre-event 30d drawdown gate in daily_scanner.evaluate_nt10k_events, encoding yesterday's discovery that the large-cap NT 10-K short signal is concentrated in the -20% to -5% pre-event 30d return bucket (disc 10d -6.48% p=0.0043, OOS 10d -5.04%). (2) Investigated top P8 scan hit XLB/gold exposure (beta=0.12 IS, 0.17 OOS, Granger lag-2 p=0.006 IS+OOS).",
+      "findings": "Built an automated filter into the late-filing scanner that only flags companies whose stock dropped a moderate amount (5-20%) before filing late \u2014 deeper crashes tend to bounce, and stocks that are up reverse course. Also confirmed that a promising-looking gold-vs-materials-stocks signal does not actually predict future moves.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3453,11 +3459,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] target=XLB factor=GC=F (gold) beta=0.122 IS (p<0.0001), beta=0.168 OOS (strengthening). XLB (materials sector) has validated positive gold ",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
         "question": "[SCAN HIT] XLRE (Real Estate) DGS10 exposure: IS not significant (beta=-0.010, p=0.185) but OOS 2024+ is EXTREMELY significant (beta=-0.303). REITs ar",
         "priority": 8,
         "category": "scan_hit"
@@ -3474,6 +3475,11 @@
       },
       {
         "question": "[SCAN HIT] XME/gold (GC=F) exposure: beta=0.489 IS (p<0.0001), beta=0.547 OOS (strengthening). Metals & mining ETF has strong validated gold exposure ",
+        "priority": 7,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] GLD has strong negative DGS10 exposure: IS beta=-0.082 (p<0.0001), OOS beta=-0.160 (strengthening, significant). Gold benefits from rate de",
         "priority": 7,
         "category": "scan_hit"
       }
