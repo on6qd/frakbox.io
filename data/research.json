@@ -1282,13 +1282,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 49410332,
+    "sessions_today": 5,
+    "tokens_today": 53793400,
     "sessions_by_day": [
       {
         "date": "2026-04-16",
-        "sessions": 4,
-        "tokens": 49410332
+        "sessions": 5,
+        "tokens": 53793400
       },
       {
         "date": "2026-04-15",
@@ -3371,6 +3371,12 @@
       "investigated": "Resolved 5 pending non-event scan hits (GLD/DGS2, XLB, EEM/DXY, XLRE/DGS10, DVY/DGS10 exposures and structural breaks). Ran full daily scanner (all signals clean \u2014 no large-cap filings). Checked OOS status for auto tariff (HMC Day 8 -6.27%, TM Day 8 -3.75%, both tracking validated signal). Tracked NKE insider cluster theoretical OOS Day 1. Confirmed AL and SEE voluntary delisting OOS both untradeable (halted trading at filing). Investigated mid-cap NT 10-K extension \u2014 complex multi-session project, deferred.",
       "findings": "Confirmed our auto tariff trade signal is working \u2014 two auto stocks are down 3-6% as predicted. Resolved five research leads that explored broader market relationships, but none produced tradeable strategies. All daily filing scanners ran clean with no new signals to act on.",
       "tag": "discovery"
+    },
+    {
+      "date": "2026-04-16",
+      "investigated": "Mid-cap NT 10-K extension investigation. Built nt_10k_cap_tier_backtest.py. Fetched 2022-2025 NT 10-K filings, classified first-time vs repeat (730d lookback), bucketed first-time filers by current market cap tier, ran 1/3/5/10d abnormal return backtests with 2024-07-01 discovery/OOS split.",
+      "findings": "Tested whether the 'late annual-report filing = short the stock' signal works for smaller companies. Early results suggest the pattern is even stronger for mid-sized companies ($250M-$500M), but the recent sample is still small \u2014 we'll keep tracking new cases before actually trading this tier.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3445,37 +3451,11 @@
       }
     ],
     "handoff": {
-      "session": "2026-04-15 morning (orchestrator)",
-      "priorities": [
-        {
-          "priority": "P0",
-          "task": "MNR SEO Day5 FINAL: Confirmed -4.01% abnormal at intraday. Wait for Apr 15 close to finalize. Close MNR observation if final close still exceeds -2.5%. Signal VALIDATED."
-        },
-        {
-          "priority": "P0",
-          "task": "Auto tariff TM Day10 (Apr 17) and HMC Day10 (Apr 17): Run python3 data_tasks.py oos update after market close Apr 15, 16, 17. TM at -3.51% Day8, HMC at -5.85% Day7. Both exceed -3.0% threshold."
-        },
-        {
-          "priority": "P0",
-          "task": "Run daily scanners: python3 tools/daily_scanner.py (now includes OOS update automatically)"
-        },
-        {
-          "priority": "P1",
-          "task": "NKE insider cluster theoretical OOS: Apr 14 close = $44.20. Entry proxy. Check Apr 22 for 5d result."
-        },
-        {
-          "priority": "P1",
-          "task": "Track AL voluntary delisting (Day10=Apr 22) and SEE (Day10=Apr 23). Prices flat at acquisition price, no signal expected (informational)."
-        },
-        {
-          "priority": "P1",
-          "task": "GRCE PDUFA Apr 23: CONTAMINATED (-30.4% drawdown). Micro-cap. Likely ABORT. Check if recovery before Apr 22."
-        },
-        {
-          "priority": "P2",
-          "task": "SPY VIX>30 trade: +8.6% P&L, deadline Apr 27. 8% stop. Monitor daily."
-        }
-      ]
+      "attempted": "Mid-cap NT 10-K extension investigation \u2014 does the validated large-cap NT 10-K short signal extend to smaller market-cap tiers?",
+      "accomplished": "Built tools/nt_10k_cap_tier_backtest.py. Ran 2022-2025 first-time NT 10-K filers bucketed by current market cap. Identified $250M-$500M tier as promising: full-sample 3d=-3.82% (p=0.006, 67% neg); OOS N=8 unanimous (3d=-11.53%, 8/8 negative). Recorded nt_10k_midcap_extension_2026_04_16.",
+      "partial_results": "Mid-cap signal is directionally strong but OOS N=8 too small to validate per methodology (need N>=15). $500M-$2000M bucket had discovery signal but REVERSED OOS. $100M-$250M no signal. Micro-cap (<$100M, N=727) returned NaN \u2014 penny-stock issues.",
+      "blocked_by": "OOS sample too small. Also: 468 UNCACHED first-time filers (likely delisted mid-caps) excluded from analysis \u2014 potential survivorship bias unquantified.",
+      "key_insight": "Mid-cap ($250M-$500M) tier shows signal as strong or stronger than large-cap. This could roughly double NT 10-K signal frequency (~11.5/yr mid-low + ~11/yr large-cap = ~22/yr). Trade not yet ready to activate \u2014 track forward OOS and re-evaluate in ~6-9 months when N hits 15."
     }
   }
 }
