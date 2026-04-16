@@ -1286,13 +1286,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 11,
-    "tokens_today": 89508113,
+    "sessions_today": 12,
+    "tokens_today": 92534446,
     "sessions_by_day": [
       {
         "date": "2026-04-16",
-        "sessions": 11,
-        "tokens": 89508113
+        "sessions": 12,
+        "tokens": 92534446
       },
       {
         "date": "2026-04-15",
@@ -3417,6 +3417,12 @@
       "investigated": "Triaged 5 scan hits (XLRE/DGS10, XLV/DGS10, XME/gold, GLD/DGS10 exposures + VIX>30 XLK/XLF rotation). Cross-tabulated NT 10-K cap tier (large vs mid) with pre-event drawdown buckets to test whether todays filter should add up_gt_5 as second trigger.",
       "findings": "Cleared out five scanner alerts that were rediscovering relationships the fund had already tested and retired. Also stress-tested a tempting pattern in late-filing stocks that looked strong in the historical data but failed in fresh data \u2014 confirming the filter added earlier today was drawn at the right boundary.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-16",
+      "investigated": "Multi-theme scan: Calendar Anomaly (18 tests), Cointegration Pairs (17 tests), Agricultural/Energy Lead-Lag (4 tests), Threshold Screen (10 tests), Structural Break Screen (15 tests), Regime Screen (6 tests), Factor Exposure (5 tests). Total: 75 tests.",
+      "findings": "Screened 75 factor-asset combinations across 7 test types. Found 7 statistically significant hits: a broad natural gas price threshold signal (NG<2 triggers multi-sector rally), a VIX>20 tech mean-reversion with 3x more observations than existing VIX>30 trade, and 5 structural breaks at the 2025 tariff date showing widespread regime changes across energy, healthcare, consumer, bonds, and gold relationships. Calendar anomaly screen was a comprehensive dead end (18 tests, all p>0.05). All 7 hits queued for orchestrator investigation.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3465,29 +3471,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] Cointegration cluster: IS significant but OOS fails pattern across 3 within-sector pairs: V/MA (p=0.033, half-life=19.5d), T/VZ (p=0.015, h",
-        "priority": 6,
+        "question": "[SCAN HIT] NG=F < 2.0 triggers broad market rally: XLU 20d +4.37% (p=2e-5, n=16), NEE +5.26% (p=0.0002), DUK +3.56% (p=0.003), SPY +2.97% (p=0.004), X",
+        "priority": 8,
         "category": "scan_hit"
       },
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] VIX > 20 triggers XLK mean-reversion: +1.43% 10d (p=0.0014, n=97 crossings). Also QQQ +1.17% 10d (p=0.0065, n=97). Compare to existing VIX>",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] XLY~DXY relationship SIGN-FLIPPED at 2025-04-02 tariff date: Pre-beta=-0.828 (n=1318), Post-beta=+0.256 (n=260), p=3e-5 (F=10.49). Consumer",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] TLT~DGS10 sensitivity more than doubled at 2025-04-02 tariff date: Pre-beta=-0.246 (n=1309), Post-beta=-0.571 (n=260), p=1.5e-17 (F=39.73).",
+        "priority": 7,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] XLE~CL=F (energy sector vs crude oil) sensitivity jumped 5.7x at 2025-04-02 tariff date: Pre-beta=0.051 (n=1318), Post-beta=0.289 (n=260), ",
+        "priority": 7,
+        "category": "scan_hit"
       }
     ],
     "handoff": {
