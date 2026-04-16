@@ -238,6 +238,16 @@
         "name": "nke_insider_cluster_april2026_oos_entry",
         "status": "MONITORING_THEORETICAL",
         "magnitude_pct": 5.0
+      },
+      {
+        "name": "auto_import_tariff_short_event2_day10_final",
+        "status": "validated_oos_2_events",
+        "magnitude_pct": -5.14
+      },
+      {
+        "name": "auto_import_tariff_short_basket_expansion_2026_04_17",
+        "status": "validated_basket_expansion",
+        "magnitude_pct": -2.37
       }
     ],
     "dead_ends": [
@@ -1184,10 +1194,14 @@
       {
         "name": "dxy_below_100_threshold_international_etf_rally",
         "reason": "DXY<100 international ETF rally (EWJ/EWG/EEM) is FALSE POSITIVE from raw returns.\nRAW returns (20d): EWJ=+3.59% p=0.0001, EWG=+5.05% p=0.0008, EEM=+3.99% p=0.0017 (n=26).\nABNORMAL returns vs SPY (20d): EWJ=+0.02% p=0.99, EWG=+0.34% p=0.72, EEM=-0.82% p=0.47.\nOOS (>=2022, n=7): all insignificant; EEM abn=-0.39% (wrong direction, pos_rate=29%).\nRoot cause: dollar weakness coincides with broad equity bull markets - raw return includes market beta.\nVIX>=25 subset: EWJ=-4.42% abn (n=6) - signal inverts at stress regimes, same decomposition as DXY>100 dead ends (#1680, #1681).\nSession 2026-04-16. Conclusion: no independent signal beyond SPY beta and known EEM/DXY exposure (already validated)."
+      },
+      {
+        "name": "ferrari_race_tariff_short",
+        "reason": "Ferrari (RACE) does NOT follow the foreign-automaker tariff short pattern. Tested on 2 tariff events (2025-03-26, 2026-04-02): 5d +4.80/+0.51 (avg +2.65%), 10d +8.23/-1.54 (avg +3.35%) \u2014 positive at 5d/10d across both events. Luxury/ultra-luxury OEMs have pricing power to absorb tariffs and supply-constrained demand. EXCLUDE from foreign-automaker tariff short basket."
       }
     ],
-    "signal_count": 40,
-    "dead_end_count": 236,
+    "signal_count": 42,
+    "dead_end_count": 237,
     "literature_count": 25
   },
   "live_signals": [
@@ -1286,9 +1300,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 1,
+    "tokens_today": 5787462,
     "sessions_by_day": [
+      {
+        "date": "2026-04-17",
+        "sessions": 1,
+        "tokens": 5787462
+      },
       {
         "date": "2026-04-16",
         "sessions": 14,
@@ -3435,6 +3454,12 @@
       "investigated": "Built tools/cybersec_8k_cap_tier_backtest.py to test cap-tier extension of validated cybersec 8-K Item 1.05 short signal. Fetched all Item 1.05 filings 2023-12-18 to 2026-04-15 (N=66 raw, 57 with ticker), bucketed by current market cap tier. Backtested each tier with abnormal returns vs SPY. Discovery/OOS split at 2025-01-01. Dedup by company verification. Then dismissed P6 cointegration scan hit (V/MA, T/VZ, XLU/TLT) as time-varying cointegration data-mining.",
       "findings": "Tested whether the validated cybersecurity-breach short trade extends to smaller companies. It does not \u2014 the signal is strongest in the largest companies. Mid-sized companies actually drift up after a breach, suggesting the market already prices cybersecurity risk into smaller names but is repeatedly surprised by breaches at the giants.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-17",
+      "investigated": "Closed HMC/TM auto_import_tariff_short Day 10 OOS as validated (event 2 of 2). Ran daily scanner \u2014 all clean. Then extended the research: backtested 8 foreign automakers (TM, HMC, NSANY, STLA, HYMTF, MZDAY, VWAGY, RACE) across both qualifying tariff events (2025-03-26 and 2026-04-02 Liberation Day) to characterize the optimal basket.",
+      "findings": "Validated a trade that shorts foreign carmakers right after a US auto tariff announcement \u2014 it worked a second time, and a closer look showed the basket should include Stellantis alongside Toyota and Honda. Ferrari was a surprising exception: luxury cars have enough pricing power that Ferrari actually rose on tariff news.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3508,6 +3533,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-16 (research): Built tools/cybersec_8k_cap_tier_backtest.py to test if validated cybersec 8-K Item 1.05 short signal extends across cap tiers (analogous to NT 10-K). Counter-finding: signal concentrated in mega-cap (>10B), NOT mid-cap. Mid-cap (2B-10B) has NO signal (directionally positive). Mega-cap N=10 deduped: 5d -3.73% p=0.032, 80% neg. OOS still small (N=5 deduped, 7 with repeats). Recorded conservative recommendation: do NOT yet tighten scanner from 500M, but track mega-c"
+    "handoff": "\"Session 2026-04-17 (research): (1) Closed HMC/TM Day 10 OOS as VALIDATED (auto_import_tariff_short event 2 \\u2014 HMC -6.12%, TM -4.16% abn). 2/2 tariff events now validated. (2) Ran daily scanner \\u2014 all 7 sub-scanners clean, 0 actionable events. (3) RESEARCH: Expanded the auto-tariff short basket by backtesting 8 foreign automakers across both tariff events. Finding: NYSE-liquid basket TM+HMC+STLA gives 5d avg -2.37% abn with 100% neg rate across 6/6 events (both dates \\u00d7 3 tickers). S"
   }
 }
