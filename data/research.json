@@ -1282,13 +1282,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 53793400,
+    "sessions_today": 6,
+    "tokens_today": 63402058,
     "sessions_by_day": [
       {
         "date": "2026-04-16",
-        "sessions": 5,
-        "tokens": 53793400
+        "sessions": 6,
+        "tokens": 63402058
       },
       {
         "date": "2026-04-15",
@@ -3377,6 +3377,12 @@
       "investigated": "Mid-cap NT 10-K extension investigation. Built nt_10k_cap_tier_backtest.py. Fetched 2022-2025 NT 10-K filings, classified first-time vs repeat (730d lookback), bucketed first-time filers by current market cap tier, ran 1/3/5/10d abnormal return backtests with 2024-07-01 discovery/OOS split.",
       "findings": "Tested whether the 'late annual-report filing = short the stock' signal works for smaller companies. Early results suggest the pattern is even stronger for mid-sized companies ($250M-$500M), but the recent sample is still small \u2014 we'll keep tracking new cases before actually trading this tier.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-16",
+      "investigated": "Multi-theme scan: (1) Calendar anomaly screen - 12 tests across SPY/QQQ/GLD/XLE/TLT/IWM/XLF/XLB with monthly/dow/TOM patterns. (2) Cointegration pairs screen - 20 pairs across tech/finance/retail/pharma/utilities/international. (3) Regime screen - 8 sector-VIX regime tests. (4) Structural break screen 2022 (rate hike) - all 11 sectors vs DGS10. (5) Structural break screen COVID 2020 - international ETFs (EWJ/EWG/EWY/EEM/EWZ) vs DXY, plus XLB/XLI vs commodities. (6) Factor exposure screen - international ETFs and commodities vs DXY, metals vs gold futures. (7) DXY threshold screen - multiple levels and targets. Total: 114+ tests.",
+      "findings": "Screened 114+ tests across 7 themes. Key findings: (1) Universal COVID 2020 dollar sign-flip \u2014 ALL equity ETFs inverted from dollar-positive to dollar-negative at COVID (10+ ETFs confirmed, p<1e-8 each). (2) DXY leverage ladder \u2014 GDX/SLV/EWG/EWY/GLD/FCX/XLB all have OOS-confirmed inverse dollar exposure with clean betas. (3) 2022 rate hike inverted ALL sector-rate relationships (11 sectors tested, all significant). (4) Calendar anomalies (Jan/TOM/DoW) all dead ends for liquid ETFs. (5) Cointegration pairs mostly not significant. Queued 8 findings for orchestrator investigation.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3425,29 +3431,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] DXY < 100 triggers international ETF rally: EWJ=+3.59% (p=0.0001, n=26), EWG=+5.05% (p=0.0008, n=26), EEM=+3.99% (p=0.0017, n=26) in 20d wi",
+        "priority": 9,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] COVID dollar sign-flip: ALL major international ETFs (EWJ, EWG, EWY, EEM, EWZ) flipped from dollar-positive to dollar-negative at COVID (20",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] XLY/DGS10 structural break at 2022-03-16: F=26.51, p=4.7e-12. Pre-break beta=+0.116 (rate positive), Post-break beta=-0.110 (rate negative)",
+        "priority": 7,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] GDX/DXY negative exposure: beta=-2.138, p=1.1e-35, OOS beta=-2.289 (strengthening). Gold miners have 2.2x leveraged inverse dollar exposure",
+        "priority": 7,
+        "category": "scan_hit"
       },
       {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
+        "question": "[SCAN HIT] XLB/DXY negative exposure: beta=-0.311, p=2.6e-8, OOS beta=-0.394 (confirmed, strengthened). Materials sector has strong inverse dollar exp",
+        "priority": 7,
+        "category": "scan_hit"
       }
     ],
     "handoff": {
