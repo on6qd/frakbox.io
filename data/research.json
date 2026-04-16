@@ -1176,10 +1176,14 @@
       {
         "name": "restatement_8k_item_402_short",
         "reason": "{\"description\": \"8-K Item 4.02 (non-reliance on financials / restatement) tested as short signal.\", \"period\": \"2023-2024 large-cap (>500M)\", \"n\": 46, \"expected\": \"Abnormal -2% at 5d per Palmrose 2004\", \"actual_5d\": {\"avg\": -0.5, \"p\": 0.8, \"positive_rate\": 54.3}, \"actual_10d\": {\"avg\": -3.42, \"p\": 0.26, \"positive_rate\": 41.3}, \"conclusion\": \"Academic effect fully arbitraged in modern large-cap markets. No horizon significant at p<0.05. Full-text EFTS search may also introduce false positives (filings referencing 4.02 without being actual restatements).\", \"task_result\": \"T-8cd844d3\"}"
+      },
+      {
+        "name": "triggering_event_8k_item_204_short",
+        "reason": "No signal. n=47 large-cap 8-K Item 2.04 filings (Jan 2024 - Apr 2026). 5d avg=-1.15% p=0.48, 10d avg=-0.78% p=0.72. Direction correct only 41-49%. Item 2.04 covers routine debt amendments, merger triggers, and actual distress \u2014 mix too heterogeneous for tradeable signal."
       }
     ],
     "signal_count": 40,
-    "dead_end_count": 234,
+    "dead_end_count": 235,
     "literature_count": 25
   },
   "live_signals": [
@@ -3353,11 +3357,6 @@
   ],
   "pipeline": {
     "watchlist": [
-      {
-        "event": "MNR SEO bought deal OOS observation. 424B4 filed April 8. Track 5d return from Apr 9 open (close Apr 15). Expected: nega",
-        "date": "2026-04-15",
-        "symbol": "MNR"
-      },
       {
         "event": "ALKT \u2014 JANA Partners filed initial SCHEDULE 13D on 2026-04-01 (target: Alkami Technology, $1.7B mkt cap, $16.13). NOT TR",
         "date": "2026-04-20",
