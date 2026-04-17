@@ -1372,9 +1372,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 12,
-    "tokens_today": 59029789,
+    "sessions_today": 1,
+    "tokens_today": 4006137,
     "sessions_by_day": [
+      {
+        "date": "2026-04-18",
+        "sessions": 1,
+        "tokens": 4006137
+      },
       {
         "date": "2026-04-17",
         "sessions": 12,
@@ -1514,11 +1519,6 @@
         "date": "2026-03-20",
         "sessions": 1,
         "tokens": 4414573
-      },
-      {
-        "date": "2026-03-19",
-        "sessions": 2,
-        "tokens": 19950301
       }
     ]
   },
@@ -3598,6 +3598,12 @@
       "investigated": "Multi-theme scan: (1) Calendar anomaly \u2014 24 tests across 12 assets x 3 patterns (monthly, DOW, TOM). (2) Cointegration pairs \u2014 21 pairs (WFC-JPM, BAC-C, GLD-SLV, GLD-GDX, TLT-IEF, XLF-KRE, XLE-OIH, AMZN-WMT, SBUX-MCD, XLP-XLU, NFLX-DIS, MSFT-ORCL, JPM-GS, UNH-CVS, NVDA-AMD, HD-LOW, COST-WMT, GOOGL-META, XLY-XLP, XLK-QQQ, ORCL-IBM). (3) VIX threshold extension \u2014 VIX>20 and VIX>25 across all 11 SPDR sectors + SPY/QQQ/IWM/EEM. (4) Factor exposure \u2014 GDX~GC=F, GDX~DXY, SLV~DXY, KRE~DGS10, XLC~DGS10, IBB~DXY. (5) Structural breaks \u2014 GDX~GC=F and GDX~DXY at 2022-03-16. (6) Misc thresholds \u2014 DGS10>4 XLRE, DXY>105 EEM, CL=F>80 XLE, GC=F>2500 GLD. Total ~70 tests.",
       "findings": "Screened ~70 combinations: calendar anomalies (24 tests \u2014 all null), cointegration pairs (21 \u2014 all null/borderline), VIX threshold extensions (20 tests), factor exposures and structural breaks. Found 6 significant hits: VIX>25 triggers strong recovery with XLK leading (+2.0%), and a structural break in gold miners vs gold futures post-2022. Queued 3 tasks for investigation.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-18",
+      "investigated": "(1) P8 scan hit: does XLK/QQQ outperform SPY after VIX>25 first-close? (2) Daily scanner: 2 P10 SEO bought deal GO candidates (MAIR, ARXS).",
+      "findings": "Tested whether tech stocks beat the S&P 500 after volatility spikes above VIX 25. The pattern appeared only in 2024-2026 data and was absent in 2014-2023, so it is regime-specific, not a reliable signal. Also caught two false alarms from the stock-offering scanner: both flagged companies were IPOs, not the seasoned offerings the signal was designed for. Patched the scanner to filter out newly-listed tickers.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3646,11 +3652,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] VIX>25 RECOVERY CLUSTER: QQQ 10d +1.67% (p=0.012), IWM 10d +1.68% (p=0.031), XLK 10d +2.00% (p=0.006), XLY 10d +1.49% (p=0.044), SPY 10d +1",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
         "question": "[SCAN HIT] GDX~GC=F STRUCTURAL BREAK 2022: Chow p=0.028. Pre-2022 beta=1.681 (miners lever gold 1.68x), Post-2022 beta=1.465 (miners lever gold only 1",
         "priority": 7,
         "category": "scan_hit"
@@ -3669,12 +3670,13 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       }
     ],
-    "handoff": {
-      "session_date": "2026-04-17",
-      "session_type": "research",
-      "handoff_note": "Session 2026-04-17 afternoon #2: Investigated scan hit 8772bf7c (P9 VIX>30 sector recovery cluster). Ran SPY-benchmarked backtests for XLI/IWM/EEM/XLE/XLB over n=16 VIX>30 events (2010-2026) with 30d cluster buffer. PRE-REGISTERED 2 new hypotheses: XLB 20d long 8909b059 (+2.33% abnormal vs SPY OOS, 100% positive n=11, p=0.005) and EEM 10d long 358fc451 (+2.61% abnormal OOS, 82% positive n=11, p=0.008). Both fire on next VIX>30 first-close. XLI 5d 3rd place, XLE/IWM beyond 1d dead-ended. Current 2026-03-27 event informal OOS: EEM confirming (+3.2% day 15), XLB counter (-5.3% day 15) \u2014 resolve day 20 (Apr 27)."
-    }
+    "handoff": "\"Session 2026-04-18 (research, ~50min): Closed P8 VIX>25 XLK scan hit as DEAD END (regime-specific, IS p=0.53 n=17 vs OOS +2.42% p=0.02 n=6). Fixed a real scanner bug: SEO scanner was flagging fresh IPOs (MAIR, ARXS) as SEO bought deals. Added MIN_TRADING_DAYS_BEFORE_FILING=20 gate. Verified SKIP_IPO on both. This is a CRITICAL bug fix \\u2014 without it, next_session would have traded 2 contaminated shorts on IPOs. Queue: 12 -> 8 pending after closing 3 completed (2 SEO IPO false-positives + 1 V"
   }
 }
