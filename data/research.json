@@ -1226,10 +1226,38 @@
       {
         "name": "sp500_index_removal_short_q1_2026_oos_fail",
         "reason": "OOS methodology A (discovery replication): +1.0%/+1.9% abn at 5d/10d vs discovery -2.4%/-2.9%. Direction inverted outside 95% CI. n=4 Q1 2026 quarterly deletions (MTCH, MOH, LW, PAYC, effective 2026-03-23). HOLX off-cycle (n=1) also near-zero. Pending Q2 (June) and Q3 2026 OOS before formal retirement. See known_effect sp500_index_removal_short for full details."
+      },
+      {
+        "name": "lqd_dgs10_structural_break_secular_drift_2026_04_17",
+        "reason": "LQD~DGS10 scan hit at 2022-03-16 (F=248.79, p=1.6e-94) failed alt-date falsification: betas at 2021-06-15 (-0.052\u2192-0.216), 2022-03-16 (-0.061\u2192-0.279), 2023-03-16 (-0.081\u2192-0.293) show monotonic drift. Secular trend, not regime change. Applied canonical methodology structural_break_2022_altdate_falsification_comprehensive."
+      },
+      {
+        "name": "xlre_dgs10_structural_break_secular_drift_2026_04_17",
+        "reason": "XLRE~DGS10 scan hit at 2022-03-16 (F=77.80, p=6.1e-33) failed alt-date falsification: betas at 2021-06-15 (0.146\u2192-0.131), 2022-03-16 (0.127\u2192-0.220), 2023-03-16 (0.095\u2192-0.232) show monotonic drift with pre-2022 sign flip. Secular trend in rate sensitivity."
+      },
+      {
+        "name": "universal_dgs10_sector_sign_flip_2022_scan_hit_2026_04_17",
+        "reason": "Priority-9 scan hit 'UNIVERSAL DGS10 sign flip across ALL sectors at 2022-03-16' (XLRE/LQD/XLB) is secular drift artifact, not regime change. All 8 rate-sensitive assets (HYG/GLD/IWM/EEM/TLT/LQD/XLRE/XLB) scanner flagged at 2022-03-16 fail alt-date falsification. Canonical rule: any DGS10 structural break hit at 2022-03-16 is presumed secular drift unless proven otherwise."
+      },
+      {
+        "name": "gld_vix20_threshold_confounded_with_spy_recovery_2026_04_17",
+        "reason": "Scan hit: GLD 10d avg=+0.83% (p=0.008, n=97) after VIX crosses above 20. FAILED alt-threshold falsification: VIX>15 (+0.87%, p=0.014), VIX>20 (+0.83%, p=0.008), VIX>25 (+0.29%, p=0.59), VIX>30 (+0.30%, p=0.62). Effect vanishes at higher VIX where safe-haven mechanism should strengthen. ALSO FAILED benchmark check: SPY itself rallies +0.87% (p=0.016, n=97) after VIX>20 \u2014 identical to GLD. GLD's 'rally' is confounded with the known SPY V-shape recovery effect (see vix_spike_above_30_spy_recovery). Abnormal return vs SPY \u2248 0. No distinct safe-haven signal. Rule: scanner threshold hits on asset A must be benchmarked against SPY on same trigger \u2014 if SPY moves equivalently, the signal is confounded."
+      },
+      {
+        "name": "eem_vix25_vix30_threshold_spy_confounded_2026_04_17",
+        "reason": "Scan hit claimed EEM rallies after VIX>25 (+1.44%/10d) and VIX>30 (+2.43%/20d). Benchmark check: SPY rallies MORE at same triggers \u2014 +1.23%/10d after VIX>25 (p=0.036) and +3.58%/20d after VIX>30 (p=0.0008). EEM actually UNDERPERFORMS SPY after these thresholds. Signal is confounded with the known SPY V-shape recovery effect (vix_spike_above_30_spy_recovery). After benchmarking, EEM shows NO positive abnormal return at VIX>25/30 \u2014 likely NEGATIVE. Rule reinforced: threshold hits must be SPY-benchmarked."
+      },
+      {
+        "name": "qqq_vix20_threshold_spy_confounded_2026_04_17",
+        "reason": "Scan hit: QQQ +1.17%/10d after VIX>20 (p=0.006, n=97). SPY +0.87%/10d same trigger (p=0.016, n=97). Abnormal QQQ vs SPY ~ +0.30%, below 0.5% threshold. Also already documented via vix30_qqq_iwm_extension_dead_end (VIX tier extensions to QQQ/IWM fail). Signal is just SPY-recovery co-movement with beta>1. DEAD END."
+      },
+      {
+        "name": "eem_gold_exposure_dxy_proxy_confounded_2026_04_17",
+        "reason": "Scan hit: EEM~GC=F beta=+0.135 (p=2.5e-6, strengthening OOS). Cross-check with DXY control: beta collapses to +0.036 (p=0.109, NOT significant) in IS. Gold's relationship to EEM is entirely mediated by the inverse DXY relationship \u2014 both rally when dollar weakens. No independent gold signal for EEM. Methodological rule: factor exposures must survive multi-factor controls. DEAD END."
       }
     ],
     "signal_count": 42,
-    "dead_end_count": 244,
+    "dead_end_count": 251,
     "literature_count": 25
   },
   "live_signals": [
@@ -1328,13 +1356,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 29176872,
+    "sessions_today": 7,
+    "tokens_today": 32423429,
     "sessions_by_day": [
       {
         "date": "2026-04-17",
-        "sessions": 6,
-        "tokens": 29176872
+        "sessions": 7,
+        "tokens": 32423429
       },
       {
         "date": "2026-04-16",
@@ -3518,6 +3546,12 @@
       "investigated": "Mixed scan: (1) DGS10 factor exposure for all remaining sectors [8 tests], (2) Dollar (DXY) exposure screen for sectors+EEM [7 tests], (3) Structural break tests at 2022 rate hike and 2025 tariff dates for new assets [12 tests], (4) Cointegration pairs screen - bank pairs, tech pairs, consumer pairs, food pairs [10 tests], (5) Calendar anomaly screen - monthly and DOW for XLE/GLD/XLF/QQQ/IWM/EEM/SPY/GLD/XLRE [9 tests], (6) VIX threshold screen - GLD/EEM/SPY/QQQ/XLU at multiple VIX levels [9 tests], (7) Gold exposure for GDX/XLB/XLRE/EEM [4 tests], (8) HYG/LQD bond exposure tests [2 tests]. Total: ~68 tests run.",
       "findings": "Mixed macro factor scan: 68 tests across sector-rate exposures, dollar sensitivity, structural breaks, cointegration pairs, and VIX thresholds. Found 9 statistically significant hits (p<0.05). Key meta-finding: ALL equity sectors experienced a structural break at the 2022 rate hike, inverting their DGS10 beta from positive to negative. LQD (IG bonds) is now 5x more rate-sensitive. EEM shows strengthening OOS exposure to both dollar (beta -0.88) and gold (+0.21). VIX>20/25 triggers significant 10d recoveries in GLD (+0.83%), EEM (+1.44%), and QQQ (+1.17%). 9 hits queued for orchestrator investigation.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-17",
+      "investigated": "Processed 9 pending scan hits from morning/afternoon scanner runs: 3 DGS10 2022 structural breaks, 4 VIX-threshold rallies (GLD/EEM VIX>25/EEM VIX>30/QQQ), 2 DXY factor exposures (EEM/XLB), 1 EEM~gold exposure.",
+      "findings": "A batch of nine newly-discovered patterns turned out to mostly be statistical mirages: three 'rate regime changes' that were really just gradual drift over a decade, and four 'gold and emerging-markets rallies' that were actually just the broad stock market rebounding. Two genuine relationships survived \u2014 emerging markets and materials stocks both reliably weaken when the US dollar strengthens \u2014 but they don't convert into a clean trade signal.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3566,31 +3600,31 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] UNIVERSAL DGS10 sign flip across ALL sectors at 2022-03-16 rate hike: XLRE F=77.80, LQD F=248.79, XLB F=39.01, XLP F=34.56, XLY F=26.44, XL",
-        "priority": 9,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] EEM~DXY exposure: beta=-0.503 (p=1.9e-14) IS, OOS beta=-0.884 (strengthening). Emerging markets strongly negatively exposed to USD, relatio",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] LQD~DGS10 DOUBLE structural break: 2022-03-16 F=248.79 p=1.6e-94 (pre-beta=-0.061\u2192post-beta=-0.279, 5x increase); 2025-04-02 F=18.56 p=1.1e",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] XLRE~DGS10 DOUBLE structural break: 2022-03-16 F=77.80 p=6.1e-33 (pre-beta=+0.127\u2192post-beta=-0.220, sign flip); 2025-04-02 F=6.90 p=0.001 (",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       },
       {
-        "question": "[SCAN HIT] GLD threshold: When VIX crosses above 20.0, GLD 10d avg=+0.83% (p=0.008, n=97 crossings). Gold rallies after moderate fear spikes. Also: VI",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-17 pm (research): Discovered sp500_index_removal_short \\u2014 backtested Mar 2026 (n=45, -2.4%/-2.9% at 5d/10d, p<0.02) but never OOS-validated. Ran Q1 2026 OOS (MTCH, MOH, LW, PAYC eff Mar 23): direction INVERTED (+1.0%/+1.9% at 5d/10d). Recency subgroup (2024-2025 n=14) revealed signal had already decayed in-sample: 5d abn only -1.32% p=0.33 (vs full -2.40% p=0.01). NEW CANONICAL RULE: always run recency subgroup check before promoting signals to OOS \\u2014 saved as signal_rec"
+    "handoff": "\"Session 2026-04-17 pm (research): Processed all 9 pending scan hits from morning/afternoon scanner runs. 1 validated exposure (EEM~DXY, IS beta=-0.426 p=9e-23 R2=0.61, OOS=-0.846 strengthening), 1 secondary validated exposure (XLB~DXY, beta=-0.250 R2=0.75 OOS=-0.388). 7 dead ends: 3 DGS10 2022-03-16 structural breaks (LQD/XLRE/universal sign-flip claim) \\u2014 secular drift artifacts per canonical falsification rule; 3 VIX-threshold hits (GLD VIX>20, EEM VIX>25/30, QQQ VIX>20) \\u2014 all SPY-co"
   }
 }
