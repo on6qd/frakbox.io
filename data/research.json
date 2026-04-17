@@ -1198,10 +1198,34 @@
       {
         "name": "ferrari_race_tariff_short",
         "reason": "Ferrari (RACE) does NOT follow the foreign-automaker tariff short pattern. Tested on 2 tariff events (2025-03-26, 2026-04-02): 5d +4.80/+0.51 (avg +2.65%), 10d +8.23/-1.54 (avg +3.35%) \u2014 positive at 5d/10d across both events. Luxury/ultra-luxury OEMs have pricing power to absorb tariffs and supply-constrained demand. EXCLUDE from foreign-automaker tariff short basket."
+      },
+      {
+        "name": "hyg_dgs10_2022_structural_break_scan_hit",
+        "reason": "Fails alt-date falsification: all candidate break dates significant with monotonic beta drift. Secular, not discrete."
+      },
+      {
+        "name": "gld_dgs10_2022_structural_break_scan_hit",
+        "reason": "Fails alt-date falsification: betas drift monotonically with window. Secular, not discrete."
+      },
+      {
+        "name": "iwm_dgs10_2022_structural_break_scan_hit",
+        "reason": "Fails alt-date falsification \u2014 monotonic post-beta drift 2020->2023, not discrete break."
+      },
+      {
+        "name": "eem_dgs10_2022_structural_break_scan_hit",
+        "reason": "Fails alt-date falsification \u2014 monotonic post-beta drift 2020->2023, not discrete break."
+      },
+      {
+        "name": "tlt_turn_of_month_calendar_scan_hit",
+        "reason": "Not Treasury-specific (SPY TOM as strong or stronger); fails IS and OOS p<0.05; tx costs exceed expected return."
+      },
+      {
+        "name": "tlt_dgs2_beta_explosion_scan_hit",
+        "reason": "Secular drift, not discrete explosion; contemporaneous only with no Granger causality."
       }
     ],
     "signal_count": 42,
-    "dead_end_count": 237,
+    "dead_end_count": 243,
     "literature_count": 25
   },
   "live_signals": [
@@ -1300,13 +1324,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 13621150,
+    "sessions_today": 4,
+    "tokens_today": 19418658,
     "sessions_by_day": [
       {
         "date": "2026-04-17",
-        "sessions": 3,
-        "tokens": 13621150
+        "sessions": 4,
+        "tokens": 19418658
       },
       {
         "date": "2026-04-16",
@@ -3472,6 +3496,12 @@
       "investigated": "Calendar anomaly screen (monthly/DOW/TOM x 12 assets), regime screen (FEDFUNDS/VIX x 5 assets), structural break screen (COVID 2020 and rate-hike 2022 x 10 assets x DGS10/oil), individual factor exposure screen (airlines vs oil, gold miners vs gold, banks vs DGS10, REITs vs DGS10, copper miners, DGS2 exposures), threshold screen (HYG, oil, gold, DGS10, VIX levels), cointegration screen (5 cross-asset pairs), lead-lag screen (commodity futures vs individual stocks). ~100 tests total.",
       "findings": "Screened ~100 statistical tests across calendar anomalies, regime effects, structural breaks, factor exposures, thresholds, cointegration, and lead-lag. Found 6 significant hits: TLT turn-of-month calendar effect (p=0.025), plus 5 structural breaks at 2022 rate hike showing IWM/EEM/HYG sign-flipped their DGS10 relationships, and GLD sensitivity tripled. Calendar anomalies (monthly/DOW) and threshold signals all null. Queued 6 scan hits to research queue.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-17",
+      "investigated": "5 priority-7/8 scan hits on 2022-03-16 structural breaks (HYG/GLD/IWM/EEM vs DGS10, TLT~DGS2 explosion) and TLT turn-of-month calendar anomaly. Ran daily scanner.",
+      "findings": "Tested five apparent 'market regime shifts' from 2022 \u2014 all turned out to be gradual drifts rather than sharp breaks, not useful for trading. Also checked a claim that Treasuries rally at month-end; the effect is the same as in stocks and doesn't give Treasuries any edge.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3520,31 +3550,31 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] HYG~DGS10 massive sign flip at 2022-03-16 rate hike: Pre-beta=+0.040 (n=550), Post-beta=-0.135 (n=1017), F=119.91, p=3.6e-49. High yield bo",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] GLD~DGS10 structural break at 2022-03-16: Pre-beta=-0.048 (n=550), Post-beta=-0.177 (n=1017), F=17.73, p=2.4e-8. Gold rate sensitivity near",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] TLT turn-of-month calendar effect: p=0.0254, turn_of_month=+0.071%/day vs mid_month=+0.002%/day, n=5354 (2002-2026). TLT systematically out",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] IWM~DGS10 sign flip at 2022-03-16: Pre-beta=+0.154 (n=550), Post-beta=-0.098 (n=1017), F=31.63, p=3.4e-14. Small caps flipped from rate-pos",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       },
       {
-        "question": "[SCAN HIT] EEM~DGS10 sign flip at 2022-03-16: Pre-beta=+0.122 (n=550), Post-beta=-0.083 (n=1017), F=30.65, p=8.8e-14. Emerging markets flipped from ra",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-17 (research): Deployed $10B mega-cap gate in cybersec 8-K evaluator. Added min_market_cap_b param to evaluate_8k_signal_events; cybersec call passes 10.0. Per cybersec_8k_megacap_only_2026_04_16: mid-cap ($500M-$10B) contributes noise; mega-cap OOS 5d=-4.92% 10d=-7.73%. Updated hypothesis template 8844b439: expected_magnitude 3.0->4.9, success_criteria tightened. Synthetic test passed: $50B GO, $2B+$0.4B NO_GO. Daily scanner ran clean (0 cybersec events today, no live exercise "
+    "handoff": "\"Session 2026-04-17 pm (research): Retired 5 priority-7/8 scan hits as methodology-consistent dead ends. HYG/GLD/IWM/EEM/TLT all tested \\u2014 2022-03-16 'breaks' are secular beta drifts, confirmed monotonic across 2020/2021/2022/2023 alt-dates. TLT turn-of-month calendar failed both IS (p=0.32) and OOS (p=0.21); also not Treasury-specific (SPY TOM stronger OOS). TLT~DGS2 'beta explosion' confirmed as secular drift (-0.078 OOS21 -> -0.368 OOS24), no Granger causality (p=0.32 lag 5), not tradeabl"
   }
 }
