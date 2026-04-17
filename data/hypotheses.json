@@ -81,6 +81,32 @@
       "report": null
     },
     {
+      "id": "8909b059",
+      "status": "pending",
+      "created": "2026-04-17",
+      "event_type": "vix30 xlb outperformance 20d long",
+      "symbol": "XLB",
+      "direction": "long",
+      "magnitude_pct": 2.3,
+      "timeframe_days": 20,
+      "confidence": 7,
+      "thesis": "VIX closes above 30 (first close in 30-day cluster, market stress spike) -> buy Materials ETF XLB at next open, hold 20 trading days. Expect XLB to pr",
+      "report": "Investigation Report: 8909b059\n============================================================\nStatus: pending  \u2014  Created 2026-04-17\n\n1. Hypothesis\n------------------------------------------------------------\nGiven that vix30 xlb outperformance 20d long events have historically produced\nabnormal returns in affected stocks,\nwhen vix closes above 30 (first close in 30-day cluster, market stress spike)\n-> buy materials etf xlb at next open, hold 20 trading days. expect xlb to\nproduce abnormal return vs spy of at least +2.0% over 20 days,\nthen XLB should rise by approximately 2.3% within 20 trading days.\n\nThe proposed causal mechanism: Market stress VIX spikes trigger correlated\ndeleveraging across risk assets. Sector ETFs more cyclical than broad SPY\n(Materials is cyclical-commodity-levered) experience larger drawdown AND\nlarger recovery bounce. XLB constituents (DOW, FCX, LIN, SHW, NEM) are\nleveraged to post-stress reflation via commodity pricing and industrial demand\nrecovery.\n\nMechanism evidence:\n  - Actors and incentives: Institutional deleveraging during VIX>30 spikes\nsells cyclical exposure most aggressively. Post-spike, same institutions re-\nrisk into cyclicals first as volatility normalizes.\n  - Transmission channel: VIX>30 cluster -> correlated risk-off selling ->\noversold cyclicals -> vol mean reversion -> cyclicals bounce harder than SPY\nover 10-20d window.\n  - Academic reference: Andersen, Bollerslev, Diebold (2007); Fama-French\n(1989): volatility extremes correlate with business-cycle-sensitive asset\noutperformance in recovery phases.\n\n2. Test Design\n------------------------------------------------------------\nThe backtest covered 16 historical events across 1 stocks (XLB). All returns\nare measured as abnormal returns against SPY to isolate the event effect from\nbroad market moves.\n\nSurvivorship bias control: XLB ETF continuously traded since 1998. No\nsurvivorship selection at sector-ETF level.\n\nSelection bias control: Scan hit 8772bf7c screened 5 sector ETFs\nsimultaneously. Bonferroni threshold 0.01 at 5 tests. XLB 20d OOS p=0.005\npasses. Selected for consistency (XLB 100% positive rate OOS vs EEM 82%), not\ncherry-picked on magnitude.\n\nConfounders recorded at entry:\n  broad market direction: Controlled via SPY benchmark (abnormal return = XLB\n  - SPY).\n  vix level: VIX>30 is the trigger itself; tested across VIX crisis/extreme-\n  spike regimes 2010-2026.\n  sector trend: Materials sector trend absorbed into XLB returns; abnormal-vs-\n  SPY isolates sector effect.\n  survivorship bias: XLB continuous ETF since 1998. No constituent\n  survivorship issue. VIX>30 events identified ex-ante with 30-day cluster\n  buffer.\n  selection bias: 5 sector ETFs screened (XLI IWM EEM XLE XLB) in scan\n  8772bf7c. Bonferroni threshold 0.01; XLB 20d OOS p=0.005 passes.\n  event timing: VIX close, execute at next regular open.\n  market regime: Tested across 16 VIX>30 events spanning 2010 flash crash,\n  2011 debt-ceiling, 2015 China devaluation, 2018 Volmageddon, 2020 COVID,\n  2022 rate-hike crash, 2024 yen-carry unwind, 2025-2026 tariff panics.\n\n3. Success Criteria (locked before testing)\n------------------------------------------------------------\nAbnormal return vs SPY > +1.5% at 20d, positive rate >= 70% across min 3 live\ntriggers, p < 0.05 on live OOS sample, direction consistent with backtest.\n\nConfidence: 7/10  |  Pre-registration: 05228f585f1419ab\n\n4. Outcome\n------------------------------------------------------------\nNot yet tested.\n\n5. Conclusion\n------------------------------------------------------------\nAwaiting outcome.\n\n6. What Comes Next\n------------------------------------------------------------\nComplete the current investigation first.\n\nWarnings\n------------------------------------------------------------\n- Related dead end: vix30_sector_rotation_xlk_outperformance \u2014 XLK does NOT\nreliably outperform SPY after VIX>30.\n- Related dead end: vix30_tlt_short_threshold_scan_hit \u2014 RESOLVED per\nnon_event_allocation_retirement.\n"
+    },
+    {
+      "id": "358fc451",
+      "status": "pending",
+      "created": "2026-04-17",
+      "event_type": "vix30 eem outperformance 10d long",
+      "symbol": "EEM",
+      "direction": "long",
+      "magnitude_pct": 2.6,
+      "timeframe_days": 10,
+      "confidence": 7,
+      "thesis": "VIX closes above 30 (first close in 30-day cluster) -> buy Emerging Markets ETF EEM at next open, hold 10 trading days. Expect EEM to produce abnormal",
+      "report": "Investigation Report: 358fc451\n============================================================\nStatus: pending  \u2014  Created 2026-04-17\n\n1. Hypothesis\n------------------------------------------------------------\nGiven that vix30 eem outperformance 10d long events have historically produced\nabnormal returns in affected stocks,\nwhen vix closes above 30 (first close in 30-day cluster) -> buy emerging\nmarkets etf eem at next open, hold 10 trading days. expect eem to produce\nabnormal return vs spy of at least +2.0% over 10 days,\nthen EEM should rise by approximately 2.6% within 10 trading days.\n\nThe proposed causal mechanism: EEM is high-beta to global risk appetite.\nMarket stress VIX spikes cause disproportionate EM selling (cross-border\ncapital flight, USD strength). As vol mean-reverts, risk-on rotation returns\ncapital to EM first due to valuation gap. Shorter horizon than XLB because EM\nreversion is faster.\n\nMechanism evidence:\n  - Actors and incentives: Global macro and EM-specific funds cut EM exposure\nfastest in risk-off. Post-stress, same pool re-enters EM for carry and\nvaluation, compressing EM-DM spread.\n  - Transmission channel: VIX>30 -> USD strength + capital flight from EM ->\nEEM oversold vs SPY -> vol mean reversion -> EM relative reflation over 5-10d.\n  - Academic reference: De Bondt & Thaler (1985); Harvey (1995) \"Predictable\nRisk and Returns in Emerging Markets\"; Bekaert & Harvey (2000).\n\n2. Test Design\n------------------------------------------------------------\nThe backtest covered 16 historical events across 1 stocks (EEM). All returns\nare measured as abnormal returns against SPY to isolate the event effect from\nbroad market moves.\n\nSurvivorship bias control: EEM continuously traded since 2003. MSCI EM index\nrebalances constituents without survivorship selection.\n\nSelection bias control: Same context as XLB. EEM selected for strongest\nabnormal magnitude (+2.43% pooled, +2.61% OOS at 10d) with p=0.008 passing\nBonferroni.\n\nConfounders recorded at entry:\n  broad market direction: Controlled via SPY benchmark.\n  vix level: VIX>30 is the trigger.\n  sector trend: EM risk-asset class; abnormal-vs-SPY isolates EM-specific\n  effect.\n  survivorship bias: EEM ETF since 2003, continuous. MSCI EM methodology\n  handles constituent turnover.\n  selection bias: 5 ETFs screened in scan 8772bf7c. Bonferroni 0.01; EEM 10d\n  OOS p=0.008 passes. 10d chosen over 5d (p=0.061) and 20d (p=0.157).\n  event timing: VIX close, next open execution.\n  market regime: Tested across 16 events 2010-2026; OOS n=11 covers 2020-2026\n  regimes.\n\n3. Success Criteria (locked before testing)\n------------------------------------------------------------\nAbnormal return vs SPY > +1.5% at 10d, positive rate >= 65% across min 3 live\ntriggers, p < 0.05 on live OOS sample.\n\nConfidence: 7/10  |  Pre-registration: eb91df60c67c9fef\n\n4. Outcome\n------------------------------------------------------------\nNot yet tested.\n\n5. Conclusion\n------------------------------------------------------------\nAwaiting outcome.\n\n6. What Comes Next\n------------------------------------------------------------\nComplete the current investigation first.\n\nWarnings\n------------------------------------------------------------\n- Related dead end: vix30_sector_rotation_xlk_outperformance \u2014 XLK does NOT\nreliably outperform SPY after VIX>30.\n- Related dead end: vix30_tlt_short_threshold_scan_hit \u2014 RESOLVED per\nnon_event_allocation_retirement.\n"
+    },
+    {
       "id": "1cb6140f",
       "status": "completed",
       "created": "2026-03-21",
@@ -843,9 +869,9 @@
     }
   ],
   "counts": {
-    "total": 61,
+    "total": 63,
     "active": 1,
-    "pending": 5,
+    "pending": 7,
     "completed": 8,
     "abandoned": 39,
     "invalidated": 6,

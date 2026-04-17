@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 61,
-    "pending": 5,
+    "total_hypotheses": 63,
+    "pending": 7,
     "active": 1,
     "completed": 8,
     "invalidated": 6,
@@ -1258,10 +1258,18 @@
       {
         "name": "btc_weekend_gap_mstr_monday_drift",
         "reason": "IS borderline p=0.05 (n=93), OOS sign flipped (slope -0.26 p=0.19, n=61), no persistent lead-lag. Weekend BTC move fully prices in at MSTR open."
+      },
+      {
+        "name": "vix30_xle_20d_unreliable",
+        "reason": "XLE after VIX>30 at 20d horizon: pooled avg +3.62% but median -1.08%, 43% positive rate, p=0.32. Outlier-driven, not a reliable signal. XLE 1d is fine (+1.70% p=0.004) but does not extend beyond 1d. Scan hit 8772bf7c investigation 2026-04-17. Evidence: Pooled n=16 2010-2026: 1d +1.70% p=0.004 (ok), 3d p=0.11 (fail), 5d p=0.38 (fail), 10d p=0.64 (fail), 20d +3.62% p=0.32 with median -1.08% (outlier-driven)."
+      },
+      {
+        "name": "vix30_iwm_beyond_1d_dead",
+        "reason": "IWM after VIX>30 beyond 1d: failed multiple-testing gate. Pooled 3d p=0.27, 10d p=0.27, 20d p=0.14. Only 1d is significant (+1.27% p=0.03). Small caps do not produce systematic alpha vs SPY beyond 1 day after VIX spikes. Evidence: Pooled n=16 2010-2026; 1d +1.27% p=0.03 only; 3d/5d/10d/20d all p>0.06."
       }
     ],
     "signal_count": 42,
-    "dead_end_count": 252,
+    "dead_end_count": 254,
     "literature_count": 25
   },
   "live_signals": [
@@ -1355,18 +1363,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 6,
+    "active_signal_types": 8,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 43312280,
+    "sessions_today": 10,
+    "tokens_today": 48999597,
     "sessions_by_day": [
       {
         "date": "2026-04-17",
-        "sessions": 9,
-        "tokens": 43312280
+        "sessions": 10,
+        "tokens": 48999597
       },
       {
         "date": "2026-04-16",
@@ -3568,6 +3576,12 @@
       "investigated": "Multi-theme scanner: Calendar Anomalies (16 tests), Cointegration Pairs (13 tests), Factor Exposure screen across ALL sectors x macro drivers (50+ tests including DGS10, GC=F/gold, CL=F/oil, HG=F/copper, DX-Y.NYB/dollar), and VIX threshold screen across all 11 sector ETFs + IWM/EEM/TLT",
       "findings": "Scanned 50+ factor-exposure, cointegration, calendar, and threshold tests. Found 10 significant hits queued: VIX>30 bounces ALL sectors (new cluster), precious metals strongly inverse to dollar (OOS strengthening), materials/EEM/utilities all gold-exposed OOS. Calendar and cointegration screens mostly null (13 pairs, all null).",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-17",
+      "investigated": "P9 scan hit 8772bf7c \u2014 VIX>30 multi-sector recovery cluster. Ran SPY-benchmarked backtests on XLI, IWM, EEM, XLE, XLB across n=16 VIX>30 first-close events (2010-2026, 30-day cluster buffer). Split 2010-2019 discovery (n=5) vs 2020-2026 OOS (n=11). All 5 horizons tested: 1d/3d/5d/10d/20d.",
+      "findings": "Discovered that certain sector ETFs (Materials and Emerging Markets) tend to bounce harder than the broad market after extreme fear spikes (VIX above 30). Pre-registered two new trades to capture this alpha on the next stress event.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3616,11 +3630,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] VIX>30 SYSTEMATIC EQUITY RECOVERY CLUSTER: XLI 5d +2.02% (p=0.0008, n=30), IWM 20d +4.09% (p=0.004, n=30), EEM 20d +2.43% (p=0.025, n=30), ",
-        "priority": 9,
-        "category": "scan_hit"
-      },
-      {
         "question": "[SCAN HIT] XLB~GC=F gold exposure: IS beta=+0.122 (p=3.9e-7, R2=0.768, n=1005), OOS beta=+0.168 (significant, strengthening +37%). Materials sector st",
         "priority": 8,
         "category": "scan_hit"
@@ -3636,11 +3645,20 @@
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] VIX>30 \u2192 XLB mean-reversion: 5d avg=+1.89% (t=3.47, p=0.0016, n=30 crossings). Materials sector bounces after VIX spike. Similar to validat",
+        "question": "[SCAN HIT] PRECIOUS METALS / DOLLAR CLUSTER \u2014 all OOS strengthening: (1) SLV~DXY: IS beta=-1.701 (p=3.1e-38), OOS beta=-1.840 (strengthening 8%). (2) ",
         "priority": 8,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] GLD~DX-Y.NYB gold-dollar inverse: IS beta=-0.969 (p=7.9e-50), OOS beta=-1.234 (significant, STRENGTHENING 27%). Classic gold-dollar inverse",
+        "priority": 7,
         "category": "scan_hit"
       }
     ],
-    "handoff": "\"Session 2026-04-17 evening (research): Daily scanner ran clean (0 actionable \\u2014 NKE cluster stale >1bd, BEAT microcap). Non-event exploration: validated 3 BTC factor exposures (MSTR beta 0.83->1.10 OOS strengthening, COIN 0.64->0.81 strengthening, MARA 1.08->0.91 WEAKENING, RIOT 0.98->0.66 WEAKENING). Novel structural finding: crypto miners decoupling from BTC price likely due to AI-compute pivot 2024-2026. Event conversion attempted: BTC Fri-close to Sun-close weekend gap -> MSTR Monday op"
+    "handoff": {
+      "session_date": "2026-04-17",
+      "session_type": "research",
+      "handoff_note": "Session 2026-04-17 afternoon #2: Investigated scan hit 8772bf7c (P9 VIX>30 sector recovery cluster). Ran SPY-benchmarked backtests for XLI/IWM/EEM/XLE/XLB over n=16 VIX>30 events (2010-2026) with 30d cluster buffer. PRE-REGISTERED 2 new hypotheses: XLB 20d long 8909b059 (+2.33% abnormal vs SPY OOS, 100% positive n=11, p=0.005) and EEM 10d long 358fc451 (+2.61% abnormal OOS, 82% positive n=11, p=0.008). Both fire on next VIX>30 first-close. XLI 5d 3rd place, XLE/IWM beyond 1d dead-ended. Current 2026-03-27 event informal OOS: EEM confirming (+3.2% day 15), XLB counter (-5.3% day 15) \u2014 resolve day 20 (Apr 27)."
+    }
   }
 }
