@@ -1328,13 +1328,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 19418658,
+    "sessions_today": 5,
+    "tokens_today": 23564895,
     "sessions_by_day": [
       {
         "date": "2026-04-17",
-        "sessions": 4,
-        "tokens": 19418658
+        "sessions": 5,
+        "tokens": 23564895
       },
       {
         "date": "2026-04-16",
@@ -3506,6 +3506,12 @@
       "investigated": "5 priority-7/8 scan hits on 2022-03-16 structural breaks (HYG/GLD/IWM/EEM vs DGS10, TLT~DGS2 explosion) and TLT turn-of-month calendar anomaly. Ran daily scanner.",
       "findings": "Tested five apparent 'market regime shifts' from 2022 \u2014 all turned out to be gradual drifts rather than sharp breaks, not useful for trading. Also checked a claim that Treasuries rally at month-end; the effect is the same as in stocks and doesn't give Treasuries any edge.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-17",
+      "investigated": "Ran OOS validation on sp500_index_removal_short \u2014 a signal backtested Mar 24 2026 (n=45, 2020-2026 discovery: -2.4% 5d p=0.01, -2.9% 10d p=0.01) but never promoted to OOS monitoring. Tested Q1 2026 quarterly deletions MTCH/MOH/LW/PAYC with discovery methodology.",
+      "findings": "Tested whether stocks dropped from the S&P 500 underperform the market. Historical data said yes, but 2026 out-of-sample data said no \u2014 and a closer look showed the signal had quietly stopped working a year earlier. Added a new habit of checking the most-recent slice of any historical signal before trusting it.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3579,6 +3585,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-17 pm (research): Retired 5 priority-7/8 scan hits as methodology-consistent dead ends. HYG/GLD/IWM/EEM/TLT all tested \\u2014 2022-03-16 'breaks' are secular beta drifts, confirmed monotonic across 2020/2021/2022/2023 alt-dates. TLT turn-of-month calendar failed both IS (p=0.32) and OOS (p=0.21); also not Treasury-specific (SPY TOM stronger OOS). TLT~DGS2 'beta explosion' confirmed as secular drift (-0.078 OOS21 -> -0.368 OOS24), no Granger causality (p=0.32 lag 5), not tradeabl"
+    "handoff": "\"Session 2026-04-17 pm (research): Discovered sp500_index_removal_short \\u2014 backtested Mar 2026 (n=45, -2.4%/-2.9% at 5d/10d, p<0.02) but never OOS-validated. Ran Q1 2026 OOS (MTCH, MOH, LW, PAYC eff Mar 23): direction INVERTED (+1.0%/+1.9% at 5d/10d). Recency subgroup (2024-2025 n=14) revealed signal had already decayed in-sample: 5d abn only -1.32% p=0.33 (vs full -2.40% p=0.01). NEW CANONICAL RULE: always run recency subgroup check before promoting signals to OOS \\u2014 saved as signal_rec"
   }
 }
