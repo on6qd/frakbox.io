@@ -1222,10 +1222,14 @@
       {
         "name": "tlt_dgs2_beta_explosion_scan_hit",
         "reason": "Secular drift, not discrete explosion; contemporaneous only with no Granger causality."
+      },
+      {
+        "name": "sp500_index_removal_short_q1_2026_oos_fail",
+        "reason": "OOS methodology A (discovery replication): +1.0%/+1.9% abn at 5d/10d vs discovery -2.4%/-2.9%. Direction inverted outside 95% CI. n=4 Q1 2026 quarterly deletions (MTCH, MOH, LW, PAYC, effective 2026-03-23). HOLX off-cycle (n=1) also near-zero. Pending Q2 (June) and Q3 2026 OOS before formal retirement. See known_effect sp500_index_removal_short for full details."
       }
     ],
     "signal_count": 42,
-    "dead_end_count": 243,
+    "dead_end_count": 244,
     "literature_count": 25
   },
   "live_signals": [
