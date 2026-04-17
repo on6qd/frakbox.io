@@ -1372,13 +1372,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 11,
-    "tokens_today": 53613778,
+    "sessions_today": 12,
+    "tokens_today": 59029789,
     "sessions_by_day": [
       {
         "date": "2026-04-17",
-        "sessions": 11,
-        "tokens": 53613778
+        "sessions": 12,
+        "tokens": 59029789
       },
       {
         "date": "2026-04-16",
@@ -3592,6 +3592,12 @@
       "investigated": "Top scan hit investigation: VIX>30 -> TLT short (ab0a058a P7, counter-intuitive claim of TLT falling -1.30% 10d post-spike). Checked top P8 hits against existing knowledge.",
       "findings": "Investigated whether long-term Treasury bonds (TLT) fall after big volatility spikes \u2014 a counter-intuitive idea versus the usual flight-to-safety narrative. The scanner-reported effect did not hold up under careful event dating; the signal was not robust enough to trade, though post-2022 shows a striking pattern worth watching with more data.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-17",
+      "investigated": "Multi-theme scan: (1) Calendar anomaly \u2014 24 tests across 12 assets x 3 patterns (monthly, DOW, TOM). (2) Cointegration pairs \u2014 21 pairs (WFC-JPM, BAC-C, GLD-SLV, GLD-GDX, TLT-IEF, XLF-KRE, XLE-OIH, AMZN-WMT, SBUX-MCD, XLP-XLU, NFLX-DIS, MSFT-ORCL, JPM-GS, UNH-CVS, NVDA-AMD, HD-LOW, COST-WMT, GOOGL-META, XLY-XLP, XLK-QQQ, ORCL-IBM). (3) VIX threshold extension \u2014 VIX>20 and VIX>25 across all 11 SPDR sectors + SPY/QQQ/IWM/EEM. (4) Factor exposure \u2014 GDX~GC=F, GDX~DXY, SLV~DXY, KRE~DGS10, XLC~DGS10, IBB~DXY. (5) Structural breaks \u2014 GDX~GC=F and GDX~DXY at 2022-03-16. (6) Misc thresholds \u2014 DGS10>4 XLRE, DXY>105 EEM, CL=F>80 XLE, GC=F>2500 GLD. Total ~70 tests.",
+      "findings": "Screened ~70 combinations: calendar anomalies (24 tests \u2014 all null), cointegration pairs (21 \u2014 all null/borderline), VIX threshold extensions (20 tests), factor exposures and structural breaks. Found 6 significant hits: VIX>25 triggers strong recovery with XLK leading (+2.0%), and a structural break in gold miners vs gold futures post-2022. Queued 3 tasks for investigation.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3640,6 +3646,21 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "[SCAN HIT] VIX>25 RECOVERY CLUSTER: QQQ 10d +1.67% (p=0.012), IWM 10d +1.68% (p=0.031), XLK 10d +2.00% (p=0.006), XLY 10d +1.49% (p=0.044), SPY 10d +1",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] GDX~GC=F STRUCTURAL BREAK 2022: Chow p=0.028. Pre-2022 beta=1.681 (miners lever gold 1.68x), Post-2022 beta=1.465 (miners lever gold only 1",
+        "priority": 7,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] VIX>20 XLK SYSTEMATIC RECOVERY: 10d avg=+1.43% (p=0.0014, n=97 crossings). NOTE: vix20_xlk was previously found regime-specific at VIX>20. ",
+        "priority": 6,
+        "category": "scan_hit"
+      },
+      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -3648,21 +3669,6 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
-      },
-      {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
-      },
-      {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": {
