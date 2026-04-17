@@ -1300,13 +1300,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 5787462,
+    "sessions_today": 2,
+    "tokens_today": 11219302,
     "sessions_by_day": [
       {
         "date": "2026-04-17",
-        "sessions": 1,
-        "tokens": 5787462
+        "sessions": 2,
+        "tokens": 11219302
       },
       {
         "date": "2026-04-16",
@@ -3460,6 +3460,12 @@
       "investigated": "Closed HMC/TM auto_import_tariff_short Day 10 OOS as validated (event 2 of 2). Ran daily scanner \u2014 all clean. Then extended the research: backtested 8 foreign automakers (TM, HMC, NSANY, STLA, HYMTF, MZDAY, VWAGY, RACE) across both qualifying tariff events (2025-03-26 and 2026-04-02 Liberation Day) to characterize the optimal basket.",
       "findings": "Validated a trade that shorts foreign carmakers right after a US auto tariff announcement \u2014 it worked a second time, and a closer look showed the basket should include Stellantis alongside Toyota and Honda. Ferrari was a surprising exception: luxury cars have enough pricing power that Ferrari actually rose on tariff news.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-17",
+      "investigated": "Deploying the megacap-only filter discovered yesterday for the cybersecurity 8-K Item 1.05 short signal.",
+      "findings": "Tightened the fund's cybersecurity breach short signal so it only triggers on the very largest companies, where the research showed the effect is actually stronger and cleaner. Mid-sized firms were adding noise and occasionally even moving the wrong direction after a breach disclosure.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3533,6 +3539,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-17 (research): (1) Closed HMC/TM Day 10 OOS as VALIDATED (auto_import_tariff_short event 2 \\u2014 HMC -6.12%, TM -4.16% abn). 2/2 tariff events now validated. (2) Ran daily scanner \\u2014 all 7 sub-scanners clean, 0 actionable events. (3) RESEARCH: Expanded the auto-tariff short basket by backtesting 8 foreign automakers across both tariff events. Finding: NYSE-liquid basket TM+HMC+STLA gives 5d avg -2.37% abn with 100% neg rate across 6/6 events (both dates \\u00d7 3 tickers). S"
+    "handoff": "\"Session 2026-04-17 (research): Deployed $10B mega-cap gate in cybersec 8-K evaluator. Added min_market_cap_b param to evaluate_8k_signal_events; cybersec call passes 10.0. Per cybersec_8k_megacap_only_2026_04_16: mid-cap ($500M-$10B) contributes noise; mega-cap OOS 5d=-4.92% 10d=-7.73%. Updated hypothesis template 8844b439: expected_magnitude 3.0->4.9, success_criteria tightened. Synthetic test passed: $50B GO, $2B+$0.4B NO_GO. Daily scanner ran clean (0 cybersec events today, no live exercise "
   }
 }
