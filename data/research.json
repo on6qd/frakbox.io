@@ -1266,10 +1266,14 @@
       {
         "name": "vix30_iwm_beyond_1d_dead",
         "reason": "IWM after VIX>30 beyond 1d: failed multiple-testing gate. Pooled 3d p=0.27, 10d p=0.27, 20d p=0.14. Only 1d is significant (+1.27% p=0.03). Small caps do not produce systematic alpha vs SPY beyond 1 day after VIX spikes. Evidence: Pooled n=16 2010-2026; 1d +1.27% p=0.03 only; 3d/5d/10d/20d all p>0.06."
+      },
+      {
+        "name": "vix30_tlt_short_threshold_dead_end_2026_04_17",
+        "reason": "VIX>30 -> TLT short 5d/10d/20d. Scan hit 10d p=0.0148 (n=30) does NOT replicate under canonical 30-day clustering (p=0.33, n=22). Pooled 5d shows p=0.02 but fails OOS validation (2020-2026 p=0.14). Post-2022 n=5 extreme but underpowered."
       }
     ],
     "signal_count": 42,
-    "dead_end_count": 254,
+    "dead_end_count": 255,
     "literature_count": 25
   },
   "live_signals": [
@@ -1368,13 +1372,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 48999597,
+    "sessions_today": 11,
+    "tokens_today": 53613778,
     "sessions_by_day": [
       {
         "date": "2026-04-17",
-        "sessions": 10,
-        "tokens": 48999597
+        "sessions": 11,
+        "tokens": 53613778
       },
       {
         "date": "2026-04-16",
@@ -3582,6 +3586,12 @@
       "investigated": "P9 scan hit 8772bf7c \u2014 VIX>30 multi-sector recovery cluster. Ran SPY-benchmarked backtests on XLI, IWM, EEM, XLE, XLB across n=16 VIX>30 first-close events (2010-2026, 30-day cluster buffer). Split 2010-2019 discovery (n=5) vs 2020-2026 OOS (n=11). All 5 horizons tested: 1d/3d/5d/10d/20d.",
       "findings": "Discovered that certain sector ETFs (Materials and Emerging Markets) tend to bounce harder than the broad market after extreme fear spikes (VIX above 30). Pre-registered two new trades to capture this alpha on the next stress event.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-17",
+      "investigated": "Top scan hit investigation: VIX>30 -> TLT short (ab0a058a P7, counter-intuitive claim of TLT falling -1.30% 10d post-spike). Checked top P8 hits against existing knowledge.",
+      "findings": "Investigated whether long-term Treasury bonds (TLT) fall after big volatility spikes \u2014 a counter-intuitive idea versus the usual flight-to-safety narrative. The scanner-reported effect did not hold up under careful event dating; the signal was not robust enough to trade, though post-2022 shows a striking pattern worth watching with more data.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3630,29 +3640,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] XLB~GC=F gold exposure: IS beta=+0.122 (p=3.9e-7, R2=0.768, n=1005), OOS beta=+0.168 (significant, strengthening +37%). Materials sector st",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] EEM~HG=F copper exposure: IS beta=+0.197 (p=1.3e-23, R2=0.643, n=1005), OOS beta=+0.177 (significant, maintained 90%). Emerging markets str",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] GLD~HG=F gold-copper co-movement: IS beta=+0.138 (p=2e-11, R2=0.064 low), OOS beta=+0.236 (significant, STRENGTHENING 71%). Gold positively",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] PRECIOUS METALS / DOLLAR CLUSTER \u2014 all OOS strengthening: (1) SLV~DXY: IS beta=-1.701 (p=3.1e-38), OOS beta=-1.840 (strengthening 8%). (2) ",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       },
       {
-        "question": "[SCAN HIT] GLD~DX-Y.NYB gold-dollar inverse: IS beta=-0.969 (p=7.9e-50), OOS beta=-1.234 (significant, STRENGTHENING 27%). Classic gold-dollar inverse",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": {
