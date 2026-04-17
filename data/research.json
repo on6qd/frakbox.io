@@ -1360,13 +1360,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 36152226,
+    "sessions_today": 9,
+    "tokens_today": 43312280,
     "sessions_by_day": [
       {
         "date": "2026-04-17",
-        "sessions": 8,
-        "tokens": 36152226
+        "sessions": 9,
+        "tokens": 43312280
       },
       {
         "date": "2026-04-16",
@@ -3562,6 +3562,12 @@
       "investigated": "Daily scanner (0 actionable). Non-event exploration of BTC factor exposures for crypto-linked equities (MSTR, COIN, MARA, RIOT) and attempted event conversion via BTC weekend-gap predicting MSTR Monday intraday drift.",
       "findings": "Tested whether bitcoin weekend moves predict MicroStrategy intraday drift on Mondays \u2014 turns out the market fully prices in the gap at open, so no tradeable edge. Along the way we confirmed a novel split: MicroStrategy and Coinbase are behaving more like pure bitcoin proxies over time, while bitcoin miners MARA and RIOT are drifting away from bitcoin price, likely because they now lease computing power to AI firms.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-17",
+      "investigated": "Multi-theme scanner: Calendar Anomalies (16 tests), Cointegration Pairs (13 tests), Factor Exposure screen across ALL sectors x macro drivers (50+ tests including DGS10, GC=F/gold, CL=F/oil, HG=F/copper, DX-Y.NYB/dollar), and VIX threshold screen across all 11 sector ETFs + IWM/EEM/TLT",
+      "findings": "Scanned 50+ factor-exposure, cointegration, calendar, and threshold tests. Found 10 significant hits queued: VIX>30 bounces ALL sectors (new cluster), precious metals strongly inverse to dollar (OOS strengthening), materials/EEM/utilities all gold-exposed OOS. Calendar and cointegration screens mostly null (13 pairs, all null).",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3610,29 +3616,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] VIX>30 SYSTEMATIC EQUITY RECOVERY CLUSTER: XLI 5d +2.02% (p=0.0008, n=30), IWM 20d +4.09% (p=0.004, n=30), EEM 20d +2.43% (p=0.025, n=30), ",
+        "priority": 9,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] XLB~GC=F gold exposure: IS beta=+0.122 (p=3.9e-7, R2=0.768, n=1005), OOS beta=+0.168 (significant, strengthening +37%). Materials sector st",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] EEM~HG=F copper exposure: IS beta=+0.197 (p=1.3e-23, R2=0.643, n=1005), OOS beta=+0.177 (significant, maintained 90%). Emerging markets str",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] GLD~HG=F gold-copper co-movement: IS beta=+0.138 (p=2e-11, R2=0.064 low), OOS beta=+0.236 (significant, STRENGTHENING 71%). Gold positively",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
+        "question": "[SCAN HIT] VIX>30 \u2192 XLB mean-reversion: 5d avg=+1.89% (t=3.47, p=0.0016, n=30 crossings). Materials sector bounces after VIX spike. Similar to validat",
+        "priority": 8,
+        "category": "scan_hit"
       }
     ],
     "handoff": "\"Session 2026-04-17 evening (research): Daily scanner ran clean (0 actionable \\u2014 NKE cluster stale >1bd, BEAT microcap). Non-event exploration: validated 3 BTC factor exposures (MSTR beta 0.83->1.10 OOS strengthening, COIN 0.64->0.81 strengthening, MARA 1.08->0.91 WEAKENING, RIOT 0.98->0.66 WEAKENING). Novel structural finding: crypto miners decoupling from BTC price likely due to AI-compute pivot 2024-2026. Event conversion attempted: BTC Fri-close to Sun-close weekend gap -> MSTR Monday op"
