@@ -1380,13 +1380,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 8993961,
+    "sessions_today": 3,
+    "tokens_today": 11763991,
     "sessions_by_day": [
       {
         "date": "2026-04-18",
-        "sessions": 2,
-        "tokens": 8993961
+        "sessions": 3,
+        "tokens": 11763991
       },
       {
         "date": "2026-04-17",
@@ -3618,6 +3618,12 @@
       "investigated": "Daily scanner pass + P7 GDX~GC=F structural-break scan hit investigation + VIX9D/VIX term structure exploration.",
       "findings": "Ran the daily pipeline for event signals \u2014 nothing actionable across all scanners. Tested a flagged pairs trade between gold miners and gold \u2014 failed: the spread doesn't mean-revert. Also tested whether short-term volatility spikes predict market rebounds \u2014 weak signal, already captured by the existing high-VIX trade.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-18",
+      "investigated": "Mixed scan: Calendar anomalies (monthly/TOM/DOW across 12 symbols), DGS2 sector exposure (8 tests), new cointegration pairs (9 tests), structural breaks (8 tests), threshold effects (10 tests), lead-lag (6 tests). Totaling ~66 tests across 6 theme clusters.",
+      "findings": "Screened 66 tests across 6 themes (calendar anomalies, DGS2 exposure, cointegration pairs, structural breaks, thresholds, lead-lag). Found 2 scan hits: (1) GLD~DGS2 strengthening negative exposure (p=6e-15, OOS strengthening), (2) DGS10>3.5\u2192TLT short threshold (p=0.024, n=14). Major negative findings: calendar anomalies dead for all sector ETFs; ETF cointegration universally null; universal DGS10 sign flip at 2022 now confirmed for XLV/XLC/XLP/XLY/XLF.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3671,6 +3677,16 @@
         "category": "scan_hit"
       },
       {
+        "question": "[SCAN HIT] DGS10>3.5 -> TLT SHORT: When 10-yr crosses 3.5%, TLT falls -2.02% over 20d (t=-2.56, p=0.0235, n=14 crossings). Threshold event study. Inve",
+        "priority": 6,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] GLD~DGS2 STRENGTHENING NEGATIVE EXPOSURE: Gold has consistent negative exposure to 2yr rate across both IS and OOS periods, with OOS *stren",
+        "priority": 6,
+        "category": "scan_hit"
+      },
+      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -3679,16 +3695,6 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
-      },
-      {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
       }
     ],
     "handoff": {
