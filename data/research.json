@@ -248,6 +248,11 @@
         "name": "auto_import_tariff_short_basket_expansion_2026_04_17",
         "status": "validated_basket_expansion",
         "magnitude_pct": -2.37
+      },
+      {
+        "name": "vix30_recovery_sector_landscape_2026_04_18",
+        "status": "moderate",
+        "magnitude_pct": 2.3
       }
     ],
     "dead_ends": [
@@ -1278,10 +1283,18 @@
       {
         "name": "vix_term_structure_backwardation_spy_recovery_2026_04_18",
         "reason": "VIX9D/VIX > 1.05 + VIX>20 SPY recovery test. IS (pre-2024, n=27): 5d +0.65%/pos=78%, 10d +1.07%/67%, 20d +1.72%/78% (modest alpha vs baseline +0.28/+0.56/+1.10%). OOS (2024+, n=4): 5d -0.09%/50%, 10d +1.29%/50%, 20d +0.88%/50% \u2014 pos_rate collapses to 50%. Strong variant (ratio>1.10) n=3 OOS unreliable. Signal overlaps with VIX>30 (4-5 same-day events) \u2014 likely subsumed by existing validated signal. INCONCLUSIVE / DEAD END: no OOS confirmation. Existing vix_spike_above_30_spy_recovery captures the tradeable subset."
+      },
+      {
+        "name": "dgs10_3.5_threshold_tlt_short",
+        "reason": "REGIME_CONCENTRATED: all 14 crossings (5 cluster-buffered) occurred Sep2022-Apr2023 during a single 7-month Fed hiking cycle. n=14 is one regime sampled 14 times. -2.02% 20d signal cannot generalize. 5d and 10d not even significant (p=0.25, 0.27). Rate thresholds over long history trap a single hiking regime."
+      },
+      {
+        "name": "vix30_gld_long_flight_to_safety",
+        "reason": "DEAD_END: VIX>30 (first close, 30d cluster) -> GLD long: 5d +0.33% p=0.42, 10d +0.30% p=0.62, 20d +0.20% p=0.78, n=30 crossings 2015-2026, all horizons null, positive rate ~0.5. Gold does not systematically rally during fear spikes. Combined with vix30_tlt_short (bonds fall at VIX>30, stagflation regime) and vix30_tlt_long being disproven, traditional safe-haven assets GLD and TLT offer no VIX>30 alpha. The pre-registered SPY+XLB+EEM recovery basket remains the validated play."
       }
     ],
-    "signal_count": 42,
-    "dead_end_count": 257,
+    "signal_count": 43,
+    "dead_end_count": 259,
     "literature_count": 25
   },
   "live_signals": [
@@ -1380,13 +1393,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 11763991,
+    "sessions_today": 4,
+    "tokens_today": 15511202,
     "sessions_by_day": [
       {
         "date": "2026-04-18",
-        "sessions": 3,
-        "tokens": 11763991
+        "sessions": 4,
+        "tokens": 15511202
       },
       {
         "date": "2026-04-17",
@@ -3624,6 +3637,12 @@
       "investigated": "Mixed scan: Calendar anomalies (monthly/TOM/DOW across 12 symbols), DGS2 sector exposure (8 tests), new cointegration pairs (9 tests), structural breaks (8 tests), threshold effects (10 tests), lead-lag (6 tests). Totaling ~66 tests across 6 theme clusters.",
       "findings": "Screened 66 tests across 6 themes (calendar anomalies, DGS2 exposure, cointegration pairs, structural breaks, thresholds, lead-lag). Found 2 scan hits: (1) GLD~DGS2 strengthening negative exposure (p=6e-15, OOS strengthening), (2) DGS10>3.5\u2192TLT short threshold (p=0.024, n=14). Major negative findings: calendar anomalies dead for all sector ETFs; ETF cointegration universally null; universal DGS10 sign flip at 2022 now confirmed for XLV/XLC/XLP/XLY/XLF.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-18",
+      "investigated": "Closed 3 pending P6 scan hits (VIX>20 XLK, DGS10>3.5 TLT short, GLD~DGS2 exposure). Then mapped the full VIX>30 sector-recovery landscape \u2014 tested all remaining sector ETFs and safe-haven assets (GLD, TLT, XLF, XLY, XLU, XLV, XLP, XLC) SPY-relative over 5/10/20d horizons at 18 cluster-buffered VIX>30 crossings (2015-2026).",
+      "findings": "Closed out three open research leads as dead ends, then mapped how different stock-market sectors behave during high-fear periods. Found that cyclical sectors like materials and emerging markets recover strongly after VIX spikes above 30, while defensive sectors like utilities and consumer staples actually underperform. Traditional safe havens like gold and long-term bonds offer no alpha in these episodes. This confirms the current pre-registered long-cyclical basket is the right play and defensive hedges would be counterproductive.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3672,21 +3691,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] VIX>20 XLK SYSTEMATIC RECOVERY: 10d avg=+1.43% (p=0.0014, n=97 crossings). NOTE: vix20_xlk was previously found regime-specific at VIX>20. ",
-        "priority": 6,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] DGS10>3.5 -> TLT SHORT: When 10-yr crosses 3.5%, TLT falls -2.02% over 20d (t=-2.56, p=0.0235, n=14 crossings). Threshold event study. Inve",
-        "priority": 6,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] GLD~DGS2 STRENGTHENING NEGATIVE EXPOSURE: Gold has consistent negative exposure to 2yr rate across both IS and OOS periods, with OOS *stren",
-        "priority": 6,
-        "category": "scan_hit"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -3695,6 +3699,21 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
+      },
+      {
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": {
