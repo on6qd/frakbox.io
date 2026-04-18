@@ -1393,13 +1393,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 15511202,
+    "sessions_today": 5,
+    "tokens_today": 18026283,
     "sessions_by_day": [
       {
         "date": "2026-04-18",
-        "sessions": 4,
-        "tokens": 15511202
+        "sessions": 5,
+        "tokens": 18026283
       },
       {
         "date": "2026-04-17",
@@ -3643,6 +3643,12 @@
       "investigated": "Closed 3 pending P6 scan hits (VIX>20 XLK, DGS10>3.5 TLT short, GLD~DGS2 exposure). Then mapped the full VIX>30 sector-recovery landscape \u2014 tested all remaining sector ETFs and safe-haven assets (GLD, TLT, XLF, XLY, XLU, XLV, XLP, XLC) SPY-relative over 5/10/20d horizons at 18 cluster-buffered VIX>30 crossings (2015-2026).",
       "findings": "Closed out three open research leads as dead ends, then mapped how different stock-market sectors behave during high-fear periods. Found that cyclical sectors like materials and emerging markets recover strongly after VIX spikes above 30, while defensive sectors like utilities and consumer staples actually underperform. Traditional safe havens like gold and long-term bonds offer no alpha in these episodes. This confirms the current pre-registered long-cyclical basket is the right play and defensive hedges would be counterproductive.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-18",
+      "investigated": "Mechanism test: does DXY fall after VIX>30 first-close? Goal was to validate the causal chain behind the recent vix30_sector_basket_alpha_finding (XLB 20d long + EEM 10d long pre-registered trade). Both XLB and EEM have validated negative DXY exposure, so 'VIX spike -> dollar weakens -> cyclicals outperform' was the candidate mechanism.",
+      "findings": "Investigated the reason behind a freshly-discovered pattern where certain stock groups tend to rebound faster than the broad market after big volatility spikes. The dollar-weakening story holds only in recent years and the replicated returns were much smaller than first recorded, so the fund will re-check the math before placing the trade.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3691,6 +3697,11 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "RE-VERIFY vix30 XLB 20d and EEM 10d basket signals BEFORE next VIX>30 trigger fires (eligible 2026-04-27+). Replication shows XLB 20d +1.08% (vs claim",
+        "priority": 10,
+        "category": "validation_check"
+      },
+      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -3709,11 +3720,6 @@
         "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
         "priority": 1,
         "category": "sp500_index_addition"
-      },
-      {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": {
