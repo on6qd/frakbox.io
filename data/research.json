@@ -1393,13 +1393,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 18026283,
+    "sessions_today": 6,
+    "tokens_today": 26435880,
     "sessions_by_day": [
       {
         "date": "2026-04-18",
-        "sessions": 5,
-        "tokens": 18026283
+        "sessions": 6,
+        "tokens": 26435880
       },
       {
         "date": "2026-04-17",
@@ -3649,6 +3649,12 @@
       "investigated": "Mechanism test: does DXY fall after VIX>30 first-close? Goal was to validate the causal chain behind the recent vix30_sector_basket_alpha_finding (XLB 20d long + EEM 10d long pre-registered trade). Both XLB and EEM have validated negative DXY exposure, so 'VIX spike -> dollar weakens -> cyclicals outperform' was the candidate mechanism.",
       "findings": "Investigated the reason behind a freshly-discovered pattern where certain stock groups tend to rebound faster than the broad market after big volatility spikes. The dollar-weakening story holds only in recent years and the replicated returns were much smaller than first recorded, so the fund will re-check the math before placing the trade.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-18",
+      "investigated": "Calendar anomalies (monthly/DOW/TOM for 8 symbols) + Cointegration pairs (18 pairs) + Factor exposure screen (25+ tests: gold/DXY/rates vs sectors/international ETFs) + Threshold tests (gold at $2000/$2500, copper, DXY/100) + Structural breaks (5 tests)",
+      "findings": "Screened 55+ tests across 4 themes: calendar anomalies (13 tests, all dead ends), cointegration pairs (18 pairs, all dead ends), factor exposures (20+ tests, 4 hits), and thresholds (5+ tests, mostly confounded). Top findings: XLB~gold exposure independent of dollar (p=0.001, OOS sig), FXI~DXY structural break at 2022 (China sensitivity doubled, p=0.019), XLU~gold independent of rates (p=2.5e-9, OOS sig), and international ETF dollar cluster (EFA/EWJ/GDX all OOS-strengthening). 4 findings queued for investigation.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3702,24 +3708,24 @@
         "category": "validation_check"
       },
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] XLB~GC=F gold exposure INDEPENDENT of dollar: after DXY+SPY controls, beta=0.083 (p=0.0013), OOS beta=0.142 significant. Materials have gen",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] FXI~DXY structural break at 2022-03-16: Chow F=3.95 p=0.019. Pre-2022 beta=-0.698, Post-2022 beta=-1.307 (sensitivity DOUBLED). China ETF n",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] XLU~GC=F gold exposure INDEPENDENT of rates: after DGS10+SPY controls, beta=0.211 (p=2.5e-9), OOS beta=0.083 significant. Utilities track g",
+        "priority": 7,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] INTERNATIONAL ETF DOLLAR EXPOSURE CLUSTER \u2014 all OOS strengthening: EFA beta=-0.656 (p=1.6e-54) OOS beta=-0.916; EWJ beta=-0.482 (p=2.4e-19)",
+        "priority": 6,
+        "category": "scan_hit"
       }
     ],
     "handoff": {
