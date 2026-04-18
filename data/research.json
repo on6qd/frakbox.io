@@ -1393,13 +1393,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 26435880,
+    "sessions_today": 7,
+    "tokens_today": 32166413,
     "sessions_by_day": [
       {
         "date": "2026-04-18",
-        "sessions": 6,
-        "tokens": 26435880
+        "sessions": 7,
+        "tokens": 32166413
       },
       {
         "date": "2026-04-17",
@@ -3655,6 +3655,12 @@
       "investigated": "Calendar anomalies (monthly/DOW/TOM for 8 symbols) + Cointegration pairs (18 pairs) + Factor exposure screen (25+ tests: gold/DXY/rates vs sectors/international ETFs) + Threshold tests (gold at $2000/$2500, copper, DXY/100) + Structural breaks (5 tests)",
       "findings": "Screened 55+ tests across 4 themes: calendar anomalies (13 tests, all dead ends), cointegration pairs (18 pairs, all dead ends), factor exposures (20+ tests, 4 hits), and thresholds (5+ tests, mostly confounded). Top findings: XLB~gold exposure independent of dollar (p=0.001, OOS sig), FXI~DXY structural break at 2022 (China sensitivity doubled, p=0.019), XLU~gold independent of rates (p=2.5e-9, OOS sig), and international ETF dollar cluster (EFA/EWJ/GDX all OOS-strengthening). 4 findings queued for investigation.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-18",
+      "investigated": "P0 CRITICAL re-verification of VIX>30 XLB 20d and EEM 10d parent signals before next trigger eligibility (2026-04-27+). Session #351 AM had claimed replication yielded +1.08% / +0.40% \u2014 50-80% below the recorded +2.33% / +2.61% \u2014 flagging both hypotheses as DO-NOT-FIRE.",
+      "findings": "Rechecked two volatility-spike trade setups (materials and emerging-market ETFs) that a prior session had flagged as overstated. The original numbers reproduced exactly with the correct methodology \u2014 the trades remain on track and will fire automatically at the next qualifying VIX spike after April 27.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3703,11 +3709,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "RE-VERIFY vix30 XLB 20d and EEM 10d basket signals BEFORE next VIX>30 trigger fires (eligible 2026-04-27+). Replication shows XLB 20d +1.08% (vs claim",
-        "priority": 10,
-        "category": "validation_check"
-      },
-      {
         "question": "[SCAN HIT] XLB~GC=F gold exposure INDEPENDENT of dollar: after DXY+SPY controls, beta=0.083 (p=0.0013), OOS beta=0.142 significant. Materials have gen",
         "priority": 8,
         "category": "scan_hit"
@@ -3726,6 +3727,11 @@
         "question": "[SCAN HIT] INTERNATIONAL ETF DOLLAR EXPOSURE CLUSTER \u2014 all OOS strengthening: EFA beta=-0.656 (p=1.6e-54) OOS beta=-0.916; EWJ beta=-0.482 (p=2.4e-19)",
         "priority": 6,
         "category": "scan_hit"
+      },
+      {
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       }
     ],
     "handoff": {
