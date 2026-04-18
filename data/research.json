@@ -1296,10 +1296,14 @@
       {
         "name": "vix30_gld_long_flight_to_safety",
         "reason": "DEAD_END: VIX>30 (first close, 30d cluster) -> GLD long: 5d +0.33% p=0.42, 10d +0.30% p=0.62, 20d +0.20% p=0.78, n=30 crossings 2015-2026, all horizons null, positive rate ~0.5. Gold does not systematically rally during fear spikes. Combined with vix30_tlt_short (bonds fall at VIX>30, stagflation regime) and vix30_tlt_long being disproven, traditional safe-haven assets GLD and TLT offer no VIX>30 alpha. The pre-registered SPY+XLB+EEM recovery basket remains the validated play."
+      },
+      {
+        "name": "cointegration_brute_force_screening_low_yield_2026_04_19",
+        "reason": "Brute-force pair cointegration screening yields near-zero tradeable pairs. Tested 7 intuitive pairs (GLD/SLV, XLE/XOP, JPM/BAC, KO/PEP, UNH/CVS, XOM/CVX, NEE/DUK) plus GOOG/GOOGL sanity check and VOO/SPY. ONE passed full-sample Engle-Granger (GOOG/GOOGL, p=0.02, hedge ratio 1.013, half-life 13.8d) but failed OOS spread stationarity (ADF p=0.997). Six failed both. Even VOO/SPY (near-identical by construction) achieves only p=0.38 full-sample EG though OOS stationarity holds (half-life 1.1d). Pattern consistent with 2022 structural break finding and prior cointegration dead ends (v_ma, t_vz, xlu_tlt). ACTION: deprioritize brute-force pair cointegration as a discovery strategy; only pursue when theoretical basis is overwhelming (true share-class arb, ETF-vs-basket) AND a cluster-aware stationarity check is used."
       }
     ],
     "signal_count": 44,
-    "dead_end_count": 259,
+    "dead_end_count": 260,
     "literature_count": 25
   },
   "live_signals": [
@@ -1398,9 +1402,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 1,
+    "tokens_today": 3179315,
     "sessions_by_day": [
+      {
+        "date": "2026-04-19",
+        "sessions": 1,
+        "tokens": 3179315
+      },
       {
         "date": "2026-04-18",
         "sessions": 14,
@@ -3703,6 +3712,12 @@
       "investigated": "Automated canonical retest for threshold-mode scan hits. Background: 8 threshold scan hits closed as dead ends on 2026-04-18 after manual canonical retest. Goal: prevent future manual work by auto-running canonical retest in the data_tasks.py threshold pipeline.",
       "findings": "Built automatic quality check into the market-anomaly scanner. When the scanner finds a promising trigger, it now re-tests the finding with stricter rules to avoid fooling ourselves, and reports whether both tests pass. This prevents about eight wasted investigations per week.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-19",
+      "investigated": "Weekend exploration session. No scan hits, no active OOS observations. Ran daily scanner (0 actionable events). Tested 9 cointegration pairs (GLD/SLV, XLE/XOP, JPM/BAC, KO/PEP, UNH/CVS, XOM/CVX, NEE/DUK, GOOG/GOOGL, VOO/SPY) to probe whether brute-force pair-screening can produce tradeable pairs-trade candidates.",
+      "findings": "Tested nine classic pairs-trade candidates (like Coke vs Pepsi and Exxon vs Chevron) and found none of them reliably track each other anymore. Conclusion: brute-force searching for pairs-trade candidates is a dead end under our methodology; we will shift non-event exploration elsewhere.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3776,12 +3791,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": {
-      "attempted": "Saturday/markets-closed session. Ran daily scanner (clean), then built canonical-retest automation into the threshold pipeline per P3 priority.",
-      "accomplished": "1) Daily scanner: 0 GO candidates (BEAT 3-insider cluster fails M filter). 2) Added causal_tests.identify_first_close_events + canonical_retest_threshold. 3) Wired into data_tasks.py cmd_threshold: raw-significant threshold tests automatically trigger canonical retest (first-close 30d cluster-buffered, SPY-adjusted, dual-sample pooled+recent). Output exposes canonical_passes, canonical_fail_reason, per-sample best-horizon stats. Added --skip-canonical flag for debugging. 4) Updated CLAUDE.md gating rule. 5) Verified against known cases: XLB/EEM PASS (match validated signals), XLK FAIL recency_subset_fails_regime_dependent. Committed ee3b9e5.",
-      "partial_results": "XLF and XLV still PASS canonical (p<0.05, mean>1% in both samples) correctly passes the general noise gate. Today the orchestrator closed them because they fall below the stricter mean>=2.5% basket-addition threshold. Canonical-retest automation is a noise gate, not a basket-admission filter.",
-      "blocked_by": "Nothing blocking. Next scan session will be the first to produce canonical_passes output; verify scanners are reading it correctly.",
-      "key_insight": "Raw threshold mode counted n=41 VIX>30 crossings 2010-2026 (with in-cluster duplicates). Canonical counts n=16 first-close (pooled) and n=11 recent, ratio 2.6x. Raw p-values look artificially strong at n=41 (p=0.001 for XLK) but the canonical dual-sample check correctly routes these to DEAD_END_CANONICAL_FAILED."
-    }
+    "handoff": "\"2026-04-19 weekend session. No scan hits, no active OOS. Ran daily scanner (0 actionable events). Spent session testing 9 cointegration pairs (7 a-priori strong + GOOG/GOOGL and VOO/SPY as sanity checks) to probe brute-force pair-screening as a discovery strategy. Outcome: GOOG/GOOGL passed full-sample Engle-Granger (p=0.02, hedge 1.013, half-life 13.8d) but OOS spread ADF p=0.997 = non-stationary; VOO/SPY OOS-stationary (half-life 1.1d) but full-sample EG p=0.38; 7 others fail both gates. Patt"
   }
 }
