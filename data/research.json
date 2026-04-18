@@ -1393,13 +1393,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 41739946,
+    "sessions_today": 11,
+    "tokens_today": 53324617,
     "sessions_by_day": [
       {
         "date": "2026-04-18",
-        "sessions": 9,
-        "tokens": 41739946
+        "sessions": 11,
+        "tokens": 53324617
       },
       {
         "date": "2026-04-17",
@@ -3673,6 +3673,18 @@
       "investigated": "Cointegration pairs screen (30 pairs), calendar anomalies screen (13 tests), lead-lag full sector screen (25 tests), VIX>30 sector threshold expansion (11 tests)",
       "findings": "Screened 80 tests across 4 themes: cointegration (30 pairs), calendar anomalies (13), sector lead-lag (25), VIX>30 sector expansion (11). Found 16 significant findings \u2014 queued 4 to research queue. Key finding: XLF (financials ETF) is a broad leading indicator for SPY/QQQ/EEM/XLY with p<1e-7, OOS confirmed, unidirectional. Also expanded VIX>30 recovery basket to include XLF (+4.35% 20d), QQQ (+4.0% 20d), XLY (+3.1% 20d). Calendar anomalies all dead ends.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-18",
+      "investigated": "Top scan hit: VIX>30 -> XLF 20d +4.35% p=0.0017 (T-1d4fb3c8) \u2014 proposal to extend the validated VIX>30 sector recovery basket (currently XLB +2.33%, EEM +2.61%) with XLF, XLK, XLY heads. Pre-registered criteria: p<0.01, mean>=2.5%, pos>=70%. Also reviewed lead-lag XLF Granger cluster and BA/RTX cointegration scan hits.",
+      "findings": "A scanner suggested adding the financials sector ETF to a recovery-trade basket that currently uses materials and emerging markets. After re-testing with the same rigorous methodology, the financials signal turned out to be much weaker than it first looked \u2014 the scanner had been double-counting overlapping events. Tightened the rule so future scanner hits must pass the strict re-test before becoming a real trade.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-18",
+      "investigated": "Extended NT 10-K mid-cap ($250M-$500M) first-time filer OOS with 2026 Q1-Q2 data (previous OOS was only N=8 split at 2024-07-01; now split moved to 2026-01-01 to validate 8 fresh 2026 events).",
+      "findings": "We found that the 'company delays its annual 10-K filing' short-selling signal also works for slightly smaller companies than previously tested (market cap $250M-$500M) \u2014 the bucket shows an average 4.5% drop 3 days after filing, with 88% of stocks falling. Before trading it live we still need one more safety check on how much the stock had already dropped before filing.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3721,37 +3733,37 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] XLF Granger-causes SPY at lag 2: F=12.55 p=4.1e-6, OOS confirmed at lag 1. No XCORR false-positive warning (true lead, not contemporaneous)",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] XLF SYSTEMIC LEADING INDICATOR CLUSTER \u2014 XLF leads SPY (p=4.1e-6 OOS confirmed), QQQ (p=1.8e-8 OOS confirmed), XLY (p=3.3e-8 OOS confirmed)",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] BA and RTX cointegration: t=-3.50 p=0.032, hedge_ratio=0.736, half-life=55.8d, OOS spread stationarity CONFIRMED. Result ID: T-7a8c9998. Bo",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] VIX>30 \u2192 XLF 20d +4.35%: t=3.45 p=0.0017, n=30 crossings. Result ID: T-1d4fb3c8. XLF is NOT in the existing VIX>30 sector basket (which has",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       },
       {
-        "question": "[SCAN HIT] COINTEGRATION PAIRS \u2014 IS significant but OOS NOT confirmed: MO/PM p=0.006 hedge_ratio=0.354 HL=23.7d (T-467421e4); T/VZ p=0.015 hedge_ratio",
-        "priority": 6,
-        "category": "scan_hit"
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": {
-      "attempted": "Daily scanner + investigate top pending scan hit (GDX~GC=F structural break P7) + explore VIX term structure backwardation signal as non-event exploration.",
-      "accomplished": "1) Daily scanner 0 actionable (5 events, IPO gate on SEO working). 2) GDX~GC=F P7 scan hit: DEAD END \u2014 GDX/GLD cointegration p=0.29 IS, OOS ADF p=0.79 non-stationary; GDX/GC=F same pattern. Chow break + beta shift \u2260 cointegration. Miners permanently de-levered from gold (cost inflation, capital discipline). 6th 2022 structural-break scan hit closed as secular drift. 3) VIX9D/VIX backwardation + VIX>20 SPY recovery test: modest IS alpha (+0.51%/0.62% abnormal 10d/20d) but pos_rate collapses to 50% in OOS (n=4). INCONCLUSIVE/DEAD END \u2014 subsumed by existing VIX>30 signal (4-5 same-day overlap).",
-      "partial_results": "VIX9D/VIX ratio>1.05 + VIX>20 captures 31 first-close events in 15y vs 14 for VIX>30 \u2014 2x the opportunity but weaker per-event effect. Worth revisiting with larger OOS sample in 1-2y.",
-      "blocked_by": "Nothing \u2014 low-volatility regime (VIX 17.48) means no immediate triggers for VIX-class signals.",
-      "key_insight": "CANONICAL: Chow break + beta shift alone DOES NOT imply cointegration. Pairs trade validity requires stationary spread \u2014 confirm with ADF/Engle-Granger. 6 structural-break 2022 scan hits now all closed as secular drift. Consider deprioritizing the structural-break scanner unless we add a cointegration filter downstream."
+      "attempted": "Saturday/markets-closed session. Originally planned non-event exploration; pivoted after finding actionable refinement to NT 10-K mid-cap extension.",
+      "accomplished": "1) Ran daily scanner (0 actionable). 2) Attempted JPM->KRE network test (non-actionable, treats target as hub). 3) Extended NT 10-K mid-cap 250M-500M OOS with 2026 Q1-Q2 data via new tools/nt_10k_midcap_targeted_oos.py \u2014 found N=8 fresh OOS, 3d -4.52% p=0.039, 88% negative rate, same sign as discovery. Logged as VALIDATED_OOS.",
+      "partial_results": "Mid-cap finding needs combined pre-event drawdown filter validation before scanner can be relaxed. The $500M-$2000M bucket remains AMBIGUOUS \u2014 directional OOS but weak discovery.",
+      "blocked_by": "Pre-event drawdown gate not tested on the midcap sample \u2014 need to subset the 27 midcap events to moderate-drawdown only and re-backtest. Combined filter N could drop below 5 making preregistration unsupported.",
+      "key_insight": "The NT 10-K short signal DOES extend below $500M. The 250M-500M bucket OOS confirms with p<0.05 at 3d and 5d. But do NOT change the live scanner until the pre-event-drawdown gate is re-confirmed on the midcap subset \u2014 the gate was critical in the large-cap finding and may change the effect size materially."
     }
   }
 }
