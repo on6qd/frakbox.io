@@ -1270,10 +1270,18 @@
       {
         "name": "vix30_tlt_short_threshold_dead_end_2026_04_17",
         "reason": "VIX>30 -> TLT short 5d/10d/20d. Scan hit 10d p=0.0148 (n=30) does NOT replicate under canonical 30-day clustering (p=0.33, n=22). Pooled 5d shows p=0.02 but fails OOS validation (2020-2026 p=0.14). Post-2022 n=5 extreme but underpowered."
+      },
+      {
+        "name": "gdx_gcf_gld_structural_break_secular_drift_2026_04_18",
+        "reason": "GDX vs GLD cointegration p=0.291 IS (T-126c3d9b), OOS ADF p=0.792. GDX vs GC=F: p=0.298 IS (T-1afd0744), OOS ADF p=0.775. Chow p=0.028 (beta 1.68\u21921.47 post-2022) reflects miners permanently de-levering from gold \u2014 secular drift (cost inflation, capital discipline, FX), not reversible regime. 6th structural-break 2022 scan hit closed as secular drift. Lesson: Chow break + beta shift does NOT imply cointegration. Pairs trade requires stationary spread \u2014 confirm with ADF/Engle-Granger, not just Chow."
+      },
+      {
+        "name": "vix_term_structure_backwardation_spy_recovery_2026_04_18",
+        "reason": "VIX9D/VIX > 1.05 + VIX>20 SPY recovery test. IS (pre-2024, n=27): 5d +0.65%/pos=78%, 10d +1.07%/67%, 20d +1.72%/78% (modest alpha vs baseline +0.28/+0.56/+1.10%). OOS (2024+, n=4): 5d -0.09%/50%, 10d +1.29%/50%, 20d +0.88%/50% \u2014 pos_rate collapses to 50%. Strong variant (ratio>1.10) n=3 OOS unreliable. Signal overlaps with VIX>30 (4-5 same-day events) \u2014 likely subsumed by existing validated signal. INCONCLUSIVE / DEAD END: no OOS confirmation. Existing vix_spike_above_30_spy_recovery captures the tradeable subset."
       }
     ],
     "signal_count": 42,
-    "dead_end_count": 255,
+    "dead_end_count": 257,
     "literature_count": 25
   },
   "live_signals": [
@@ -1372,13 +1380,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 4006137,
+    "sessions_today": 2,
+    "tokens_today": 8993961,
     "sessions_by_day": [
       {
         "date": "2026-04-18",
-        "sessions": 1,
-        "tokens": 4006137
+        "sessions": 2,
+        "tokens": 8993961
       },
       {
         "date": "2026-04-17",
@@ -3604,6 +3612,12 @@
       "investigated": "(1) P8 scan hit: does XLK/QQQ outperform SPY after VIX>25 first-close? (2) Daily scanner: 2 P10 SEO bought deal GO candidates (MAIR, ARXS).",
       "findings": "Tested whether tech stocks beat the S&P 500 after volatility spikes above VIX 25. The pattern appeared only in 2024-2026 data and was absent in 2014-2023, so it is regime-specific, not a reliable signal. Also caught two false alarms from the stock-offering scanner: both flagged companies were IPOs, not the seasoned offerings the signal was designed for. Patched the scanner to filter out newly-listed tickers.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-18",
+      "investigated": "Daily scanner pass + P7 GDX~GC=F structural-break scan hit investigation + VIX9D/VIX term structure exploration.",
+      "findings": "Ran the daily pipeline for event signals \u2014 nothing actionable across all scanners. Tested a flagged pairs trade between gold miners and gold \u2014 failed: the spread doesn't mean-revert. Also tested whether short-term volatility spikes predict market rebounds \u2014 weak signal, already captured by the existing high-VIX trade.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3652,11 +3666,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] GDX~GC=F STRUCTURAL BREAK 2022: Chow p=0.028. Pre-2022 beta=1.681 (miners lever gold 1.68x), Post-2022 beta=1.465 (miners lever gold only 1",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
         "question": "[SCAN HIT] VIX>20 XLK SYSTEMATIC RECOVERY: 10d avg=+1.43% (p=0.0014, n=97 crossings). NOTE: vix20_xlk was previously found regime-specific at VIX>20. ",
         "priority": 6,
         "category": "scan_hit"
@@ -3675,8 +3684,19 @@
         "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
         "priority": 2,
         "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
-    "handoff": "\"Session 2026-04-18 (research, ~50min): Closed P8 VIX>25 XLK scan hit as DEAD END (regime-specific, IS p=0.53 n=17 vs OOS +2.42% p=0.02 n=6). Fixed a real scanner bug: SEO scanner was flagging fresh IPOs (MAIR, ARXS) as SEO bought deals. Added MIN_TRADING_DAYS_BEFORE_FILING=20 gate. Verified SKIP_IPO on both. This is a CRITICAL bug fix \\u2014 without it, next_session would have traded 2 contaminated shorts on IPOs. Queue: 12 -> 8 pending after closing 3 completed (2 SEO IPO false-positives + 1 V"
+    "handoff": {
+      "attempted": "Daily scanner + investigate top pending scan hit (GDX~GC=F structural break P7) + explore VIX term structure backwardation signal as non-event exploration.",
+      "accomplished": "1) Daily scanner 0 actionable (5 events, IPO gate on SEO working). 2) GDX~GC=F P7 scan hit: DEAD END \u2014 GDX/GLD cointegration p=0.29 IS, OOS ADF p=0.79 non-stationary; GDX/GC=F same pattern. Chow break + beta shift \u2260 cointegration. Miners permanently de-levered from gold (cost inflation, capital discipline). 6th 2022 structural-break scan hit closed as secular drift. 3) VIX9D/VIX backwardation + VIX>20 SPY recovery test: modest IS alpha (+0.51%/0.62% abnormal 10d/20d) but pos_rate collapses to 50% in OOS (n=4). INCONCLUSIVE/DEAD END \u2014 subsumed by existing VIX>30 signal (4-5 same-day overlap).",
+      "partial_results": "VIX9D/VIX ratio>1.05 + VIX>20 captures 31 first-close events in 15y vs 14 for VIX>30 \u2014 2x the opportunity but weaker per-event effect. Worth revisiting with larger OOS sample in 1-2y.",
+      "blocked_by": "Nothing \u2014 low-volatility regime (VIX 17.48) means no immediate triggers for VIX-class signals.",
+      "key_insight": "CANONICAL: Chow break + beta shift alone DOES NOT imply cointegration. Pairs trade validity requires stationary spread \u2014 confirm with ADF/Engle-Granger. 6 structural-break 2022 scan hits now all closed as secular drift. Consider deprioritizing the structural-break scanner unless we add a cointegration filter downstream."
+    }
   }
 }
