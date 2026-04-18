@@ -1393,13 +1393,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 11,
-    "tokens_today": 53324617,
+    "sessions_today": 12,
+    "tokens_today": 55402009,
     "sessions_by_day": [
       {
         "date": "2026-04-18",
-        "sessions": 11,
-        "tokens": 53324617
+        "sessions": 12,
+        "tokens": 55402009
       },
       {
         "date": "2026-04-17",
@@ -3685,6 +3685,12 @@
       "investigated": "Extended NT 10-K mid-cap ($250M-$500M) first-time filer OOS with 2026 Q1-Q2 data (previous OOS was only N=8 split at 2024-07-01; now split moved to 2026-01-01 to validate 8 fresh 2026 events).",
       "findings": "We found that the 'company delays its annual 10-K filing' short-selling signal also works for slightly smaller companies than previously tested (market cap $250M-$500M) \u2014 the bucket shows an average 4.5% drop 3 days after filing, with 88% of stocks falling. Before trading it live we still need one more safety check on how much the stock had already dropped before filing.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-18",
+      "investigated": "High-throughput scan session: Calendar anomalies (12), Cointegration pairs (24), Factor exposures (22), Threshold tests (14), Lead-lag tests (7), Structural breaks (6), Regime tests (2) = 87 total tests",
+      "findings": "Ran 87 statistical tests across 6 scan themes. Found 8 significant hits (p<0.05): gold leading REITs 2 days ahead (OOS confirmed), 4 new VIX>30 sector basket extensions (XLV/XLI/XLP/XLC), oil-below-70 airline rally cluster, and stable XLRE/gold and IWM/dollar exposures. Calendar anomalies and large-cap cointegration pairs yielded zero hits \u2014 confirmed dead ends.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3733,29 +3739,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] LEAD-LAG: GC=F Granger-causes XLRE at lag 2 \u2014 F=7.11, p=0.0009, n=1106, OOS confirmed at lag 1. No XCORR false-positive warning. Gold price",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] THRESHOLD: VIX>30 \u2192 XLV (Healthcare) 20d avg=+2.60% (t=3.57, p=0.0013, n=30 crossings). New sector for VIX>30 basket. Needs canonical metho",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] THRESHOLD: VIX>30 \u2192 XLI (Industrials) 5d avg=+2.02% (t=3.74, p=0.0008, n=30 crossings). New sector for VIX>30 basket. Needs canonical metho",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] EXPOSURE + LEAD-LAG: XLRE has positive gold exposure (beta=+0.098, p=0.0009, OOS confirmed beta=0.063). AND gold Granger-causes XLRE at lag",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
+        "question": "[SCAN HIT] THRESHOLD: VIX>30 \u2192 XLP (Consumer Staples) 20d avg=+1.74% (t=2.37, p=0.0246, n=30 crossings). Defensive sector rally after VIX spike. Canon",
+        "priority": 7,
+        "category": "scan_hit"
       }
     ],
     "handoff": {
