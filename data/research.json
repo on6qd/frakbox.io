@@ -1452,13 +1452,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 11,
-    "tokens_today": 62110190,
+    "sessions_today": 12,
+    "tokens_today": 65420979,
     "sessions_by_day": [
       {
         "date": "2026-04-19",
-        "sessions": 11,
-        "tokens": 62110190
+        "sessions": 12,
+        "tokens": 65420979
       },
       {
         "date": "2026-04-18",
@@ -3828,6 +3828,12 @@
       "investigated": "Handoff P2/P3/P5: vix30 round-2 orthogonality bug audit + trade-loop signal-family budget cap + pending hypothesis firing-mechanism audit",
       "findings": "Closed a bug in how the system decided whether to add new sector ETFs to the VIX>30 recovery basket, and added a hard dollar cap so six related bets can never exceed K combined.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-19",
+      "investigated": "Multi-theme scan: currency exposure (9 tests), cointegration pairs (12 tests), credit lead-lag (6 tests), calendar anomalies (9 tests), threshold tests (12 tests), regime/structural break/network tests (12+ tests). Total: ~48 tests.",
+      "findings": "Scanned 48 factor combinations across currency exposure, cointegration pairs, credit lead-lag, calendar anomalies, and threshold tests. Found 4 statistically significant hits: VIX>30->TLT Long (canonical pass, 1d +2.5%, flight-to-safety), BA/RTX cointegration (pairs trade candidate, half-life 56d), Oil>85->XLE threshold (canonical pass but small n=4), and EEM/copper independent channel. Queued all 4 for orchestrator investigation.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3886,19 +3892,19 @@
         "category": "monitor"
       },
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] BA/RTX aerospace cointegration: p=0.032, OOS spread stationarity confirmed, hedge_ratio=0.736, half-life=55.8d (n=1006). Investigate for pa",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] VIX>30 -> TLT LONG: canonical_passes=True, 1d avg=+2.50%, p=0.0000, 92.9% positive rate (pooled n=14, recent n=11). Previous test only chec",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] Oil>85 -> XLE LONG: canonical_passes=True, 5d avg=+2.70%, p=0.0043, 100% positive (n=4 pooled/recent). WARNING: n=4 is very small. Needs fu",
+        "priority": 7,
+        "category": "scan_hit"
       }
     ],
     "handoff": {
