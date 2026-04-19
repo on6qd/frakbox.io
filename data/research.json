@@ -1452,13 +1452,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 36037790,
+    "sessions_today": 8,
+    "tokens_today": 41989297,
     "sessions_by_day": [
       {
         "date": "2026-04-19",
-        "sessions": 7,
-        "tokens": 36037790
+        "sessions": 8,
+        "tokens": 41989297
       },
       {
         "date": "2026-04-18",
@@ -3804,6 +3804,12 @@
       "investigated": "8 pending scan hits: 4 DGS10 structural-break (EEM, KRE, XLV, GDX) + 1 BA/RTX cointegration + 3 VIX30 canonical-pass extensions (RSP, EWZ, DIA).",
       "findings": "Tested and rejected a batch of 'regime change' alarms in the data \u2014 all turned out to be gradual drift being misreported as sudden shifts. Added a guardrail so the scanner stops crying wolf on that pattern.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-19",
+      "investigated": "P2 priority: deploy DGS10/DGS30 scan-artifact auto-suppression baked into data_tasks.py. P3: commodity calendar screen (GLD/USO/UNG/SLV x 3 patterns).",
+      "findings": "The system now auto-filters a known class of false-positive scan results (patterns where historical data look like a meaningful shift but are really slow drift). A separate seasonality test on gold, oil, silver, and natural gas ETFs came back with no usable edge.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3877,6 +3883,6 @@
         "category": "activist_13d_filing_long"
       }
     ],
-    "handoff": "\"Session 2026-04-19 PM: Dispatched all 8 pending scan hits. Four DGS10 structural-break hits (EEM, KRE, XLV, GDX) closed as DEAD_END_SECULAR_TREND per alt-date falsification \\u2014 target-date F is never 3x+ alt-date F, and betas drift monotonically across 2020-2023. BA/RTX cointegration confirmed deferred per capacity. Three VIX30 canonical-pass extensions (RSP, EWZ, DIA) deferred per family capacity cap \\u2014 all are subsets/proxies of already-active VIX30 members. New canonical rule: dgs10_s"
+    "handoff": "\"Session 2026-04-19 late: Deployed DGS10/DGS30 scan-artifact auto-suppression in data_tasks.py cmd_regression. Structural_break (factor in DGS set, target in 32 rate-sensitive ETFs, break within 120d of 2022-03-16) auto-runs alt-date Chow at 2020-06-15 and 2024-01-15 and flags scan_artifact_suppressed=true if target-F < 3x max(alt-F). Lead_lag same factor/target pairs always flagged. Verified: EEM 0.89x suppressed, XLV 0.89x suppressed, GDX 2.17x suppressed, KRE 5.29x passes (documented exceptio"
   }
 }
