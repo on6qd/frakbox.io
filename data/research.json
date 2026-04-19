@@ -1440,13 +1440,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 29532872,
+    "sessions_today": 6,
+    "tokens_today": 32790048,
     "sessions_by_day": [
       {
         "date": "2026-04-19",
-        "sessions": 5,
-        "tokens": 29532872
+        "sessions": 6,
+        "tokens": 32790048
       },
       {
         "date": "2026-04-18",
@@ -3780,6 +3780,12 @@
       "investigated": "Round-2 evaluation of 4 VIX>30 sector-extension scan hits (KRE, XME, SMH, XHB) + falsification of DGS30->XHB/ITB Granger lead-lag.",
       "findings": "Promoted two new market-stress trades to the watchlist \u2014 when fear spikes, buy metals-and-mining for a one-day bounce and semiconductors for a five-day rebound. Rejected two other candidates (regional banks and homebuilders) because they overlap too much with trades we already track.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-19",
+      "investigated": "Calendar anomaly screen (12 symbols x 3 patterns), cointegration pairs screen (10 pairs), structural break extension screen (8 assets vs DGS10/DXY), threshold screen (8 tests, various triggers), regime/exposure tests (6 tests), lead-lag tests (2 tests)",
+      "findings": "Screened 48 statistical tests: 12 calendar patterns (all null), 10 cointegration pairs (1 hit: BA/RTX p=0.032 OOS-confirmed), 8 structural break tests (4 hits: EEM, GDX, XLV, GLD all show strong 2022 rate-hike structural breaks), 8 threshold tests (2 raw-sig but failed canonical), 6 regime/exposure tests, 2 lead-lag tests. 4 significant findings queued for deep investigation.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3838,17 +3844,17 @@
         "category": "monitor"
       },
       {
+        "question": "[SCAN HIT] Cointegration: BA/RTX aerospace peers. p=0.032, hedge_ratio=0.736, half-life=55.8d (n=1006). OOS stationarity CONFIRMED. Investigate for pa",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] Structural break: EEM vs FRED:DGS10 at 2022-03-16. F=30.65, p=8.76e-14. Pre-break beta=+0.122 -> Post-break beta=-0.083 (SIGN FLIP). Rising",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
         "question": "[SCAN HIT] STRUCTURAL BREAK: KRE~DGS10 at 2022-03-16: F=23.21, p=1.17e-10. Pre-beta=+0.303 (banks loved rising rates) -> Post-beta=+0.016 (neutral). R",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> RSP 20d avg=+3.62% (t=3.30, p=0.0026, n=30 crossings). canonical_passes=True: pooled 1d mean=+1.46% p=0.0147 posi",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> EWZ 20d avg=+4.80% (t=2.19, p=0.0371, n=30 crossings). canonical_passes=True: pooled 1d mean=+2.17% p=0.0078 posi",
         "priority": 7,
         "category": "scan_hit"
       }
