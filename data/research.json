@@ -1402,13 +1402,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 3179315,
+    "sessions_today": 2,
+    "tokens_today": 10374956,
     "sessions_by_day": [
       {
         "date": "2026-04-19",
-        "sessions": 1,
-        "tokens": 3179315
+        "sessions": 2,
+        "tokens": 10374956
       },
       {
         "date": "2026-04-18",
@@ -3718,6 +3718,12 @@
       "investigated": "Weekend exploration session. No scan hits, no active OOS observations. Ran daily scanner (0 actionable events). Tested 9 cointegration pairs (GLD/SLV, XLE/XOP, JPM/BAC, KO/PEP, UNH/CVS, XOM/CVX, NEE/DUK, GOOG/GOOGL, VOO/SPY) to probe whether brute-force pair-screening can produce tradeable pairs-trade candidates.",
       "findings": "Tested nine classic pairs-trade candidates (like Coke vs Pepsi and Exxon vs Chevron) and found none of them reliably track each other anymore. Conclusion: brute-force searching for pairs-trade candidates is a dead end under our methodology; we will shift non-event exploration elsewhere.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-19",
+      "investigated": "Weekend passive session \u2014 no scan hits, no active OOS. Ran daily scanner (0 actionable). Audited scanner GO/NO-GO gates for alignment with VALIDATED subgroup findings in the knowledge base.",
+      "findings": "Fixed a scanner bug that was flagging non-Starboard activist stake filings as tradeable, when only Starboard filings have historically produced reliable returns. Also audited the other event scanners \u2014 all are correctly aligned with their validated filters.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3791,6 +3797,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"2026-04-19 weekend session. No scan hits, no active OOS. Ran daily scanner (0 actionable events). Spent session testing 9 cointegration pairs (7 a-priori strong + GOOG/GOOGL and VOO/SPY as sanity checks) to probe brute-force pair-screening as a discovery strategy. Outcome: GOOG/GOOGL passed full-sample Engle-Granger (p=0.02, hedge 1.013, half-life 13.8d) but OOS spread ADF p=0.997 = non-stationary; VOO/SPY OOS-stationary (half-life 1.1d) but full-sample EG p=0.38; 7 others fail both gates. Patt"
+    "handoff": "[\"P1 Daily scanner pass (python3 tools/daily_scanner.py --days 3). Run at session start.\", \"P1 VIX>30 XLB/EEM hypotheses (8909b059, 358fc451) eligible Apr 27. Basket FINAL (XLB 20d + EEM 10d). On next VIX>30 first-close cluster-buffered, set trigger=next_market_open, size=5000, stop=10% on BOTH. Do NOT add other sectors.\", \"P1 NKE insider cluster OOS Day 5 eval 2026-04-22 (entry $45.08 Apr 15). Expected close as disproven short.\", \"P1 Monitor SPY VIX>30 trade b63a0168 (deadline Apr 27). trade_lo"
   }
 }
