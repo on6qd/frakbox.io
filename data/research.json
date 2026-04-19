@@ -1464,8 +1464,8 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 14,
-    "tokens_today": 76075482,
+    "sessions_today": 0,
+    "tokens_today": 0,
     "sessions_by_day": [
       {
         "date": "2026-04-19",
@@ -1606,11 +1606,6 @@
         "date": "2026-03-22",
         "sessions": 24,
         "tokens": 139879840
-      },
-      {
-        "date": "2026-03-21",
-        "sessions": 22,
-        "tokens": 161668738
       }
     ]
   },
@@ -3901,6 +3896,11 @@
         "event": "MIDCO Food Processing (Middleby MIDD spinoff) - STRONG CANDIDATE for spinco short. Revenue $850M, EBITDA $172M, est mktc",
         "date": "2026-05-12",
         "symbol": "MIDD"
+      },
+      {
+        "event": "Re-run S&P 500 candidate screener (tools/sp500_candidate_screener.py). Apr 14 screen found 8 eligible: FLEX, MTZ, CW, VE",
+        "date": "2026-05-20",
+        "symbol": "TBD"
       }
     ],
     "pending_triggers": [],
