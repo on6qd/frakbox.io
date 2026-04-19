@@ -1,7 +1,7 @@
 {
   "summary": {
     "total_hypotheses": 67,
-    "pending": 11,
+    "pending": 5,
     "active": 1,
     "completed": 8,
     "invalidated": 6,
@@ -1350,10 +1350,18 @@
       {
         "name": "eem_dgs10_structural_break_2022_duplicate",
         "reason": "EEM~DGS10 2022-03-16 structural break already documented as secular drift in iwm_eem_dgs10_structural_break_secular_drift_2026_04_17. Scanner re-emission without alt-date falsification. Scan hit 984aa2fd closed."
+      },
+      {
+        "name": "canonical_retest_lookahead_bias_bug_2026_04_19",
+        "reason": "CRITICAL BUG in causal_tests.canonical_retest_threshold. Prior to 2026-04-19 fix, canonical retest called market_data.measure_event_impact with entry_price='open' but NO event_timing='after_hours'. This caused look-ahead bias: target entered at OPEN of event_date (before signal fired at CLOSE of event_date), while benchmark referenced CLOSE of T-1. For VIX>30 events, this inflated abnormal 1d returns by ~2.5% (captures SPY's intraday panic move while target only shows intraday-from-open). Example: TLT 1d canonical showed +2.50% abnormal (PASS); correct value with event_timing='after_hours' is +0.07% (FAIL) for equivalent sample. FIX: added event_timing='after_hours' in causal_tests.py canonical_retest_threshold. Impact: invalidates 6 pending VIX30 basket hypotheses + 1 active trade; all had inflated abnormal returns. Re-tested 2026-04-19: SPY=-0.08%, HYG=+0.39%, XME=-0.38%, EEM=-0.29%, EFA=+0.42% pooled, SMH=+1.38% pooled \u2014 NONE pass canonical (p<0.05 + |mean|>=1% in BOTH pooled AND recent). Signal family was spurious artifact of methodology bug."
+      },
+      {
+        "name": "vix30_basket_spurious_bug_driven_2026_04_19",
+        "reason": "VIX30 sector-rotation basket (SPY 20d, HYG 1d, XME 1d, EEM 10d, EFA 20d, XLB 20d, SMH 5d) was DISCOVERED via canonical retest with look-ahead bias. After bug fix (event_timing='after_hours'), NO basket member passes canonical in both pooled and recent samples. The +2-3% abnormal returns that drove promotion were artifacts of measuring target intraday-from-open vs benchmark close-to-close with mismatched entry timing. Re-tested 2026-04-19 with corrected method: all basket members show |abnormal|<1% or p>0.05 in at least one sample. Action: 6 pending hypotheses abandoned, active SPY trade (b63a0168) allowed to complete for observational data but its backtest was not valid. RETIRE vix30 basket family."
       }
     ],
     "signal_count": 46,
-    "dead_end_count": 270,
+    "dead_end_count": 272,
     "literature_count": 25
   },
   "live_signals": [
@@ -1447,18 +1455,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 12,
+    "active_signal_types": 6,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 12,
-    "tokens_today": 65420979,
+    "sessions_today": 13,
+    "tokens_today": 71741842,
     "sessions_by_day": [
       {
         "date": "2026-04-19",
-        "sessions": 12,
-        "tokens": 65420979
+        "sessions": 13,
+        "tokens": 71741842
       },
       {
         "date": "2026-04-18",
@@ -3834,6 +3842,12 @@
       "investigated": "Multi-theme scan: currency exposure (9 tests), cointegration pairs (12 tests), credit lead-lag (6 tests), calendar anomalies (9 tests), threshold tests (12 tests), regime/structural break/network tests (12+ tests). Total: ~48 tests.",
       "findings": "Scanned 48 factor combinations across currency exposure, cointegration pairs, credit lead-lag, calendar anomalies, and threshold tests. Found 4 statistically significant hits: VIX>30->TLT Long (canonical pass, 1d +2.5%, flight-to-safety), BA/RTX cointegration (pairs trade candidate, half-life 56d), Oil>85->XLE threshold (canonical pass but small n=4), and EEM/copper independent channel. Queued all 4 for orchestrator investigation.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-19",
+      "investigated": "VIX>30 -> TLT LONG scan hit (P8). Hypothesis: TLT is flight-to-safety asset; canonical_passes=True, +2.50% abnormal at 1d. Goal: validate orthogonality to existing VIX30 basket (HYG/XME/EEM/EFA/XLB/SMH/SPY) and decide GO/NO-GO.",
+      "findings": "Found a measurement bug that inflated research backtest numbers by 2-3 percentage points for any strategy triggered by a market close. Fixed the bug, re-tested the strategies that looked promising, and every single one turned out to be a statistical mirage. Retired the entire strategy family from consideration.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3897,22 +3911,16 @@
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] VIX>30 -> TLT LONG: canonical_passes=True, 1d avg=+2.50%, p=0.0000, 92.9% positive rate (pooled n=14, recent n=11). Previous test only chec",
-        "priority": 8,
+        "question": "[SCAN HIT - EXPOSURE] EEM/copper independent exposure: beta=0.164, p=1.29e-15, R2=0.651, OOS confirmed (beta=0.136). Survives DXY+SPY joint control. C",
+        "priority": 6,
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] Oil>85 -> XLE LONG: canonical_passes=True, 5d avg=+2.70%, p=0.0043, 100% positive (n=4 pooled/recent). WARNING: n=4 is very small. Needs fu",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": {
-      "attempted": "Address handoff P2 (reviewer audit of vix30 round-2 orthogonality bug), P3 (enforce K basket budget in trade_loop), P5 (audit 11 pending hypotheses for firing mechanism)",
-      "accomplished": "1) Confirmed round-2 ortho miscalc: XME and SMH actually correlate 0.76 with EEM/HYG (not 0.43/0.49 vs XLB/EFA) -- both fail orthogonality threshold. Logged as vix30_round2_orthogonality_bug_confirmed_2026_04_19. 2) Added config.SIGNAL_FAMILY_BUDGETS + trade_loop family budget enforcement (preferred sort, deployed tracking, diversifier cap). Simulation: 6 vix30 triggers -> only XLB+EFA fund (K), rest blocked. 3) Extended vix_monitor to activate all 6 pending vix30_* basket hypotheses on VIX>30 fire, wired into tools/daily_scanner.py.",
-      "partial_results": "Pre-registrations for XME and SMH kept per reconciliation rule -- let them play out OOS. If they underperform XLB/EFA, retire after OOS.",
-      "blocked_by": "vix_monitor now wired into daily_scanner but daily_scanner itself has no launchd plist. Next session must verify/add scheduling.",
-      "key_insight": "Pre-registration + trade-execution-layer budget caps is cleaner than retroactively retiring hypotheses. The orthogonality bug is contained because the budget cap cannot fund the correlated-cluster members. Round-2 promotions were wrong, but the execution layer catches the error."
-    }
+    "handoff": "\"2026-04-19 scan-hit investigation session\""
   }
 }
