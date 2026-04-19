@@ -1,6 +1,6 @@
 {
   "summary": {
-    "total_hypotheses": 67,
+    "total_hypotheses": 68,
     "pending": 5,
     "active": 1,
     "completed": 8,
@@ -1358,10 +1358,14 @@
       {
         "name": "vix30_basket_spurious_bug_driven_2026_04_19",
         "reason": "VIX30 sector-rotation basket (SPY 20d, HYG 1d, XME 1d, EEM 10d, EFA 20d, XLB 20d, SMH 5d) was DISCOVERED via canonical retest with look-ahead bias. After bug fix (event_timing='after_hours'), NO basket member passes canonical in both pooled and recent samples. The +2-3% abnormal returns that drove promotion were artifacts of measuring target intraday-from-open vs benchmark close-to-close with mismatched entry timing. Re-tested 2026-04-19 with corrected method: all basket members show |abnormal|<1% or p>0.05 in at least one sample. Action: 6 pending hypotheses abandoned, active SPY trade (b63a0168) allowed to complete for observational data but its backtest was not valid. RETIRE vix30 basket family."
+      },
+      {
+        "name": "ba_rtx_cointegration_pairs",
+        "reason": "BA/RTX scan hit (p=0.032 on 2020-2024 IS with 1.25y OOS) fails rigorous cross-window testing: (1) OOS ADF p=0.289 when OOS window extended to 3.3y; (2) hedge ratio drifts 86-96% across windows (0.04 to 2.72); (3) pairs Sharpe only +0.05 to +0.16 above BA-alone z-score (fails single-asset confound rule). Scan hit was an artifact of COVID recovery common-shock anchoring (IS start 2020-01-01). Confirms cointegration_brute_force_screening_low_yield_2026_04_19 meta-finding: even aerospace/defense pairs with strong economic story fail rigorous OOS gates."
       }
     ],
     "signal_count": 46,
-    "dead_end_count": 272,
+    "dead_end_count": 273,
     "literature_count": 25
   },
   "live_signals": [
@@ -1460,13 +1464,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 13,
-    "tokens_today": 71741842,
+    "sessions_today": 14,
+    "tokens_today": 76075482,
     "sessions_by_day": [
       {
         "date": "2026-04-19",
-        "sessions": 13,
-        "tokens": 71741842
+        "sessions": 14,
+        "tokens": 76075482
       },
       {
         "date": "2026-04-18",
@@ -3848,6 +3852,12 @@
       "investigated": "VIX>30 -> TLT LONG scan hit (P8). Hypothesis: TLT is flight-to-safety asset; canonical_passes=True, +2.50% abnormal at 1d. Goal: validate orthogonality to existing VIX30 basket (HYG/XME/EEM/EFA/XLB/SMH/SPY) and decide GO/NO-GO.",
       "findings": "Found a measurement bug that inflated research backtest numbers by 2-3 percentage points for any strategy triggered by a market close. Fixed the bug, re-tested the strategies that looked promising, and every single one turned out to be a statistical mirage. Retired the entire strategy family from consideration.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-19",
+      "investigated": "BA/RTX aerospace cointegration scan hit (priority 8). Pre-registered 6-criterion test across multiple IS/OOS windows, with single-asset confound check and hedge-ratio stability audit.",
+      "findings": "We investigated a computer-generated signal suggesting Boeing and Raytheon stock prices move together predictably. With rigorous testing across multiple time windows, the pattern disappeared \u2014 it was an artifact of both stocks recovering together from COVID, not a real tradeable relationship. We added a new methodology rule to catch similar false positives automatically in the future.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3906,11 +3916,6 @@
         "category": "monitor"
       },
       {
-        "question": "[SCAN HIT] BA/RTX aerospace cointegration: p=0.032, OOS spread stationarity confirmed, hedge_ratio=0.736, half-life=55.8d (n=1006). Investigate for pa",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
         "question": "[SCAN HIT - EXPOSURE] EEM/copper independent exposure: beta=0.164, p=1.29e-15, R2=0.651, OOS confirmed (beta=0.136). Survives DXY+SPY joint control. C",
         "priority": 6,
         "category": "scan_hit"
@@ -3919,8 +3924,13 @@
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
+      },
+      {
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       }
     ],
-    "handoff": "\"2026-04-19 scan-hit investigation session\""
+    "handoff": "\"2026-04-19 scan-hit BA/RTX cointegration investigation session.\\n\\nPRIORITIES FOR NEXT SESSION (unchanged from prior handoff + new):\\n\\nP1 KNOWLEDGE AUDIT (FROM PRIOR): canonical_retest_lookahead_bias_bug_2026_04_19 fix retired 7 VIX30 basket members + Oil>85 XLE scan hit. AUDIT other threshold-based 'validated' knowledge entries: vix30_recovery_sector_landscape_2026_04_18, vix_spike_above_30_spy_recovery, threshold_scan_hit_canonical_retest_rule_2026_04_18. Re-run threshold canonical retests a"
   }
 }
