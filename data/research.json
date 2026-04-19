@@ -1452,13 +1452,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 44851784,
+    "sessions_today": 10,
+    "tokens_today": 51082919,
     "sessions_by_day": [
       {
         "date": "2026-04-19",
-        "sessions": 9,
-        "tokens": 44851784
+        "sessions": 10,
+        "tokens": 51082919
       },
       {
         "date": "2026-04-18",
@@ -3816,6 +3816,12 @@
       "investigated": "High-throughput scan: Currency Exposure + Calendar Anomalies + Cointegration Pairs + Threshold/VIX Extensions + Regime Tests",
       "findings": "Screened 68 tests across calendar, cointegration, currency, threshold, lead-lag, regime, and structural break themes. Found 3 statistically significant canonical passes \u2014 VIX>30 triggers 1d recovery in XLP (+1.81%), XLV (+1.63%, 100% hit rate!), and XLI (+1.62%). All three queued for orchestrator investigation. Note: these conflict with a prior dead-end entry \u2014 new all-horizons canonical methodology may have surfaced valid 1d signals missed earlier.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-19",
+      "investigated": "investigated=3 canonical-passing VIX>30 scan hits (XLP/XLV/XLI P8/P8/P7) that conflicted with 04/18 DEAD_END_CANONICAL_FAILED decision",
+      "findings": "Three new market-stress rebound signals (consumer staples, healthcare, industrials) looked statistically strong at first glance, but a closer look showed they rebound in lockstep with signals we already trade -- no new information. We closed them out and tightened the rule for accepting future look-alike signals.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3874,21 +3880,21 @@
         "category": "monitor"
       },
       {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> XLP 1d avg=+1.81% (p=0.0011, 92.9% positive, pooled n=14). Recent: +1.62% p=0.0023 90.9% positive (n=11). NOTE: P",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> XLV 1d avg=+1.63% (p=0.0037, 100% positive, pooled n=14). Recent: 3d +1.44% p=0.003 90.9% positive (n=11). NOTE: ",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> XLI 1d avg=+1.62% (p=0.0162, 85.7% positive, pooled n=14). Recent: 1d +1.31% p=0.0117 90.9% positive (n=11). NOTE",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       }
     ],
-    "handoff": "\"Session 2026-04-19 late: Deployed DGS10/DGS30 scan-artifact auto-suppression in data_tasks.py cmd_regression. Structural_break (factor in DGS set, target in 32 rate-sensitive ETFs, break within 120d of 2022-03-16) auto-runs alt-date Chow at 2020-06-15 and 2024-01-15 and flags scan_artifact_suppressed=true if target-F < 3x max(alt-F). Lead_lag same factor/target pairs always flagged. Verified: EEM 0.89x suppressed, XLV 0.89x suppressed, GDX 2.17x suppressed, KRE 5.29x passes (documented exceptio"
+    "handoff": "\"Session 2026-04-19 (Sunday): Closed 3 conflicting VIX>30 scan hits (XLP/XLV/XLI) as DEAD_END_ORTHOGONALITY_FAILED.\\n\\nResolution of 04/18 vs 04/19 conflict: XLP/XLV/XLI DO pass canonical statistics at 1d horizon under new all-horizons rule (p<0.005, |mean|>=1%, pos>=85%, same sign both samples). But per-event correlation to existing basket exceeds 0.60 threshold: XLP-HYG 0.67, XLV-SMH 0.77, XLI-SMH 0.88. Candidates also 0.76-0.86 intra-correlated.\\n\\nCONCENTRATION RISK SURFACED: Audit of existi"
   }
 }
