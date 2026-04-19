@@ -1452,13 +1452,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 51082919,
+    "sessions_today": 11,
+    "tokens_today": 62110190,
     "sessions_by_day": [
       {
         "date": "2026-04-19",
-        "sessions": 10,
-        "tokens": 51082919
+        "sessions": 11,
+        "tokens": 62110190
       },
       {
         "date": "2026-04-18",
@@ -3822,6 +3822,12 @@
       "investigated": "investigated=3 canonical-passing VIX>30 scan hits (XLP/XLV/XLI P8/P8/P7) that conflicted with 04/18 DEAD_END_CANONICAL_FAILED decision",
       "findings": "Three new market-stress rebound signals (consumer staples, healthcare, industrials) looked statistically strong at first glance, but a closer look showed they rebound in lockstep with signals we already trade -- no new information. We closed them out and tightened the rule for accepting future look-alike signals.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-19",
+      "investigated": "Handoff P2/P3/P5: vix30 round-2 orthogonality bug audit + trade-loop signal-family budget cap + pending hypothesis firing-mechanism audit",
+      "findings": "Closed a bug in how the system decided whether to add new sector ETFs to the VIX>30 recovery basket, and added a hard dollar cap so six related bets can never exceed K combined.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3895,6 +3901,12 @@
         "category": "activist_13d_filing_long"
       }
     ],
-    "handoff": "\"Session 2026-04-19 (Sunday): Closed 3 conflicting VIX>30 scan hits (XLP/XLV/XLI) as DEAD_END_ORTHOGONALITY_FAILED.\\n\\nResolution of 04/18 vs 04/19 conflict: XLP/XLV/XLI DO pass canonical statistics at 1d horizon under new all-horizons rule (p<0.005, |mean|>=1%, pos>=85%, same sign both samples). But per-event correlation to existing basket exceeds 0.60 threshold: XLP-HYG 0.67, XLV-SMH 0.77, XLI-SMH 0.88. Candidates also 0.76-0.86 intra-correlated.\\n\\nCONCENTRATION RISK SURFACED: Audit of existi"
+    "handoff": {
+      "attempted": "Address handoff P2 (reviewer audit of vix30 round-2 orthogonality bug), P3 (enforce K basket budget in trade_loop), P5 (audit 11 pending hypotheses for firing mechanism)",
+      "accomplished": "1) Confirmed round-2 ortho miscalc: XME and SMH actually correlate 0.76 with EEM/HYG (not 0.43/0.49 vs XLB/EFA) -- both fail orthogonality threshold. Logged as vix30_round2_orthogonality_bug_confirmed_2026_04_19. 2) Added config.SIGNAL_FAMILY_BUDGETS + trade_loop family budget enforcement (preferred sort, deployed tracking, diversifier cap). Simulation: 6 vix30 triggers -> only XLB+EFA fund (K), rest blocked. 3) Extended vix_monitor to activate all 6 pending vix30_* basket hypotheses on VIX>30 fire, wired into tools/daily_scanner.py.",
+      "partial_results": "Pre-registrations for XME and SMH kept per reconciliation rule -- let them play out OOS. If they underperform XLB/EFA, retire after OOS.",
+      "blocked_by": "vix_monitor now wired into daily_scanner but daily_scanner itself has no launchd plist. Next session must verify/add scheduling.",
+      "key_insight": "Pre-registration + trade-execution-layer budget caps is cleaner than retroactively retiring hypotheses. The orthogonality bug is contained because the budget cap cannot fund the correlated-cluster members. Round-2 promotions were wrong, but the execution layer catches the error."
+    }
   }
 }
