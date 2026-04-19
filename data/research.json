@@ -1338,10 +1338,22 @@
       {
         "name": "vix30_mdy_midcap_scan_hit_capacity_deferred",
         "reason": "Canonical retest passes (T-78046896: pooled 1d +1.43% p=0.021 78.6% pos; recent 1d +1.23% p=0.049 81.8% pos), BUT not promoted for the same reasons as KRE: (a) cap discipline \u2014 already 6 VIX30 hypotheses active (XLB, EEM, EFA, HYG, XME, SMH) at the focus-discipline ceiling; (b) mid-cap ETF expected to be highly correlated with SPY (broad market beta) \u2014 limited diversification value; (c) recent p=0.049 is borderline (just below 0.05); (d) magnitude-reconciliation P2 task should complete first before any further VIX30 promotions. Re-evaluate after reconciliation."
+      },
+      {
+        "name": "xlv_dgs10_structural_break_2022",
+        "reason": "Sign-flip (+0.101 -> -0.089) at 2022-03-16 but 2021-03-16 alt-date F=40.90 exceeds 2022 F=39.22. Pre/post betas drift monotonically \u2014 secular trend, not discrete regime. Scan hit 324a4cab closed. T-ids: T-78ae8d26, T-b88a727f, T-01cd1e0f."
+      },
+      {
+        "name": "gdx_dgs10_structural_break_2022",
+        "reason": "Post-beta drifts monotonically more negative (-0.122 -> -0.243 -> -0.322 -> -0.359) across 2020/2021/2022/2023. Target F=14.69 only 1.2x closest alt F=12.56. Secular amplification, no sign flip. Scan hit 9807b99e closed. T-ids: T-8c47e435, T-0bc9efa3, T-656ff8e3."
+      },
+      {
+        "name": "eem_dgs10_structural_break_2022_duplicate",
+        "reason": "EEM~DGS10 2022-03-16 structural break already documented as secular drift in iwm_eem_dgs10_structural_break_secular_drift_2026_04_17. Scanner re-emission without alt-date falsification. Scan hit 984aa2fd closed."
       }
     ],
     "signal_count": 46,
-    "dead_end_count": 267,
+    "dead_end_count": 270,
     "literature_count": 25
   },
   "live_signals": [
@@ -1440,13 +1452,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 32790048,
+    "sessions_today": 7,
+    "tokens_today": 36037790,
     "sessions_by_day": [
       {
         "date": "2026-04-19",
-        "sessions": 6,
-        "tokens": 32790048
+        "sessions": 7,
+        "tokens": 36037790
       },
       {
         "date": "2026-04-18",
@@ -3786,6 +3798,12 @@
       "investigated": "Calendar anomaly screen (12 symbols x 3 patterns), cointegration pairs screen (10 pairs), structural break extension screen (8 assets vs DGS10/DXY), threshold screen (8 tests, various triggers), regime/exposure tests (6 tests), lead-lag tests (2 tests)",
       "findings": "Screened 48 statistical tests: 12 calendar patterns (all null), 10 cointegration pairs (1 hit: BA/RTX p=0.032 OOS-confirmed), 8 structural break tests (4 hits: EEM, GDX, XLV, GLD all show strong 2022 rate-hike structural breaks), 8 threshold tests (2 raw-sig but failed canonical), 6 regime/exposure tests, 2 lead-lag tests. 4 significant findings queued for deep investigation.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-19",
+      "investigated": "8 pending scan hits: 4 DGS10 structural-break (EEM, KRE, XLV, GDX) + 1 BA/RTX cointegration + 3 VIX30 canonical-pass extensions (RSP, EWZ, DIA).",
+      "findings": "Tested and rejected a batch of 'regime change' alarms in the data \u2014 all turned out to be gradual drift being misreported as sudden shifts. Added a guardrail so the scanner stops crying wolf on that pattern.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3844,27 +3862,21 @@
         "category": "monitor"
       },
       {
-        "question": "[SCAN HIT] Cointegration: BA/RTX aerospace peers. p=0.032, hedge_ratio=0.736, half-life=55.8d (n=1006). OOS stationarity CONFIRMED. Investigate for pa",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] Structural break: EEM vs FRED:DGS10 at 2022-03-16. F=30.65, p=8.76e-14. Pre-break beta=+0.122 -> Post-break beta=-0.083 (SIGN FLIP). Rising",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] STRUCTURAL BREAK: KRE~DGS10 at 2022-03-16: F=23.21, p=1.17e-10. Pre-beta=+0.303 (banks loved rising rates) -> Post-beta=+0.016 (neutral). R",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       }
     ],
-    "handoff": {
-      "attempted": "Evaluate 5 P8 scan hits (4 VIX>30 sector extensions + 1 DGS30->XHB/ITB Granger lead-lag).",
-      "accomplished": "PROMOTED 2 of 4 VIX30 extensions: XME (1d, hyp 4d43382d) and SMH (5d, hyp 67450c92). REJECTED 2: KRE (cap discipline + magnitude reconciliation needed) and XHB (0.63 corr to already-pending XLB). DGS30 lead-lag DEAD END per regime_aware_leadlag_validation_rule (post-2022 retest collapses signal: best lag wandered 5->8, IS p=0.048, OOS p=0.074). Recorded knowledge entries: vix30_round2_extensions_promoted_xme_smh_2026_04_19, dgs30_granger_lead_lag_extends_systematic_dead_end_2026_04_19. Added XME and SMH to watchlist for next VIX>30 first-close trigger.",
-      "partial_results": "Ad-hoc orthogonality calc revealed a 6x magnitude discrepancy between my replication and canonical T-results for XLB/EEM. Used my calc only for relative correlation structure, trusted T-results for magnitudes. Discrepancy logged as P2 for next session.",
-      "blocked_by": "Nothing \u2014 all 5 P8 scan hits resolved.",
-      "key_insight": "Active VIX30 threshold hypothesis count is now 6 (XLB, EEM, EFA, HYG, XME, SMH). At the focus-discipline ceiling for one signal family. Next session should NOT add more VIX30 sector extensions \u2014 instead shift to non-event exploration (factor exposure, regime, calendar) per the 2/6 reservation rule. Also: long-end Treasury Granger lead-lag scanner is producing repeated false positives (DGS10 documented as systematic dead end; DGS30 just confirmed as second instance). Suppression rule needed."
-    }
+    "handoff": "\"Session 2026-04-19 PM: Dispatched all 8 pending scan hits. Four DGS10 structural-break hits (EEM, KRE, XLV, GDX) closed as DEAD_END_SECULAR_TREND per alt-date falsification \\u2014 target-date F is never 3x+ alt-date F, and betas drift monotonically across 2020-2023. BA/RTX cointegration confirmed deferred per capacity. Three VIX30 canonical-pass extensions (RSP, EWZ, DIA) deferred per family capacity cap \\u2014 all are subsets/proxies of already-active VIX30 members. New canonical rule: dgs10_s"
   }
 }
