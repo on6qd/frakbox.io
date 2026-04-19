@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 64,
-    "pending": 8,
+    "total_hypotheses": 65,
+    "pending": 9,
     "active": 1,
     "completed": 8,
     "invalidated": 6,
@@ -1413,7 +1413,7 @@
     }
   ],
   "focus": {
-    "active_signal_types": 9,
+    "active_signal_types": 10,
     "max_signal_types": 20,
     "over_limit": false
   },
