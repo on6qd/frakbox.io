@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 63,
-    "pending": 7,
+    "total_hypotheses": 64,
+    "pending": 8,
     "active": 1,
     "completed": 8,
     "invalidated": 6,
@@ -1300,10 +1300,26 @@
       {
         "name": "cointegration_brute_force_screening_low_yield_2026_04_19",
         "reason": "Brute-force pair cointegration screening yields near-zero tradeable pairs. Tested 7 intuitive pairs (GLD/SLV, XLE/XOP, JPM/BAC, KO/PEP, UNH/CVS, XOM/CVX, NEE/DUK) plus GOOG/GOOGL sanity check and VOO/SPY. ONE passed full-sample Engle-Granger (GOOG/GOOGL, p=0.02, hedge ratio 1.013, half-life 13.8d) but failed OOS spread stationarity (ADF p=0.997). Six failed both. Even VOO/SPY (near-identical by construction) achieves only p=0.38 full-sample EG though OOS stationarity holds (half-life 1.1d). Pattern consistent with 2022 structural break finding and prior cointegration dead ends (v_ma, t_vz, xlu_tlt). ACTION: deprioritize brute-force pair cointegration as a discovery strategy; only pursue when theoretical basis is overwhelming (true share-class arb, ETF-vs-basket) AND a cluster-aware stationarity check is used."
+      },
+      {
+        "name": "vix30_hyg_highyield_5d_canonical_failed",
+        "reason": "HYG threshold scan +0.69% 5d p=0.0076 n=30. Canonical first-close cluster-buffered retest T-e20bfd46 on validated 11-event parent list gives +1.46% 5d p=0.077, fails preregistered p<0.05. Classic threshold-mode over-counting. DEAD_END_CANONICAL_FAILED."
+      },
+      {
+        "name": "vix30_jnk_highyield_5d_canonical_failed",
+        "reason": "JNK 5d canonical retest T-16d4197d fails all horizons (5d p=0.53, 10d p=0.26, 20d p=0.53). Near-duplicate of HYG. DEAD_END_CANONICAL_FAILED."
+      },
+      {
+        "name": "vix30_xlre_realestate_20d_wrong_sign",
+        "reason": "XLRE canonical T-694f0252 gives 20d -1.15% WRONG SIGN vs scan +2.74%, p=0.43. Scan used raw crossings including cluster-correlated events. DEAD_END_CANONICAL_FAILED_WRONG_SIGN."
+      },
+      {
+        "name": "vix30_vwo_emerging_20d_duplicate_of_eem",
+        "reason": "VWO canonical T-7bfe21d6: 20d +1.68% p=0.18 fails. 10d +2.36% p=0.0073 validated but near-duplicate of EEM 10d pending hypothesis 358fc451 (same emerging-markets exposure, expected corr >0.9). DEAD_END_REDUNDANT."
       }
     ],
     "signal_count": 44,
-    "dead_end_count": 260,
+    "dead_end_count": 264,
     "literature_count": 25
   },
   "live_signals": [
@@ -1397,7 +1413,7 @@
     }
   ],
   "focus": {
-    "active_signal_types": 8,
+    "active_signal_types": 9,
     "max_signal_types": 20,
     "over_limit": false
   },
@@ -3778,27 +3794,27 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> HYG 5d avg=+0.69% (t=2.87, p=0.0076, n=30 crossings). canonical_passes=True: pooled 1d mean=+2.54% p~0 positive_r",
-        "priority": 9,
+        "question": "[SCAN HIT] LEAD-LAG: FRED:DGS30 Granger-causes XHB (F=6.39, p=7.32e-6, lag=5, n=1097) AND ITB (F=6.73, p=3.47e-6, lag=5, n=1097). Both OOS-confirmed a",
+        "priority": 8,
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> EFA 20d avg=+3.00% (t=3.20, p=0.0033, n=30 crossings). canonical_passes=True: pooled 1d mean=+1.92% p=0.0006 posi",
-        "priority": 9,
+        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> KRE 20d avg=+5.03% (t=2.74, p=0.0104, n=30 crossings). canonical_passes=True: pooled 1d mean=+1.52% p=0.009 posit",
+        "priority": 8,
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> JNK 5d avg=+0.67% (t=2.68, p=0.0121, n=30 crossings). canonical_passes=True: pooled 1d mean=+2.50% p~0 positive_r",
-        "priority": 9,
+        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> XME 5d avg=+2.95% (t=3.09, p=0.0044, n=30 crossings). canonical_passes=True: pooled 1d mean=+2.03% p=0.0075 posit",
+        "priority": 8,
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> VWO 20d avg=+2.27% (t=2.21, p=0.0351, n=30 crossings). canonical_passes=True: pooled 1d mean=+2.34% p=0.0006 posi",
-        "priority": 9,
+        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> SMH 20d avg=+6.13% (t=4.13, p=0.0003, n=30 crossings). canonical_passes=True: pooled 20d mean=+5.31% p=0.0123 pos",
+        "priority": 8,
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> XLRE 20d avg=+2.74% (t=2.09, p=0.0458, n=28 crossings). canonical_passes=True: pooled 1d mean=+1.09% p=0.0084 pos",
+        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> XHB 5d avg=+2.50% (t=3.23, p=0.0031, n=30 crossings). canonical_passes=True: pooled 3d mean=+1.53% p=0.0079 posit",
         "priority": 8,
         "category": "scan_hit"
       }
