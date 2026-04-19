@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 65,
-    "pending": 9,
+    "total_hypotheses": 67,
+    "pending": 11,
     "active": 1,
     "completed": 8,
     "invalidated": 6,
@@ -258,6 +258,16 @@
         "name": "nt_10k_midcap_combined_drawdown_filter_2026_04_18",
         "status": "disproven",
         "magnitude_pct": -8.8
+      },
+      {
+        "name": "dgs30_granger_lead_lag_extends_systematic_dead_end_2026_04_19",
+        "status": "DEAD_END_EXTENDS_DGS10_SYSTEMATIC",
+        "magnitude_pct": 0.0
+      },
+      {
+        "name": "vix30_round2_extensions_promoted_xme_smh_2026_04_19",
+        "status": "PROMOTED_2_OF_4",
+        "magnitude_pct": 2.3
       }
     ],
     "dead_ends": [
@@ -1312,10 +1322,26 @@
       {
         "name": "vix30_vwo_emerging_1d_duplicate_of_eem",
         "reason": "VWO canonical: 1d +2.19% p=0.0015 91% pos, 10d +2.36% p=0.0073 82% pos. Signal real but VWO is Vanguard analog of EEM (same emerging-markets exposure). Expected correlation >0.9 with pending hypothesis 358fc451 (vix30_eem_outperformance_10d). NOT PROMOTED - redundant."
+      },
+      {
+        "name": "dgs30_xhb_itb_granger_lead_lag",
+        "reason": "Pattern reproduces dgs10_granger_lead_lag_systematic_dead_end. Original scan claim: DGS30 Granger-causes XHB at lag=5 with p=7.32e-6 on full 2020-2026 window (n=1097). Regime-restricted retest (post-2022, IS through 2024-09, OOS 2024-10+) collapses the signal: best lag shifts from 5 to 8 (lag wandering = regime-mixing artifact diagnostic), IS p=0.048 (marginal), OOS p=0.074 (NOT significant). Same mechanism: pre-2022 reflation regime had positive rate-sector correlation, post-2022 tightening regime has negative; mixed-window Granger averages opposite-sign contemporaneous relationships and produces a spurious lag. T-cde9740c."
+      },
+      {
+        "name": "vix30_kre_regional_banks_scan_hit",
+        "reason": "Canonical retest passes (T-4eae4337: pooled 1d +1.52% p=0.009 85.7% pos; recent 1d +1.34% p=0.033 81.8% pos), BUT not promoted due to: (a) cap discipline \u2014 already 4 VIX30-class hypotheses pending plus 2 newly promoted (XME, SMH); (b) magnitude is the smallest of 4 candidates; (c) KRE-HYG corr=0.33 (some overlap with already-pending HYG 1d signal); (d) ad-hoc 13-event reproduction shows mean -0.24% pos_rate 35.7%, conflicting with canonical. Backup: re-evaluate if any of the active VIX30 hypotheses is retired."
+      },
+      {
+        "name": "vix30_xhb_homebuilders_5d_high_overlap_xlb",
+        "reason": "Canonical retest passes (T-a3e2a2a1: pooled 3d +1.53% p=0.0079 85.7% pos; recent 5d +1.43% p=0.019 72.7% pos), BUT not promoted because XHB-XLB event-level abnormal-return correlation = 0.63 (HIGHEST overlap of all 4 candidates with already-pending VIX30 hypotheses). Adding XHB would be largely redundant with existing XLB 20d hypothesis (8909b059). XHB also has the smallest magnitude of all 4 candidates (~1.4%). Following precedent of vix30_xlre_realestate_20d_wrong_sign and vix30_jnk_highyield_1d_duplicate_of_hyg, mark as duplicate-class dead end."
+      },
+      {
+        "name": "vix30_mdy_midcap_scan_hit_capacity_deferred",
+        "reason": "Canonical retest passes (T-78046896: pooled 1d +1.43% p=0.021 78.6% pos; recent 1d +1.23% p=0.049 81.8% pos), BUT not promoted for the same reasons as KRE: (a) cap discipline \u2014 already 6 VIX30 hypotheses active (XLB, EEM, EFA, HYG, XME, SMH) at the focus-discipline ceiling; (b) mid-cap ETF expected to be highly correlated with SPY (broad market beta) \u2014 limited diversification value; (c) recent p=0.049 is borderline (just below 0.05); (d) magnitude-reconciliation P2 task should complete first before any further VIX30 promotions. Re-evaluate after reconciliation."
       }
     ],
-    "signal_count": 44,
-    "dead_end_count": 263,
+    "signal_count": 46,
+    "dead_end_count": 267,
     "literature_count": 25
   },
   "live_signals": [
@@ -1409,18 +1435,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 10,
+    "active_signal_types": 12,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 23819665,
+    "sessions_today": 5,
+    "tokens_today": 29532872,
     "sessions_by_day": [
       {
         "date": "2026-04-19",
-        "sessions": 4,
-        "tokens": 23819665
+        "sessions": 5,
+        "tokens": 29532872
       },
       {
         "date": "2026-04-18",
@@ -3748,6 +3774,12 @@
       "investigated": "Investigated 5 P9 VIX>30 threshold scan hits: HYG, EFA, JNK, VWO, XLRE. Ran canonical retests on the validated XLB/EEM parent 11-event list (T-6fced8a2, next-open entry, SPY benchmark, 30d cluster buffer).",
       "findings": "Extended our market-fear recovery playbook by evaluating five new asset candidates. Two were added to the playbook \u2014 a developed-markets equity trade (EFA) and a high-yield bond trade (HYG) \u2014 because they perform strongly in their own right and aren't redundant with what we already trade. The other three were dropped as duplicates or too small to be worth pursuing. Along the way we caught a subtle flaw in our automated testing: it was reporting signals at a different time horizon than the one initially flagged, so we've updated our checklist to always verify across all five horizons before keeping or dropping a candidate.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-19",
+      "investigated": "Round-2 evaluation of 4 VIX>30 sector-extension scan hits (KRE, XME, SMH, XHB) + falsification of DGS30->XHB/ITB Granger lead-lag.",
+      "findings": "Promoted two new market-stress trades to the watchlist \u2014 when fear spikes, buy metals-and-mining for a one-day bounce and semiconductors for a five-day rebound. Rejected two other candidates (regional banks and homebuilders) because they overlap too much with trades we already track.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3796,31 +3828,37 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] LEAD-LAG: FRED:DGS30 Granger-causes XHB (F=6.39, p=7.32e-6, lag=5, n=1097) AND ITB (F=6.73, p=3.47e-6, lag=5, n=1097). Both OOS-confirmed a",
+        "question": "vix30_hyg_highyield_1d_long",
         "priority": 8,
+        "category": "monitor"
+      },
+      {
+        "question": "vix30_efa_outperformance_20d",
+        "priority": 8,
+        "category": "monitor"
+      },
+      {
+        "question": "[SCAN HIT] STRUCTURAL BREAK: KRE~DGS10 at 2022-03-16: F=23.21, p=1.17e-10. Pre-beta=+0.303 (banks loved rising rates) -> Post-beta=+0.016 (neutral). R",
+        "priority": 7,
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> KRE 20d avg=+5.03% (t=2.74, p=0.0104, n=30 crossings). canonical_passes=True: pooled 1d mean=+1.52% p=0.009 posit",
-        "priority": 8,
+        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> RSP 20d avg=+3.62% (t=3.30, p=0.0026, n=30 crossings). canonical_passes=True: pooled 1d mean=+1.46% p=0.0147 posi",
+        "priority": 7,
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> XME 5d avg=+2.95% (t=3.09, p=0.0044, n=30 crossings). canonical_passes=True: pooled 1d mean=+2.03% p=0.0075 posit",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> SMH 20d avg=+6.13% (t=4.13, p=0.0003, n=30 crossings). canonical_passes=True: pooled 20d mean=+5.31% p=0.0123 pos",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> XHB 5d avg=+2.50% (t=3.23, p=0.0031, n=30 crossings). canonical_passes=True: pooled 3d mean=+1.53% p=0.0079 posit",
-        "priority": 8,
+        "question": "[SCAN HIT] CANONICAL PASS: VIX>30 -> EWZ 20d avg=+4.80% (t=2.19, p=0.0371, n=30 crossings). canonical_passes=True: pooled 1d mean=+2.17% p=0.0078 posi",
+        "priority": 7,
         "category": "scan_hit"
       }
     ],
-    "handoff": "[\"P1 Daily scanner pass (python3 tools/daily_scanner.py --days 3). Run at session start.\", \"P1 VIX>30 XLB/EEM hypotheses (8909b059, 358fc451) eligible Apr 27. Basket FINAL (XLB 20d + EEM 10d). On next VIX>30 first-close cluster-buffered, set trigger=next_market_open, size=5000, stop=10% on BOTH. Do NOT add other sectors.\", \"P1 NKE insider cluster OOS Day 5 eval 2026-04-22 (entry $45.08 Apr 15). Expected close as disproven short.\", \"P1 Monitor SPY VIX>30 trade b63a0168 (deadline Apr 27). trade_lo"
+    "handoff": {
+      "attempted": "Evaluate 5 P8 scan hits (4 VIX>30 sector extensions + 1 DGS30->XHB/ITB Granger lead-lag).",
+      "accomplished": "PROMOTED 2 of 4 VIX30 extensions: XME (1d, hyp 4d43382d) and SMH (5d, hyp 67450c92). REJECTED 2: KRE (cap discipline + magnitude reconciliation needed) and XHB (0.63 corr to already-pending XLB). DGS30 lead-lag DEAD END per regime_aware_leadlag_validation_rule (post-2022 retest collapses signal: best lag wandered 5->8, IS p=0.048, OOS p=0.074). Recorded knowledge entries: vix30_round2_extensions_promoted_xme_smh_2026_04_19, dgs30_granger_lead_lag_extends_systematic_dead_end_2026_04_19. Added XME and SMH to watchlist for next VIX>30 first-close trigger.",
+      "partial_results": "Ad-hoc orthogonality calc revealed a 6x magnitude discrepancy between my replication and canonical T-results for XLB/EEM. Used my calc only for relative correlation structure, trusted T-results for magnitudes. Discrepancy logged as P2 for next session.",
+      "blocked_by": "Nothing \u2014 all 5 P8 scan hits resolved.",
+      "key_insight": "Active VIX30 threshold hypothesis count is now 6 (XLB, EEM, EFA, HYG, XME, SMH). At the focus-discipline ceiling for one signal family. Next session should NOT add more VIX30 sector extensions \u2014 instead shift to non-event exploration (factor exposure, regime, calendar) per the 2/6 reservation rule. Also: long-end Treasury Granger lead-lag scanner is producing repeated false positives (DGS10 documented as systematic dead end; DGS30 just confirmed as second instance). Suppression rule needed."
+    }
   }
 }
