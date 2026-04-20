@@ -1389,10 +1389,14 @@
       {
         "name": "xlre_tom_calendar_2026_04_20",
         "reason": "Scan hit 8b19d3c8: XLRE TOM p=0.0295 full-sample. IS (2015-10 to 2019): p=0.971 (no signal, TOM +0.070% vs mid +0.034%). OOS (2020-2026): p=0.008, differential only +0.186%/day (below 0.5% tradeable threshold). Post-2020 only temporal artifact, matches tlt_turn_of_month_dead_end_2026_04_17 pattern. DEAD END."
+      },
+      {
+        "name": "yield_curve_inversion_threshold_macro_indicator_underpowered_2026_04_20",
+        "reason": "T10Y2Y<0 threshold tests on SPY/IWM/XLF all fail canonical retest due to severe cluster buffering. Raw: SPY 20d +1.59% p=0.031 n=20; IWM 20d +2.69% p=0.013 n=19; XLF null. Canonical after first-close cluster buffering: pooled n=8, recent n=2 (far below 10-event threshold). Same for T10Y2Y>0 steepening direction (pooled n=5, recent n=1). DFII10>2.0 -> GLD: raw +1.58% p=0.016 n=32 -> canonical pooled n=9, recent n=4 also FAIL. Slow-moving FRED macro indicators cluster-buffer out to unusable sample sizes. Methodology lesson: threshold-mode testing is structurally unsuitable for quarterly/cyclical macro indicators (yield curve, real yields) because their regime changes are few and prolonged. Pivot these signals to regime-mode (continuous classification) or lead-lag tests."
       }
     ],
     "signal_count": 45,
-    "dead_end_count": 281,
+    "dead_end_count": 282,
     "literature_count": 25
   },
   "live_signals": [
@@ -1491,13 +1495,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 20161359,
+    "sessions_today": 5,
+    "tokens_today": 25906179,
     "sessions_by_day": [
       {
         "date": "2026-04-20",
-        "sessions": 4,
-        "tokens": 20161359
+        "sessions": 5,
+        "tokens": 25906179
       },
       {
         "date": "2026-04-19",
@@ -3909,6 +3913,12 @@
       "investigated": "Cleared the full backlog of pending scan hits \u2014 4 investigations (P8 bank DXY break, P7 BIZD-HYG cointegration, P7 GLD-DXY break, P6 XLRE turn-of-month). Also ran TOM on 5 additional sector ETFs (XLF/XLK/XLY/XLP/XLE) to complete meta-finding.",
       "findings": "Looked into four market ideas the system flagged this week and ruled them all out. Most interesting: the apparent 'flip' in how US bank stocks respond to the dollar turned out to be a slow continuous drift, not a sudden regime change. Also confirmed there's no tradeable calendar edge at month-end in major sector ETFs.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-20",
+      "investigated": "Threshold/regime sweep of under-explored macro-cycle indicators (2Y-10Y yield curve inversion, 10Y real yield, MOVE bond-vol) against SPY / IWM / XLF / TLT / EEM / GLD.",
+      "findings": "Tested whether the yield-curve inversion and other macro indicators could be used as stand-alone trading signals \u2014 they can't. The rare events they capture are too few to survive robust statistical screening. Also found and fixed a bug in the research tool that was quietly marking noisy regime tests as 'validated' based on coincidental sign-matching; audited the eleven affected tests and confirmed none had corrupted the research record.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3987,6 +3997,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-20 (orchestrator): Cleared ALL pending scan hits (4 closed as dead ends) and established one canonical methodology rule.\\n\\nDEAD ENDS CLOSED:\\n1. e84687fe (P8 bank DXY 2024-01-01 break) -> DEAD_END_SECULAR_DRIFT. BAC/JPM alt-date falsification: 2024-06-01 alt F > target F (ratio 0.72-0.77, rule requires >=3x). Post-beta monotonic drift -0.6 to +0.6 over 2023-2025.\\n2. be93e92f (P7 BIZD-HYG cointegration) -> DEAD_END_NO_COINTEGRATION. IS EG p=0.947, OOS ADF p=0.972, half-life 289"
+    "handoff": "\"Session 2026-04-20 P2 (orchestrator): Tested 2Y-10Y yield curve inversion (T10Y2Y) as threshold signal (5 test variants across SPY/IWM/XLF, both inversion and steepening directions). ALL failed canonical retest \\u2014 cluster-buffering reduces macro-cycle events to pooled-n 5-8 / recent-n 1-2, far below the 10-event canonical floor. Regime tests on MOVE index (SPY/TLT/EEM) and T10Y2Y (XLF) all null p=0.62-0.89 with single-regime post-2020 coverage problems. Recorded as macro_indicator_threshold"
   }
 }
