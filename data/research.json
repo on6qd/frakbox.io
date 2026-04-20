@@ -1507,13 +1507,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 41155345,
+    "sessions_today": 9,
+    "tokens_today": 45032103,
     "sessions_by_day": [
       {
         "date": "2026-04-20",
-        "sessions": 8,
-        "tokens": 41155345
+        "sessions": 9,
+        "tokens": 45032103
       },
       {
         "date": "2026-04-19",
@@ -3949,6 +3949,12 @@
       "investigated": "Non-event exploration per P2 handoff: copper/gold ratio (HG=F/GC=F) as cyclical regime indicator + HYG-SPY 20d credit-equity divergence as threshold signals on SPY.",
       "findings": "Tested copper-to-gold ratio and credit-vs-equity divergence as market timing signals. Both failed: the ratio signals don't have enough events in recent years to validate, and the credit divergence 'signal' turned out to be a disguised version of simple price momentum with no added value.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-20",
+      "investigated": "Broad sweep: 50 tests across 7 themes \u2014 VVIX thresholds (5), calendar anomalies (16), cointegration pairs (15), structural breaks (3), regime tests (4), DXY thresholds (3), network propagation (2), and misc thresholds (5).\n\nResults by theme:\n1. VVIX thresholds (5 tests): All show raw significance (p<0.05) but ALL canonical_fails \u2014 VVIX events cluster into <3 distinct first-close events after cluster-buffer. Systematic dead end. Added to class-level dead end: VVIX threshold signals are underpowered for canonical testing.\n\n2. Calendar anomalies (16 tests): Zero significant. Tested monthly/DOW/TOM patterns for SPY, QQQ, IWM, GLD, TLT, GLD, XLF, XLE, SMH, HYG plus specific months (January, April, September). All p>0.09. Monthly calendar signals = exhausted for major ETFs.\n\n3. Cointegration pairs (15 tests): All null. Tested: KO/PEP, XOM/CVX, V/MA, WMT/TGT, HD/LOW, MCD/YUM, JPM/BAC, GLD/GDX, OXY/COP, MSFT/GOOGL, GS/MS, SLV/GLD, PG/JNJ, XLF/KRE, XLY/XLP, AMZN/COST. Only V/MA borderline (p=0.033 IS, OOS fails). Rival-pair cointegration exhausted for obvious large-cap US pairs.\n\n4. Structural breaks: COVID break (2020-03-23): XLE vs CL=F shows huge F=91.9 (p\u22480) but suspicious pre-window n=54. GLD vs CL=F null. DGS10 structural breaks suppressed (secular drift rule). \n\n5. Regime tests (4): All null or refused validation due to OOS coverage imbalance.\n\n6. DXY thresholds: DXY>105 too rare (n=20 crossings). DXY<100 not tested. \n\n7. Network Granger causality (2 tests \u2014 NOVEL): JPM\u2192BAC/WFC/C: 3/3 spokes (Granger p<0.05 each). AVGO\u2192QCOM/TSM: 2/3 spokes. Both queued for orchestrator investigation with cross-correlation sanity check required.\n\n8. Below-threshold VIX (2 tests): VIX<15 and VIX<20 both raw-significant but canonical fails (cluster-buffer yields ~11 distinct events). Below-threshold VIX = systematic canonical fail class.\n\n9. Cheap-oil threshold: CL=F<60\u2192XLY (p=0.0025) and CL=F<70\u2192XLY (p=0.0049) \u2014 raw significant but canonical fails (n=6-8 pooled). Near-miss for XLY consumer signal.",
+      "findings": "Broad scan: 50 tests across 7 themes. Zero canonical threshold passes. Calendar, cointegration, and regime tests all null. Two novel network Granger findings queued for investigation: JPM leads BAC/WFC/C (3/3 spokes) and AVGO leads QCOM/TSM (2/3 spokes). Key meta-finding: VVIX thresholds and below-VIX thresholds are systematic dead end classes.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4002,6 +4008,16 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "[SCAN HIT] JPM\u2192BAC/WFC/C network Granger causality: JPM leads all 3 major banks (3/3 spokes, p<0.05 each). T-b22a2ad4. Investigate: cross-correlation ",
+        "priority": 7,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] AVGO\u2192QCOM/TSM semiconductor network: AVGO Granger-causes 2/3 chip stocks (QCOM, TSM but not MSFT). T-78371249. Investigate: cross-correlati",
+        "priority": 6,
+        "category": "scan_hit"
+      },
+      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -4015,16 +4031,6 @@
         "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
         "priority": 2,
         "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
-      },
-      {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": "\"Copper/gold ratio + HYG-SPY divergence explored exhaustively \\u2014 all dead ends. Next session: pivot to HIGH-FREQUENCY triggers (VVIX/VIX spread, SKEW, single-asset thresholds) or explore SEC filing classes we haven't tested (10-K/A restatement timing, Item 7.01 Reg FD, 13H large trader classification). Also consider relaxing recent-n split to 2015+ for low-frequency ratio signals per new methodology effect.\""
