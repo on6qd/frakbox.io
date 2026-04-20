@@ -4034,24 +4034,24 @@
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] Gold factor (GC=F) sector exposure scan. Significant exposures after SPY control: XME beta=+0.531 p=3.5e-17 OOS confirmed; XLF beta=-0.134 ",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] XLF (financials) has NEGATIVE exposure to GC=F (gold) after SPY control: beta=-0.134, p=4.4e-5, OOS confirmed beta=-0.057 (same sign). When",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] EEM has positive exposure to GC=F after SPY control: IS beta=0.103 p=0.002, OOS beta=0.226 (STRONGER, significant). Gold adds to EEM driver",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
+      },
+      {
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
     "handoff": "\"Item 3.02 PIPE signal FULLY VALIDATED. Canonical retest (cluster-buffered 30d, SPY-adj) passes at all 3 filter cells (all/>$5/>$15) in pooled AND 2023+ recent. XBI benchmark retains 90-93% of magnitude \\u2014 signal NOT just biotech beta. Chronic filers have STRONGER signal (-7% recent 2023+ vs -4.26% first-only) \\u2014 do NOT exclude repeat filers. Created hypothesis 84f218f0 (TBD ticker, short, 5%, 10d, conf 7.8, passes Bonferroni, full confounders). NEXT SESSION: build real-time Item 3.02 sc"
