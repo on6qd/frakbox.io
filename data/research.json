@@ -1413,10 +1413,14 @@
       {
         "name": "avgo_qcom_tsm_network_granger_2026_04_20",
         "reason": "Network Granger: AVGO leads QCOM/TSM (p<0.05) but contemp 0.63-0.66 vs lag -0.12, residual lag-corr -0.03 after SMH+SPY, OOS TSM sign flip. Same common-factor artifact pattern as JPM."
+      },
+      {
+        "name": "aapl_monday_dow_anomaly",
+        "reason": "AAPL Monday DOW anomaly. IS 2004-2019 SPY-adj Monday +0.297% p=0.0012, OOS 2020-2025 +0.140% p=0.14, Recent 2022-2025 +0.016% p=0.92. Effect concentrated 2011-2017 (AAPL growth era +60-86 bps/day). SPY null throughout (p=0.82 full). Fails signal_recency_subgroup_check_rule. Test result id T-cc1cf101."
       }
     ],
     "signal_count": 45,
-    "dead_end_count": 287,
+    "dead_end_count": 288,
     "literature_count": 25
   },
   "live_signals": [
