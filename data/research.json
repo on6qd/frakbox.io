@@ -1377,10 +1377,22 @@
       {
         "name": "xlf_dxy_exposure_no_break_2026_04_20",
         "reason": "XLF/DXY exposure scan-hit follow-up: no structural break at either 2022-03 (Fed hike, p=0.58) or 2020-03 (COVID, p=0.55). Pre-beta -0.41/-0.42 \u2192 Post-beta -0.51/-0.53, statistically indistinguishable. Per exposure_scan_hit_deprioritization_rule_2026_04_17, raw exposure without break/event-context is closed as known-null risk attribution. No further investigation."
+      },
+      {
+        "name": "bank_dxy_structural_break_2024_01_01_secular_drift",
+        "reason": "Scan hit e84687fe claimed sector-wide bank DXY sign flip at 2024-01-01 (BAC/JPM/C/GS/WFC/XLF, p<1e-5). Alt-date falsification FAILED for BAC and JPM: 2024-06-01 alt F-stat > target F-stat (BAC 14.90>10.72, JPM 15.11>11.67). Target/max-alt ratios 0.72 and 0.77, far below 3x rule. Post-beta drifts monotonically from -0.6 to +0.6 across 2023-2025 \u2014 classic secular drift. Per structural_break_secular_trend_vs_regime_methodology + dgs10_structural_break_scan_artifact_rule_2026_04_19, this is NOT a discrete regime change. DEAD END."
+      },
+      {
+        "name": "bizd_hyg_cointegration_2026_04_20",
+        "reason": "Scan hit be93e92f: BIZD (BDC ETF) ~ HYG beta=0.92 strong contemporaneous. Engle-Granger cointegration test: IS p=0.947 (n=1111, 2019-2023-06), OOS ADF p=0.972 (2023-06 to 2026-04, 2.8y). Hedge ratio 0.301 (fine), half-life 289d (random walk). No mean-reverting spread -> no pairs trading alpha. Even with 'new asset class' exception to exposure_scan_hit_deprioritization_rule, the relationship is pure contemporaneous beta with no tradeable edge. DEAD END."
+      },
+      {
+        "name": "xlre_tom_calendar_2026_04_20",
+        "reason": "Scan hit 8b19d3c8: XLRE TOM p=0.0295 full-sample. IS (2015-10 to 2019): p=0.971 (no signal, TOM +0.070% vs mid +0.034%). OOS (2020-2026): p=0.008, differential only +0.186%/day (below 0.5% tradeable threshold). Post-2020 only temporal artifact, matches tlt_turn_of_month_dead_end_2026_04_17 pattern. DEAD END."
       }
     ],
     "signal_count": 45,
-    "dead_end_count": 278,
+    "dead_end_count": 281,
     "literature_count": 25
   },
   "live_signals": [
@@ -1479,13 +1491,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 15402636,
+    "sessions_today": 4,
+    "tokens_today": 20161359,
     "sessions_by_day": [
       {
         "date": "2026-04-20",
-        "sessions": 3,
-        "tokens": 15402636
+        "sessions": 4,
+        "tokens": 20161359
       },
       {
         "date": "2026-04-19",
@@ -3891,6 +3903,12 @@
       "investigated": "Calendar anomaly screen (all 11 sector ETFs x TOM/monthly/DOW = 31 tests) + Credit exposure BIZD vs HYG/LQD/DGS10/DGS2 + FX exposure BAC/JPM/C/MS/GS/WFC vs DXY + structural break scan DXY vs all sectors at 2024-01-01 + GLD/EEM/BIZD structural breaks + gold thresholds + falsification checks",
       "findings": "Screened 60+ tests across calendar anomalies (all 11 sector ETFs), credit exposure (BIZD), FX exposure (major banks vs DXY), and structural breaks. Found major regime shift: the historic inverse DXY-US equity relationship collapsed around 2024, with banks/energy flipping to POSITIVE dollar exposure. Queued 3 high-priority scan hits for investigation.",
       "tag": "validation"
+    },
+    {
+      "date": "2026-04-20",
+      "investigated": "Cleared the full backlog of pending scan hits \u2014 4 investigations (P8 bank DXY break, P7 BIZD-HYG cointegration, P7 GLD-DXY break, P6 XLRE turn-of-month). Also ran TOM on 5 additional sector ETFs (XLF/XLK/XLY/XLP/XLE) to complete meta-finding.",
+      "findings": "Looked into four market ideas the system flagged this week and ruled them all out. Most interesting: the apparent 'flip' in how US bank stocks respond to the dollar turned out to be a slow continuous drift, not a sudden regime change. Also confirmed there's no tradeable calendar edge at month-end in major sector ETFs.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -3944,31 +3962,31 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] MAJOR: Bank stocks DXY sign flip at 2024-01-01. BAC beta=-0.857\u2192+0.347 (p=1.6e-5), JPM=-0.732\u2192+0.376 (p=1.4e-5), C=-1.099\u2192+0.332 (p=1.3e-6)",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] BIZD (BDC ETF) vs HYG: beta=0.922, p=2.5e-18, R2=0.436, n=1005. OOS confirmed (beta=0.851, significant). BIZD also had negative DXY exposur",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] GLD vs DXY structural break at 2024-01-01: p=0.017. Pre-beta=-0.989\u2192Post-beta=-1.231. GOLD became MORE negatively correlated with the dolla",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] XLRE (Real Estate ETF) turn-of-month calendar anomaly: p=0.0295, TOM=+0.135% vs mid-month=+0.011%. n=2645 (XLRE since 2015). No other secto",
-        "priority": 6,
-        "category": "scan_hit"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
+      },
+      {
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
+      },
+      {
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-20: completed P2 (vix_spike_presold_regime regime-artifact audit) and P3 (HYG-LQD credit-spread lead-lag + XLF/DXY structural break check). Both P3 directions DEAD. P2 support for active SPY trade is now retracted on a SECOND vector (the 'pre-sold' fallback also fails). Active SPY trade still allowed to run as observational. Scanners ran clean (weekend). Next session: pick ONE of the P2 non-event ideas (BDC credit-cycle is most novel \\u2014 actually a new asset class).\""
+    "handoff": "\"Session 2026-04-20 (orchestrator): Cleared ALL pending scan hits (4 closed as dead ends) and established one canonical methodology rule.\\n\\nDEAD ENDS CLOSED:\\n1. e84687fe (P8 bank DXY 2024-01-01 break) -> DEAD_END_SECULAR_DRIFT. BAC/JPM alt-date falsification: 2024-06-01 alt F > target F (ratio 0.72-0.77, rule requires >=3x). Post-beta monotonic drift -0.6 to +0.6 over 2023-2025.\\n2. be93e92f (P7 BIZD-HYG cointegration) -> DEAD_END_NO_COINTEGRATION. IS EG p=0.947, OOS ADF p=0.972, half-life 289"
   }
 }
