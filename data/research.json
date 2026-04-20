@@ -1365,10 +1365,22 @@
       {
         "name": "vix30_recovery_sector_landscape_dead_end_2026_04_20",
         "reason": "P1 audit re-test with bug-fixed canonical_retest_threshold across 9 sectors (XLB EEM XLU XLP XLF XLV XLY GLD XLI) on ^VIX>30 30d cluster. NO sector passes canonical (p<0.05 + |mean|>=1% in BOTH pooled 2010+ and recent 2020+ samples) at any horizon. Lone marginal: XLU 1d -0.65% p=0.036 (pool) / -0.51% p=0.021 (recent) \u2014 sign-consistent but |mean|<1% so not tradeable. Original 2026-04-18 claim of cyclical outperformance (XLB +2.3%, EEM +2.6%) and defensive underperformance (XLU -1.85%, XLP -1.23%) was entirely an artifact of look-ahead bias."
+      },
+      {
+        "name": "vix_spike_presold_regime_audit_2026_04_20",
+        "reason": "REGIME_ARTIFACT: +6.3% post-VIX>30 SPY 20d return in pre-sold subset is INDISTINGUISHABLE from random pre-sold control. Treatment n=6 mean=+2.92%; Control n=56 mean=+3.29%; diff=-0.37%, p=0.88. Original analysis cherry-picked 3 of 6 events as policy-driven. VIX>30 trigger adds zero incremental info beyond pre-selloff regression-to-mean. See tools/vix_presold_regime_audit.py."
+      },
+      {
+        "name": "hyg_lqd_credit_spread_spy_leadlag_2026_04_20",
+        "reason": "DEAD END: Granger highly significant (IS lag 4 p<0.0001, OOS lag 4 p<0.0001) BUT cross-correlation at every individual lag 1-5 is tiny (|xcorr|<0.10) and sign-flips across lags (mean xcorr -0.015 IS, -0.039 OOS). Classic granger_false_positive: nonlinear/variance effect, not directional edge. Same-day corr +0.69 IS / +0.45 OOS (well-known contemporaneous coupling, no lead). HYG individual: IS p<0.001 lag 3 but OOS fails (p=0.171). LQD individual: weak both windows. No tradeable credit-spread \u2192 SPY lead at 1-5d horizons."
+      },
+      {
+        "name": "xlf_dxy_exposure_no_break_2026_04_20",
+        "reason": "XLF/DXY exposure scan-hit follow-up: no structural break at either 2022-03 (Fed hike, p=0.58) or 2020-03 (COVID, p=0.55). Pre-beta -0.41/-0.42 \u2192 Post-beta -0.51/-0.53, statistically indistinguishable. Per exposure_scan_hit_deprioritization_rule_2026_04_17, raw exposure without break/event-context is closed as known-null risk attribution. No further investigation."
       }
     ],
     "signal_count": 45,
-    "dead_end_count": 275,
+    "dead_end_count": 278,
     "literature_count": 25
   },
   "live_signals": [
@@ -1467,13 +1479,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 6717863,
+    "sessions_today": 2,
+    "tokens_today": 10383952,
     "sessions_by_day": [
       {
         "date": "2026-04-20",
-        "sessions": 1,
-        "tokens": 6717863
+        "sessions": 2,
+        "tokens": 10383952
       },
       {
         "date": "2026-04-19",
@@ -3867,6 +3879,12 @@
       "investigated": "P1 KNOWLEDGE AUDIT post canonical_retest look-ahead bias bug-fix. Re-tested SPY + 9 sector ETFs (XLB, EEM, XLU, XLP, XLF, XLV, XLY, GLD, XLI) on ^VIX>30 first-close cluster-buffered events using bug-fixed event_timing='after_hours'. Audited entries: vix_spike_above_30_spy_recovery and vix30_recovery_sector_landscape_2026_04_18. Closed P6 scan hit (EEM/copper) per exposure deprioritization rule.",
       "findings": "Verified that an entire family of trade ideas based on the VIX-spike recovery pattern was a methodology error, not a real market signal. After fixing the bug and re-running the tests, none of the affected ideas produced a tradeable edge \u2014 so the related strategies were retired from the playbook.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-20",
+      "investigated": "P2 audit of vix_spike_presold_regime (the remaining backtest support for active SPY trade), P3 exploration of HYG-LQD credit-spread \u2192 SPY lead-lag and XLF/DXY structural break.",
+      "findings": "Two more research ideas tested and killed today: the \"buy after a VIX spike that follows a pullback\" rule turned out to be indistinguishable from just buying after any pullback, and a credit-market signal that looked promising at first was a statistical mirage. Keeping the discipline: ideas that don't survive checks get retired.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -3945,12 +3963,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": {
-      "attempted": "P1 KNOWLEDGE AUDIT post canonical_retest_lookahead_bias_bug_2026_04_19 \u2014 re-test SPY VIX>30 + 9 sector ETFs with bug-fixed event_timing='after_hours'. Audit prior 'validated' threshold-based knowledge entries.",
-      "accomplished": "Re-ran canonical_retest_threshold (bug-fixed) on ^VIX>30 across SPY + XLB+EEM+XLU+XLP+XLF+XLV+XLY+GLD+XLI. Updated 2 knowledge entries to DEAD_END_BUG_DRIVEN_2026_04_20 (vix_spike_above_30_spy_recovery, vix30_recovery_sector_landscape_2026_04_18). Added 2 new entries (vix30_threshold_audit_complete_2026_04_20, vix30_xlu_1d_micro_effect_2026_04_20). Recorded 2 dead-ends. Annotated 2 audit-trail entries (round2_extensions_promoted, extensions_canonical_retest) as historical_record_only. Retired hygmon0419 + efamon0419 monitor items. Closed 95767422 EEM/copper P6 scan hit per exposure deprioritization rule. Flagged vix_spike_presold_regime as SUPPORT_RETRACTED.",
-      "partial_results": "Lone informational micro-effect surfaced: XLU 1d post VIX>30 first-close cluster shows -0.65% pool p=0.036 / -0.51% recent p=0.021 \u2014 sign-consistent BOTH samples but |mean|<1% so not directly tradeable. Noted as INFORMATIONAL_MICRO_EFFECT for potential paired-trade hedge leg in future.",
-      "blocked_by": "Nothing \u2014 clean P1 closeout.",
-      "key_insight": "Entire VIX30 mean-reversion family (SPY long + sector basket) is a methodology-bug artifact. Original +1-3% claims came from look-ahead bias (target entered at OPEN of T while signal fired at CLOSE of T). After bug fix: ZERO sector passes canonical p<0.05 + |mean|>=1% in BOTH pooled and recent samples. Active SPY trade b63a0168 should complete observationally but its backtest support is invalid. Next session: framing audit for vix_spike_presold_regime + free 6 retired hypothesis slots for fresh exploration."
-    }
+    "handoff": "\"Session 2026-04-20: completed P2 (vix_spike_presold_regime regime-artifact audit) and P3 (HYG-LQD credit-spread lead-lag + XLF/DXY structural break check). Both P3 directions DEAD. P2 support for active SPY trade is now retracted on a SECOND vector (the 'pre-sold' fallback also fails). Active SPY trade still allowed to run as observational. Scanners ran clean (weekend). Next session: pick ONE of the P2 non-event ideas (BDC credit-cycle is most novel \\u2014 actually a new asset class).\""
   }
 }
