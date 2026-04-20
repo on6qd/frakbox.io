@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 68,
-    "pending": 5,
+    "total_hypotheses": 69,
+    "pending": 6,
     "active": 1,
     "completed": 8,
     "invalidated": 6,
@@ -1510,18 +1510,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 6,
+    "active_signal_types": 7,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 55101562,
+    "sessions_today": 11,
+    "tokens_today": 59755970,
     "sessions_by_day": [
       {
         "date": "2026-04-20",
-        "sessions": 10,
-        "tokens": 55101562
+        "sessions": 11,
+        "tokens": 59755970
       },
       {
         "date": "2026-04-19",
@@ -3969,6 +3969,12 @@
       "investigated": "Closed 2 scan hits (JPM->BAC/WFC/C Granger, AVGO->QCOM/TSM Granger) as common-factor artifacts; explored new SEC filing class 8-K Item 3.02 (unregistered equity sales / PIPE / private placement) as a short signal candidate.",
       "findings": "Tested whether SEC disclosures of private stock sales (PIPE deals) signal short opportunities \u2014 found these filings are followed by a large price drop over 10 days, a strong preliminary result that needs more validation before becoming a real trade.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-20",
+      "investigated": "Full validation of 8-K Item 3.02 PIPE/private placement short signal. Canonical retest (cluster-buffered 30d, SPY-adjusted) across ALL/price>$5/price>$15 filters and pooled/2023+/2024+ samples. XBI benchmark to rule out biotech sector beta. Repeat-filer exclusion test. Created tradeable hypothesis.",
+      "findings": "Validated a new trading signal: when a public company discloses it has just sold stock directly to private investors (a \"PIPE\" deal), its stock tends to fall about 5% over the next two weeks. The pattern holds up across multiple years and is stronger when the company is not a tiny penny stock.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4047,6 +4053,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Item 3.02 PIPE short is a STRONG preliminary finding (OOS -7.6% to -11.5% @ h=10, p<0.001, 73-77% neg, monotonic horizon). Two split samples agree, Bonferroni-corrected. Next session: (1) Build real-time Item 3.02 scanner (use tools/cybersecurity_8k_scanner.py as template). (2) Fill 2023 EFTS gap with 3-month chunks. (3) Replace SPY with XBI benchmark (PIPEs are biotech-heavy). (4) Exclude employee grants / acquisition stock / repeat filers within 30d (clustering 49/74 unique at OOS price>$5). "
+    "handoff": "\"Item 3.02 PIPE signal FULLY VALIDATED. Canonical retest (cluster-buffered 30d, SPY-adj) passes at all 3 filter cells (all/>$5/>$15) in pooled AND 2023+ recent. XBI benchmark retains 90-93% of magnitude \\u2014 signal NOT just biotech beta. Chronic filers have STRONGER signal (-7% recent 2023+ vs -4.26% first-only) \\u2014 do NOT exclude repeat filers. Created hypothesis 84f218f0 (TBD ticker, short, 5%, 10d, conf 7.8, passes Bonferroni, full confounders). NEXT SESSION: build real-time Item 3.02 sc"
   }
 }
