@@ -1555,13 +1555,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 45456274,
+    "sessions_today": 7,
+    "tokens_today": 49742037,
     "sessions_by_day": [
       {
         "date": "2026-04-21",
-        "sessions": 6,
-        "tokens": 45456274
+        "sessions": 7,
+        "tokens": 49742037
       },
       {
         "date": "2026-04-20",
@@ -4057,6 +4057,12 @@
       "investigated": "Theme 1 - Regime Screen (16 tests): Tested sector ETFs (XLF, XLU, XLK, XLV, XLP, XLI, IWM, HYG, TLT, EEM, GLD, XLE) against macro regime drivers (DGS10, VIX, DXY, FEDFUNDS, CL=F). All regime tests null (p>0.10). FEDFUNDS unusable for daily regime tests (monthly data, insufficient n). DGS10 regime tests showed 100% OOS in 'high' bucket (stable rates 2024).\nTheme 2 - Calendar Screen (22 tests): Tested monthly and day-of-week patterns on SPY, QQQ, GLD, TLT, IWM, EEM, XLE (all null). Then tested Turn-of-Month (TOM) on bond ETFs: HYG, LQD, EMB, AGG, JNK, SHY, IEF, VCSH, TLT, BKLN. Ran OOS robustness checks with multiple start years.\nTheme 3 - VIX Threshold Screen (12 tests): Tested VIX>30 on EFA, IBB, EWJ, FXI, HYG, GLD, IWM, SMH, XME. Tested VIX>25 on EFA, EEM. All raw significant at 20d horizon but ALL failed canonical retest (pooled_sample_fails or recency_subset_fails_regime_dependent).\nTheme 4 - Copper Structural Break Screen (16 tests): Tested ALL 11 sectors + SPY + IWM + HYG + GLD vs copper (HG=F) at 2022-03-16 break date. Also tested COVID break (2020-03-15). Separately tested XLY vs CL=F, EEM/GLD vs DXY at 2022.",
       "findings": "Ran 66 statistical tests across 4 scan themes. Found 2 significant clusters: (1) Bond ETF Turn-of-Month anomaly \u2014 TOM returns 2-6x higher than mid-month across HYG, LQD, EMB, AGG, JNK, SHY, IEF, VCSH (p range: 3.8e-6 to 0.047). Fresh territory \u2014 equity TOM dead-ended but bond TOM untested. (2) Universal copper sensitivity structural break at 2022-03-16 \u2014 ALL equity sectors plus HYG lost copper beta (XLF 0.42\u21920.12, XLE 0.69\u21920.23, IWM 0.41\u21920.18, all p<0.025). VIX>30 threshold on 9 new targets (EFA/IBB/EWJ/SMH/XME/etc.) all raw-significant but failed canonical retest. Regime tests and calendar monthly/DOW all null.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-21",
+      "investigated": "Two high-priority scan hits: (1) f58c3df4 p=8 \u2014 bond ETF turn-of-month anomaly across SHY/AGG/IEF/VCSH/LQD/HYG/JNK/EMB (scan showed SHY p=3.8e-6, 7 other ETFs p<0.05). (2) d1d892dc p=7 \u2014 2022-03 copper structural break extending to 10 equity sectors + credit bonds.",
+      "findings": "Investigated a scanner finding claiming bond ETFs gain extra return at month-end. Rigorous re-testing with a clean train/test split showed the effect disappears \u2014 it was a statistical artifact of low-variance bond price series, not a tradeable pattern. Added a new rule that requires both statistical significance AND meaningful return size before future calendar-anomaly claims are investigated.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
