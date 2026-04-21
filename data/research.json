@@ -1563,13 +1563,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 11,
-    "tokens_today": 66285157,
+    "sessions_today": 0,
+    "tokens_today": 0,
     "sessions_by_day": [
       {
         "date": "2026-04-21",
-        "sessions": 11,
-        "tokens": 66285157
+        "sessions": 12,
+        "tokens": 79814995
       },
       {
         "date": "2026-04-20",
@@ -1705,11 +1705,6 @@
         "date": "2026-03-24",
         "sessions": 11,
         "tokens": 110574733
-      },
-      {
-        "date": "2026-03-23",
-        "sessions": 28,
-        "tokens": 244289668
       }
     ]
   },
@@ -4089,6 +4084,12 @@
       "investigated": "Top-priority (p=9) 'MAJOR' scan hit: universal equity-dollar decoupling structural break at 2024-01-01. Scan claimed SPY pre-beta=-0.739 -> post=+0.027 (p=3.9e-6), repeating across 9/11 sectors including XLY, XLK, XLF, XLB. Ran altdate 3x F-ratio falsification at 2024-01-02 target vs alt dates 2021-01, 2022-01, 2023-01, 2025-01 on SPY, XLK, XLY, XLF, XLB, XLP, XLV, GLD.",
       "findings": "Checked whether the market's relationship with the dollar really shifted at the start of 2024 \u2014 our own scan said yes with strong statistics. When we retested at nearby dates, 2025, 2023, and 2022 looked just as strong. The relationship hasn't broken at any single date; it's been slowly drifting the whole time. Added a permanent rule so the scanner stops flagging this pattern as news.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-21",
+      "investigated": "Multi-theme scan: (1) Lead-lag screen: commodity futures -> sectors (HG=F, CL=F -> XLI/XLB/XLE/XLI) \u2014 all 4 suppressed as documented artifacts. (2) Cointegration pairs screen: 14 pairs (XOM/CVX, V/MA, HD/LOW, KO/PEP, WMT/TGT, GOOGL/META, BAC/JPM, GLD/SLV, GDX/GLD, XME/XLB, IWM/QQQ, TLT/AGG, HYG/LQD, MSFT/AAPL, SPY/QQQ, GDX/XLB, WFC/USB, EQT/AR, EQT/XLE, RIVN/LCID, SBUX/MCD, SBUX/YUM, NVDA/AMD). (3) Non-vol threshold screen: DGS10, DXY, HYG, oil, gold, copper levels against sectors. (4) Factor exposure: UNG (natural gas) -> XLE/XLU/XLI/XLB; airlines vs oil; various BTC->equity; EURUSD->materials; copper->gold; USD->TSM/EWJ; FCX->DXY. (5) Calendar: monthly/TOM/DOW in GLD/SLV/XLE/XLB. (6) Structural breaks: MSTR-BTC at ETF launch, GLD-copper at 2022. (7) VIX>30/35/40 on remaining sectors (XLP/XLV/XLB/XLE/XLC/XLRE). Total: ~50 tests.",
+      "findings": "Ran 50+ statistical tests across 7 themes: lead-lag (commodity -> sector, all artifacts), cointegration pairs (22 pairs, nearly all null), non-vol thresholds (DXY/rates/commodity levels), factor exposures (natural gas, oil, dollar, crypto), calendar patterns, and structural break checks.\n\nKey findings: (1) DXY crossing above 100 triggers a unique materials (XLB) rally \u2014 the only sector passing rigorous benchmark-adjusted retesting among 11 sectors tested. (2) Natural gas has a distinct, oil-independent effect on energy stocks \u2014 XLE gains even after controlling for oil price, and pure gas producers (EQT/AR/RRC) have strong consistent exposure. (3) Airlines show emerging oil sensitivity in recent data (2024+) that was absent before.\n\nAll VIX>30 sector tests (XLP/XLV/XLB/XLE/XLC/XLRE) failed canonical despite raw significance, confirming the systematic VIX pattern is arbitraged. No new calendar anomalies found.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4142,29 +4143,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "[SCAN HIT] DX-Y.NYB crosses above 100 -> XLB CANONICAL PASS: raw 20d avg=+5.08% (t=4.01, p=0.0005, n=26). Canonical (SPY-adjusted, cluster-buffered): ",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] Natural gas (UNG) exposure cluster: EQT beta=0.426 (p~0, OOS 0.263), AR beta=0.444 (p~0, OOS 0.323), RRC beta=0.419 (p~0, OOS 0.258). XLE U",
+        "priority": 7,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] XLE (energy ETF) has consistent positive exposure to UNG (natural gas ETF): IS beta=0.050 (p=0.0018, R2=0.388), OOS beta=0.055 (significant",
+        "priority": 6,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] Airlines (AAL/DAL/UAL) have emerging OOS negative oil exposure: AAL OOS beta=-0.219 (IS: p=0.61 not sig), DAL OOS beta=-0.130, UAL OOS beta",
+        "priority": 6,
+        "category": "scan_hit"
+      },
+      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
-      },
-      {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
-      },
-      {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
-      },
-      {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": "\"Session 2026-04-21 orchestrator pass (evening): closed the DXY-equity structural-break scan-hit family. Top hit c58fca16 (SPY universal equity-dollar decoupling at 2024-01-01, p=3.9e-6 across 9 sectors) FAILED altdate 3x F-ratio falsification \\u2014 betas drift monotonically from 2021 to 2025, target F equal to or lower than max alt-date F on every target. Closed 5 scan hits (c58fca16 SPY, 45974a7f XLB, 55c52480 GLD-DXY, 98acb6b9 GLD-DGS2, 2d0751c7 XLF-VIX). Queue now has 0 pending scan hits. N"
