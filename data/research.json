@@ -1461,10 +1461,14 @@
       {
         "name": "hy_oas_threshold_iwm_gld_eem_2026_04_21",
         "reason": "HY OAS (FRED:BAMLH0A0HYM2) threshold tests against IWM/GLD/EEM all fail. Thresholds 5.0/5.5/6.0 with horizons 5/10/20d: only EEM at HY>6.0 raw significant (+4.44%/20d/p=0.04, n=10) but OPPOSITE direction from credit-stress hypothesis (mean-reversion rally) AND canonical retest FAILS (pooled n=3, recent n=1 after cluster-buffering). Same pattern as macro_indicator_threshold_underpowered_canonical_2026_04_20: stress events concentrate in Mar 2020 COVID + Q4 2018, leaving too few distinct cluster-buffered crossings. GLD direction also flipped (-1.64%/20d at thresh 5.0, p=0.07) \u2014 gold sold off in liquidity-stress periods, not safe-haven bid. Per threshold_scan_hit_canonical_retest_rule_2026_04_18, none of these qualify for queue. Result IDs: T-e154c267 (IWM/6.0), T-7ebfca32 (GLD/6.0), T-e4de326f (EEM/6.0)."
+      },
+      {
+        "name": "dxy_100_xlb_threshold_regime_artifact_2026_04_22",
+        "reason": "DXY > 100 first-close cluster-buffered (30d) \u2192 XLB 20d: DEAD_END_CANONICAL_FAILED.\n\nScan claimed pooled n=8 +2.63% p=0.0037, recent n=5 +3.05% p=0.0002 (100% positive).\nInvestigation with 30d cluster buffer (matches 20d hold window):\n\nALL-HORIZONS SPY-ADJUSTED (n=21 total events 1999-2026):\n  1d   mean_abn -0.02% p=0.96\n  3d   mean_abn +0.07% p=0.92\n  5d   mean_abn +0.44% p=0.55\n  10d  mean_abn +0.42% p=0.66\n  20d  mean_abn +0.36% p=0.80\nNO horizon passes p<0.05.\n\nFATAL ROBUSTNESS FAILURES:\n1. Leave-one-out: dropping ANY single event makes p > 0.28. Signal driven by 1999-04-07 +24.98% outlier (dot-com bubble materials).\n2. 1999 dominance: 6 of 21 events in 1999 alone.\n3. VIX stratification reverses: VIX>=25 n=9 mean=-1.56%, VIX<25 n=12 mean=+1.81%. DXY crosses 100 mostly during stress \u2014 exact regime where signal is negative.\n4. IS/OOS split: discovery (<2022) n=15 mean=-0.04% p=0.98 (NULL). OOS (2022+) n=6 mean=+1.38% p=0.28 (not significant).\n5. Scanner's \"100% positive n=5\" is cluster-buffer artifact excluding 2025-04-15 -3.77% event.\n\nMatches dxy108_gld_counterintuitive_2026_04_11 pattern: clustered-regime artifact, non-tradeable.\n\nMeta-finding: DXY threshold crossings on equity-like targets remain scan artifacts even when canonical_passes=True from automated pipeline \u2014 the canonical pipeline's sample size (n=5-8) is too small to survive leave-one-out and regime stratification. Strengthens scan_hit_canonical_all_horizons_rule_2026_04_19 enforcement.\n\nInvestigation tool: tools/dxy100_xlb_investigation.py\nCanonical retest task T-209a93a1, source scan 20d horizon."
       }
     ],
     "signal_count": 49,
-    "dead_end_count": 294,
+    "dead_end_count": 295,
     "literature_count": 25
   },
   "live_signals": [
@@ -1563,9 +1567,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 1,
+    "tokens_today": 3818629,
     "sessions_by_day": [
+      {
+        "date": "2026-04-22",
+        "sessions": 1,
+        "tokens": 3818629
+      },
       {
         "date": "2026-04-21",
         "sessions": 12,
@@ -4090,6 +4099,12 @@
       "investigated": "Multi-theme scan: (1) Lead-lag screen: commodity futures -> sectors (HG=F, CL=F -> XLI/XLB/XLE/XLI) \u2014 all 4 suppressed as documented artifacts. (2) Cointegration pairs screen: 14 pairs (XOM/CVX, V/MA, HD/LOW, KO/PEP, WMT/TGT, GOOGL/META, BAC/JPM, GLD/SLV, GDX/GLD, XME/XLB, IWM/QQQ, TLT/AGG, HYG/LQD, MSFT/AAPL, SPY/QQQ, GDX/XLB, WFC/USB, EQT/AR, EQT/XLE, RIVN/LCID, SBUX/MCD, SBUX/YUM, NVDA/AMD). (3) Non-vol threshold screen: DGS10, DXY, HYG, oil, gold, copper levels against sectors. (4) Factor exposure: UNG (natural gas) -> XLE/XLU/XLI/XLB; airlines vs oil; various BTC->equity; EURUSD->materials; copper->gold; USD->TSM/EWJ; FCX->DXY. (5) Calendar: monthly/TOM/DOW in GLD/SLV/XLE/XLB. (6) Structural breaks: MSTR-BTC at ETF launch, GLD-copper at 2022. (7) VIX>30/35/40 on remaining sectors (XLP/XLV/XLB/XLE/XLC/XLRE). Total: ~50 tests.",
       "findings": "Ran 50+ statistical tests across 7 themes: lead-lag (commodity -> sector, all artifacts), cointegration pairs (22 pairs, nearly all null), non-vol thresholds (DXY/rates/commodity levels), factor exposures (natural gas, oil, dollar, crypto), calendar patterns, and structural break checks.\n\nKey findings: (1) DXY crossing above 100 triggers a unique materials (XLB) rally \u2014 the only sector passing rigorous benchmark-adjusted retesting among 11 sectors tested. (2) Natural gas has a distinct, oil-independent effect on energy stocks \u2014 XLE gains even after controlling for oil price, and pure gas producers (EQT/AR/RRC) have strong consistent exposure. (3) Airlines show emerging oil sensitivity in recent data (2024+) that was absent before.\n\nAll VIX>30 sector tests (XLP/XLV/XLB/XLE/XLC/XLRE) failed canonical despite raw significance, confirming the systematic VIX pattern is arbitraged. No new calendar anomalies found.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-22",
+      "investigated": "Top-priority P8 scan hit DXY > 100 first-cross -> XLB 20d (raw +5.08% p=0.0005, pipeline canonical_passes=True with pooled n=8 +2.63% p=0.004 and recent n=5 +3.05% p=0.0002 100% positive). Ran full 6-step investigation with 30-day cluster buffer and all-horizon test per scan_hit_canonical_all_horizons_rule_2026_04_19. Also triaged three exposure-class scan hits (UNG->EQT/AR/RRC, XLE->UNG, airlines->oil).",
+      "findings": "We tested whether the dollar index rising through 100 predicts a rally in basic-materials stocks. A naive look showed a big positive effect but the deeper investigation showed the signal is entirely driven by one dot-com-era outlier and reverses sign in stressed markets \u2014 so we closed it as a dead end.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4143,31 +4158,31 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] DX-Y.NYB crosses above 100 -> XLB CANONICAL PASS: raw 20d avg=+5.08% (t=4.01, p=0.0005, n=26). Canonical (SPY-adjusted, cluster-buffered): ",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] Natural gas (UNG) exposure cluster: EQT beta=0.426 (p~0, OOS 0.263), AR beta=0.444 (p~0, OOS 0.323), RRC beta=0.419 (p~0, OOS 0.258). XLE U",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] XLE (energy ETF) has consistent positive exposure to UNG (natural gas ETF): IS beta=0.050 (p=0.0018, R2=0.388), OOS beta=0.055 (significant",
-        "priority": 6,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] Airlines (AAL/DAL/UAL) have emerging OOS negative oil exposure: AAL OOS beta=-0.219 (IS: p=0.61 not sig), DAL OOS beta=-0.130, UAL OOS beta",
-        "priority": 6,
-        "category": "scan_hit"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
+      },
+      {
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
+      },
+      {
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-21 orchestrator pass (evening): closed the DXY-equity structural-break scan-hit family. Top hit c58fca16 (SPY universal equity-dollar decoupling at 2024-01-01, p=3.9e-6 across 9 sectors) FAILED altdate 3x F-ratio falsification \\u2014 betas drift monotonically from 2021 to 2025, target F equal to or lower than max alt-date F on every target. Closed 5 scan hits (c58fca16 SPY, 45974a7f XLB, 55c52480 GLD-DXY, 98acb6b9 GLD-DGS2, 2d0751c7 XLF-VIX). Queue now has 0 pending scan hits. N"
+    "handoff": "[{\"priority\": 1, \"topic\": \"dxy_threshold_family_suppression\", \"note\": \"NEW RULE dxy_equity_threshold_saturation_rule_2026_04_22: DXY threshold crossings (100/105/108) on equity/sector targets auto-deprioritize to P3. Pipeline's canonical_passes=True with n=5-8 routinely fails LOO + VIX stratification + IS/OOS. See T-209a93a1 (DXY>100 XLB): raw +5.08% canonical n=8 pooled passes; full investigation (n=21, 30d cluster) shows p>0.55 at all horizons, LOO fails every event, VIX>=25 sign flip to -1.56"
   }
 }
