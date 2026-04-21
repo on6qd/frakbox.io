@@ -1453,10 +1453,14 @@
       {
         "name": "bond_etf_tom_canonical_fail_2026_04_21",
         "reason": "Bond ETF TOM (SHY/AGG/IEF/LQD/HYG/JNK/VCSH/EMB) canonical retest FAILED across ALL 8 ETFs. Scan hit (p=3.8e-6 on SHY) was driven by low-variance long-series inflating t-stats on economically tiny effects. Disc (2008-2019) vs val (2020-2026): 7/8 fail p<0.05 in one subsample. IEF sign-flips. EMB passes disc (diff=0.068%, p=0.046) fails val (p=0.29). Effect sizes 0.3-6.8 bps/day \u2014 at or below transaction cost threshold. Tool: tools/bond_tom_canonical_retest.py. Scan hit id: f58c3df4. Mechanism (pension rebalancing) REJECTED for liquid bond ETFs."
+      },
+      {
+        "name": "vvix_skew_spy_threshold_dead_end_2026_04_21",
+        "reason": "VVIX and SKEW extreme-reading thresholds applied to SPY forward returns. Raw signals highly significant (VVIX>120 n=92 +1.71% 20d p=0.004; VVIX>140 n=18 +4.39% 20d p=0.00077; SKEW>150 n=59 +0.90% 10d p=0.0014; SKEW>155 n=42 +1.02% 10d p=0.004). ALL FAIL canonical retest (30d cluster buffer + SPY-adjusted + pooled/recent dual-sample):\n - VVIX>120 pooled n=28 5d=+0.31%/50%/p=0.27; recent n=14 5d=+0.19%/43%/p=0.60\n - VVIX>140 pooled n=14 10d=+0.58%/50%/p=0.38; recent n=10 10d=+1.06%/50%/p=0.18 (effect size above 1% threshold but p fails; positive_rate 50% indicates bi-modal fat-tail driver \u2014 2020-03, 2022-01, 2025-04-04 crashes)\n - SKEW>150 pooled n=18 all-horizons mean=-0.14% pos=16.7% p=0.30 (striking directional consistency but effect sub-economic, non-significant)\n - SKEW>155 pooled n=15 canonical also fails\nPattern: SPY-target threshold signals on vol indicators cannot pass canonical because benchmark=target \u2014 any raw SPY outperformance gets absorbed into SPY unconditional baseline. Fat-tail events drive mean; median near zero means not a reliable regular signal.\nMirrors existing vix_term_structure_inversion_spy_long and vix_term_structure_backwardation_spy_recovery_2026_04_18 dead ends.\nMeta-finding: stop running threshold tests where target=SPY and trigger is a SPY-correlated vol indicator. Instead, vol-indicator thresholds should be tested against NON-SPY targets (bonds, sector dispersion, cross-asset) \u2014 though vix30_basket_orthogonality rules have already disposed of the sector-rotation family.\nResult IDs: T-ec0f3aa1 (VVIX120), T-23ea91a8 (VVIX140), T-447a76f1 (SKEW150), T-34b7d041 (SKEW155), T-2d5084fc (VVIX120 IWM), T-12f53f1d (VVIX120 QQQ)."
       }
     ],
     "signal_count": 49,
-    "dead_end_count": 292,
+    "dead_end_count": 293,
     "literature_count": 25
   },
   "live_signals": [
@@ -1555,13 +1559,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 49742037,
+    "sessions_today": 8,
+    "tokens_today": 54625477,
     "sessions_by_day": [
       {
         "date": "2026-04-21",
-        "sessions": 7,
-        "tokens": 49742037
+        "sessions": 8,
+        "tokens": 54625477
       },
       {
         "date": "2026-04-20",
@@ -4063,6 +4067,12 @@
       "investigated": "Two high-priority scan hits: (1) f58c3df4 p=8 \u2014 bond ETF turn-of-month anomaly across SHY/AGG/IEF/VCSH/LQD/HYG/JNK/EMB (scan showed SHY p=3.8e-6, 7 other ETFs p<0.05). (2) d1d892dc p=7 \u2014 2022-03 copper structural break extending to 10 equity sectors + credit bonds.",
       "findings": "Investigated a scanner finding claiming bond ETFs gain extra return at month-end. Rigorous re-testing with a clean train/test split showed the effect disappears \u2014 it was a statistical artifact of low-variance bond price series, not a tradeable pattern. Added a new rule that requires both statistical significance AND meaningful return size before future calendar-anomaly claims are investigated.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-21",
+      "investigated": "Tested fresh non-event threshold signals on vol-of-vol and tail-risk indicators (VVIX, SKEW) against SPY and non-SPY targets (IWM, QQQ, TLT, GLD). Followed 6-step method with canonical retest gate.",
+      "findings": "Tested whether extreme readings of volatility-of-volatility (VVIX) and tail-risk index (SKEW) can predict stock market rebounds. Found the signals look strong at first but disappear under rigorous benchmark-adjusted retesting \u2014 a few crash-recovery outliers create misleading averages. Recorded a new research rule to avoid repeating this class of test.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4141,64 +4151,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": {
-      "session_date": "2026-04-21",
-      "session_type": "investigation",
-      "model": "opus",
-      "findings": {
-        "bond_etf_tom_canonical_retest": {
-          "scan_hit_id": "f58c3df4",
-          "scan_hit_priority": 8,
-          "outcome": "DEAD_END",
-          "tickers_tested": [
-            "SHY",
-            "AGG",
-            "IEF",
-            "VCSH",
-            "LQD",
-            "HYG",
-            "JNK",
-            "EMB"
-          ],
-          "discovery_period": "2008-2019",
-          "validation_period": "2020-2026",
-          "pass_count": 0,
-          "fail_modes": {
-            "effect_size_sub_threshold": 7,
-            "p_value_failure_in_one_subsample": 7,
-            "sign_flip_between_samples": 1,
-            "disc_pass_val_fail": 1
-          },
-          "methodology_rule_added": "calendar_anomaly_scan_effect_size_floor_rule_2026_04_21",
-          "tool": "tools/bond_tom_canonical_retest.py"
-        },
-        "copper_sectorwide_break_2022": {
-          "scan_hit_id": "d1d892dc",
-          "scan_hit_priority": 7,
-          "outcome": "INFORMATIONAL_META_EXTENSION",
-          "action": "No new hypothesis \u2014 already covered by 6 existing knowledge entries including alt-date falsification",
-          "key_covering_knowledge": [
-            "rate_sensitive_sectors_2022_structural_break",
-            "structural_break_2022_altdate_falsification_comprehensive",
-            "xli_hgf_copper_structural_break_2022",
-            "xme_copper_structural_break_2022",
-            "threshold_structural_break_filter_rule",
-            "dgs10_structural_break_scan_artifact_rule_2026_04_19"
-          ]
-        }
-      },
-      "open_signals": [
-        "nt_10k_late_filing_short (waiting for scanner trigger)",
-        "seo_bought_deal_short (waiting for scanner trigger)",
-        "cybersecurity_8k_item_105_short (waiting for scanner trigger)",
-        "delisting_notice_8k_301_short (waiting for scanner trigger)",
-        "starboard_13d_filing_long (waiting for scanner trigger)",
-        "sp500_index_addition (next announcement expected 2026-06-05)",
-        "spinco_institutional_selling_short (monitoring HONA, MIDCO, SPGI)"
-      ],
-      "active_trades": 1,
-      "pending_hypotheses": 5,
-      "pending_queue_items": 8
-    }
+    "handoff": "\"Session 2026-04-21 orchestrator pass: Tested fresh VVIX/SKEW threshold family against SPY/IWM/QQQ/TLT/GLD \\u2014 all dead-end at canonical gate. Recorded meta-rule blocking future SPY-target vol-threshold tests. No new trades set up. 5 pending hypotheses still waiting on daily scanner triggers.\""
   }
 }
