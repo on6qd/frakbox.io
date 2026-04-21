@@ -1519,9 +1519,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 1,
+    "tokens_today": 4750541,
     "sessions_by_day": [
+      {
+        "date": "2026-04-21",
+        "sessions": 1,
+        "tokens": 4750541
+      },
       {
         "date": "2026-04-20",
         "sessions": 12,
@@ -3980,6 +3985,12 @@
       "investigated": "Calendar anomaly screen (27 tests: all 11 sector ETFs monthly + DOW, major assets, individual mega-caps) + Gold (GC=F) factor exposure screen (21 tests: all sectors + TLT, HYG, EEM, SMH, GDX, SLV vs gold after SPY control)",
       "findings": "Ran 48 tests across two scan themes. Calendar screen (27 tests): all sector ETF monthly/DOW patterns null. ONE hit: AAPL Monday DOW anomaly (p=3.8e-5), unique among mega-caps. Gold factor screen (21 tests): gold (GC=F) is a significant residual risk-off factor for 8 assets after SPY control. Notable: XLF is uniquely NEGATIVE to gold (financials hurt in risk-off); EEM exposure is OOS-strengthening (2x). Queued 4 scan hits for investigation.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-21",
+      "investigated": "P1 handoff execution: (1) Built and deployed tools/item_302_pipe_scanner.py for 8-K Item 3.02 PIPE / private placement short signal, wired into daily_scanner.py. (2) Investigated AAPL Monday DOW calendar scan hit with full 6-step method. (3) Closed 3 gold-exposure scan hits per canonical deprioritization rule.",
+      "findings": "Added a new scanner that watches for a validated short signal: when a company files an SEC Item 3.02 (disclosing a private share sale) at share price above five dollars, the stock tends to fall about 5% over the next 10 days. It found three live candidates today. Also investigated an Apple Monday-effect pattern and confirmed it was a pre-2018 artifact that has disappeared.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4033,6 +4044,21 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "ITEM 302 PIPE SHORT AUTO-DETECTED: DELL on 2026-04-20. VALIDATED SIGNAL: short for 10d hold, expected -5.2% abnormal return. Action: Clone hypothesis ",
+        "priority": 10,
+        "category": "scan_hit"
+      },
+      {
+        "question": "ITEM 302 PIPE SHORT AUTO-DETECTED: AVEX on 2026-04-20. VALIDATED SIGNAL: short for 10d hold, expected -5.2% abnormal return. Action: Clone hypothesis ",
+        "priority": 10,
+        "category": "scan_hit"
+      },
+      {
+        "question": "ITEM 302 PIPE SHORT AUTO-DETECTED: USAR on 2026-04-20. VALIDATED SIGNAL: short for 10d hold, expected -5.2% abnormal return. Action: Clone hypothesis ",
+        "priority": 10,
+        "category": "scan_hit"
+      },
+      {
         "question": "[SCAN HIT] AAPL DOW calendar: Monday effect. p=3.8e-5, H=25.59, n=5355. Mon=0.290% vs Thu=0.031%. AAPL-specific (AMZN/NVDA/GOOGL/META/MSFT all null). ",
         "priority": 8,
         "category": "scan_hit"
@@ -4041,21 +4067,6 @@
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
-      },
-      {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
-      },
-      {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
       }
     ],
     "handoff": "\"Item 3.02 PIPE signal FULLY VALIDATED. Canonical retest (cluster-buffered 30d, SPY-adj) passes at all 3 filter cells (all/>$5/>$15) in pooled AND 2023+ recent. XBI benchmark retains 90-93% of magnitude \\u2014 signal NOT just biotech beta. Chronic filers have STRONGER signal (-7% recent 2023+ vs -4.26% first-only) \\u2014 do NOT exclude repeat filers. Created hypothesis 84f218f0 (TBD ticker, short, 5%, 10d, conf 7.8, passes Bonferroni, full confounders). NEXT SESSION: build real-time Item 3.02 sc"
