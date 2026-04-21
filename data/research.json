@@ -1435,10 +1435,14 @@
       {
         "name": "item_302_pipe_short_as_designed_classifier_v1_2026_04_21",
         "reason": "Canonical retest classifier-filtered (high/med dilutive_pipe, n=11 ex-chronic-BCH) shows POSITIVE +9.03% at 5d p=0.037 SPY-adj / +10.01% XBI-adj, not negative as hypothesized. Classifier v1 inverts selection: captures investor-led Type A (Andreessen/Flagship biotech financings) while missing Type B distressed PIPEs (284 unknown + 43 low-confidence). Retire hypothesis 84f218f0 as designed. Rebuild classifier on distressed markers before any new activation."
+      },
+      {
+        "name": "item_302_pipe_short_largecap_universe",
+        "reason": "V2 distressed classifier retest 2026-04-21: largecap Item 3.02 filings show +3.83% abn at h=10 (positive). Distress markers rare (12%) and no tier produces negative return. Pooled -5.21% signal lives in sub-$500M tail \u2014 untradeable in our universe. See knowledge item_302_distressed_v2_retest_dead_end_largecap_2026_04_21."
       }
     ],
     "signal_count": 47,
-    "dead_end_count": 290,
+    "dead_end_count": 291,
     "literature_count": 25
   },
   "live_signals": [
@@ -1537,13 +1541,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 31801791,
+    "sessions_today": 5,
+    "tokens_today": 39215462,
     "sessions_by_day": [
       {
         "date": "2026-04-21",
-        "sessions": 4,
-        "tokens": 31801791
+        "sessions": 5,
+        "tokens": 39215462
       },
       {
         "date": "2026-04-20",
@@ -4027,6 +4031,12 @@
       "investigated": "P0 handoff task: classifier-filtered canonical retest of 8-K Item 3.02 PIPE short signal. Built threaded retest script (chunked EFTS scan, 10-worker yfinance cap/price filter, 6-worker SEC classifier). Ran 2023-01-01 to 2026-04-18 at price>$5 cap>$500M. Also closed 8 P6 exposure scan hits and 1 P8 stale AAPL Monday calendar hit.",
       "findings": "A trading signal based on 8-K PIPE disclosures turned out to be the opposite of what we thought: filings that look like classic 'distressed' capital raises on paper are actually positive events when you read them \u2014 large biotech and pharma companies announcing premium-priced investor-led financing rounds. Retiring that hypothesis and planning to rebuild the classifier to focus on real distress markers instead.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-21",
+      "investigated": "P0 handoff task: rebuild Item 3.02 PIPE classifier v2 on DISTRESSED markers (going-concern / listing deficiency / reverse split / discount / toxic convert / prefunded warrants). Applied regex classifier to 440 largecap (>500M) + price>$5 Item 3.02 filings from 2023-01-01 to 2026-04-18. Joined v2 tier labels to v1 cached backtest results (n=39 events matched in discovery period). Compared direction by tier.",
+      "findings": "We retired a planned short-sale pattern around PIPE capital raises (Item 3.02 filings). Our revised classifier showed that once we restrict to stocks we can actually trade \u2014 over $500M market cap and above $5 per share \u2014 the 'short after dilution' pattern flips direction and becomes a small positive. The historical -5% effect lives only in micro-cap stocks we cannot liquidly short. Signal shelved.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4105,6 +4115,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"P0 retest COMPLETE: classifier-filtered Item 3.02 short signal DISPROVEN as designed. Regex classifier v1 inverts direction \\u2014 filings tagged 'dilutive_pipe' high/med are predominantly investor-led biotech PIPEs (+9.03% 5d p=0.037 SPY-adj, 82% pos, n=11 ex-BCH chronic filer). Against XBI: +10.01% 5d p=0.026, 91% pos. Opposite of short thesis. Hypothesis 84f218f0 retired as abandoned. Knowledge: item_302_classifier_inverts_direction_2026_04_21. Next: rebuild classifier on distressed markers "
+    "handoff": "\"P0 RESOLVED 2026-04-21: Item 3.02 classifier v2 (distressed-marker regex) retest COMPLETE. Signal family RETIRED for largecap universe. Findings: (1) distress markers rare in mcap>$500M + price>$5 filings (15/130=12%, zero strong_distressed); (2) largecap Item 3.02 pooled h=10 is POSITIVE +3.83% \\u2014 opposite of short thesis; (3) -5.21% pooled signal lives entirely in sub-$500M tail (untradeable due to HTB borrow + size limits). Scanner stays disabled in daily_scanner.py. See knowledge item_3"
   }
 }
