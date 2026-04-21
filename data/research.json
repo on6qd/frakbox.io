@@ -263,6 +263,16 @@
         "name": "vix30_round2_extensions_promoted_xme_smh_2026_04_19",
         "status": "PROMOTED_2_OF_4",
         "magnitude_pct": 2.3
+      },
+      {
+        "name": "item_302_pipe_scanner_false_positives_2026_04_21",
+        "status": "operational_deployment",
+        "magnitude_pct": 0.0
+      },
+      {
+        "name": "item_302_strategic_pipe_opposite_direction_2026_04_21",
+        "status": "methodology_revision_critical",
+        "magnitude_pct": 20.3
       }
     ],
     "dead_ends": [
@@ -1419,7 +1429,7 @@
         "reason": "AAPL Monday DOW anomaly. IS 2004-2019 SPY-adj Monday +0.297% p=0.0012, OOS 2020-2025 +0.140% p=0.14, Recent 2022-2025 +0.016% p=0.92. Effect concentrated 2011-2017 (AAPL growth era +60-86 bps/day). SPY null throughout (p=0.82 full). Fails signal_recency_subgroup_check_rule. Test result id T-cc1cf101."
       }
     ],
-    "signal_count": 45,
+    "signal_count": 47,
     "dead_end_count": 288,
     "literature_count": 25
   },
@@ -1519,13 +1529,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 4750541,
+    "sessions_today": 2,
+    "tokens_today": 10568901,
     "sessions_by_day": [
       {
         "date": "2026-04-21",
-        "sessions": 1,
-        "tokens": 4750541
+        "sessions": 2,
+        "tokens": 10568901
       },
       {
         "date": "2026-04-20",
@@ -3991,6 +4001,12 @@
       "investigated": "P1 handoff execution: (1) Built and deployed tools/item_302_pipe_scanner.py for 8-K Item 3.02 PIPE / private placement short signal, wired into daily_scanner.py. (2) Investigated AAPL Monday DOW calendar scan hit with full 6-step method. (3) Closed 3 gold-exposure scan hits per canonical deprioritization rule.",
       "findings": "Added a new scanner that watches for a validated short signal: when a company files an SEC Item 3.02 (disclosing a private share sale) at share price above five dollars, the stock tends to fall about 5% over the next 10 days. It found three live candidates today. Also investigated an Apple Monday-effect pattern and confirmed it was a pre-2018 artifact that has disappeared.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-21",
+      "investigated": "Reviewed 3 Item 3.02 PIPE scan hits (DELL/AVEX/USAR auto-queued 2026-04-21) and built regex dilution-type classifier for the scanner after finding all 3 were false positives on 8-K text review.",
+      "findings": "Caught three mis-classified insider-share filings that looked like dilutive stock issuances but were actually routine share conversions, a SPAC closing, and an M&A deal \u2014 none were the short-trade signal we watch for. Also discovered the signal itself is bimodal: the same filing type can mean 'distressed company' (drops) or 'strategic investor like NVIDIA' (rallies). Paused the signal for deeper validation before trading on it.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4044,21 +4060,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "ITEM 302 PIPE SHORT AUTO-DETECTED: DELL on 2026-04-20. VALIDATED SIGNAL: short for 10d hold, expected -5.2% abnormal return. Action: Clone hypothesis ",
-        "priority": 10,
-        "category": "scan_hit"
-      },
-      {
-        "question": "ITEM 302 PIPE SHORT AUTO-DETECTED: AVEX on 2026-04-20. VALIDATED SIGNAL: short for 10d hold, expected -5.2% abnormal return. Action: Clone hypothesis ",
-        "priority": 10,
-        "category": "scan_hit"
-      },
-      {
-        "question": "ITEM 302 PIPE SHORT AUTO-DETECTED: USAR on 2026-04-20. VALIDATED SIGNAL: short for 10d hold, expected -5.2% abnormal return. Action: Clone hypothesis ",
-        "priority": 10,
-        "category": "scan_hit"
-      },
-      {
         "question": "[SCAN HIT] AAPL DOW calendar: Monday effect. p=3.8e-5, H=25.59, n=5355. Mon=0.290% vs Thu=0.031%. AAPL-specific (AMZN/NVDA/GOOGL/META/MSFT all null). ",
         "priority": 8,
         "category": "scan_hit"
@@ -4067,8 +4068,29 @@
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
+      },
+      {
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
-    "handoff": "\"Item 3.02 PIPE signal FULLY VALIDATED. Canonical retest (cluster-buffered 30d, SPY-adj) passes at all 3 filter cells (all/>$5/>$15) in pooled AND 2023+ recent. XBI benchmark retains 90-93% of magnitude \\u2014 signal NOT just biotech beta. Chronic filers have STRONGER signal (-7% recent 2023+ vs -4.26% first-only) \\u2014 do NOT exclude repeat filers. Created hypothesis 84f218f0 (TBD ticker, short, 5%, 10d, conf 7.8, passes Bonferroni, full confounders). NEXT SESSION: build real-time Item 3.02 sc"
+    "handoff": {
+      "attempted": "Review 3 Item 3.02 PIPE scan hits (DELL/AVEX/USAR) auto-queued by daily scanner; activate qualifying ones.",
+      "accomplished": "All 3 scan hits reviewed via direct 8-K inspection and rejected as false positives: DELL=Silver Lake Class B->C conversion (Section 3(a)(9)); AVEX=de-SPAC closing with sponsor shares + board reconstitution; USAR=M&A-related future share issuance per merger agreement. Scan hits closed in research_queue. Deployed regex classifier classify_302_dilution_type() in tools/item_302_pipe_scanner.py \u2014 7 pattern families (conversion, M&A, de-SPAC, strategic PIPE, distressed PIPE) producing dilution_type tag + confidence. Classifier regression-tested: all 3 false-positives excluded with high confidence.",
+      "partial_results": "Validation on Sep 2025 filings (n=43) found: 11 dilutive_pipe, 11 share_conversion, 7 M&A, 2 de-SPAC, 12 unknown. ~47% of prior signal-validation filings were non-dilutive noise. Backtest on 7 high/med-conf dilutive_pipe Sep 2025 filings showed h=10 +20.3% (WRONG DIRECTION) because INTC Sep 18 2025 was NVDA $5B strategic investment (positive catalyst), not distressed dilution.",
+      "blocked_by": "Strategic-vs-distressed PIPE disambiguation requires semantic classification beyond regex. Added rough strategic markers (named mega-cap investor, collab/partnership language, Section 4(a)(2)) but Haiku subagent classifier recommended for production.",
+      "key_insight": "Item 3.02 PIPE signal is BIMODAL: distressed PIPEs short -5%, strategic PIPEs long +20%. Original -5.2% validation was pooled average; the TRUE distressed-only magnitude should be materially larger. Do NOT trade item_302 triggers until distressed-only canonical retest passes. Signal 84f218f0 confidence downgraded 7.8 -> 6.0."
+    }
   }
 }
