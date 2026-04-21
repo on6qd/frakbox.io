@@ -1559,13 +1559,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 59595291,
+    "sessions_today": 10,
+    "tokens_today": 62255386,
     "sessions_by_day": [
       {
         "date": "2026-04-21",
-        "sessions": 9,
-        "tokens": 59595291
+        "sessions": 10,
+        "tokens": 62255386
       },
       {
         "date": "2026-04-20",
@@ -4079,6 +4079,12 @@
       "investigated": "Mixed scan: cointegration pairs (14 pairs), threshold tests (8), calendar anomalies (12), structural breaks (17 at 2024-01-01 across all sector ETFs), factor exposure dollar screen (11 sectors)",
       "findings": "Screened 62+ sector-factor-calendar combinations. MAJOR FINDING: Universal equity-dollar decoupling at 2024-01-01 confirmed across 9 of 11 SPDR sector ETFs and QQQ/SPY \u2014 cyclical sectors switched from strongly negative to near-zero/positive dollar exposure. Defensive sectors (XLP, XLV) and bonds retained negative exposure. Gold paradoxically became MORE negative. Five hits queued (priorities 7-9).",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-21",
+      "investigated": "Top-priority (p=9) 'MAJOR' scan hit: universal equity-dollar decoupling structural break at 2024-01-01. Scan claimed SPY pre-beta=-0.739 -> post=+0.027 (p=3.9e-6), repeating across 9/11 sectors including XLY, XLK, XLF, XLB. Ran altdate 3x F-ratio falsification at 2024-01-02 target vs alt dates 2021-01, 2022-01, 2023-01, 2025-01 on SPY, XLK, XLY, XLF, XLB, XLP, XLV, GLD.",
+      "findings": "Checked whether the market's relationship with the dollar really shifted at the start of 2024 \u2014 our own scan said yes with strong statistics. When we retested at nearby dates, 2025, 2023, and 2022 looked just as strong. The relationship hasn't broken at any single date; it's been slowly drifting the whole time. Added a permanent rule so the scanner stops flagging this pattern as news.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4132,31 +4138,31 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT - MAJOR] UNIVERSAL equity-dollar decoupling at 2024-01-01 confirmed across 9/11 sectors. SPY: pre-beta=-0.739\u2192post=+0.027 (p=3.9e-6). All cy",
-        "priority": 9,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] XLB (materials ETF) strong negative dollar exposure: IS beta=-0.311 p=2.6e-8 OOS beta=-0.393 (STRONGER, significant). Full 2024 structural ",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] GLD (gold) vs FRED:DGS2 (2-year yield): IS beta=-0.034 p=6.2e-15 R2=0.079 OOS beta=-0.199 (5.8x LARGER, significant). The 2-year yield sens",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] GLD (gold) vs DX-Y.NYB structural break at 2024-01-01: Pre-beta=-0.989 -> Post-beta=-1.230 (p=0.018). Gold became MORE negatively correlate",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       },
       {
-        "question": "[SCAN HIT] XLF (financials ETF) vs VIX regime: IS p=0.003, H=11.57, n=1005. Low-VIX regime=+0.202%/day vs High-VIX=-0.145%/day, spread=0.347%/day. OOS",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-21 orchestrator pass: Tested fresh VVIX/SKEW threshold family against SPY/IWM/QQQ/TLT/GLD \\u2014 all dead-end at canonical gate. Recorded meta-rule blocking future SPY-target vol-threshold tests. No new trades set up. 5 pending hypotheses still waiting on daily scanner triggers.\""
+    "handoff": "\"Session 2026-04-21 orchestrator pass (evening): closed the DXY-equity structural-break scan-hit family. Top hit c58fca16 (SPY universal equity-dollar decoupling at 2024-01-01, p=3.9e-6 across 9 sectors) FAILED altdate 3x F-ratio falsification \\u2014 betas drift monotonically from 2021 to 2025, target F equal to or lower than max alt-date F on every target. Closed 5 scan hits (c58fca16 SPY, 45974a7f XLB, 55c52480 GLD-DXY, 98acb6b9 GLD-DGS2, 2d0751c7 XLF-VIX). Queue now has 0 pending scan hits. N"
   }
 }
