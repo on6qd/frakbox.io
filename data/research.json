@@ -1559,13 +1559,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 54625477,
+    "sessions_today": 9,
+    "tokens_today": 59595291,
     "sessions_by_day": [
       {
         "date": "2026-04-21",
-        "sessions": 8,
-        "tokens": 54625477
+        "sessions": 9,
+        "tokens": 59595291
       },
       {
         "date": "2026-04-20",
@@ -4073,6 +4073,12 @@
       "investigated": "Tested fresh non-event threshold signals on vol-of-vol and tail-risk indicators (VVIX, SKEW) against SPY and non-SPY targets (IWM, QQQ, TLT, GLD). Followed 6-step method with canonical retest gate.",
       "findings": "Tested whether extreme readings of volatility-of-volatility (VVIX) and tail-risk index (SKEW) can predict stock market rebounds. Found the signals look strong at first but disappear under rigorous benchmark-adjusted retesting \u2014 a few crash-recovery outliers create misleading averages. Recorded a new research rule to avoid repeating this class of test.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-21",
+      "investigated": "Mixed scan: cointegration pairs (14 pairs), threshold tests (8), calendar anomalies (12), structural breaks (17 at 2024-01-01 across all sector ETFs), factor exposure dollar screen (11 sectors)",
+      "findings": "Screened 62+ sector-factor-calendar combinations. MAJOR FINDING: Universal equity-dollar decoupling at 2024-01-01 confirmed across 9 of 11 SPDR sector ETFs and QQQ/SPY \u2014 cyclical sectors switched from strongly negative to near-zero/positive dollar exposure. Defensive sectors (XLP, XLV) and bonds retained negative exposure. Gold paradoxically became MORE negative. Five hits queued (priorities 7-9).",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4126,29 +4132,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT - MAJOR] UNIVERSAL equity-dollar decoupling at 2024-01-01 confirmed across 9/11 sectors. SPY: pre-beta=-0.739\u2192post=+0.027 (p=3.9e-6). All cy",
+        "priority": 9,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] XLB (materials ETF) strong negative dollar exposure: IS beta=-0.311 p=2.6e-8 OOS beta=-0.393 (STRONGER, significant). Full 2024 structural ",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] GLD (gold) vs FRED:DGS2 (2-year yield): IS beta=-0.034 p=6.2e-15 R2=0.079 OOS beta=-0.199 (5.8x LARGER, significant). The 2-year yield sens",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] GLD (gold) vs DX-Y.NYB structural break at 2024-01-01: Pre-beta=-0.989 -> Post-beta=-1.230 (p=0.018). Gold became MORE negatively correlate",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
+        "question": "[SCAN HIT] XLF (financials ETF) vs VIX regime: IS p=0.003, H=11.57, n=1005. Low-VIX regime=+0.202%/day vs High-VIX=-0.145%/day, spread=0.347%/day. OOS",
+        "priority": 7,
+        "category": "scan_hit"
       }
     ],
     "handoff": "\"Session 2026-04-21 orchestrator pass: Tested fresh VVIX/SKEW threshold family against SPY/IWM/QQQ/TLT/GLD \\u2014 all dead-end at canonical gate. Recorded meta-rule blocking future SPY-target vol-threshold tests. No new trades set up. 5 pending hypotheses still waiting on daily scanner triggers.\""
