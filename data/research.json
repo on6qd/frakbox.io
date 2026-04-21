@@ -1541,13 +1541,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 39215462,
+    "sessions_today": 6,
+    "tokens_today": 45456274,
     "sessions_by_day": [
       {
         "date": "2026-04-21",
-        "sessions": 5,
-        "tokens": 39215462
+        "sessions": 6,
+        "tokens": 45456274
       },
       {
         "date": "2026-04-20",
@@ -4037,6 +4037,12 @@
       "investigated": "P0 handoff task: rebuild Item 3.02 PIPE classifier v2 on DISTRESSED markers (going-concern / listing deficiency / reverse split / discount / toxic convert / prefunded warrants). Applied regex classifier to 440 largecap (>500M) + price>$5 Item 3.02 filings from 2023-01-01 to 2026-04-18. Joined v2 tier labels to v1 cached backtest results (n=39 events matched in discovery period). Compared direction by tier.",
       "findings": "We retired a planned short-sale pattern around PIPE capital raises (Item 3.02 filings). Our revised classifier showed that once we restrict to stocks we can actually trade \u2014 over $500M market cap and above $5 per share \u2014 the 'short after dilution' pattern flips direction and becomes a small positive. The historical -5% effect lives only in micro-cap stocks we cannot liquidly short. Signal shelved.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-21",
+      "investigated": "Theme 1 - Regime Screen (16 tests): Tested sector ETFs (XLF, XLU, XLK, XLV, XLP, XLI, IWM, HYG, TLT, EEM, GLD, XLE) against macro regime drivers (DGS10, VIX, DXY, FEDFUNDS, CL=F). All regime tests null (p>0.10). FEDFUNDS unusable for daily regime tests (monthly data, insufficient n). DGS10 regime tests showed 100% OOS in 'high' bucket (stable rates 2024).\nTheme 2 - Calendar Screen (22 tests): Tested monthly and day-of-week patterns on SPY, QQQ, GLD, TLT, IWM, EEM, XLE (all null). Then tested Turn-of-Month (TOM) on bond ETFs: HYG, LQD, EMB, AGG, JNK, SHY, IEF, VCSH, TLT, BKLN. Ran OOS robustness checks with multiple start years.\nTheme 3 - VIX Threshold Screen (12 tests): Tested VIX>30 on EFA, IBB, EWJ, FXI, HYG, GLD, IWM, SMH, XME. Tested VIX>25 on EFA, EEM. All raw significant at 20d horizon but ALL failed canonical retest (pooled_sample_fails or recency_subset_fails_regime_dependent).\nTheme 4 - Copper Structural Break Screen (16 tests): Tested ALL 11 sectors + SPY + IWM + HYG + GLD vs copper (HG=F) at 2022-03-16 break date. Also tested COVID break (2020-03-15). Separately tested XLY vs CL=F, EEM/GLD vs DXY at 2022.",
+      "findings": "Ran 66 statistical tests across 4 scan themes. Found 2 significant clusters: (1) Bond ETF Turn-of-Month anomaly \u2014 TOM returns 2-6x higher than mid-month across HYG, LQD, EMB, AGG, JNK, SHY, IEF, VCSH (p range: 3.8e-6 to 0.047). Fresh territory \u2014 equity TOM dead-ended but bond TOM untested. (2) Universal copper sensitivity structural break at 2022-03-16 \u2014 ALL equity sectors plus HYG lost copper beta (XLF 0.42\u21920.12, XLE 0.69\u21920.23, IWM 0.41\u21920.18, all p<0.025). VIX>30 threshold on 9 new targets (EFA/IBB/EWJ/SMH/XME/etc.) all raw-significant but failed canonical retest. Regime tests and calendar monthly/DOW all null.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4090,6 +4096,16 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "[SCAN HIT] Bond ETF Turn-of-Month (TOM) anomaly confirmed across entire fixed income universe: SHY p=3.8e-6, VCSH p=4.1e-4, AGG p=0.005, IEF p=0.005, ",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] Copper sensitivity structural break at 2022-03-16 confirmed UNIVERSALLY across equity sectors + credit: XLF p=2.0e-8 (beta 0.418\u21920.124), XL",
+        "priority": 7,
+        "category": "scan_hit"
+      },
+      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -4103,16 +4119,6 @@
         "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
         "priority": 2,
         "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
-      },
-      {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": "\"P0 RESOLVED 2026-04-21: Item 3.02 classifier v2 (distressed-marker regex) retest COMPLETE. Signal family RETIRED for largecap universe. Findings: (1) distress markers rare in mcap>$500M + price>$5 filings (15/130=12%, zero strong_distressed); (2) largecap Item 3.02 pooled h=10 is POSITIVE +3.83% \\u2014 opposite of short thesis; (3) -5.21% pooled signal lives entirely in sub-$500M tail (untradeable due to HTB borrow + size limits). Scanner stays disabled in daily_scanner.py. See knowledge item_3"
