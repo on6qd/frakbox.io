@@ -1,7 +1,7 @@
 {
   "summary": {
     "total_hypotheses": 69,
-    "pending": 6,
+    "pending": 5,
     "active": 1,
     "completed": 8,
     "invalidated": 6,
@@ -1427,10 +1427,18 @@
       {
         "name": "aapl_monday_dow_anomaly",
         "reason": "AAPL Monday DOW anomaly. IS 2004-2019 SPY-adj Monday +0.297% p=0.0012, OOS 2020-2025 +0.140% p=0.14, Recent 2022-2025 +0.016% p=0.92. Effect concentrated 2011-2017 (AAPL growth era +60-86 bps/day). SPY null throughout (p=0.82 full). Fails signal_recency_subgroup_check_rule. Test result id T-cc1cf101."
+      },
+      {
+        "name": "exposure_scan_hit_batch_2026_04_21",
+        "reason": "Batch-closed 8 exposure scan hits (GDX/NEM/FCX/SCCO/EWJ/EEM/GLD/SLV vs DXY/HG=F/DGS10/VIX) per exposure_scan_hit_deprioritization_rule_2026_04_17. All are within-class exposures (precious/base metal miners, sector ETFs, broad market) with no new mechanism or structural break. Scanner continues to log them for risk attribution and break discovery; orchestrator does not convert to events."
+      },
+      {
+        "name": "item_302_pipe_short_as_designed_classifier_v1_2026_04_21",
+        "reason": "Canonical retest classifier-filtered (high/med dilutive_pipe, n=11 ex-chronic-BCH) shows POSITIVE +9.03% at 5d p=0.037 SPY-adj / +10.01% XBI-adj, not negative as hypothesized. Classifier v1 inverts selection: captures investor-led Type A (Andreessen/Flagship biotech financings) while missing Type B distressed PIPEs (284 unknown + 43 low-confidence). Retire hypothesis 84f218f0 as designed. Rebuild classifier on distressed markers before any new activation."
       }
     ],
     "signal_count": 47,
-    "dead_end_count": 288,
+    "dead_end_count": 290,
     "literature_count": 25
   },
   "live_signals": [
@@ -1524,18 +1532,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 7,
+    "active_signal_types": 6,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 12997475,
+    "sessions_today": 4,
+    "tokens_today": 31801791,
     "sessions_by_day": [
       {
         "date": "2026-04-21",
-        "sessions": 3,
-        "tokens": 12997475
+        "sessions": 4,
+        "tokens": 31801791
       },
       {
         "date": "2026-04-20",
@@ -4013,6 +4021,12 @@
       "investigated": "Individual stock factor exposure screen (100+ tests): airlines/energy vs oil, gold miners vs gold/dollar, copper stocks vs copper, tech/industrial vs dollar, Liberation Day structural breaks, calendar anomalies, regime tests, thresholds",
       "findings": "Screened 100+ individual stock and ETF factor exposures plus Liberation Day structural breaks. Found 8 statistically significant relationships (p<0.0000 IS + OOS confirmed): gold miners vs dollar (GDX, NEM), copper miners vs copper+dollar (FCX, SCCO), Japan ETF vs dollar (EWJ), emerging markets vs VIX (EEM), gold vs rates (GLD vs DGS10), silver vs gold+dollar (SLV). Key negative finding: all Liberation Day 2025-04-02 structural breaks are secular drift artifacts.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-21",
+      "investigated": "P0 handoff task: classifier-filtered canonical retest of 8-K Item 3.02 PIPE short signal. Built threaded retest script (chunked EFTS scan, 10-worker yfinance cap/price filter, 6-worker SEC classifier). Ran 2023-01-01 to 2026-04-18 at price>$5 cap>$500M. Also closed 8 P6 exposure scan hits and 1 P8 stale AAPL Monday calendar hit.",
+      "findings": "A trading signal based on 8-K PIPE disclosures turned out to be the opposite of what we thought: filings that look like classic 'distressed' capital raises on paper are actually positive events when you read them \u2014 large biotech and pharma companies announcing premium-priced investor-led financing rounds. Retiring that hypothesis and planning to rebuild the classifier to focus on real distress markers instead.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4066,37 +4080,31 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] AAPL DOW calendar: Monday effect. p=3.8e-5, H=25.59, n=5355. Mon=0.290% vs Thu=0.031%. AAPL-specific (AMZN/NVDA/GOOGL/META/MSFT all null). ",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] GDX has STRONG stable negative dollar exposure: IS beta=-2.047 p=0.0000, OOS beta=-2.288 (stronger). No secular drift (2023/2024 break test",
-        "priority": 6,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] NEM has very strong negative dollar exposure: IS beta=-1.172 p=0.0000, OOS beta=-1.988 (STRONGER in OOS). Newmont Corp - largest gold miner",
-        "priority": 6,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] FCX has dual exposure: (1) Copper HG=F: IS beta=1.077 p=0.0000, OOS beta=0.591 confirmed. (2) Dollar DXY: IS beta=-1.277 p=0.0000, OOS beta",
-        "priority": 6,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       },
       {
-        "question": "[SCAN HIT] SCCO has strong copper exposure: IS beta=0.751 p=0.0000, OOS beta=0.626 confirmed. Southern Copper Corp - major copper producer. High R2=0.",
-        "priority": 6,
-        "category": "scan_hit"
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": {
-      "attempted": "Review 3 Item 3.02 PIPE scan hits (DELL/AVEX/USAR) auto-queued by daily scanner; activate qualifying ones.",
-      "accomplished": "All 3 scan hits reviewed via direct 8-K inspection and rejected as false positives: DELL=Silver Lake Class B->C conversion (Section 3(a)(9)); AVEX=de-SPAC closing with sponsor shares + board reconstitution; USAR=M&A-related future share issuance per merger agreement. Scan hits closed in research_queue. Deployed regex classifier classify_302_dilution_type() in tools/item_302_pipe_scanner.py \u2014 7 pattern families (conversion, M&A, de-SPAC, strategic PIPE, distressed PIPE) producing dilution_type tag + confidence. Classifier regression-tested: all 3 false-positives excluded with high confidence.",
-      "partial_results": "Validation on Sep 2025 filings (n=43) found: 11 dilutive_pipe, 11 share_conversion, 7 M&A, 2 de-SPAC, 12 unknown. ~47% of prior signal-validation filings were non-dilutive noise. Backtest on 7 high/med-conf dilutive_pipe Sep 2025 filings showed h=10 +20.3% (WRONG DIRECTION) because INTC Sep 18 2025 was NVDA $5B strategic investment (positive catalyst), not distressed dilution.",
-      "blocked_by": "Strategic-vs-distressed PIPE disambiguation requires semantic classification beyond regex. Added rough strategic markers (named mega-cap investor, collab/partnership language, Section 4(a)(2)) but Haiku subagent classifier recommended for production.",
-      "key_insight": "Item 3.02 PIPE signal is BIMODAL: distressed PIPEs short -5%, strategic PIPEs long +20%. Original -5.2% validation was pooled average; the TRUE distressed-only magnitude should be materially larger. Do NOT trade item_302 triggers until distressed-only canonical retest passes. Signal 84f218f0 confidence downgraded 7.8 -> 6.0."
-    }
+    "handoff": "\"P0 retest COMPLETE: classifier-filtered Item 3.02 short signal DISPROVEN as designed. Regex classifier v1 inverts direction \\u2014 filings tagged 'dilutive_pipe' high/med are predominantly investor-led biotech PIPEs (+9.03% 5d p=0.037 SPY-adj, 82% pos, n=11 ex-BCH chronic filer). Against XBI: +10.01% 5d p=0.026, 91% pos. Opposite of short thesis. Hypothesis 84f218f0 retired as abandoned. Knowledge: item_302_classifier_inverts_direction_2026_04_21. Next: rebuild classifier on distressed markers "
   }
 }
