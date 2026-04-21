@@ -1529,13 +1529,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 10568901,
+    "sessions_today": 3,
+    "tokens_today": 12997475,
     "sessions_by_day": [
       {
         "date": "2026-04-21",
-        "sessions": 2,
-        "tokens": 10568901
+        "sessions": 3,
+        "tokens": 12997475
       },
       {
         "date": "2026-04-20",
@@ -4007,6 +4007,12 @@
       "investigated": "Reviewed 3 Item 3.02 PIPE scan hits (DELL/AVEX/USAR auto-queued 2026-04-21) and built regex dilution-type classifier for the scanner after finding all 3 were false positives on 8-K text review.",
       "findings": "Caught three mis-classified insider-share filings that looked like dilutive stock issuances but were actually routine share conversions, a SPAC closing, and an M&A deal \u2014 none were the short-trade signal we watch for. Also discovered the signal itself is bimodal: the same filing type can mean 'distressed company' (drops) or 'strategic investor like NVIDIA' (rallies). Paused the signal for deeper validation before trading on it.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-21",
+      "investigated": "Individual stock factor exposure screen (100+ tests): airlines/energy vs oil, gold miners vs gold/dollar, copper stocks vs copper, tech/industrial vs dollar, Liberation Day structural breaks, calendar anomalies, regime tests, thresholds",
+      "findings": "Screened 100+ individual stock and ETF factor exposures plus Liberation Day structural breaks. Found 8 statistically significant relationships (p<0.0000 IS + OOS confirmed): gold miners vs dollar (GDX, NEM), copper miners vs copper+dollar (FCX, SCCO), Japan ETF vs dollar (EWJ), emerging markets vs VIX (EEM), gold vs rates (GLD vs DGS10), silver vs gold+dollar (SLV). Key negative finding: all Liberation Day 2025-04-02 structural breaks are secular drift artifacts.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4065,24 +4071,24 @@
         "category": "scan_hit"
       },
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] GDX has STRONG stable negative dollar exposure: IS beta=-2.047 p=0.0000, OOS beta=-2.288 (stronger). No secular drift (2023/2024 break test",
+        "priority": 6,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] NEM has very strong negative dollar exposure: IS beta=-1.172 p=0.0000, OOS beta=-1.988 (STRONGER in OOS). Newmont Corp - largest gold miner",
+        "priority": 6,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] FCX has dual exposure: (1) Copper HG=F: IS beta=1.077 p=0.0000, OOS beta=0.591 confirmed. (2) Dollar DXY: IS beta=-1.277 p=0.0000, OOS beta",
+        "priority": 6,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] SCCO has strong copper exposure: IS beta=0.751 p=0.0000, OOS beta=0.626 confirmed. Southern Copper Corp - major copper producer. High R2=0.",
+        "priority": 6,
+        "category": "scan_hit"
       }
     ],
     "handoff": {
