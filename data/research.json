@@ -1579,13 +1579,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 22521534,
+    "sessions_today": 5,
+    "tokens_today": 28774493,
     "sessions_by_day": [
       {
         "date": "2026-04-22",
-        "sessions": 4,
-        "tokens": 22521534
+        "sessions": 5,
+        "tokens": 28774493
       },
       {
         "date": "2026-04-21",
@@ -4135,6 +4135,12 @@
       "investigated": "3 scan hits claiming Liberation Day 2025-04-02 structural breaks: airlines/oil (p8), energy/oil (p7), copper/sector (p7). Ran canonical Chow-test falsification (target F >= 3x max alt F) plus alternative multi-day event spec for airlines.",
       "findings": "Looked at three apparent market 'regime shifts' tied to April 2, 2025 that a scanner flagged. All three failed a falsification check: the real shift happened earlier (2022, when Russia invaded Ukraine) and the 2025 pattern is just the tail end of that earlier change. Added a rule so the scanner won't keep rediscovering the same old shift under a new date.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-22",
+      "investigated": "ARXS insider-cluster P0 scan hit triage + commodity-factor structural-break auto-suppression + scanner-evaluator disagreement bug.",
+      "findings": "Tightened two pieces of plumbing today: the insider-buying scanner no longer flags old stale filings as top-priority trades, and the statistical scanner now auto-skips spurious Liberation Day commodity regime-change signals.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4220,6 +4226,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-22 closed 3 scan hits as canonical failures:\\n\\n1. airline-oil sign flip (5f45f030, p=8): REDISCOVERY of oil_airline_exposure_structural_break (Apr 9, REAL_BUT_NOT_EVENT_TRADEABLE). Falsification: all 4 airlines fail 3x rule (AAL 0.56x, DAL/UAL 0.88x, LUV 1.19x). Extra test: 5d cumulative oil move event spec also fails (1/96 significant).\\n\\n2. energy-oil amplification (0d3002ec, p=7): XLE/XOM/CVX target F 0.14-0.17x vs 2022 alt F. Scanner re-detecting validated 2022 Russia-Ukra"
+    "handoff": "\"Session 2026-04-22 (01:11 ET): Deployed commodity-factor structural-break auto-suppression + fixed cluster scanner lag triage.\\n\\nWORK DONE:\\n1. ARXS insider-cluster scan hit (P0): closed NO_GO. Filing 2026-04-17 is 5 bd old \\u2014 hard block per T+1 retirement rule. Evaluator agreed; scanner had logged it as P0 anyway.\\n2. Scanner bug root-caused + fixed: cluster_auto_scanner.py now computes bd-since-latest-filing and downgrades stale (>1bd) clusters to P5 informational. Dry-run confirmed: ARX"
   }
 }
