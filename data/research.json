@@ -1579,13 +1579,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 34570978,
+    "sessions_today": 7,
+    "tokens_today": 39695032,
     "sessions_by_day": [
       {
         "date": "2026-04-22",
-        "sessions": 6,
-        "tokens": 34570978
+        "sessions": 7,
+        "tokens": 39695032
       },
       {
         "date": "2026-04-21",
@@ -4147,6 +4147,12 @@
       "investigated": "Factor Exposure Screen: 70+ tests across 5 batches. Sectors (XLC/XLY/XLP/XLV/XLI/XLF/XLRE) \u00d7 drivers (VIX, DGS10, DXY, GLD, CL=F, HG=F). Global/regional ETFs (EWZ, FXI, EEM, GDX, SLV, FCX, OIH, XOP, DBA). Regime tests for XLC/XLY/XLV/XLP/XLI/EWZ/FXI vs VIX. Bitcoin ETF tested (IBIT has insufficient IS data).",
       "findings": "Screened 70+ factor-asset combinations across 5 themes. Found 18 validated IS+OOS significant exposures and 4 novel findings queued for deep investigation. Top finding: oil services/E&P stocks (OIH, XOP) show 10-18x amplification of crude oil sensitivity in OOS period (2024+) vs historical sample \u2014 possibly tariff-regime driven structural change.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-22",
+      "investigated": "Scan-hit queue triage, daily scanner run, active-trade status check",
+      "findings": "Reviewed four market-signal candidates flagged by the scanner this morning \u2014 all four turned out to already be well-known relationships with no tradeable edge, so they were closed without further testing. The watchlist is now clear and the fund is set up to short a stock this morning that filed a delisting notice yesterday.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4207,31 +4213,41 @@
     ],
     "research_queue": [
       {
-        "question": "[SCAN HIT] OIH/XOP crude oil MASSIVE OOS amplification: OIH IS-beta=0.039 (p=0.000003) OOS-beta=0.299; XOP IS-beta=0.023 (p=0.0025) OOS-beta=0.411. En",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] FXI/DXY OOS amplification: IS-beta=-0.658 (p=1.3e-7, n=1005) OOS-beta=-1.069 (significant). China ETF (FXI) negative dollar exposure AMPLIF",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] GLD/DXY OOS amplification: IS-beta=-0.969 (p=7.9e-50) OOS-beta=-1.244 (significant). Gold negative dollar exposure AMPLIFIED in OOS (2024+)",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] Novel validated exposures: (1) EWZ/copper IS-beta=0.259 (p=1.3e-9) OOS-beta=0.152 (sig) - Brazil ETF is copper proxy. (2) EWZ/GLD IS-beta=0",
-        "priority": 7,
+        "question": "DELISTING NOTICE 8K 301 SHORT AUTO-DETECTED: DRVN on 2026-04-21. VALIDATED SIGNAL: short for 10d hold, expected -3.92% abnormal return. Action: Clone ",
+        "priority": 10,
         "category": "scan_hit"
       },
       {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
+      },
+      {
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
-    "handoff": "\"Session 2026-04-22 (01:11 ET): Deployed commodity-factor structural-break auto-suppression + fixed cluster scanner lag triage.\\n\\nWORK DONE:\\n1. ARXS insider-cluster scan hit (P0): closed NO_GO. Filing 2026-04-17 is 5 bd old \\u2014 hard block per T+1 retirement rule. Evaluator agreed; scanner had logged it as P0 anyway.\\n2. Scanner bug root-caused + fixed: cluster_auto_scanner.py now computes bd-since-latest-filing and downgrades stale (>1bd) clusters to P5 informational. Dry-run confirmed: ARX"
+    "handoff": {
+      "summary": "Session 2026-04-22 (04:15 ET): Closed entire scan-hit queue as canonical dead ends. DRVN still pending (fires at next market open). NKE OOS day-5 pending after market close.",
+      "work_done": [
+        "Batch-closed 4 exposure-class scan hits (bb988f84 OIH/XOP, f6f41c1b FXI/DXY, ff0085d6 GLD/DXY, 678316bd EWZ/copper) per exposure_scan_hit_deprioritization_rule_2026_04_17 + commodity_factor_liberation_day_structural_break_scan_artifact_rule_2026_04_22",
+        "Daily scanner run: 0 cybersec, 0 SEO GO, 0 SP500 changes, VIX=19.09, 1 delisting (DRVN already queued)",
+        "NT 10-K/Q scanner: 0 events. Activist 13D: 0 filings",
+        "NKE theoretical-OOS day 4: +1.64% abnormal (below +2.5% target). Day 5 pending tonight",
+        "DRVN 995a7465 verified pending. Daemon fires at next open"
+      ],
+      "scan_hit_queue_state": "EMPTY. Non-event exploration retired per non_event_allocation_retirement_2026_04_14."
+    }
   }
 }
