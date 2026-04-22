@@ -1,8 +1,8 @@
 {
   "summary": {
     "total_hypotheses": 69,
-    "pending": 5,
-    "active": 1,
+    "pending": 4,
+    "active": 2,
     "completed": 8,
     "invalidated": 6,
     "direction_accuracy": "3/8",
@@ -4215,14 +4215,7 @@
         "symbol": "TBD"
       }
     ],
-    "pending_triggers": [
-      {
-        "symbol": "DRVN",
-        "direction": "short",
-        "trigger": "next_market_open",
-        "event_type": "delisting notice 8k 301 short"
-      }
-    ],
+    "pending_triggers": [],
     "research_queue": [
       {
         "question": "DELISTING NOTICE 8K 301 SHORT AUTO-DETECTED: DRVN on 2026-04-21. VALIDATED SIGNAL: short for 10d hold, expected -3.92% abnormal return. Action: Clone ",

@@ -6,6 +6,13 @@
       "event_type": "vix_spike_above_30_spy_long",
       "thesis": "When VIX closes above 30 (first close in 30-day cluster), buy SPY at next open and hold 20 trading days. VIX>30 signals ",
       "opened_date": "2026-03-24"
+    },
+    {
+      "symbol": "DRVN",
+      "direction": "short",
+      "event_type": "delisting_notice_8k_301_short",
+      "thesis": "Large-cap company (>$500M market cap) receives forced delisting notice or fails continued listing standards, disclosing ",
+      "opened_date": "2026-04-13"
     }
   ],
   "recent_closed": [
