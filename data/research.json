@@ -1477,10 +1477,14 @@
       {
         "name": "copper_sector_liberation_day_structural_break_2026_04_22",
         "reason": "XLB/XLI/XME/EEM all fail 3x canonical rule (0.08-0.96x). XLI fails catastrophically - 2022 alt F=28 vs target F=2.2. Copper decoupling is a 2022 phenomenon, not Liberation Day."
+      },
+      {
+        "name": "nke_insider_cluster_april2026_day5_close",
+        "reason": "{\"status\": \"OOS_MISS\", \"date\": \"2026-04-22\", \"signal\": \"insider_buying_cluster\", \"symbol\": \"NKE\", \"entry_date\": \"2026-04-15\", \"entry_price\": 45.08, \"entry_spy\": 695.26, \"close_date\": \"2026-04-22\", \"close_price\": 45.68, \"close_spy\": 711.21, \"nke_return_pct\": 1.33, \"spy_return_pct\": 2.29, \"abnormal_return_pct\": -0.96, \"expected_abnormal_target_pct\": 2.5, \"direction_correct\": false, \"notes\": \"Theoretical OOS (no real position entered). 5-day hold from 2026-04-15 entry. NKE +1.33%, SPY +2.29%, abnormal -0.96%. Miss vs +2.5% target. Insider cluster t+1 benchmark (42.5% pos rate) continues to disappoint.\"}"
       }
     ],
     "signal_count": 49,
-    "dead_end_count": 298,
+    "dead_end_count": 299,
     "literature_count": 25
   },
   "live_signals": [
@@ -1579,9 +1583,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 1,
+    "tokens_today": 5803214,
     "sessions_by_day": [
+      {
+        "date": "2026-04-23",
+        "sessions": 1,
+        "tokens": 5803214
+      },
       {
         "date": "2026-04-22",
         "sessions": 10,
@@ -4166,6 +4175,12 @@
       "investigated": "Full investigation of scan-hit c9c47f63 (bank-basket JPM/BAC/GS/WFC Granger-causes SPY at lag 2) plus batch triage of 9 related lead-lag and cointegration scan hits.",
       "findings": "Tested a claim that bank stocks predict next-day S&P 500 moves, which had looked like the strongest signal found in recent scans. Once the test properly controlled for yesterday's market return and measured actual trading profit, the edge vanished completely. Result confirms that many 'lead-lag' statistics are artifacts of shared exposure rather than real predictive information.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-23",
+      "investigated": "Handoff priorities: verify DRVN short, close NKE OOS, run daily scanner, implement lead-lag scanner pre-filter (P2).",
+      "findings": "Cleaned up stale scan alerts, closed a 5-day out-of-sample test on NKE (miss), and taught the scanner to auto-reject lead-lag results between assets that are already parts of each other (e.g., a bank stock leading the broad market is just mechanical inclusion, not a real signal).",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4219,21 +4234,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "DELISTING NOTICE 8K 301 SHORT AUTO-DETECTED: DRVN on 2026-04-21. VALIDATED SIGNAL: short for 10d hold, expected -3.92% abnormal return. Action: Clone ",
-        "priority": 10,
-        "category": "scan_hit"
-      },
-      {
-        "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $36.58 (-7.3% from 52W high). Market cap: $",
-        "priority": 5,
-        "category": "insider_buying_cluster"
-      },
-      {
-        "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $31.06 (-26.6% from 52W high). Market cap: ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -4242,8 +4242,23 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
+      },
+      {
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Session 2026-04-22 14:28 ET (mid-day). Closed 10 P7-P10 scan hits as dead ends: 9 lead-lag + 3 cointegration. Core test: bank-basket (JPM/BAC/GS/WFC) Granger lead to SPY was labeled 'strongest scan cluster ever found' -> ran full regression + threshold P&L: beta INSIGNIFICANT both samples (p=0.42 IS, 0.16 OOS), SIGN FLIPS, threshold P&L ~0. Extends xlf_granger_leadlag_known_null meta-rule to cover individual stocks within major sector ETFs. Canonical methodology rule recorded. Only remaining sc"
+    "handoff": "[{\"priority\": \"P0\", \"task\": \"Monitor DRVN short (hyp 995a7465): entry .33 2026-04-22, -2.5% day1. 10d hold expires 2026-05-06, 10% stop. Expected -3.92% abnormal. Check daily vs SPY.\"}, {\"priority\": \"P0\", \"task\": \"Monitor SPY VIX-recovery trade (hyp b63a0168): entry .74 up +11%. Deadline 2026-04-27. trade_loop handles deadline exit.\"}, {\"priority\": \"P1\", \"task\": \"Run daily_scanner.py (tools/daily_scanner.py). 2026-04-23 run returned no new scan hits (only DRVN, already cloned).\"}, {\"priority\": \""
   }
 }
