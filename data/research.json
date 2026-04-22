@@ -1579,13 +1579,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 39695032,
+    "sessions_today": 8,
+    "tokens_today": 43477975,
     "sessions_by_day": [
       {
         "date": "2026-04-22",
-        "sessions": 7,
-        "tokens": 39695032
+        "sessions": 8,
+        "tokens": 43477975
       },
       {
         "date": "2026-04-21",
@@ -4153,6 +4153,12 @@
       "investigated": "Scan-hit queue triage, daily scanner run, active-trade status check",
       "findings": "Reviewed four market-signal candidates flagged by the scanner this morning \u2014 all four turned out to already be well-known relationships with no tradeable edge, so they were closed without further testing. The watchlist is now clear and the fund is set up to short a stock this morning that filed a delisting notice yesterday.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-22",
+      "investigated": "Pre-market session: triage DRVN scan hit, daily scanners, pending-hypothesis audit, single non-event test attempt",
+      "findings": "Quiet pre-market session. The delisting signal for DRVN was already queued as a short trade to fire at open, and the daily scanners found nothing new worth acting on. The active SPY position from the March VIX spike is up about 10.8% \u2014 much more than expected \u2014 and is set to close at its deadline next week.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4238,16 +4244,6 @@
         "category": "sp500_index_addition"
       }
     ],
-    "handoff": {
-      "summary": "Session 2026-04-22 (04:15 ET): Closed entire scan-hit queue as canonical dead ends. DRVN still pending (fires at next market open). NKE OOS day-5 pending after market close.",
-      "work_done": [
-        "Batch-closed 4 exposure-class scan hits (bb988f84 OIH/XOP, f6f41c1b FXI/DXY, ff0085d6 GLD/DXY, 678316bd EWZ/copper) per exposure_scan_hit_deprioritization_rule_2026_04_17 + commodity_factor_liberation_day_structural_break_scan_artifact_rule_2026_04_22",
-        "Daily scanner run: 0 cybersec, 0 SEO GO, 0 SP500 changes, VIX=19.09, 1 delisting (DRVN already queued)",
-        "NT 10-K/Q scanner: 0 events. Activist 13D: 0 filings",
-        "NKE theoretical-OOS day 4: +1.64% abnormal (below +2.5% target). Day 5 pending tonight",
-        "DRVN 995a7465 verified pending. Daemon fires at next open"
-      ],
-      "scan_hit_queue_state": "EMPTY. Non-event exploration retired per non_event_allocation_retirement_2026_04_14."
-    }
+    "handoff": "\"Pre-market session (05:42-06:20 ET). Closed DRVN scan hit (already absorbed into hyp 995a7465, trigger=next_market_open). Ran daily_scanner.py \\u2014 4 insider clusters all NO_GO, no NT-10K / cybersec / SEO / 13D hits. Only DRVN actionable (already handled). No new investigation fired \\u2014 tried HYG threshold for IWM but threshold CLI takes absolute prices not daily returns (tool limitation). SPY active position +10.8% vs +1.69% expected \\u2014 trade will exit at Apr 27 deadline via trade_loo"
   }
 }
