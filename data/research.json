@@ -1465,10 +1465,22 @@
       {
         "name": "dxy_100_xlb_threshold_regime_artifact_2026_04_22",
         "reason": "DXY > 100 first-close cluster-buffered (30d) \u2192 XLB 20d: DEAD_END_CANONICAL_FAILED.\n\nScan claimed pooled n=8 +2.63% p=0.0037, recent n=5 +3.05% p=0.0002 (100% positive).\nInvestigation with 30d cluster buffer (matches 20d hold window):\n\nALL-HORIZONS SPY-ADJUSTED (n=21 total events 1999-2026):\n  1d   mean_abn -0.02% p=0.96\n  3d   mean_abn +0.07% p=0.92\n  5d   mean_abn +0.44% p=0.55\n  10d  mean_abn +0.42% p=0.66\n  20d  mean_abn +0.36% p=0.80\nNO horizon passes p<0.05.\n\nFATAL ROBUSTNESS FAILURES:\n1. Leave-one-out: dropping ANY single event makes p > 0.28. Signal driven by 1999-04-07 +24.98% outlier (dot-com bubble materials).\n2. 1999 dominance: 6 of 21 events in 1999 alone.\n3. VIX stratification reverses: VIX>=25 n=9 mean=-1.56%, VIX<25 n=12 mean=+1.81%. DXY crosses 100 mostly during stress \u2014 exact regime where signal is negative.\n4. IS/OOS split: discovery (<2022) n=15 mean=-0.04% p=0.98 (NULL). OOS (2022+) n=6 mean=+1.38% p=0.28 (not significant).\n5. Scanner's \"100% positive n=5\" is cluster-buffer artifact excluding 2025-04-15 -3.77% event.\n\nMatches dxy108_gld_counterintuitive_2026_04_11 pattern: clustered-regime artifact, non-tradeable.\n\nMeta-finding: DXY threshold crossings on equity-like targets remain scan artifacts even when canonical_passes=True from automated pipeline \u2014 the canonical pipeline's sample size (n=5-8) is too small to survive leave-one-out and regime stratification. Strengthens scan_hit_canonical_all_horizons_rule_2026_04_19 enforcement.\n\nInvestigation tool: tools/dxy100_xlb_investigation.py\nCanonical retest task T-209a93a1, source scan 20d horizon."
+      },
+      {
+        "name": "airline_oil_liberation_day_structural_break_2026_04_22",
+        "reason": "Rediscovery of oil_airline_exposure_structural_break (REAL_BUT_NOT_EVENT_TRADEABLE). All 4 airlines fail 3x canonical rule at 2025-04-02 (AAL 0.56x, DAL/UAL 0.88x, LUV 1.19x). Multi-day 5d-cumulative oil event spec also fails: 1/96 tests significant = chance."
+      },
+      {
+        "name": "energy_oil_liberation_day_structural_break_2026_04_22",
+        "reason": "Scanner re-detected validated 2022 Russia-Ukraine structural break. XLE/XOM/CVX target F at 2025-04-02 is 0.14-0.17x of 2022-alt F. 2022 break is 7x stronger than alleged Liberation Day break."
+      },
+      {
+        "name": "copper_sector_liberation_day_structural_break_2026_04_22",
+        "reason": "XLB/XLI/XME/EEM all fail 3x canonical rule (0.08-0.96x). XLI fails catastrophically - 2022 alt F=28 vs target F=2.2. Copper decoupling is a 2022 phenomenon, not Liberation Day."
       }
     ],
     "signal_count": 49,
-    "dead_end_count": 295,
+    "dead_end_count": 298,
     "literature_count": 25
   },
   "live_signals": [
@@ -1567,13 +1579,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 18789824,
+    "sessions_today": 4,
+    "tokens_today": 22521534,
     "sessions_by_day": [
       {
         "date": "2026-04-22",
-        "sessions": 3,
-        "tokens": 18789824
+        "sessions": 4,
+        "tokens": 22521534
       },
       {
         "date": "2026-04-21",
@@ -4117,6 +4129,12 @@
       "investigated": "Liberation Day structural breaks + credit regime + individual exposures + cointegration + thresholds",
       "findings": "Ran 58 statistical tests across structural breaks, credit regimes, individual exposures, cointegration, and thresholds. Top finding: all 4 major US airlines flipped from zero oil exposure to negative oil exposure (~-0.20 beta) starting Jan 2025 \u2014 oil now tracks demand expectations rather than fuel cost, creating a new regime. Also found energy stocks (XLE/XOM/CVX) became ~6x more sensitive to oil post-Liberation Day, while materials/industrials (XLB/XLI/XME) became LESS copper-sensitive. Queued 3 hits for orchestrator investigation.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-22",
+      "investigated": "3 scan hits claiming Liberation Day 2025-04-02 structural breaks: airlines/oil (p8), energy/oil (p7), copper/sector (p7). Ran canonical Chow-test falsification (target F >= 3x max alt F) plus alternative multi-day event spec for airlines.",
+      "findings": "Looked at three apparent market 'regime shifts' tied to April 2, 2025 that a scanner flagged. All three failed a falsification check: the real shift happened earlier (2022, when Russia invaded Ukraine) and the 2025 pattern is just the tail end of that earlier change. Added a rule so the scanner won't keep rediscovering the same old shift under a new date.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4177,21 +4195,6 @@
     ],
     "research_queue": [
       {
-        "question": "[SCAN HIT] AIRLINE-OIL SIGN FLIP: All 4 major US airlines (AAL/DAL/UAL/LUV) show structural break in oil exposure. Pre-2025 beta~0 (no relationship), ",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] ENERGY-OIL AMPLIFICATION AT LIBERATION DAY: XLE, XOM, CVX all show ~6x increase in crude oil beta post-2025-04-02. XLE: Pre-beta=0.051 \u2192 Po",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] COPPER SECTOR SENSITIVITY DECREASE AT LIBERATION DAY: XLB, XLI, XME, EEM all show significantly LOWER copper beta post-2025-04-02. XME: Pre",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -4200,14 +4203,23 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
+      },
+      {
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": {
-      "attempted": "Daily scanner run + one delisting scan-hit investigation (DRVN) + HTBK scanner-gap diagnosis/fix",
-      "accomplished": "Activated DRVN short (hyp 995a7465), dropped HTBK as going-private, patched delisting_8k_scanner, recorded NKE OOS day-4 result",
-      "partial_results": "DRVN short trigger set for next_market_open; fill pending Apr 22 open",
-      "blocked_by": "None - session cleanly completed; did not start new non-event exploration due to time",
-      "key_insight": "Item 3.01 delisting scanner had structural gap: M&A completion filings (Item 3.01 + Item 2.01/5.01/3.03) matched voluntary patterns due to 'Transfer of Listing' language in standard Item 3.01 title. Now filtered structurally. DRVN is a legitimate compound signal: Feb 26 NT 10-K + Apr 21 Item 3.01 non-compliance - first tradeable test of compound late-filer chain."
-    }
+    "handoff": "\"Session 2026-04-22 closed 3 scan hits as canonical failures:\\n\\n1. airline-oil sign flip (5f45f030, p=8): REDISCOVERY of oil_airline_exposure_structural_break (Apr 9, REAL_BUT_NOT_EVENT_TRADEABLE). Falsification: all 4 airlines fail 3x rule (AAL 0.56x, DAL/UAL 0.88x, LUV 1.19x). Extra test: 5d cumulative oil move event spec also fails (1/96 significant).\\n\\n2. energy-oil amplification (0d3002ec, p=7): XLE/XOM/CVX target F 0.14-0.17x vs 2022 alt F. Scanner re-detecting validated 2022 Russia-Ukra"
   }
 }
