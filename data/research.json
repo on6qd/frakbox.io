@@ -1579,13 +1579,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 43477975,
+    "sessions_today": 9,
+    "tokens_today": 51351552,
     "sessions_by_day": [
       {
         "date": "2026-04-22",
-        "sessions": 8,
-        "tokens": 43477975
+        "sessions": 9,
+        "tokens": 51351552
       },
       {
         "date": "2026-04-21",
@@ -4159,6 +4159,12 @@
       "investigated": "Pre-market session: triage DRVN scan hit, daily scanners, pending-hypothesis audit, single non-event test attempt",
       "findings": "Quiet pre-market session. The delisting signal for DRVN was already queued as a short trade to fire at open, and the daily scanners found nothing new worth acting on. The active SPY position from the March VIX spike is up about 10.8% \u2014 much more than expected \u2014 and is set to close at its deadline next week.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-22",
+      "investigated": "Lead-lag screen (sectors leading market) + Cointegration pairs screen (57 tests total)",
+      "findings": "Screened 57 tests (36 cointegration pairs + 21 sector lead-lag). MAJOR FINDING: Financial sector (XLF, JPM, BAC, GS, WFC, KRE) consistently Granger-causes broad market with 1-2 day lag, IS+OOS confirmed across 11 test combinations. Reverse not significant. Also found 3 IS-significant pair trade candidates (V/MA, MO/PM, T/VZ). Queued 9 tasks for orchestrator investigation.",
+      "tag": "validation"
     }
   ],
   "pipeline": {
@@ -4224,24 +4230,24 @@
         "category": "scan_hit"
       },
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] XLF->QQQ lead-lag: IS F=18.09 p=1.9e-8 lag=2, OOS CONFIRMED lag=1. Financials Granger-causes Nasdaq 100 with 1-2 day lag. Strongest sector ",
+        "priority": 9,
+        "category": "scan_hit"
       },
       {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
+        "question": "[SCAN HIT] XLF->EEM lead-lag: IS F=6.50 p=5.75e-6 lag=5, OOS CONFIRMED lag=1. US Financials sector Granger-causes Emerging Markets ETF with 1-5 day la",
+        "priority": 9,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] BANK STOCKS LEAD SPY CLUSTER: All 4 major banks Granger-cause SPY at lag 2, all IS+OOS confirmed. JPM p=1.6e-5, BAC p=0.0009, GS p=0.0009, ",
+        "priority": 9,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] XLF->SPY lead-lag: IS F=12.55 p=4e-6 lag=2, OOS CONFIRMED lag=1. Financials sector Granger-causes broad market with 1-2 day lag. No XCORR s",
+        "priority": 8,
+        "category": "scan_hit"
       }
     ],
     "handoff": "\"Pre-market session (05:42-06:20 ET). Closed DRVN scan hit (already absorbed into hyp 995a7465, trigger=next_market_open). Ran daily_scanner.py \\u2014 4 insider clusters all NO_GO, no NT-10K / cybersec / SEO / 13D hits. Only DRVN actionable (already handled). No new investigation fired \\u2014 tried HYG threshold for IWM but threshold CLI takes absolute prices not daily returns (tool limitation). SPY active position +10.8% vs +1.69% expected \\u2014 trade will exit at Apr 27 deadline via trade_loo"
