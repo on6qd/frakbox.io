@@ -1567,13 +1567,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 14610304,
+    "sessions_today": 3,
+    "tokens_today": 18789824,
     "sessions_by_day": [
       {
         "date": "2026-04-22",
-        "sessions": 2,
-        "tokens": 14610304
+        "sessions": 3,
+        "tokens": 18789824
       },
       {
         "date": "2026-04-21",
@@ -4111,6 +4111,12 @@
       "investigated": "Two priority-10 delisting-scanner hits (DRVN, HTBK) plus NKE insider-cluster theoretical-OOS day-4 closeout. Verified each scan hit against the 8-K text, market cap, and pre-event contamination rules.",
       "findings": "The system flagged two possible short trades on companies getting delisting warnings. One (Heritage Commerce) turned out to be a completed acquisition and was dropped, and the scanner was improved to catch that pattern in the future. The other (Driven Brands) is a legitimate non-compliance notice, and a short trade was set up to enter at the next market open.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-22",
+      "investigated": "Liberation Day structural breaks + credit regime + individual exposures + cointegration + thresholds",
+      "findings": "Ran 58 statistical tests across structural breaks, credit regimes, individual exposures, cointegration, and thresholds. Top finding: all 4 major US airlines flipped from zero oil exposure to negative oil exposure (~-0.20 beta) starting Jan 2025 \u2014 oil now tracks demand expectations rather than fuel cost, creating a new regime. Also found energy stocks (XLE/XOM/CVX) became ~6x more sensitive to oil post-Liberation Day, while materials/industrials (XLB/XLI/XME) became LESS copper-sensitive. Queued 3 hits for orchestrator investigation.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4171,6 +4177,21 @@
     ],
     "research_queue": [
       {
+        "question": "[SCAN HIT] AIRLINE-OIL SIGN FLIP: All 4 major US airlines (AAL/DAL/UAL/LUV) show structural break in oil exposure. Pre-2025 beta~0 (no relationship), ",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] ENERGY-OIL AMPLIFICATION AT LIBERATION DAY: XLE, XOM, CVX all show ~6x increase in crude oil beta post-2025-04-02. XLE: Pre-beta=0.051 \u2192 Po",
+        "priority": 7,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] COPPER SECTOR SENSITIVITY DECREASE AT LIBERATION DAY: XLB, XLI, XME, EEM all show significantly LOWER copper beta post-2025-04-02. XME: Pre",
+        "priority": 7,
+        "category": "scan_hit"
+      },
+      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -4179,21 +4200,6 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
-      },
-      {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
-      },
-      {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": {
