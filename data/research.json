@@ -4229,6 +4229,16 @@
         "category": "scan_hit"
       },
       {
+        "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $36.58 (-7.3% from 52W high). Market cap: $",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
+        "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $31.06 (-26.6% from 52W high). Market cap: ",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -4237,16 +4247,6 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
-      },
-      {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
       }
     ],
     "handoff": "\"Session 2026-04-22 14:28 ET (mid-day). Closed 10 P7-P10 scan hits as dead ends: 9 lead-lag + 3 cointegration. Core test: bank-basket (JPM/BAC/GS/WFC) Granger lead to SPY was labeled 'strongest scan cluster ever found' -> ran full regression + threshold P&L: beta INSIGNIFICANT both samples (p=0.42 IS, 0.16 OOS), SIGN FLIPS, threshold P&L ~0. Extends xlf_granger_leadlag_known_null meta-rule to cover individual stocks within major sector ETFs. Canonical methodology rule recorded. Only remaining sc"
