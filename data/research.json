@@ -1587,13 +1587,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 11092406,
+    "sessions_today": 4,
+    "tokens_today": 14996208,
     "sessions_by_day": [
       {
         "date": "2026-04-23",
-        "sessions": 3,
-        "tokens": 11092406
+        "sessions": 4,
+        "tokens": 14996208
       },
       {
         "date": "2026-04-22",
@@ -4197,6 +4197,18 @@
       "investigated": "Threshold (33), Exposure (23), Lead-lag (7), Cointegration (7), Regime (6), Calendar (8), Structural Break (5) = 62 tests total",
       "findings": "Screened 62 tests across 8 hypothesis classes. Found 2 new OOS-confirmed signals: tech sector sensitivity to 2-year yields and gold leading materials stocks. Threshold mean-reversion failed canonical validation; calendar anomalies show no edge.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-23",
+      "investigated": "Queue triage: resolved 3 scan hits (DRVN delisting already traded; XLK-DGS2 exposure and GLD-XLB lead-lag auto-closed per canonical rules). Identified gap in data_tasks commodity-sector lead-lag auto-suppression (covered futures only, not ETFs). Ran daily scanner \u2014 clean, no new actionables.",
+      "findings": "Cleaned up three stale research leads and fixed a small but recurring blind spot in our scan filters \u2014 commodity ETF signals against sector ETFs will now be automatically flagged as known dead ends instead of triggering fresh investigations.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-23",
+      "investigated": "Queue triage: resolved 3 scan hits (DRVN delisting already traded; XLK-DGS2 exposure and GLD-XLB lead-lag auto-closed per canonical rules). Identified gap in data_tasks commodity-sector lead-lag auto-suppression (covered futures only, not ETFs). Ran daily scanner \u2014 clean, no new actionables.",
+      "findings": "Cleaned up three stale research leads and closed a small but recurring blind spot in our scan filters \u2014 commodity ETF signals against sector ETFs will now be automatically flagged as known dead ends instead of triggering fresh investigations.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4250,11 +4262,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "DELISTING NOTICE 8K 301 SHORT AUTO-DETECTED: DRVN on 2026-04-21. VALIDATED SIGNAL: short for 10d hold, expected -3.92% abnormal return. Action: Clone ",
-        "priority": 10,
-        "category": "scan_hit"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -4273,8 +4280,28 @@
         "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
         "priority": 1,
         "category": "sp500_index_addition"
+      },
+      {
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "[{\"priority\": \"P0\", \"task\": \"DRVN short hyp 995a7465: entry $12.33 2026-04-22 day1 -2.5%. 10d hold to 2026-05-06, 10% stop, expected -3.92% abnormal. trade_loop handles.\"}, {\"priority\": \"P0\", \"task\": \"SPY VIX-recovery hyp b63a0168: entry $639.74 +10.9%. Deadline 2026-04-27.\"}, {\"priority\": \"P1\", \"task\": \"Daily scanner. 2026-04-23 AM run: no new hits.\"}, {\"priority\": \"P1\", \"task\": \"Pending hypotheses waiting for scanner hits: #673aaa32 seo_bought_deal, #3db5eb00 nt_10k, #571ec598 starboard_13d, #"
+    "handoff": {
+      "session": "2026-04-23 orchestrator",
+      "summary": "Queue triage + operational fix session. 3 scan hits resolved (1 already-traded, 2 auto-closed per canonical rules). Deployed _COMMODITY_ETFS auto-suppression gap fix \u2014 prevents future wasted cycles on GLD/SLV/USO type commodity-ETF -> sector-ETF lead-lag scan hits. Daily scanner clean.",
+      "open_positions": [
+        "DRVN short (-2.5%, 10d)",
+        "SPY long (+10.7%, deadline 04-27)"
+      ],
+      "pending_hypotheses_waiting_triggers": [
+        "seo_bought_deal_short (673aaa32)",
+        "nt_10k_late_filing_short (3db5eb00)",
+        "starboard_13d_filing_long (571ec598)",
+        "cybersecurity_8k_item_105_short (8844b439)"
+      ],
+      "scan_hits_pending": 0,
+      "next_session_focus": "Open the P2 non-event slot. Run 3-min novelty check first: grep dead_ends/known_effects for any candidate before designing a test."
+    }
   }
 }
