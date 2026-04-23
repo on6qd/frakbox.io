@@ -1489,10 +1489,14 @@
       {
         "name": "defm14a_merger_proxy_post_filing_long",
         "reason": "IS/OOS sign inversion at all horizons (IS 5d +0.16% flat, OOS 5d -1.46% p=0.017 recent-only). Full sample null (5d -0.64% p=0.15). OOS negative tilt is regime artifact (bullish SPY vs beta-anchored merger targets), per signal_recency_subgroup_check_rule. Merger targets decouple from SPY beta post-filing -> SPY-adjusted returns become artifact, not alpha. Raw merger arb spread 0.2-0.5% over 5d insufficient vs transaction costs. n=274 IS+OOS, 2019-2024. Scanner tools/defm14a_scanner.py validated but signal dead. Result IDs: T-8fb2336f, T-079e9657, T-6c5db229."
+      },
+      {
+        "name": "nt_10q_tradeable_large_cap_short",
+        "reason": "NT 10-Q signal (71% neg direction) is untradeable at large-cap. Close-based 5% stop does not protect from overnight gaps (SVMB +55%, NIKA +41%). Liquidity filter (min price $10 + min $10M dollar vol + no healthcare) inverts OOS signal (p=0.62, direction 40%, N=10). Pre-registered thresholds fail. Signal concentrates in illiquid pump stocks where execution impractical. Tested 2026-04-23 via tools/nt10q_sector_filter_stoploss.py. Knowledge key: nt_10q_tradeable_large_cap_dead_end_2026_04_23."
       }
     ],
     "signal_count": 49,
-    "dead_end_count": 301,
+    "dead_end_count": 302,
     "literature_count": 25
   },
   "live_signals": [
@@ -1591,13 +1595,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 28147882,
+    "sessions_today": 8,
+    "tokens_today": 33810667,
     "sessions_by_day": [
       {
         "date": "2026-04-23",
-        "sessions": 7,
-        "tokens": 28147882
+        "sessions": 8,
+        "tokens": 33810667
       },
       {
         "date": "2026-04-22",
@@ -4231,6 +4235,12 @@
       "investigated": "Canonical retest of scan hit 56bf8424: Oil (CL=F) Granger-causes EEM at 4-day lag (F=3.92, p=0.0037 IS, OOS confirmed). Extended commodity-sector lead-lag dead-end rule to broad emerging-market ETFs.",
       "findings": "Tested a potential signal where large oil price moves would predict emerging-market stocks four days later. It didn't hold up \u2014 directions were weakly consistent, but the size of the expected move stayed too small to trade after costs. Added emerging-market ETFs to the auto-dismiss list so similar dead ends close automatically in future scans.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-23",
+      "investigated": "NT 10-Q late filing short \u2014 attempted to convert untradeable directional signal into tradeable large-cap strategy via sector filter (exclude healthcare) + 5%% close-based stop-loss + liquidity filter (min $10 price, min $10M avg dollar volume). Tested IS (T-8887e2ab, 57 events) and OOS (T-dda35472, 55 events) samples separately against pre-registered criteria.",
+      "findings": "Explored whether a known directional signal in late SEC quarterly reports could be turned into a tradeable strategy. Result: the effect comes almost entirely from tiny illiquid stocks that gap overnight, so filtering to tradeable names eliminates the edge. Signal parked as a dead end.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4309,21 +4319,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": {
-      "session": "2026-04-23 orchestrator",
-      "summary": "Queue triage + operational fix session. 3 scan hits resolved (1 already-traded, 2 auto-closed per canonical rules). Deployed _COMMODITY_ETFS auto-suppression gap fix \u2014 prevents future wasted cycles on GLD/SLV/USO type commodity-ETF -> sector-ETF lead-lag scan hits. Daily scanner clean.",
-      "open_positions": [
-        "DRVN short (-2.5%, 10d)",
-        "SPY long (+10.7%, deadline 04-27)"
-      ],
-      "pending_hypotheses_waiting_triggers": [
-        "seo_bought_deal_short (673aaa32)",
-        "nt_10k_late_filing_short (3db5eb00)",
-        "starboard_13d_filing_long (571ec598)",
-        "cybersecurity_8k_item_105_short (8844b439)"
-      ],
-      "scan_hits_pending": 0,
-      "next_session_focus": "Open the P2 non-event slot. Run 3-min novelty check first: grep dead_ends/known_effects for any candidate before designing a test."
-    }
+    "handoff": "\"Today investigated whether NT 10-Q late filing short (directionally valid, 71% neg @3d, Wilcoxon p=0.008 OOS) could be made tradeable via filters. Tested 3 stacks: (1) 5% close-based stop, (2) + no-healthcare, (3) + liquidity filter (min $10 price, $10M dollar vol). Stack 1-2 barely clear IS threshold. Stack 3 COLLAPSES OOS to p=0.62, direction 40%. Root cause: signal concentrates in illiquid pump stocks (overnight gaps of 30-55%+) where execution is impractical. Recorded DEAD END. Tool: tools/"
   }
 }
