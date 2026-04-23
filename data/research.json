@@ -1595,8 +1595,8 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 41386979,
+    "sessions_today": 0,
+    "tokens_today": 0,
     "sessions_by_day": [
       {
         "date": "2026-04-23",
@@ -1737,11 +1737,6 @@
         "date": "2026-03-26",
         "sessions": 10,
         "tokens": 82955820
-      },
-      {
-        "date": "2026-03-25",
-        "sessions": 10,
-        "tokens": 88404828
       }
     ]
   },
