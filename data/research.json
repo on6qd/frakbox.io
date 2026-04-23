@@ -4306,6 +4306,21 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
+        "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
+        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -4314,21 +4329,6 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
-      },
-      {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
-      },
-      {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
       }
     ],
     "handoff": "\"Session 2026-04-23: Tested S&P MidCap 400 addition signal as natural extension of validated S&P 500 addition signal. 6-step investigation. Hypothesis: pure index-reshuffle additions produce tradeable positive drift between announcement and effective date. Universe: 197 parsed 'Market cap change' events 2017-2026 (IS n=82, OOS n=107). Result: DEAD END. IS +1.42% abn 3d p=0.129 (fails), OOS +0.53% abn 3d p=0.112 direction 52% (fails). OOS magnitude half of IS. Root cause: $85B indexed in MidCap 4"
