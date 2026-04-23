@@ -1595,9 +1595,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 1,
+    "tokens_today": 7498284,
     "sessions_by_day": [
+      {
+        "date": "2026-04-24",
+        "sessions": 1,
+        "tokens": 7498284
+      },
       {
         "date": "2026-04-23",
         "sessions": 10,
@@ -4248,6 +4253,12 @@
       "investigated": "S&P MidCap 400 addition signal as natural extension of validated S&P 500 addition signal. 6-step investigation: universe 197 'Market cap change' events 2017-2026 split IS (n=82, pre-2023) / OOS (n=107, 2023+), benchmark MDY, event date = effective_date - 7 calendar days (announcement proxy). Also checked MIDCO Form 10 filing status (May 12 Investor Day approaching).",
       "findings": "Tested whether S&P MidCap 400 index additions produce the same tradeable drift as S&P 500 additions. They do not \u2014 the effect is about ten times smaller because the amount of indexed money tracking MidCap 400 is about two hundred times less than the S&P 500. Confirmed our validated S&P 500 signal doesn't transfer to smaller sibling indices.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-24",
+      "investigated": "Strategic PIPE long signal: 8-K Item 3.02 filings tagged dilutive_pipe high/medium by v1 classifier, in large-cap (>$500M) + price>$5 universe. 6-step hypothesis investigation.",
+      "findings": "Tested a potential buy signal based on specific PIPE financing filings by large biotech companies. Found preliminary evidence it produced +10-15% returns during 2023-2024, but strangely no matching filings appeared in 2025-2026 \u2014 suggesting the pattern may have ended or the detection logic needs updating.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4326,6 +4337,6 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": "\"Session 2026-04-23: Tested S&P MidCap 400 addition signal as natural extension of validated S&P 500 addition signal. 6-step investigation. Hypothesis: pure index-reshuffle additions produce tradeable positive drift between announcement and effective date. Universe: 197 parsed 'Market cap change' events 2017-2026 (IS n=82, OOS n=107). Result: DEAD END. IS +1.42% abn 3d p=0.129 (fails), OOS +0.53% abn 3d p=0.112 direction 52% (fails). OOS magnitude half of IS. Root cause: $85B indexed in MidCap 4"
+    "handoff": "\"Session 2026-04-24: Investigated STRATEGIC PIPE LONG signal \\u2014 8-K Item 3.02 filings classified as dilutive_pipe high/medium by v1 classifier, applied to large-cap (>$500M) + price>$5 universe. 6-step investigation.\\n\\nHYPOTHESIS: Given large-cap US company, when files 8-K Item 3.02 with Securities Purchase Agreement + registration rights + accredited investor language, then stock produces positive abn returns (mechanism: major biotech/pharma strategic investor round priced at premium).\\n\\n"
   }
 }
