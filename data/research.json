@@ -1481,10 +1481,14 @@
       {
         "name": "nke_insider_cluster_april2026_day5_close",
         "reason": "{\"status\": \"OOS_MISS\", \"date\": \"2026-04-22\", \"signal\": \"insider_buying_cluster\", \"symbol\": \"NKE\", \"entry_date\": \"2026-04-15\", \"entry_price\": 45.08, \"entry_spy\": 695.26, \"close_date\": \"2026-04-22\", \"close_price\": 45.68, \"close_spy\": 711.21, \"nke_return_pct\": 1.33, \"spy_return_pct\": 2.29, \"abnormal_return_pct\": -0.96, \"expected_abnormal_target_pct\": 2.5, \"direction_correct\": false, \"notes\": \"Theoretical OOS (no real position entered). 5-day hold from 2026-04-15 entry. NKE +1.33%, SPY +2.29%, abnormal -0.96%. Miss vs +2.5% target. Insider cluster t+1 benchmark (42.5% pos rate) continues to disappoint.\"}"
+      },
+      {
+        "name": "iwm_hyg_residual_divergence_2026_04_23",
+        "reason": "{\"reason\": \"IWM residual divergence from rolling regression on HYG+SPY (z>2\\u03c3) shows classic IS/OOS sign flip. IS (pre-2022) pos_trigs +0.34% at 5d (MOMENTUM, wrong direction, p=0.023). OOS (post-2022) pos_trigs -0.48% at 5d (MEAN-REVERSION, right direction, p=0.114). Sign flips are disqualifying per methodology. Both directions fail direction>55% and |abs_ret|>0.5% in OOS.\", \"session\": \"2026-04-23 orchestrator\", \"test_params\": \"60-day rolling regression, z=2sigma residual threshold, horizons 1/3/5d, OOS split 2022-01-01\", \"sample_sizes\": \"IS: 93 pos / 99 neg triggers; OOS: 38 pos / 29 neg triggers\", \"closes_meta_finding\": \"exposure_to_event_conversion_meta_finding\"}"
       }
     ],
     "signal_count": 49,
-    "dead_end_count": 299,
+    "dead_end_count": 300,
     "literature_count": 25
   },
   "live_signals": [
@@ -1583,13 +1587,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 5803214,
+    "sessions_today": 3,
+    "tokens_today": 11092406,
     "sessions_by_day": [
       {
         "date": "2026-04-23",
-        "sessions": 1,
-        "tokens": 5803214
+        "sessions": 3,
+        "tokens": 11092406
       },
       {
         "date": "2026-04-22",
@@ -4181,6 +4185,18 @@
       "investigated": "Handoff priorities: verify DRVN short, close NKE OOS, run daily scanner, implement lead-lag scanner pre-filter (P2).",
       "findings": "Cleaned up stale scan alerts, closed a 5-day out-of-sample test on NKE (miss), and taught the scanner to auto-reject lead-lag results between assets that are already parts of each other (e.g., a bank stock leading the broad market is just mechanical inclusion, not a real signal).",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-23",
+      "investigated": "Final dispositive test on exposure-to-event conversion via residual divergence trigger (IWM/HYG pair, 60d rolling regression, z=2sigma threshold, OOS split 2022-01-01).",
+      "findings": "Tested whether a small-cap ETF reliably bounces back after drifting away from credit-market signals. The relationship flipped direction between older and newer data \u2014 so there is no stable trade there. Closed this line of research and locked in a rule to stop repeating it.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-23",
+      "investigated": "Threshold (33), Exposure (23), Lead-lag (7), Cointegration (7), Regime (6), Calendar (8), Structural Break (5) = 62 tests total",
+      "findings": "Screened 62 tests across 8 hypothesis classes. Found 2 new OOS-confirmed signals: tech sector sensitivity to 2-year yields and gold leading materials stocks. Threshold mean-reversion failed canonical validation; calendar anomalies show no edge.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4234,6 +4250,21 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "DELISTING NOTICE 8K 301 SHORT AUTO-DETECTED: DRVN on 2026-04-21. VALIDATED SIGNAL: short for 10d hold, expected -3.92% abnormal return. Action: Clone ",
+        "priority": 10,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] XLK -> FRED:DGS2 negative exposure: beta=-0.009 (t=-3.31, p=0.0010, R2=0.886, n=998). OOS: beta=0.048, p<0.05 CONFIRMED. Tech sector shows ",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] GLD -> XLB lead-lag: Gold Granger-causes Materials (XLB) at 2-day lag. IS: F=3.43, p=0.0326, lag=2. OOS: CONFIRMED at lag=2. Investigate fo",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -4242,23 +4273,8 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
-      },
-      {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
-      },
-      {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "[{\"priority\": \"P0\", \"task\": \"Monitor DRVN short (hyp 995a7465): entry .33 2026-04-22, -2.5% day1. 10d hold expires 2026-05-06, 10% stop. Expected -3.92% abnormal. Check daily vs SPY.\"}, {\"priority\": \"P0\", \"task\": \"Monitor SPY VIX-recovery trade (hyp b63a0168): entry .74 up +11%. Deadline 2026-04-27. trade_loop handles deadline exit.\"}, {\"priority\": \"P1\", \"task\": \"Run daily_scanner.py (tools/daily_scanner.py). 2026-04-23 run returned no new scan hits (only DRVN, already cloned).\"}, {\"priority\": \""
+    "handoff": "[{\"priority\": \"P0\", \"task\": \"DRVN short hyp 995a7465: entry $12.33 2026-04-22 day1 -2.5%. 10d hold to 2026-05-06, 10% stop, expected -3.92% abnormal. trade_loop handles.\"}, {\"priority\": \"P0\", \"task\": \"SPY VIX-recovery hyp b63a0168: entry $639.74 +10.9%. Deadline 2026-04-27.\"}, {\"priority\": \"P1\", \"task\": \"Daily scanner. 2026-04-23 AM run: no new hits.\"}, {\"priority\": \"P1\", \"task\": \"Pending hypotheses waiting for scanner hits: #673aaa32 seo_bought_deal, #3db5eb00 nt_10k, #571ec598 starboard_13d, #"
   }
 }
