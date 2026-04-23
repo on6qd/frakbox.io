@@ -1485,10 +1485,14 @@
       {
         "name": "iwm_hyg_residual_divergence_2026_04_23",
         "reason": "{\"reason\": \"IWM residual divergence from rolling regression on HYG+SPY (z>2\\u03c3) shows classic IS/OOS sign flip. IS (pre-2022) pos_trigs +0.34% at 5d (MOMENTUM, wrong direction, p=0.023). OOS (post-2022) pos_trigs -0.48% at 5d (MEAN-REVERSION, right direction, p=0.114). Sign flips are disqualifying per methodology. Both directions fail direction>55% and |abs_ret|>0.5% in OOS.\", \"session\": \"2026-04-23 orchestrator\", \"test_params\": \"60-day rolling regression, z=2sigma residual threshold, horizons 1/3/5d, OOS split 2022-01-01\", \"sample_sizes\": \"IS: 93 pos / 99 neg triggers; OOS: 38 pos / 29 neg triggers\", \"closes_meta_finding\": \"exposure_to_event_conversion_meta_finding\"}"
+      },
+      {
+        "name": "defm14a_merger_proxy_post_filing_long",
+        "reason": "IS/OOS sign inversion at all horizons (IS 5d +0.16% flat, OOS 5d -1.46% p=0.017 recent-only). Full sample null (5d -0.64% p=0.15). OOS negative tilt is regime artifact (bullish SPY vs beta-anchored merger targets), per signal_recency_subgroup_check_rule. Merger targets decouple from SPY beta post-filing -> SPY-adjusted returns become artifact, not alpha. Raw merger arb spread 0.2-0.5% over 5d insufficient vs transaction costs. n=274 IS+OOS, 2019-2024. Scanner tools/defm14a_scanner.py validated but signal dead. Result IDs: T-8fb2336f, T-079e9657, T-6c5db229."
       }
     ],
     "signal_count": 49,
-    "dead_end_count": 300,
+    "dead_end_count": 301,
     "literature_count": 25
   },
   "live_signals": [
@@ -1587,13 +1591,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 14996208,
+    "sessions_today": 5,
+    "tokens_today": 20276490,
     "sessions_by_day": [
       {
         "date": "2026-04-23",
-        "sessions": 4,
-        "tokens": 14996208
+        "sessions": 5,
+        "tokens": 20276490
       },
       {
         "date": "2026-04-22",
@@ -4208,6 +4212,12 @@
       "date": "2026-04-23",
       "investigated": "Queue triage: resolved 3 scan hits (DRVN delisting already traded; XLK-DGS2 exposure and GLD-XLB lead-lag auto-closed per canonical rules). Identified gap in data_tasks commodity-sector lead-lag auto-suppression (covered futures only, not ETFs). Ran daily scanner \u2014 clean, no new actionables.",
       "findings": "Cleaned up three stale research leads and closed a small but recurring blind spot in our scan filters \u2014 commodity ETF signals against sector ETFs will now be automatically flagged as known dead ends instead of triggering fresh investigations.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-23",
+      "investigated": "DEFM14A (definitive merger proxy) post-filing abnormal return hypothesis. Built on existing but untested tools/defm14a_scanner.py. 395 raw DEFM14A filings 2019-2024, 274 tradable. Hypothesis: large-cap targets filing DEFM14A show +0.3% 5d abnormal return vs SPY (spread compression thesis).",
+      "findings": "Tested whether stocks that file a definitive merger proxy (DEFM14A) with the SEC outperform the market in the week after filing. The answer is no: the signal shows sign inversion across time periods and is not tradable. A plausible reason: once a merger deal is announced with fixed cash consideration, the target stock effectively stops moving with the market, so market-adjusted returns become a statistical artifact rather than real alpha.",
       "tag": "dead_end"
     }
   ],
