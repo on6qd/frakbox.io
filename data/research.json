@@ -4255,16 +4255,6 @@
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] XLK -> FRED:DGS2 negative exposure: beta=-0.009 (t=-3.31, p=0.0010, R2=0.886, n=998). OOS: beta=0.048, p<0.05 CONFIRMED. Tech sector shows ",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] GLD -> XLB lead-lag: Gold Granger-causes Materials (XLB) at 2-day lag. IS: F=3.43, p=0.0326, lag=2. OOS: CONFIRMED at lag=2. Investigate fo",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
@@ -4273,6 +4263,16 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
     "handoff": "[{\"priority\": \"P0\", \"task\": \"DRVN short hyp 995a7465: entry $12.33 2026-04-22 day1 -2.5%. 10d hold to 2026-05-06, 10% stop, expected -3.92% abnormal. trade_loop handles.\"}, {\"priority\": \"P0\", \"task\": \"SPY VIX-recovery hyp b63a0168: entry $639.74 +10.9%. Deadline 2026-04-27.\"}, {\"priority\": \"P1\", \"task\": \"Daily scanner. 2026-04-23 AM run: no new hits.\"}, {\"priority\": \"P1\", \"task\": \"Pending hypotheses waiting for scanner hits: #673aaa32 seo_bought_deal, #3db5eb00 nt_10k, #571ec598 starboard_13d, #"
