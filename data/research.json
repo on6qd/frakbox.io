@@ -1595,13 +1595,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 33810667,
+    "sessions_today": 10,
+    "tokens_today": 41386979,
     "sessions_by_day": [
       {
         "date": "2026-04-23",
-        "sessions": 8,
-        "tokens": 33810667
+        "sessions": 10,
+        "tokens": 41386979
       },
       {
         "date": "2026-04-22",
@@ -4241,6 +4241,18 @@
       "investigated": "NT 10-Q late filing short \u2014 attempted to convert untradeable directional signal into tradeable large-cap strategy via sector filter (exclude healthcare) + 5%% close-based stop-loss + liquidity filter (min $10 price, min $10M avg dollar volume). Tested IS (T-8887e2ab, 57 events) and OOS (T-dda35472, 55 events) samples separately against pre-registered criteria.",
       "findings": "Explored whether a known directional signal in late SEC quarterly reports could be turned into a tradeable strategy. Result: the effect comes almost entirely from tiny illiquid stocks that gap overnight, so filtering to tradeable names eliminates the edge. Signal parked as a dead end.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-23",
+      "investigated": "Threshold, Calendar, Regime, Structural Break, Lead-Lag, Cointegration, Exposure screens: 50 tests total",
+      "findings": "Screened 50 statistical tests across 7 hypothesis classes. Threshold tests show p<0.05 but fail canonical retests (by design). Factor exposures validate known models but offer no novel signals. No scan hits added to queue.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-23",
+      "investigated": "S&P MidCap 400 addition signal as natural extension of validated S&P 500 addition signal. 6-step investigation: universe 197 'Market cap change' events 2017-2026 split IS (n=82, pre-2023) / OOS (n=107, 2023+), benchmark MDY, event date = effective_date - 7 calendar days (announcement proxy). Also checked MIDCO Form 10 filing status (May 12 Investor Day approaching).",
+      "findings": "Tested whether S&P MidCap 400 index additions produce the same tradeable drift as S&P 500 additions. They do not \u2014 the effect is about ten times smaller because the amount of indexed money tracking MidCap 400 is about two hundred times less than the S&P 500. Confirmed our validated S&P 500 signal doesn't transfer to smaller sibling indices.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4319,6 +4331,6 @@
         "category": "ceo_sudden_departure_short"
       }
     ],
-    "handoff": "\"Today investigated whether NT 10-Q late filing short (directionally valid, 71% neg @3d, Wilcoxon p=0.008 OOS) could be made tradeable via filters. Tested 3 stacks: (1) 5% close-based stop, (2) + no-healthcare, (3) + liquidity filter (min $10 price, $10M dollar vol). Stack 1-2 barely clear IS threshold. Stack 3 COLLAPSES OOS to p=0.62, direction 40%. Root cause: signal concentrates in illiquid pump stocks (overnight gaps of 30-55%+) where execution is impractical. Recorded DEAD END. Tool: tools/"
+    "handoff": "\"Session 2026-04-23: Tested S&P MidCap 400 addition signal as natural extension of validated S&P 500 addition signal. 6-step investigation. Hypothesis: pure index-reshuffle additions produce tradeable positive drift between announcement and effective date. Universe: 197 parsed 'Market cap change' events 2017-2026 (IS n=82, OOS n=107). Result: DEAD END. IS +1.42% abn 3d p=0.129 (fails), OOS +0.53% abn 3d p=0.112 direction 52% (fails). OOS magnitude half of IS. Root cause: $85B indexed in MidCap 4"
   }
 }
