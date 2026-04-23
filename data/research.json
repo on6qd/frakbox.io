@@ -1595,13 +1595,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 7498284,
+    "sessions_today": 2,
+    "tokens_today": 15323284,
     "sessions_by_day": [
       {
         "date": "2026-04-24",
-        "sessions": 1,
-        "tokens": 7498284
+        "sessions": 2,
+        "tokens": 15323284
       },
       {
         "date": "2026-04-23",
@@ -4259,6 +4259,12 @@
       "investigated": "Strategic PIPE long signal: 8-K Item 3.02 filings tagged dilutive_pipe high/medium by v1 classifier, in large-cap (>$500M) + price>$5 universe. 6-step hypothesis investigation.",
       "findings": "Tested a potential buy signal based on specific PIPE financing filings by large biotech companies. Found preliminary evidence it produced +10-15% returns during 2023-2024, but strangely no matching filings appeared in 2025-2026 \u2014 suggesting the pattern may have ended or the detection logic needs updating.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-24",
+      "investigated": "Strategic PIPE 2025-2026 0-event puzzle. Built tools/item_302_2025_diagnostic.py to classify all 485 2025+ largecap Item 3.02 filings and compare tier distribution vs 2023-2024 validated signal (12 events, +10.8% h=5d).",
+      "findings": "Investigated why a promising biotech large-cap signal (captured 12 events in 2023-2024 averaging +11% gain) showed zero events in 2025-2026. The SEC filing server temporarily blocked our automated lookups, so we could not directly reclassify 2025+ filings. Analysis of existing data suggests our classification rules changed mid-investigation and now route the same kinds of filings into a different bucket \u2014 the signal may still exist, just relabeled. Next session will finish the reclassification on a slower pace to confirm.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4337,6 +4343,6 @@
         "category": "signal_refinement"
       }
     ],
-    "handoff": "\"Session 2026-04-24: Investigated STRATEGIC PIPE LONG signal \\u2014 8-K Item 3.02 filings classified as dilutive_pipe high/medium by v1 classifier, applied to large-cap (>$500M) + price>$5 universe. 6-step investigation.\\n\\nHYPOTHESIS: Given large-cap US company, when files 8-K Item 3.02 with Securities Purchase Agreement + registration rights + accredited investor language, then stock produces positive abn returns (mechanism: major biotech/pharma strategic investor round priced at premium).\\n\\n"
+    "handoff": "\"Session 2026-04-24 afternoon: Investigated strategic PIPE 2025-2026 0-event puzzle (from Apr 24 morning handoff). Built tools/item_302_2025_diagnostic.py to classify all 485 2025+ largecap (>$500M) Item 3.02 filings using cached market_cap_cache.json (485 events qualify vs 441 from Apr 24 analysis \\u2014 slightly broader since price filter skipped in this session). \\n\\nATTEMPT RESULT: SEC EDGAR rate-limited IP after initial 6-worker diagnostic burst. All 485 classifications came back as unknown"
   }
 }
