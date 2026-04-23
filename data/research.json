@@ -1591,13 +1591,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 20276490,
+    "sessions_today": 7,
+    "tokens_today": 28147882,
     "sessions_by_day": [
       {
         "date": "2026-04-23",
-        "sessions": 5,
-        "tokens": 20276490
+        "sessions": 7,
+        "tokens": 28147882
       },
       {
         "date": "2026-04-22",
@@ -4218,6 +4218,18 @@
       "date": "2026-04-23",
       "investigated": "DEFM14A (definitive merger proxy) post-filing abnormal return hypothesis. Built on existing but untested tools/defm14a_scanner.py. 395 raw DEFM14A filings 2019-2024, 274 tradable. Hypothesis: large-cap targets filing DEFM14A show +0.3% 5d abnormal return vs SPY (spread compression thesis).",
       "findings": "Tested whether stocks that file a definitive merger proxy (DEFM14A) with the SEC outperform the market in the week after filing. The answer is no: the signal shows sign inversion across time periods and is not tradable. A plausible reason: once a merger deal is announced with fixed cash consideration, the target stock effectively stops moving with the market, so market-adjusted returns become a statistical artifact rather than real alpha.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-23",
+      "investigated": "Multi-class hypothesis screen: 6 themes across 45+ tests (thresholds, exposures, lead-lag, calendars, regimes, cointegration)",
+      "findings": "Screened 45+ tests across 6 hypothesis classes. Found 1 new relationship: oil prices lead emerging markets by 4 days (p=0.0037). Threshold strategies failed canonical retest (spurious volatility clustering). Queued oil\u2192EEM lead-lag for investigation.",
+      "tag": "validation"
+    },
+    {
+      "date": "2026-04-23",
+      "investigated": "Canonical retest of scan hit 56bf8424: Oil (CL=F) Granger-causes EEM at 4-day lag (F=3.92, p=0.0037 IS, OOS confirmed). Extended commodity-sector lead-lag dead-end rule to broad emerging-market ETFs.",
+      "findings": "Tested a potential signal where large oil price moves would predict emerging-market stocks four days later. It didn't hold up \u2014 directions were weakly consistent, but the size of the expected move stayed too small to trade after costs. Added emerging-market ETFs to the auto-dismiss list so similar dead ends close automatically in future scans.",
       "tag": "dead_end"
     }
   ],
