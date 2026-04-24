@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 69,
-    "pending": 4,
+    "total_hypotheses": 70,
+    "pending": 5,
     "active": 2,
     "completed": 8,
     "invalidated": 6,
@@ -1590,18 +1590,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 6,
+    "active_signal_types": 7,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 15323284,
+    "sessions_today": 4,
+    "tokens_today": 21097770,
     "sessions_by_day": [
       {
         "date": "2026-04-24",
-        "sessions": 2,
-        "tokens": 15323284
+        "sessions": 4,
+        "tokens": 21097770
       },
       {
         "date": "2026-04-23",
@@ -4265,6 +4265,18 @@
       "investigated": "Strategic PIPE 2025-2026 0-event puzzle. Built tools/item_302_2025_diagnostic.py to classify all 485 2025+ largecap Item 3.02 filings and compare tier distribution vs 2023-2024 validated signal (12 events, +10.8% h=5d).",
       "findings": "Investigated why a promising biotech large-cap signal (captured 12 events in 2023-2024 averaging +11% gain) showed zero events in 2025-2026. The SEC filing server temporarily blocked our automated lookups, so we could not directly reclassify 2025+ filings. Analysis of existing data suggests our classification rules changed mid-investigation and now route the same kinds of filings into a different bucket \u2014 the signal may still exist, just relabeled. Next session will finish the reclassification on a slower pace to confirm.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-24",
+      "investigated": "THRESHOLD SCREEN: Macro indicator crossings (VIX, oil, copper, gold, rates, dollar) vs equities, sectors, bonds",
+      "findings": "Threshold screen: 56 tests on VIX/commodity/rate crossings. 1 canonical pass found: VIX>30\u2192TLT (bonds short, -1.3% 5d). 20 raw hits but 19 failed canonical retest\u2014strong evidence of regime-specific effects post-2022. Robust signal rare in threshold space.",
+      "tag": "exploration"
+    },
+    {
+      "date": "2026-04-24",
+      "investigated": "VIX>30 -> TLT short 5d signal (scan hit de77bdf9, priority=8). Full 6-step investigation on the sole canonical-pass signal from the 56-test threshold screen.",
+      "findings": "When markets panic hard (VIX above 30), long-term Treasury bonds typically fall more than stocks over the next five days \u2014 the opposite of the traditional 'safe haven' story. Pre-registered a paper trade to short bonds the next time this happens.",
+      "tag": "discovery"
     }
   ],
   "pipeline": {
@@ -4318,6 +4330,11 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
+        "priority": 7,
+        "category": "activation_watch"
+      },
+      {
         "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
         "priority": 5,
         "category": "insider_buying_cluster"
@@ -4336,11 +4353,6 @@
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
-      },
-      {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
       }
     ],
     "handoff": "\"Session 2026-04-24 afternoon: Investigated strategic PIPE 2025-2026 0-event puzzle (from Apr 24 morning handoff). Built tools/item_302_2025_diagnostic.py to classify all 485 2025+ largecap (>$500M) Item 3.02 filings using cached market_cap_cache.json (485 events qualify vs 441 from Apr 24 analysis \\u2014 slightly broader since price filter skipped in this session). \\n\\nATTEMPT RESULT: SEC EDGAR rate-limited IP after initial 6-worker diagnostic burst. All 485 classifications came back as unknown"
