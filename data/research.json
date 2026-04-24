@@ -1493,10 +1493,14 @@
       {
         "name": "nt_10q_tradeable_large_cap_short",
         "reason": "NT 10-Q signal (71% neg direction) is untradeable at large-cap. Close-based 5% stop does not protect from overnight gaps (SVMB +55%, NIKA +41%). Liquidity filter (min price $10 + min $10M dollar vol + no healthcare) inverts OOS signal (p=0.62, direction 40%, N=10). Pre-registered thresholds fail. Signal concentrates in illiquid pump stocks where execution impractical. Tested 2026-04-23 via tools/nt10q_sector_filter_stoploss.py. Knowledge key: nt_10q_tradeable_large_cap_dead_end_2026_04_23."
+      },
+      {
+        "name": "item_302_dp_hm_largecap_pipe_long_2025_oos",
+        "reason": "Direct OOS test (n=18 2025+ dp_hm tier events, same classifier as 2023-2024 signal) fails pre-registered criteria at all horizons. 5d mean +2.64% (< +5% threshold), p=0.73 (> 0.05), median +0.5%. Pooled 2023-2026 (n=30) also fails pre-reg (p=0.17). 2023-2024 +10.81% 5d p=0.023 signal was regime-specific to 2023-2024 biotech PIPE wave. See strategic_pipe_2025_oos_expansion_dead_end_2026_04_24 for full details."
       }
     ],
     "signal_count": 49,
-    "dead_end_count": 302,
+    "dead_end_count": 303,
     "literature_count": 25
   },
   "live_signals": [
@@ -1595,13 +1599,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 21097770,
+    "sessions_today": 6,
+    "tokens_today": 29110931,
     "sessions_by_day": [
       {
         "date": "2026-04-24",
-        "sessions": 4,
-        "tokens": 21097770
+        "sessions": 6,
+        "tokens": 29110931
       },
       {
         "date": "2026-04-23",
@@ -4277,6 +4281,18 @@
       "investigated": "VIX>30 -> TLT short 5d signal (scan hit de77bdf9, priority=8). Full 6-step investigation on the sole canonical-pass signal from the 56-test threshold screen.",
       "findings": "When markets panic hard (VIX above 30), long-term Treasury bonds typically fall more than stocks over the next five days \u2014 the opposite of the traditional 'safe haven' story. Pre-registered a paper trade to short bonds the next time this happens.",
       "tag": "discovery"
+    },
+    {
+      "date": "2026-04-24",
+      "investigated": "Strategic PIPE 2025-2026 0-event puzzle (continuation from rate-limited prior session). Ran tools/item_302_2025_diagnostic.py sequentially to classify all 485 2025+ largecap Item 3.02 filings. Tested expansion hypothesis: does the validated 2023-2024 dilutive_pipe high/med +10.81% 5d PIPE-long signal extend to 2025-2026 via same tier (direct OOS) or via strategic_pipe tier (modern classifier routing)?",
+      "findings": "Tested whether a private-placement-based stock signal that worked in 2023-2024 still works in 2025-2026 on the same type of filings. It doesn't \u2014 the original effect was tied to a specific biotech financing wave that has since faded. We're retiring that signal and moving on.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-24",
+      "investigated": "Cointegration pairs screen: tested 50 pairs across 10 sectors (consumer, energy, finance, tech, utilities, healthcare, industrials, REITs, airlines, streaming)",
+      "findings": "Screened 50 cointegration pairs, found 7 significant (p<0.05). Only BA-RTX passes OOS validation. Key insight: 2022 structural break disrupted most historical cointegration relationships. BA-RTX advances; others queued for break-point testing.",
+      "tag": "validation"
     }
   ],
   "pipeline": {
@@ -4330,31 +4346,31 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "[SCAN HIT] BA-RTX cointegration: p=0.032 (CANONICAL OOS CONFIRMED). Hedge ratio=0.736, half-life=55.8d, n=1006. Both test and OOS pass stationarity. S",
+        "priority": 9,
+        "category": "scan_hit"
+      },
+      {
         "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
         "priority": 7,
         "category": "activation_watch"
       },
       {
-        "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
-        "priority": 5,
-        "category": "insider_buying_cluster"
+        "question": "[SCAN HIT] V-MA cointegration: p=0.033 (IS significant). Hedge ratio=0.534, half-life=19.5d, n=1006. OOS non-significant. Fast mean-reversion cycle (1",
+        "priority": 7,
+        "category": "scan_hit"
       },
       {
-        "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
+        "question": "[SCAN HIT] TSLA-F cointegration: p=0.028 (IS significant). Hedge ratio=24.3, half-life=30.7d, n=1006. OOS non-significant. Automotive peers.",
+        "priority": 7,
+        "category": "scan_hit"
       },
       {
-        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
-      },
-      {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] COP-EOG cointegration: p=0.046 (IS significant). Hedge ratio=0.954, half-life=23.7d, n=1006. OOS non-significant. Energy exploration compan",
+        "priority": 7,
+        "category": "scan_hit"
       }
     ],
-    "handoff": "\"Session 2026-04-24 afternoon: Investigated strategic PIPE 2025-2026 0-event puzzle (from Apr 24 morning handoff). Built tools/item_302_2025_diagnostic.py to classify all 485 2025+ largecap (>$500M) Item 3.02 filings using cached market_cap_cache.json (485 events qualify vs 441 from Apr 24 analysis \\u2014 slightly broader since price filter skipped in this session). \\n\\nATTEMPT RESULT: SEC EDGAR rate-limited IP after initial 6-worker diagnostic burst. All 485 classifications came back as unknown"
+    "handoff": "\"Session 2026-04-24 session3 (evening): RESOLVED strategic PIPE 2025-2026 0-event puzzle. Ran tools/item_302_2025_diagnostic.py successfully (sequential 0.15s delay, no SEC 429). Found 20 dilutive_pipe high/med events in 2025+ largecap (not 0 \\u2014 the earlier '0' was a price filter + BCH/dup-exclusion artifact). \\nPRIMARY HYPOTHESIS (2025+ dp_hm reproduces 2023-2024 +10.81% 5d signal): DISCONFIRMED. 18 post-dedup events show +2.64% 5d mean, p=0.73, median 0.5%. Pooled 2023-2026 n=30 also fails"
   }
 }
