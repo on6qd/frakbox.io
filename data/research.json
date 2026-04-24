@@ -1599,13 +1599,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 44703678,
+    "sessions_today": 10,
+    "tokens_today": 50426565,
     "sessions_by_day": [
       {
         "date": "2026-04-24",
-        "sessions": 9,
-        "tokens": 44703678
+        "sessions": 10,
+        "tokens": 50426565
       },
       {
         "date": "2026-04-23",
@@ -4311,6 +4311,12 @@
       "investigated": "Regime screen (90 tests) + Exposure screen (75 tests) + Lead-lag screen (13 tests) + Structural break screen (42 tests) + Threshold screen (7 tests) + Calendar screen (10 tests) + Cointegration screen (12 tests). Total: ~245 quick statistical tests.",
       "findings": "Screened 245+ tests (regime, exposure, lead-lag, structural break, threshold, calendar, cointegration). Found 70+ significant (p<0.05) relationships. Novel: cross-stock Granger causality (BA\u2192RTX, SLB\u2192CHTR, MCD\u2192SBUX). Strong regime effects (SPY VIX p=0.0014, 31bps/day spread) but need OOS validation. Queued 5 hits for investigation.",
       "tag": "validation"
+    },
+    {
+      "date": "2026-04-24",
+      "investigated": "Cleared all 5 fresh overnight scan hits (BA-RTX, SLB-CHTR, MCD-SBUX Granger lead-lags; SPY VIX regime; XLE-CL=F 2024-03-15 structural break). Each triaged against existing canonical rules before any new data work.",
+      "findings": "Triaged five overnight statistical scan hits and found all of them to be known false positives \u2014 three duplicated prior dead ends (same-sector stock pairs like Boeing/RTX, McDonald's/Starbucks) and two failed standard out-of-sample retesting. No new tradeable patterns, but captured a methodology rule so the scanner stops re-surfacing sector-matched stock pairs.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4369,26 +4375,26 @@
         "category": "activation_watch"
       },
       {
-        "question": "[SCAN HIT] SLB-CHTR cross-sector lead-lag: SLB (oilfield) Granger-causes CHTR (telecom), p=0.00002. Test for tradeable lead-lag signal.",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] SPY VIX regime: VIX volatility regime creates statistically significant SPY return differences (p=0.00144). Spread=0.31%/day. Investigate O",
-        "priority": 6,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] XLE-crude structural break 2024-03-15: Energy-oil relationship structural break at Fed rate pause (Mar 2024), p\u22480. Test if tradeable mean-r",
-        "priority": 6,
-        "category": "scan_hit"
-      },
-      {
         "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
         "priority": 5,
         "category": "insider_buying_cluster"
+      },
+      {
+        "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
+        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
+        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
+        "priority": 3,
+        "category": "forward_stock_split_largecap_short"
       }
     ],
-    "handoff": "\"Session 2026-04-24 (evening, 4th of day): Investigated forward stock splits as a NEW signal class. Found directional short pattern on payable-date entry with ratio >=2x in large-cap S&P 500 universe 2019-2024. Pooled 10d abnormal -2.34% p=0.012, 27% positive rate, 24/33 events negative. IS p=0.155 at 10d (underpowered standalone), OOS p=0.033. Passes multiple-testing threshold on pool. Directionally consistent in 5 of 6 year groups. Recorded as preliminary, NOT traded. Added to research queue +"
+    "handoff": "[\"1. SPY-long trade b63a0168 auto-closes 2026-04-27 (Mon) via trade_loop \\u2014 no action needed.\", \"2. DRVN short 995a7465 active through 2026-05-06 (delisting_notice_8k signal).\", \"3. TLT short activation-watch 106c77c6 \\u2014 monitor next VIX>30 close (VIX=19.3 at session, earliest trigger ~2026-04-26 per 30-day cluster buffer).\", \"4. SCANNER SESSION (Sonnet): scan_hit queue is EMPTY after this session's batch closure. Before queuing any new lead-lag / Granger scan hits, consult stockpair_sam"
   }
 }
