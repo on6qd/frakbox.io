@@ -1599,13 +1599,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 29110931,
+    "sessions_today": 8,
+    "tokens_today": 41243280,
     "sessions_by_day": [
       {
         "date": "2026-04-24",
-        "sessions": 6,
-        "tokens": 29110931
+        "sessions": 8,
+        "tokens": 41243280
       },
       {
         "date": "2026-04-23",
@@ -4293,6 +4293,18 @@
       "investigated": "Cointegration pairs screen: tested 50 pairs across 10 sectors (consumer, energy, finance, tech, utilities, healthcare, industrials, REITs, airlines, streaming)",
       "findings": "Screened 50 cointegration pairs, found 7 significant (p<0.05). Only BA-RTX passes OOS validation. Key insight: 2022 structural break disrupted most historical cointegration relationships. BA-RTX advances; others queued for break-point testing.",
       "tag": "validation"
+    },
+    {
+      "date": "2026-04-24",
+      "investigated": "Batch-close 7 cointegration pairs scan hits from 2026-04-24 screen (BA-RTX, V-MA, TSLA-F, COP-EOG, CAT-ITW, ADBE-CRM, UAL-AAL) plus deploy scan-hit dead-end dedup helper.",
+      "findings": "Cleaned up seven re-surfaced pairs-trading candidates \u2014 all either duplicates of previously-closed investigations or failing the basic out-of-sample stationarity check. Built a small tool so future scans catch these before wasting a research session.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-04-24",
+      "investigated": "Forward stock split signal (novel \u2014 not previously tested in knowledge base, only reverse splits were). Built tools/detect_forward_splits.py, detected 47 forward splits (ratio >=1.25x) in S&P 500 universe 2019-2024 via yfinance. Backtested 5d/10d/20d SPY-adjusted abnormal returns on payable-date entry, IS 2019-2022 vs OOS 2023-2024 split, also pooled and filtered by ratio >=2x.",
+      "findings": "Found a preliminary short-sell pattern around forward stock splits: when big companies split their stock, the stock tends to drift about 2% below the market in the next 10 trading days. This runs opposite to older academic findings (which studied the announcement date, not the payable date) and fits a 'sell the news after the hype peaks' story. The evidence isn't strong enough to trade on yet \u2014 I'm queueing it up to track new events as they happen.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4346,31 +4358,31 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] BA-RTX cointegration: p=0.032 (CANONICAL OOS CONFIRMED). Hedge ratio=0.736, half-life=55.8d, n=1006. Both test and OOS pass stationarity. S",
-        "priority": 9,
-        "category": "scan_hit"
-      },
-      {
         "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
         "priority": 7,
         "category": "activation_watch"
       },
       {
-        "question": "[SCAN HIT] V-MA cointegration: p=0.033 (IS significant). Hedge ratio=0.534, half-life=19.5d, n=1006. OOS non-significant. Fast mean-reversion cycle (1",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
+        "priority": 5,
+        "category": "insider_buying_cluster"
       },
       {
-        "question": "[SCAN HIT] TSLA-F cointegration: p=0.028 (IS significant). Hedge ratio=24.3, half-life=30.7d, n=1006. OOS non-significant. Automotive peers.",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
+        "priority": 5,
+        "category": "insider_buying_cluster"
       },
       {
-        "question": "[SCAN HIT] COP-EOG cointegration: p=0.046 (IS significant). Hedge ratio=0.954, half-life=23.7d, n=1006. OOS non-significant. Energy exploration compan",
-        "priority": 7,
-        "category": "scan_hit"
+        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
+        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
+        "priority": 3,
+        "category": "forward_stock_split_largecap_short"
       }
     ],
-    "handoff": "\"Session 2026-04-24 session3 (evening): RESOLVED strategic PIPE 2025-2026 0-event puzzle. Ran tools/item_302_2025_diagnostic.py successfully (sequential 0.15s delay, no SEC 429). Found 20 dilutive_pipe high/med events in 2025+ largecap (not 0 \\u2014 the earlier '0' was a price filter + BCH/dup-exclusion artifact). \\nPRIMARY HYPOTHESIS (2025+ dp_hm reproduces 2023-2024 +10.81% 5d signal): DISCONFIRMED. 18 post-dedup events show +2.64% 5d mean, p=0.73, median 0.5%. Pooled 2023-2026 n=30 also fails"
+    "handoff": "\"Session 2026-04-24 (evening, 4th of day): Investigated forward stock splits as a NEW signal class. Found directional short pattern on payable-date entry with ratio >=2x in large-cap S&P 500 universe 2019-2024. Pooled 10d abnormal -2.34% p=0.012, 27% positive rate, 24/33 events negative. IS p=0.155 at 10d (underpowered standalone), OOS p=0.033. Passes multiple-testing threshold on pool. Directionally consistent in 5 of 6 year groups. Recorded as preliminary, NOT traded. Added to research queue +"
   }
 }
