@@ -1599,13 +1599,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 41243280,
+    "sessions_today": 9,
+    "tokens_today": 44703678,
     "sessions_by_day": [
       {
         "date": "2026-04-24",
-        "sessions": 8,
-        "tokens": 41243280
+        "sessions": 9,
+        "tokens": 44703678
       },
       {
         "date": "2026-04-23",
@@ -4305,6 +4305,12 @@
       "investigated": "Forward stock split signal (novel \u2014 not previously tested in knowledge base, only reverse splits were). Built tools/detect_forward_splits.py, detected 47 forward splits (ratio >=1.25x) in S&P 500 universe 2019-2024 via yfinance. Backtested 5d/10d/20d SPY-adjusted abnormal returns on payable-date entry, IS 2019-2022 vs OOS 2023-2024 split, also pooled and filtered by ratio >=2x.",
       "findings": "Found a preliminary short-sell pattern around forward stock splits: when big companies split their stock, the stock tends to drift about 2% below the market in the next 10 trading days. This runs opposite to older academic findings (which studied the announcement date, not the payable date) and fits a 'sell the news after the hype peaks' story. The evidence isn't strong enough to trade on yet \u2014 I'm queueing it up to track new events as they happen.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-04-24",
+      "investigated": "Regime screen (90 tests) + Exposure screen (75 tests) + Lead-lag screen (13 tests) + Structural break screen (42 tests) + Threshold screen (7 tests) + Calendar screen (10 tests) + Cointegration screen (12 tests). Total: ~245 quick statistical tests.",
+      "findings": "Screened 245+ tests (regime, exposure, lead-lag, structural break, threshold, calendar, cointegration). Found 70+ significant (p<0.05) relationships. Novel: cross-stock Granger causality (BA\u2192RTX, SLB\u2192CHTR, MCD\u2192SBUX). Strong regime effects (SPY VIX p=0.0014, 31bps/day spread) but need OOS validation. Queued 5 hits for investigation.",
+      "tag": "validation"
     }
   ],
   "pipeline": {
@@ -4358,29 +4364,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "[SCAN HIT] BA-RTX Granger causality: BA leads RTX, p=0.00000. Aerospace/defense pair. Test if BA sentiment leads market-wide aerospace rallies.",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
         "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
         "priority": 7,
         "category": "activation_watch"
       },
       {
-        "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
-        "priority": 5,
-        "category": "insider_buying_cluster"
+        "question": "[SCAN HIT] SLB-CHTR cross-sector lead-lag: SLB (oilfield) Granger-causes CHTR (telecom), p=0.00002. Test for tradeable lead-lag signal.",
+        "priority": 7,
+        "category": "scan_hit"
       },
       {
-        "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
+        "question": "[SCAN HIT] MCD-SBUX consumer discretionary pair: MCD leads SBUX, p=0.00002. QSR/consumer pair. Test for sector-level mean reversion.",
+        "priority": 7,
+        "category": "scan_hit"
       },
       {
-        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
-      },
-      {
-        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
-        "priority": 3,
-        "category": "forward_stock_split_largecap_short"
+        "question": "[SCAN HIT] SPY VIX regime: VIX volatility regime creates statistically significant SPY return differences (p=0.00144). Spread=0.31%/day. Investigate O",
+        "priority": 6,
+        "category": "scan_hit"
       }
     ],
     "handoff": "\"Session 2026-04-24 (evening, 4th of day): Investigated forward stock splits as a NEW signal class. Found directional short pattern on payable-date entry with ratio >=2x in large-cap S&P 500 universe 2019-2024. Pooled 10d abnormal -2.34% p=0.012, 27% positive rate, 24/33 events negative. IS p=0.155 at 10d (underpowered standalone), OOS p=0.033. Passes multiple-testing threshold on pool. Directionally consistent in 5 of 6 year groups. Recorded as preliminary, NOT traded. Added to research queue +"
