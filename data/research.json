@@ -2,11 +2,11 @@
   "summary": {
     "total_hypotheses": 70,
     "pending": 5,
-    "active": 2,
-    "completed": 8,
+    "active": 0,
+    "completed": 10,
     "invalidated": 6,
-    "direction_accuracy": "3/8",
-    "patterns_discovered": 4,
+    "direction_accuracy": "4/10",
+    "patterns_discovered": 6,
     "reliable_patterns": [
       {
         "event_type": "sp500_52w_low_momentum_short",
@@ -27,6 +27,10 @@
         "accuracy": "2/4",
         "avg_confidence": 6.5
       },
+      "vix_spike_above_30_spy_long": {
+        "accuracy": "0/1",
+        "avg_confidence": 6.0
+      },
       "xme_copper_hgf_exposure_apr2026": {
         "accuracy": "0/1",
         "avg_confidence": 6.5
@@ -34,6 +38,10 @@
       "xli_hgf_copper_structural_break_2022": {
         "accuracy": "0/1",
         "avg_confidence": 6.0
+      },
+      "delisting_notice_8k_301_short": {
+        "accuracy": "1/1",
+        "avg_confidence": 7.0
       }
     }
   },
@@ -283,6 +291,21 @@
         "name": "copper_sectorwide_break_2022_meta_extension_2026_04_21",
         "status": "INFORMATIONAL_META_EXTENSION",
         "magnitude_pct": 0.0
+      },
+      {
+        "name": "trader_deadline_tz_comparison_bug_2026_06_08",
+        "status": "moderate",
+        "magnitude_pct": 0.0
+      },
+      {
+        "name": "index_timing_self_benchmark_artifact_2026_06_08",
+        "status": "moderate",
+        "magnitude_pct": 11.8
+      },
+      {
+        "name": "delisting_notice_8k_301_short_drvn_oos_2026_06_08",
+        "status": "weak",
+        "magnitude_pct": 5.37
       }
     ],
     "dead_ends": [
@@ -1499,7 +1522,7 @@
         "reason": "Direct OOS test (n=18 2025+ dp_hm tier events, same classifier as 2023-2024 signal) fails pre-registered criteria at all horizons. 5d mean +2.64% (< +5% threshold), p=0.73 (> 0.05), median +0.5%. Pooled 2023-2026 (n=30) also fails pre-reg (p=0.17). 2023-2024 +10.81% 5d p=0.023 signal was regime-specific to 2023-2024 biotech PIPE wave. See strategic_pipe_2025_oos_expansion_dead_end_2026_04_24 for full details."
       }
     ],
-    "signal_count": 49,
+    "signal_count": 52,
     "dead_end_count": 303,
     "literature_count": 25
   },
@@ -1591,17 +1614,55 @@
           "date": "2026-04-13"
         }
       ]
+    },
+    {
+      "event_type": "vix_spike_above_30_spy_long",
+      "state": "EXPLORING",
+      "total_experiments": 1,
+      "effective_independent_n": 1,
+      "effective_correct_n": 0,
+      "last_updated": "2026-06-08T09:51:31.767812",
+      "experiments": [
+        {
+          "symbol": "SPY",
+          "correct": false,
+          "return_pct": 0.42,
+          "date": "2026-06-08"
+        }
+      ]
+    },
+    {
+      "event_type": "delisting_notice_8k_301_short",
+      "state": "EXPLORING",
+      "total_experiments": 1,
+      "effective_independent_n": 1,
+      "effective_correct_n": 1,
+      "last_updated": "2026-06-08T09:51:32.138776",
+      "experiments": [
+        {
+          "symbol": "DRVN",
+          "correct": true,
+          "return_pct": -9.45,
+          "date": "2026-06-08"
+        }
+      ]
     }
   ],
   "focus": {
-    "active_signal_types": 7,
+    "active_signal_types": 5,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
-    "sessions_by_day": []
+    "sessions_today": 1,
+    "tokens_today": 4278037,
+    "sessions_by_day": [
+      {
+        "date": "2026-06-08",
+        "sessions": 1,
+        "tokens": 4278037
+      }
+    ]
   },
   "journal": [
     {
@@ -4171,6 +4232,12 @@
       "investigated": "Cleared all 5 fresh overnight scan hits (BA-RTX, SLB-CHTR, MCD-SBUX Granger lead-lags; SPY VIX regime; XLE-CL=F 2024-03-15 structural break). Each triaged against existing canonical rules before any new data work.",
       "findings": "Triaged five overnight statistical scan hits and found all of them to be known false positives \u2014 three duplicated prior dead ends (same-sector stock pairs like Boeing/RTX, McDonald's/Starbucks) and two failed standard out-of-sample retesting. No new tradeable patterns, but captured a methodology rule so the scanner stops re-surfacing sector-matched stock pairs.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-08",
+      "investigated": "Two active positions (SPY VIX>30 long, DRVN delisting short) were flagged overdue \u2014 open 5-6 weeks past their pre-registered deadlines. Investigated why trade_loop never closed them.",
+      "findings": "Found and fixed a bug that had quietly stopped the system from closing trades on their deadlines, leaving two positions open weeks too long. After the fix, both closed automatically \u2014 a market-timing bet on a fear spike gained about 16%, while a bet against a delisting-risk stock lost as that stock rallied with the market.",
+      "tag": "infrastructure"
     }
   ],
   "pipeline": {
@@ -4279,6 +4346,6 @@
         "category": "forward_stock_split_largecap_short"
       }
     ],
-    "handoff": "[\"1. SPY-long trade b63a0168 auto-closes 2026-04-27 (Mon) via trade_loop \\u2014 no action needed.\", \"2. DRVN short 995a7465 active through 2026-05-06 (delisting_notice_8k signal).\", \"3. TLT short activation-watch 106c77c6 \\u2014 monitor next VIX>30 close (VIX=19.3 at session, earliest trigger ~2026-04-26 per 30-day cluster buffer).\", \"4. SCANNER SESSION (Sonnet): scan_hit queue is EMPTY after this session's batch closure. Before queuing any new lead-lag / Granger scan hits, consult stockpair_sam"
+    "handoff": "\"Session 2026-06-08: spent the session resolving the two flagged data-integrity overdue positions. ROOT CAUSE found & fixed: trader.check_stop_losses() compared naive now vs tz-aware deadline -> swallowed TypeError -> deadline closes NEVER fired (all positions could overstay). Fix deployed; the daemon auto-closed both within the same cycle. SPY VIX>30 long = +15.7% absolute WIN (mislabeled direction_correct=false by same-index benchmark artifact \\u2014 documented). DRVN delisting short = genuine"
   }
 }

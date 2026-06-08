@@ -1,36 +1,6 @@
 {
   "hypotheses": [
     {
-      "id": "b63a0168",
-      "status": "active",
-      "created": "2026-03-24",
-      "event_type": "vix spike above 30 spy long",
-      "symbol": "SPY",
-      "direction": "long",
-      "magnitude_pct": 1.69,
-      "timeframe_days": 20,
-      "confidence": 6,
-      "thesis": "When VIX closes above 30 (first close in 30-day cluster), buy SPY at next open and hold 20 trading days. VIX>30 signals extreme fear that systematical",
-      "report": "Investigation Report: b63a0168\n============================================================\nStatus: active  \u2014  Created 2026-03-24\n\n1. Hypothesis\n------------------------------------------------------------\nGiven that vix spike above 30 spy long events have historically produced\nabnormal returns in affected stocks,\nwhen vix closes above 30 (first close in 30-day cluster), buy spy at next open\nand hold 20 trading days. vix>30 signals extreme fear that systematically\nmean-reverts over the following 3-4 weeks,\nthen SPY should rise by approximately 1.69% within 20 trading days.\n\nThe proposed causal mechanism: Extreme fear pricing (VIX>30) overshoots fair\nvolatility through forced selling by leveraged funds (margin calls, forced\ndeleveraging, risk-parity rebalancing), creating a predictable mean-reversion\nopportunity as institutional buyers re-enter at cheaper prices.\n\nMechanism evidence:\n  - Actors and incentives: Leveraged retail/institutional funds face margin\ncalls during VIX>30 episodes. Risk-parity funds reduce equity exposure\nmechanically. Once deleveraging completes, long-term allocators (pension\nfunds, sovereign wealth) deploy cash at perceived discounts.\n  - Transmission channel: VIX>30 only occurs when selling pressure has already\nbeen extreme. Mechanical exhaustion of forced selling combined with systematic\nbuy-at-dip mandates creates predictable mean reversion. 30-day clustering\ncaptures only the FIRST spike.\n  - Academic reference: Whaley (2000) VIX as investor fear gauge, Journal of\nPortfolio Management. CBOE VIX White Paper. N=54 events 2000-2026: 5d\nmean=+1.19% p=0.012, 20d mean=+1.69% p=0.045. Both horizons at p<0.05 passes\nmultiple testing.\n\n2. Test Design\n------------------------------------------------------------\nThe backtest covered 54 historical events across 1 stocks (SPY). All returns\nare measured as abnormal returns against SPY to isolate the event effect from\nbroad market moves.\n\nSurvivorship bias control: SPY index has inherent survivorship bias (failing\ncompanies removed). This affects the level of SPY returns not the\ntiming/cyclical nature of our signal.\n\nSelection bias control: 30-day clustering is conservative \u2014 we take only the\nFIRST close above 30 in each 30-day window.\n\nConfounders recorded at entry:\n  broad market direction: Tested across bull (2003, 2009, 2019, 2021,\n  2023-2024), bear (2001-2002, 2008, 2022), and recovery markets. Effect\n  persists in all regimes.\n  vix level: By definition VIX>30 at entry. Effect holds across VIX 30-80\n  range.\n  sector trend: SPY IS the market benchmark. No sector bias by construction.\n  survivorship bias: SPY index has inherent survivorship bias but affects\n  level not timing of signal.\n  selection bias: 30-day clustering is conservative. Takes only first event in\n  cluster.\n  event timing: Entry at open of day after VIX close>30. VIX data available at\n  market close.\n  market regime: Signal holds across all market regimes 2000-2026. Modern era\n  (2015+) shows strongest validation (20d: +2.92%, dir=79%).\n\n3. Success Criteria (locked before testing)\n------------------------------------------------------------\nValid if: SPY abnormal return (vs nothing, SPY IS benchmark so vs T-bill rate)\n> +1.0% over 20 trading days from entry date. Secondary: direction > 50%.\nBased on N=54 historical VIX>30 spikes, avg 20d return +1.69%, consistency\n66.7%. Given pre-sold regime (SPY -7.3% pre-Liberation Day), consider valid if\nreturn > 0% (positive abnormal) over 20d.\n\nConfidence: 6/10  |  Pre-registration: 288e37f0e621375a\n\n4. Outcome\n------------------------------------------------------------\n  Entry:    2026-03-30 at $639.74\n  Deadline: 2026-04-27\n  Stop:     8.0%\n\nTrade is active. No outcome yet.\n\n5. Conclusion\n------------------------------------------------------------\nAwaiting outcome.\n\n6. What Comes Next\n------------------------------------------------------------\nComplete the current investigation first.\n",
-      "entry_date": "2026-03-30",
-      "deadline": "2026-04-27"
-    },
-    {
-      "id": "995a7465",
-      "status": "active",
-      "created": "2026-04-13",
-      "event_type": "delisting notice 8k 301 short",
-      "symbol": "DRVN",
-      "direction": "short",
-      "magnitude_pct": 3.92,
-      "timeframe_days": 10,
-      "confidence": 7,
-      "thesis": "Large-cap company (>$500M market cap) receives forced delisting notice or fails continued listing standards, disclosing via 8-K Item 3.01 (NOT volunta",
-      "report": null,
-      "entry_date": "2026-04-22",
-      "deadline": "2026-05-06"
-    },
-    {
       "id": "673aaa32",
       "status": "pending",
       "created": "2026-04-10",
@@ -204,6 +174,24 @@
       "closed_date": "2026-04-04"
     },
     {
+      "id": "b63a0168",
+      "status": "completed",
+      "created": "2026-03-24",
+      "event_type": "vix spike above 30 spy long",
+      "symbol": "SPY",
+      "direction": "long",
+      "magnitude_pct": 1.69,
+      "timeframe_days": 20,
+      "confidence": 6,
+      "thesis": "When VIX closes above 30 (first close in 30-day cluster), buy SPY at next open and hold 20 trading days. VIX>30 signals extreme fear that systematical",
+      "report": "Investigation Report: b63a0168\n============================================================\nStatus: completed  \u2014  Created 2026-03-24\n\n1. Hypothesis\n------------------------------------------------------------\nGiven that vix spike above 30 spy long events have historically produced\nabnormal returns in affected stocks,\nwhen vix closes above 30 (first close in 30-day cluster), buy spy at next open\nand hold 20 trading days. vix>30 signals extreme fear that systematically\nmean-reverts over the following 3-4 weeks,\nthen SPY should rise by approximately 1.69% within 20 trading days.\n\nThe proposed causal mechanism: Extreme fear pricing (VIX>30) overshoots fair\nvolatility through forced selling by leveraged funds (margin calls, forced\ndeleveraging, risk-parity rebalancing), creating a predictable mean-reversion\nopportunity as institutional buyers re-enter at cheaper prices.\n\nMechanism evidence:\n  - Actors and incentives: Leveraged retail/institutional funds face margin\ncalls during VIX>30 episodes. Risk-parity funds reduce equity exposure\nmechanically. Once deleveraging completes, long-term allocators (pension\nfunds, sovereign wealth) deploy cash at perceived discounts.\n  - Transmission channel: VIX>30 only occurs when selling pressure has already\nbeen extreme. Mechanical exhaustion of forced selling combined with systematic\nbuy-at-dip mandates creates predictable mean reversion. 30-day clustering\ncaptures only the FIRST spike.\n  - Academic reference: Whaley (2000) VIX as investor fear gauge, Journal of\nPortfolio Management. CBOE VIX White Paper. N=54 events 2000-2026: 5d\nmean=+1.19% p=0.012, 20d mean=+1.69% p=0.045. Both horizons at p<0.05 passes\nmultiple testing.\n\n2. Test Design\n------------------------------------------------------------\nThe backtest covered 54 historical events across 1 stocks (SPY). All returns\nare measured as abnormal returns against SPY to isolate the event effect from\nbroad market moves.\n\nSurvivorship bias control: SPY index has inherent survivorship bias (failing\ncompanies removed). This affects the level of SPY returns not the\ntiming/cyclical nature of our signal.\n\nSelection bias control: 30-day clustering is conservative \u2014 we take only the\nFIRST close above 30 in each 30-day window.\n\nConfounders recorded at entry:\n  broad market direction: Tested across bull (2003, 2009, 2019, 2021,\n  2023-2024), bear (2001-2002, 2008, 2022), and recovery markets. Effect\n  persists in all regimes.\n  vix level: By definition VIX>30 at entry. Effect holds across VIX 30-80\n  range.\n  sector trend: SPY IS the market benchmark. No sector bias by construction.\n  survivorship bias: SPY index has inherent survivorship bias but affects\n  level not timing of signal.\n  selection bias: 30-day clustering is conservative. Takes only first event in\n  cluster.\n  event timing: Entry at open of day after VIX close>30. VIX data available at\n  market close.\n  market regime: Signal holds across all market regimes 2000-2026. Modern era\n  (2015+) shows strongest validation (20d: +2.92%, dir=79%).\n\n3. Success Criteria (locked before testing)\n------------------------------------------------------------\nValid if: SPY abnormal return (vs nothing, SPY IS benchmark so vs T-bill rate)\n> +1.0% over 20 trading days from entry date. Secondary: direction > 50%.\nBased on N=54 historical VIX>30 spikes, avg 20d return +1.69%, consistency\n66.7%. Given pre-sold regime (SPY -7.3% pre-Liberation Day), consider valid if\nreturn > 0% (positive abnormal) over 20d.\n\nConfidence: 6/10  |  Pre-registration: 288e37f0e621375a\n\n4. Outcome\n------------------------------------------------------------\n  Stock return:     +15.71%\n  SPY return:       +15.29%\n  Abnormal return:  +0.42%\n  Direction:        WRONG\n\n5. Conclusion\n------------------------------------------------------------\nThe hypothesis is not supported. The stock moved in the opposite direction\nfrom what was predicted.\n\n6. What Comes Next\n------------------------------------------------------------\nThe hypothesis failed and no post-mortem was recorded. Without understanding\nwhy it failed, generating a new hypothesis risks repeating the same mistake.\nWrite the post-mortem first.\n",
+      "result_pct": 15.71,
+      "abnormal_pct": 0.42,
+      "direction_correct": false,
+      "magnitude_ratio": null,
+      "closed_date": "2026-06-08"
+    },
+    {
       "id": "d3026015",
       "status": "completed",
       "created": "2026-04-12",
@@ -238,6 +226,24 @@
       "direction_correct": null,
       "magnitude_ratio": null,
       "closed_date": ""
+    },
+    {
+      "id": "995a7465",
+      "status": "completed",
+      "created": "2026-04-13",
+      "event_type": "delisting notice 8k 301 short",
+      "symbol": "DRVN",
+      "direction": "short",
+      "magnitude_pct": 3.92,
+      "timeframe_days": 10,
+      "confidence": 7,
+      "thesis": "Large-cap company (>$500M market cap) receives forced delisting notice or fails continued listing standards, disclosing via 8-K Item 3.01 (NOT volunta",
+      "report": null,
+      "result_pct": -5.4,
+      "abnormal_pct": -9.45,
+      "direction_correct": true,
+      "magnitude_ratio": null,
+      "closed_date": "2026-06-08"
     },
     {
       "id": "061ae3a8",
@@ -963,9 +969,9 @@
   ],
   "counts": {
     "total": 70,
-    "active": 2,
+    "active": 0,
     "pending": 5,
-    "completed": 8,
+    "completed": 10,
     "abandoned": 46,
     "invalidated": 6,
     "superseded": 2
