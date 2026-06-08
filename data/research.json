@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_hypotheses": 70,
-    "pending": 5,
+    "total_hypotheses": 72,
+    "pending": 7,
     "active": 0,
     "completed": 10,
     "invalidated": 6,
@@ -1649,18 +1649,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 5,
+    "active_signal_types": 6,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 4278037,
+    "sessions_today": 2,
+    "tokens_today": 8906233,
     "sessions_by_day": [
       {
         "date": "2026-06-08",
-        "sessions": 1,
-        "tokens": 4278037
+        "sessions": 2,
+        "tokens": 8906233
       }
     ]
   },
@@ -4238,6 +4238,12 @@
       "investigated": "Two active positions (SPY VIX>30 long, DRVN delisting short) were flagged overdue \u2014 open 5-6 weeks past their pre-registered deadlines. Investigated why trade_loop never closed them.",
       "findings": "Found and fixed a bug that had quietly stopped the system from closing trades on their deadlines, leaving two positions open weeks too long. After the fix, both closed automatically \u2014 a market-timing bet on a fear spike gained about 16%, while a bet against a delisting-risk stock lost as that stock rallied with the market.",
       "tag": "infrastructure"
+    },
+    {
+      "date": "2026-06-08",
+      "investigated": "S&P 500 Q2 2026 quarterly rebalance (announced June 5, effective June 22). Verified the additions and matched them to our validated index-addition signal.",
+      "findings": "When S&P Dow Jones added Marvell and Flex to the S&P 500 (effective June 22), the fund placed bets that both stocks would rise into the change, since index funds are forced to buy newly added companies. This repeats a pattern that has worked well in past quarterly rebalances.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4318,7 +4324,20 @@
         "symbol": "TBD"
       }
     ],
-    "pending_triggers": [],
+    "pending_triggers": [
+      {
+        "symbol": "MRVL",
+        "direction": "long",
+        "trigger": "next_market_open",
+        "event_type": "sp500 index addition"
+      },
+      {
+        "symbol": "FLEX",
+        "direction": "long",
+        "trigger": "next_market_open",
+        "event_type": "sp500 index addition"
+      }
+    ],
     "research_queue": [
       {
         "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
@@ -4346,6 +4365,6 @@
         "category": "forward_stock_split_largecap_short"
       }
     ],
-    "handoff": "\"Session 2026-06-08: spent the session resolving the two flagged data-integrity overdue positions. ROOT CAUSE found & fixed: trader.check_stop_losses() compared naive now vs tz-aware deadline -> swallowed TypeError -> deadline closes NEVER fired (all positions could overstay). Fix deployed; the daemon auto-closed both within the same cycle. SPY VIX>30 long = +15.7% absolute WIN (mislabeled direction_correct=false by same-index benchmark artifact \\u2014 documented). DRVN delisting short = genuine"
+    "handoff": "\"Session 2026-06-08 (investigation): Picked up the time-sensitive S&P 500 Q2 2026 rebalance. Confirmed via CNBC/Bloomberg/S&P: announced 06-05 after close, effective before open 06-22; ADDITIONS = Marvell (MRVL) + Flex (FLEX), removals POOL+CPB. This fires our VALIDATED signal sp500_index_addition (quarterly-only, long, +5.2% hist, +8.89% Q1-2026 OOS 4/4, reliability 0.75; mechanism=forced index-fund buying, Shleifer 1986). Pre-registered 2 hypotheses (MRVL=0a684d8c, FLEX=8aad7987), long, $5k ea"
   }
 }
