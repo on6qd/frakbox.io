@@ -1667,13 +1667,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 18710369,
+    "sessions_today": 0,
+    "tokens_today": 0,
     "sessions_by_day": [
       {
         "date": "2026-06-08",
-        "sessions": 5,
-        "tokens": 18710369
+        "sessions": 6,
+        "tokens": 20689285
       }
     ]
   },
@@ -4275,6 +4275,12 @@
       "investigated": "The benchmark-class methodology bug that caused the last two sessions to chase false signals. Built a guard so non-equity targets (Treasuries, commodities, FX, crypto) no longer get benchmarked against the SPY stock index.",
       "findings": "Fixed a flaw in our testing method: signals on bonds, commodities, and currencies were being unfairly compared against the stock market, which made some look profitable when they were not. After the fix, a bond-trading signal we were excited about turned out to be a mirage.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-08",
+      "investigated": "Calendar anomaly screen across 56 assets (sectors, ETFs, mega-caps, bonds, commodities, intl equities) with monthly, day-of-week, and turn-of-month patterns",
+      "findings": "Scanned 56 calendar-anomaly tests. Found 2 hits: AAPL strong Monday effect (p=0.0001) and BABA Tue/Wed strength (p=0.0423). Both queued for investigation.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4371,6 +4377,16 @@
     ],
     "research_queue": [
       {
+        "question": "[SCAN HIT] AAPL day-of-week anomaly: p=0.0001 (H=24.42), n=5389. Monday effect dominant (0.284% vs Tue/Wed/Thu ~0.07-0.18%). Investigate feasibility o",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] BABA day-of-week anomaly: p=0.0423 (H=9.89), n=2944. Tue/Wed effect (0.220-0.232%) vs Thu (-0.084%). Investigate for mean-reversion or regi",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
         "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
         "priority": 7,
         "category": "activation_watch"
@@ -4384,16 +4400,6 @@
         "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
         "priority": 5,
         "category": "insider_buying_cluster"
-      },
-      {
-        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
-      },
-      {
-        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
-        "priority": 3,
-        "category": "forward_stock_split_largecap_short"
       }
     ],
     "handoff": "\"Session 2026-06-08 (investigation): No scan hits pending; market closed so MRVL/FLEX fills cannot be verified until 06-09 open. Built the benchmark-class guard flagged as priority #4 in the prior handoff \\u2014 the recurring methodology bug that burned the last TWO sessions. tools/asset_class.py classifies targets; canonical_retest_threshold defaults benchmark=auto -> SPY for equities, None(raw) for non-equities; market_data.get_price_around_date supports benchmark=None (abnormal==raw); data_ta"
