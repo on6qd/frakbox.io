@@ -1654,13 +1654,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 8906233,
+    "sessions_today": 3,
+    "tokens_today": 10185779,
     "sessions_by_day": [
       {
         "date": "2026-06-08",
-        "sessions": 2,
-        "tokens": 8906233
+        "sessions": 3,
+        "tokens": 10185779
       }
     ]
   },
@@ -4244,6 +4244,12 @@
       "investigated": "S&P 500 Q2 2026 quarterly rebalance (announced June 5, effective June 22). Verified the additions and matched them to our validated index-addition signal.",
       "findings": "When S&P Dow Jones added Marvell and Flex to the S&P 500 (effective June 22), the fund placed bets that both stocks would rise into the change, since index funds are forced to buy newly added companies. This repeats a pattern that has worked well in past quarterly rebalances.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-08",
+      "investigated": "Threshold Scanner: 57 tests across VIX/commodity/rate levels triggering mean-reversion on SPY/QQQ/IWM/sectors/bonds/gold. Calendar monthly & day-of-week anomalies. Test-type: binary threshold crossing events with canonical dual-sample retest.",
+      "findings": "Threshold scanner screened 57 macro trigger combinations. Found 1 significant, canonical-passing signal (VIX>35\u2192TLT negative return). Calendar anomalies (monthly/dow) show no effect.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4340,6 +4346,16 @@
     ],
     "research_queue": [
       {
+        "question": "[SCAN HIT] ^VIX>35.0 -> TLT: -1.80% 10d avg (p=0.0371, n=16). Canonical retest PASSED (pooled & recent). Both samples sig at p<0.05. TLT mean-reversio",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
+        "question": "[SCAN HIT] ^VIX>35.0 -> TLT: -1.80% 10d avg (p=0.0371, n=16). Canonical retest PASSED (both samples sig). TLT negative returns (bonds rally) on high V",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
         "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
         "priority": 7,
         "category": "activation_watch"
@@ -4353,16 +4369,6 @@
         "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
         "priority": 5,
         "category": "insider_buying_cluster"
-      },
-      {
-        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
-      },
-      {
-        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
-        "priority": 3,
-        "category": "forward_stock_split_largecap_short"
       }
     ],
     "handoff": "\"Session 2026-06-08 (investigation): Picked up the time-sensitive S&P 500 Q2 2026 rebalance. Confirmed via CNBC/Bloomberg/S&P: announced 06-05 after close, effective before open 06-22; ADDITIONS = Marvell (MRVL) + Flex (FLEX), removals POOL+CPB. This fires our VALIDATED signal sp500_index_addition (quarterly-only, long, +5.2% hist, +8.89% Q1-2026 OOS 4/4, reliability 0.75; mechanism=forced index-fund buying, Shleifer 1986). Pre-registered 2 hypotheses (MRVL=0a684d8c, FLEX=8aad7987), long, $5k ea"
