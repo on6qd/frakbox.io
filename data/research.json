@@ -1,7 +1,7 @@
 {
   "summary": {
     "total_hypotheses": 72,
-    "pending": 7,
+    "pending": 6,
     "active": 0,
     "completed": 10,
     "invalidated": 6,
@@ -1520,10 +1520,14 @@
       {
         "name": "item_302_dp_hm_largecap_pipe_long_2025_oos",
         "reason": "Direct OOS test (n=18 2025+ dp_hm tier events, same classifier as 2023-2024 signal) fails pre-registered criteria at all horizons. 5d mean +2.64% (< +5% threshold), p=0.73 (> 0.05), median +0.5%. Pooled 2023-2026 (n=30) also fails pre-reg (p=0.17). 2023-2024 +10.81% 5d p=0.023 signal was regime-specific to 2023-2024 biotech PIPE wave. See strategic_pipe_2025_oos_expansion_dead_end_2026_04_24 for full details."
+      },
+      {
+        "name": "vix35_tlt_short_spy_benchmark_artifact_2026_06_08",
+        "reason": "VIX>35 first-close -> TLT short. Scan hit + canonical_retest PASSED (SPY-adjusted 5d pooled -4.68% p=0.0029, recent -4.56% p=0.035, n_pooled=9 n_recent=6). KILLED: the PASS is a SPY-benchmark artifact. On RAW TLT returns (the correct treatment for a Treasury ETF; SPY is not a valid benchmark for bonds): pooled 5d -1.86% p=0.13, pooled 10d -2.51% p=0.056, recent 5d -1.94% p=0.29, recent 10d -2.71% p=0.16 -- NONE pass p<0.05. The ~2.5x inflation comes entirely from subtracting SPY's strong post-capitulation bounce (SPY raw 5d +3.18% p=0.0049 on the same 9 dates). A standalone short-TLT position's P&L is RAW TLT, which is insignificant and underpowered. Event dates: 2015-08-24,2018-02-05,2018-12-24,2020-02-27,2020-10-28,2021-01-27,2022-03-07,2024-08-05,2025-04-04. Result T-79ec6603."
       }
     ],
     "signal_count": 52,
-    "dead_end_count": 303,
+    "dead_end_count": 304,
     "literature_count": 25
   },
   "live_signals": [
@@ -1649,18 +1653,18 @@
     }
   ],
   "focus": {
-    "active_signal_types": 6,
+    "active_signal_types": 5,
     "max_signal_types": 20,
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 10185779,
+    "sessions_today": 4,
+    "tokens_today": 14714364,
     "sessions_by_day": [
       {
         "date": "2026-06-08",
-        "sessions": 3,
-        "tokens": 10185779
+        "sessions": 4,
+        "tokens": 14714364
       }
     ]
   },
@@ -4250,6 +4254,12 @@
       "investigated": "Threshold Scanner: 57 tests across VIX/commodity/rate levels triggering mean-reversion on SPY/QQQ/IWM/sectors/bonds/gold. Calendar monthly & day-of-week anomalies. Test-type: binary threshold crossing events with canonical dual-sample retest.",
       "findings": "Threshold scanner screened 57 macro trigger combinations. Found 1 significant, canonical-passing signal (VIX>35\u2192TLT negative return). Calendar anomalies (monthly/dow) show no effect.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-08",
+      "investigated": "Top scan hit: VIX>35 -> TLT short, canonical_retest PASSED (SPY-adjusted 5d pooled -4.68% p=0.003, recent -4.56% p=0.035, n=9/6). Independently re-tested on RAW TLT returns and traced the source of the PASS. Also audited the related pre-registered pending hypothesis 106c77c6 (VIX>30 -> TLT short).",
+      "findings": "Investigated a statistical 'signal' claiming long-term Treasury bonds reliably fall after big volatility spikes. It turned out to be a measurement error: the test was secretly comparing bonds against the stock market, which rebounds sharply after panics. On its own, the bond move was just noise, so we discarded the idea and fixed the flawed test for future use.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4346,16 +4356,6 @@
     ],
     "research_queue": [
       {
-        "question": "[SCAN HIT] ^VIX>35.0 -> TLT: -1.80% 10d avg (p=0.0371, n=16). Canonical retest PASSED (pooled & recent). Both samples sig at p<0.05. TLT mean-reversio",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] ^VIX>35.0 -> TLT: -1.80% 10d avg (p=0.0371, n=16). Canonical retest PASSED (both samples sig). TLT negative returns (bonds rally) on high V",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
         "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
         "priority": 7,
         "category": "activation_watch"
@@ -4369,8 +4369,18 @@
         "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
         "priority": 5,
         "category": "insider_buying_cluster"
+      },
+      {
+        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
+        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
+        "priority": 3,
+        "category": "forward_stock_split_largecap_short"
       }
     ],
-    "handoff": "\"Session 2026-06-08 (investigation): Picked up the time-sensitive S&P 500 Q2 2026 rebalance. Confirmed via CNBC/Bloomberg/S&P: announced 06-05 after close, effective before open 06-22; ADDITIONS = Marvell (MRVL) + Flex (FLEX), removals POOL+CPB. This fires our VALIDATED signal sp500_index_addition (quarterly-only, long, +5.2% hist, +8.89% Q1-2026 OOS 4/4, reliability 0.75; mechanism=forced index-fund buying, Shleifer 1986). Pre-registered 2 hypotheses (MRVL=0a684d8c, FLEX=8aad7987), long, $5k ea"
+    "handoff": "\"Session 2026-06-08 (investigation): Cleared the only two priority-8 scan hits (VIX>35->TLT short). Both are SPY-benchmark artifacts: canonical_retest hardcodes SPY, invalid for a Treasury ETF. Raw TLT returns are insignificant (5d p=0.13, 10d p=0.056); the 'edge' is SPY's +3.18% post-capitulation bounce, uncapturable by a TLT short. Recorded dead_end vix35_tlt_short_spy_benchmark_artifact_2026_06_08 + canonical rule. Retired related pending hypothesis 106c77c6 (VIX>30 TLT short) which scored a "
   }
 }
