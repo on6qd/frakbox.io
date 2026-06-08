@@ -306,6 +306,11 @@
         "name": "delisting_notice_8k_301_short_drvn_oos_2026_06_08",
         "status": "weak",
         "magnitude_pct": 5.37
+      },
+      {
+        "name": "threshold_canonical_retest_nonequity_benchmark_invalid_rule_2026_06_08",
+        "status": "strong",
+        "magnitude_pct": 0.0
       }
     ],
     "dead_ends": [
@@ -1524,10 +1529,14 @@
       {
         "name": "vix35_tlt_short_spy_benchmark_artifact_2026_06_08",
         "reason": "VIX>35 first-close -> TLT short. Scan hit + canonical_retest PASSED (SPY-adjusted 5d pooled -4.68% p=0.0029, recent -4.56% p=0.035, n_pooled=9 n_recent=6). KILLED: the PASS is a SPY-benchmark artifact. On RAW TLT returns (the correct treatment for a Treasury ETF; SPY is not a valid benchmark for bonds): pooled 5d -1.86% p=0.13, pooled 10d -2.51% p=0.056, recent 5d -1.94% p=0.29, recent 10d -2.71% p=0.16 -- NONE pass p<0.05. The ~2.5x inflation comes entirely from subtracting SPY's strong post-capitulation bounce (SPY raw 5d +3.18% p=0.0049 on the same 9 dates). A standalone short-TLT position's P&L is RAW TLT, which is insignificant and underpowered. Event dates: 2015-08-24,2018-02-05,2018-12-24,2020-02-27,2020-10-28,2021-01-27,2022-03-07,2024-08-05,2025-04-04. Result T-79ec6603."
+      },
+      {
+        "name": "vix_above_35_tlt_short_raw_confirmed",
+        "reason": "VIX>35 -> TLT short is a DEAD END even under correct raw-return benchmark (the prior SPY-adjusted PASS was an artifact). Raw cluster-buffered: pooled 3d -1.15% p=0.015 (n=12) but recency subset (post-2020) fails canonical -> recency_subset_fails_regime_dependent. Not robust across samples. Verified after benchmark-class guard fix 2026-06-08, result_id T-0bb22676."
       }
     ],
-    "signal_count": 52,
-    "dead_end_count": 304,
+    "signal_count": 53,
+    "dead_end_count": 305,
     "literature_count": 25
   },
   "live_signals": [
@@ -1658,13 +1667,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 14714364,
+    "sessions_today": 5,
+    "tokens_today": 18710369,
     "sessions_by_day": [
       {
         "date": "2026-06-08",
-        "sessions": 4,
-        "tokens": 14714364
+        "sessions": 5,
+        "tokens": 18710369
       }
     ]
   },
@@ -4260,6 +4269,12 @@
       "investigated": "Top scan hit: VIX>35 -> TLT short, canonical_retest PASSED (SPY-adjusted 5d pooled -4.68% p=0.003, recent -4.56% p=0.035, n=9/6). Independently re-tested on RAW TLT returns and traced the source of the PASS. Also audited the related pre-registered pending hypothesis 106c77c6 (VIX>30 -> TLT short).",
       "findings": "Investigated a statistical 'signal' claiming long-term Treasury bonds reliably fall after big volatility spikes. It turned out to be a measurement error: the test was secretly comparing bonds against the stock market, which rebounds sharply after panics. On its own, the bond move was just noise, so we discarded the idea and fixed the flawed test for future use.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-08",
+      "investigated": "The benchmark-class methodology bug that caused the last two sessions to chase false signals. Built a guard so non-equity targets (Treasuries, commodities, FX, crypto) no longer get benchmarked against the SPY stock index.",
+      "findings": "Fixed a flaw in our testing method: signals on bonds, commodities, and currencies were being unfairly compared against the stock market, which made some look profitable when they were not. After the fix, a bond-trading signal we were excited about turned out to be a mirage.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4381,6 +4396,6 @@
         "category": "forward_stock_split_largecap_short"
       }
     ],
-    "handoff": "\"Session 2026-06-08 (investigation): Cleared the only two priority-8 scan hits (VIX>35->TLT short). Both are SPY-benchmark artifacts: canonical_retest hardcodes SPY, invalid for a Treasury ETF. Raw TLT returns are insignificant (5d p=0.13, 10d p=0.056); the 'edge' is SPY's +3.18% post-capitulation bounce, uncapturable by a TLT short. Recorded dead_end vix35_tlt_short_spy_benchmark_artifact_2026_06_08 + canonical rule. Retired related pending hypothesis 106c77c6 (VIX>30 TLT short) which scored a "
+    "handoff": "\"Session 2026-06-08 (investigation): No scan hits pending; market closed so MRVL/FLEX fills cannot be verified until 06-09 open. Built the benchmark-class guard flagged as priority #4 in the prior handoff \\u2014 the recurring methodology bug that burned the last TWO sessions. tools/asset_class.py classifies targets; canonical_retest_threshold defaults benchmark=auto -> SPY for equities, None(raw) for non-equities; market_data.get_price_around_date supports benchmark=None (abnormal==raw); data_ta"
   }
 }
