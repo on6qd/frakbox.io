@@ -1683,13 +1683,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 17691156,
+    "sessions_today": 6,
+    "tokens_today": 20976188,
     "sessions_by_day": [
       {
         "date": "2026-06-09",
-        "sessions": 5,
-        "tokens": 17691156
+        "sessions": 6,
+        "tokens": 20976188
       },
       {
         "date": "2026-06-08",
@@ -4332,6 +4332,12 @@
       "investigated": "Ran the full daily event-scanner sweep for the 5 pending validated signals (NT 10-K/Q, cybersecurity 8-K, SEO bought-deal, delisting 8-K, insider cluster) and acted on the operational handoff item to harden the delisting-8K scanner.",
       "findings": "Checked all the daily news-and-filings scanners for fresh trade ideas and found none worth acting on this time. Also fixed a flaw in the delisting detector so it now correctly ignores companies that are merely late filing a routine quarterly report rather than facing a real delisting.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-09",
+      "investigated": "Lead-lag (6 tests), cointegration pairs (12 tests), VIX/commodity thresholds (12 tests), regime screens (3 tests), calendar anomalies (9 tests), structural breaks (3 tests). Total: 45 tests.",
+      "findings": "Screened 45 market combinations for predictive signals. Found 1 validated utility-sector effect: 10Y yields above 4.5% reliably trigger XLU mean-reversion (1.27% over 5 days). Passed rigorous canonical false-positive filter.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4428,6 +4434,11 @@
     ],
     "research_queue": [
       {
+        "question": "[SCAN HIT] Threshold: FRED:DGS10 > 4.5 triggers XLU mean-reversion. Effect size=1.27% (5d), p=0.0255, canonical_passes=True (both pooled and recent sa",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
         "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
         "priority": 7,
         "category": "activation_watch"
@@ -4446,11 +4457,6 @@
         "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
         "priority": 5,
         "category": "insider_buying_cluster"
-      },
-      {
-        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
-        "priority": 3,
-        "category": "forward_stock_split_largecap_short"
       }
     ],
     "handoff": "\"Session 2026-06-09 (01:33 ET, market CLOSED, opens ~8h). Top monitoring task (MRVL/FLEX index-addition fills) blocked until next open. Ran full daily scanner sweep: NO new GO candidates (NT=0, cyber=0, SEO=0 GO, delisting=DRVN-only=NO-GO). Insider scan timed out on EDGAR but irrelevant given VIX~19 gate. Acted on handoff priority 4: built+deployed periodic-filing-delinquency classifier in delisting scanner, verified live on DRVN and regression-tested forced/voluntary preserved. Committed.\""
