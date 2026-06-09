@@ -1,13 +1,6 @@
 {
   "active": [
     {
-      "symbol": "MRVL",
-      "direction": "long",
-      "event_type": "sp500_index_addition",
-      "thesis": "Marvell Technology added to S&P 500 in Q2 2026 quarterly rebalance (announced 2026-06-05, effective 2026-06-22), replaci",
-      "opened_date": "2026-06-08"
-    },
-    {
       "symbol": "FLEX",
       "direction": "long",
       "event_type": "sp500_index_addition",
@@ -16,6 +9,17 @@
     }
   ],
   "recent_closed": [
+    {
+      "symbol": "MRVL",
+      "direction": "long",
+      "event_type": "sp500_index_addition",
+      "result_pct": -10.27,
+      "abnormal_pct": -9.66,
+      "exit_reason": "STOP-LOSS: MRVL down -10.3% (limit: -10.0%)",
+      "closed_date": "2026-06-09",
+      "thesis": "Marvell Technology added to S&P 500 in Q2 2026 quarterly rebalance (announced 2026-06-05, effective 2026-06-22), replaci",
+      "direction_correct": false
+    },
     {
       "symbol": "SPY",
       "direction": "long",

@@ -2,11 +2,11 @@
   "summary": {
     "total_hypotheses": 72,
     "pending": 4,
-    "active": 2,
-    "completed": 10,
+    "active": 1,
+    "completed": 11,
     "invalidated": 6,
-    "direction_accuracy": "4/10",
-    "patterns_discovered": 6,
+    "direction_accuracy": "4/11",
+    "patterns_discovered": 7,
     "reliable_patterns": [
       {
         "event_type": "sp500_52w_low_momentum_short",
@@ -42,6 +42,10 @@
       "delisting_notice_8k_301_short": {
         "accuracy": "1/1",
         "avg_confidence": 7.0
+      },
+      "sp500_index_addition": {
+        "accuracy": "0/1",
+        "avg_confidence": 10.0
       }
     }
   },
@@ -1685,6 +1689,22 @@
           "correct": true,
           "return_pct": -9.45,
           "date": "2026-06-08"
+        }
+      ]
+    },
+    {
+      "event_type": "sp500_index_addition",
+      "state": "EXPLORING",
+      "total_experiments": 1,
+      "effective_independent_n": 1,
+      "effective_correct_n": 0,
+      "last_updated": "2026-06-09T17:30:06.932940",
+      "experiments": [
+        {
+          "symbol": "MRVL",
+          "correct": false,
+          "return_pct": -9.66,
+          "date": "2026-06-09"
         }
       ]
     }
