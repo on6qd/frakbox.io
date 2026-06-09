@@ -1679,13 +1679,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 5726908,
+    "sessions_today": 3,
+    "tokens_today": 8484398,
     "sessions_by_day": [
       {
         "date": "2026-06-09",
-        "sessions": 2,
-        "tokens": 5726908
+        "sessions": 3,
+        "tokens": 8484398
       },
       {
         "date": "2026-06-08",
@@ -4310,6 +4310,12 @@
       "investigated": "Ran daily event scanners (NT 10-K/Q, cybersecurity 8-K, SEO bought-deal, delisting 8-K) for pending scanner-trigger hypotheses; investigated the one live candidate, DRVN delisting 8-K Item 3.01 filed 06-05.",
       "findings": "Checked the days corporate filings for tradeable signals. The only candidate, a delisting-related notice from Driven Brands, turned out to be a routine late-quarterly-report delay that the market already knew about \u2014 not a real shock \u2014 so we passed on it.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-09",
+      "investigated": "Factor Exposure Screen: 11 sectors x 8 drivers = 59 tests, 24 hits (41%)",
+      "findings": "Comprehensive scan across all S&P 500 sector ETFs vs macro drivers.\n\nFINDINGS (24 hits):\n- Copper (HG=F): Dominant in 9/11 sectors. Extreme in XLB (p=2.3e-25)\n- 10Y Yields (DGS10): Significant in 7/11",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4406,29 +4412,29 @@
     ],
     "research_queue": [
       {
-        "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
-        "priority": 7,
-        "category": "activation_watch"
+        "question": "[FACTOR EXPOSURE] XLE-CL=F: p<0.0001. Energy sector has strong positive exposure to crude oil prices (beta=0.030) Investigate for tradeable alpha.",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
-        "priority": 5,
-        "category": "insider_buying_cluster"
+        "question": "[FACTOR EXPOSURE] XLE-HG=F: p<0.0001. Energy sector has strong exposure to copper prices (beta=0.331) Investigate for tradeable alpha.",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
+        "question": "[FACTOR EXPOSURE] XLE-DGS10: p<0.0001. Energy sector has positive exposure to 10Y yields (beta=0.115) Investigate for tradeable alpha.",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
+        "question": "[FACTOR EXPOSURE] XLE-DGS2: p=0.0004. Energy sector has positive exposure to 2Y yields (beta=0.032) Investigate for tradeable alpha.",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
-        "priority": 3,
-        "category": "forward_stock_split_largecap_short"
+        "question": "[FACTOR EXPOSURE] XLP-HG=F: p=0.00009. Consumer staples have significant copper exposure (beta positive, unexpected) Investigate for tradeable alpha.",
+        "priority": 8,
+        "category": "scan_hit"
       }
     ],
     "handoff": "\"Session 2026-06-09 (pre-market 02:54 ET). No scan_hits pending. MRVL(0a684d8c)+FLEX(8aad7987) sp500_index_addition longs trigger=next_market_open NOT yet fired (market opens 09:30) \\u2014 trade_loop handles automatically; VERIFY FILLS in a post-open session. Ran daily scanners: NT 10-K/Q=0, cybersecurity 8-K=0, SEO bought-deal=0 GO (AVEX uneval/micro). Delisting 8-K found DRVN 06-05 -> NO-GO: it is a late-Q1-10-Q delinquency (Rule 5250(c)(1)) pre-telegraphed by 12b-25 (05-08), anticipated, prot"
