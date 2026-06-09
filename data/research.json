@@ -1695,13 +1695,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 27880467,
+    "sessions_today": 9,
+    "tokens_today": 31824421,
     "sessions_by_day": [
       {
         "date": "2026-06-09",
-        "sessions": 8,
-        "tokens": 27880467
+        "sessions": 9,
+        "tokens": 31824421
       },
       {
         "date": "2026-06-08",
@@ -4362,6 +4362,12 @@
       "investigated": "Re-audited prior threshold scan-hit promotions for the start-date contamination bug (canonical retest pooled sample was collapsing to the recent window when scanners used post-2020 starts). Re-ran VIX>30->TLT 5d, VIX>35->TLT 10d, DXY>100->XLB 20d, with the fixed code.",
       "findings": "We re-checked some of our market signals using a stricter, bug-fixed test. Two volatility-to-bond signals turned out to be false alarms and were dropped, while one dollar-strength-to-materials signal held up and will be studied further.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-09",
+      "investigated": "60 statistical tests across 8 themes: lead-lag (6), cointegration pairs (15), calendar anomalies (8), regime screens (3), structural breaks (3), threshold screens (6), factor exposures (8), rate lead-lag (4)",
+      "findings": "Screened 60 statistical tests across 8 themes. Found 5 scan hits with p<0.05. Rate lead-lag relationships show strongest signal with OOS validation.",
+      "tag": "validation"
     }
   ],
   "pipeline": {
@@ -4458,29 +4464,29 @@
     ],
     "research_queue": [
       {
-        "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
-        "priority": 5,
-        "category": "insider_buying_cluster"
+        "question": "[SCAN HIT] Cointegration BA-RTX (defense peers): p=0.0321, hedge_ratio=0.739, half-life=55.8d. OOS: SPREAD STATIONARITY CONFIRMED. Mean-reversion pair",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
+        "question": "[SCAN HIT] Lead-lag FRED:DGS10 -> XLP (staples): p=0.0000, F=9.66, lag=4d, OOS confirmed. Yield increases precede staples underperformance.",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
+        "question": "[SCAN HIT] Lead-lag FRED:DGS10 -> XLC (comms): p=0.0118, F=6.36, lag=1d, OOS confirmed. Rate changes lead comms sector.",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
-        "priority": 3,
-        "category": "forward_stock_split_largecap_short"
+        "question": "[SCAN HIT] Cointegration V-MA (fintech): p=0.033, hedge_ratio=0.533, half-life=19.5d. OOS: ADF p=0.439 (weak). Visa-Mastercard spread.",
+        "priority": 7,
+        "category": "scan_hit"
       },
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] Cointegration TSLA-F (auto): p=0.0278, hedge_ratio=24.624, half-life=30.7d. OOS: ADF p=0.411 (weak). EV-legacy auto.",
+        "priority": 7,
+        "category": "scan_hit"
       }
     ],
     "handoff": "\"Re-audited all prior threshold scan-hit promotions for the start-date contamination bug. Re-ran with fixed code: VIX>30->TLT 5d collapsed to p=0.1075 (was claimed 0.0148) and VIX>35->TLT canonical now FAILS (recency_subset_fails) -- both retired (both treasury/nonequity benchmark, the contaminated cohort). DXY>100->XLB 20d SURVIVES (equity, canonical PASS) -- promote next. DGS10>4.5->XLU already disproven. Closed vix30tlt_activate P7 (would have placed a real $5k trade on next VIX>30). Audit lo"
