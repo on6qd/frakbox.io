@@ -1541,10 +1541,14 @@
       {
         "name": "baba_dow_anomaly_canonical_retest_2026_06_09",
         "reason": "BABA day-of-week scan hit (raw p=0.0423) FAILS single_stock_calendar_anomaly_recency_rule. Marginal IS abnormal p=0.030, BUT extreme day is UNSTABLE: Wed(+0.232) on raw flips to Fri(-0.209) on abnormal returns. Recent>=2022 abnormal p=0.32 (fails recency check). SPY benchmark p=0.81 no parallel effect. Inconsistent + no recent persistence. NOT tradeable."
+      },
+      {
+        "name": "drvn_delisting_8k_item301_periodic_delinquency_2026_06_05",
+        "reason": "NO-GO: DRVN 06-05 Item 3.01 is a late-Q1-10-Q delinquency (Rule 5250(c)1), pre-telegraphed by 12b-25 on 05-08; anticipated, no listing effect, 60d cure window. Protocol entry (06-08 open ~13.47) already +3.6pct above filing close; stock recovered. Same name April 3.01 short already missed +5.37pct abnormal. Periodic-filing-delinquency 3.01s do not carry the forced-mandate-selling delisting signal."
       }
     ],
     "signal_count": 53,
-    "dead_end_count": 307,
+    "dead_end_count": 308,
     "literature_count": 25
   },
   "live_signals": [
@@ -1675,13 +1679,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 2962734,
+    "sessions_today": 2,
+    "tokens_today": 5726908,
     "sessions_by_day": [
       {
         "date": "2026-06-09",
-        "sessions": 1,
-        "tokens": 2962734
+        "sessions": 2,
+        "tokens": 5726908
       },
       {
         "date": "2026-06-08",
@@ -4300,6 +4304,12 @@
       "investigated": "Two priority-8 scan hits: AAPL and BABA day-of-week anomalies. Applied single_stock_calendar_anomaly_recency_rule canonical retest (abnormal vs SPY + recency>=2022 + SPY parallel check) via new tool tools/dow_canonical_retest.py.",
       "findings": "Tested two stock-market calendar quirks (Apple tends to rise on Mondays, Alibaba mid-week) and found both have faded in recent years and do not beat the overall market, so neither is tradeable.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-09",
+      "investigated": "Ran daily event scanners (NT 10-K/Q, cybersecurity 8-K, SEO bought-deal, delisting 8-K) for pending scanner-trigger hypotheses; investigated the one live candidate, DRVN delisting 8-K Item 3.01 filed 06-05.",
+      "findings": "Checked the days corporate filings for tradeable signals. The only candidate, a delisting-related notice from Driven Brands, turned out to be a routine late-quarterly-report delay that the market already knew about \u2014 not a real shock \u2014 so we passed on it.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4421,6 +4431,6 @@
         "category": "forward_stock_split_largecap_short"
       }
     ],
-    "handoff": "\"Session 2026-06-09 (investigation): Resolved the two priority-8 day-of-week scan hits (AAPL, BABA) \\u2014 both DEAD ENDS. AAPL Monday effect real historically (abnormal Mon +0.245%, p<0.0001) but vanished post-2021 (recent abnormal p=0.60); BABA marginal + unstable extreme day + recent p=0.32. SPY has no DOW effect (p=0.81). Built tools/dow_canonical_retest.py and recorded a concrete pre-queue gate. Queue scan_hits now empty. Market was closed (1am) so MRVL/FLEX fills could not be checked \\u201"
+    "handoff": "\"Session 2026-06-09 (pre-market 02:54 ET). No scan_hits pending. MRVL(0a684d8c)+FLEX(8aad7987) sp500_index_addition longs trigger=next_market_open NOT yet fired (market opens 09:30) \\u2014 trade_loop handles automatically; VERIFY FILLS in a post-open session. Ran daily scanners: NT 10-K/Q=0, cybersecurity 8-K=0, SEO bought-deal=0 GO (AVEX uneval/micro). Delisting 8-K found DRVN 06-05 -> NO-GO: it is a late-Q1-10-Q delinquency (Rule 5250(c)(1)) pre-telegraphed by 12b-25 (05-08), anticipated, prot"
   }
 }
