@@ -1727,13 +1727,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 3197423,
+    "sessions_today": 2,
+    "tokens_today": 8822956,
     "sessions_by_day": [
       {
         "date": "2026-06-10",
-        "sessions": 1,
-        "tokens": 3197423
+        "sessions": 2,
+        "tokens": 8822956
       },
       {
         "date": "2026-06-09",
@@ -4417,6 +4417,12 @@
       "investigated": "Top P8 scan hit (BA-RTX cointegration) plus V-MA and TSLA-F P7 hits.",
       "findings": "Found that the research scanner had re-flagged three stock-pair trading ideas it had already proven worthless months ago. Closed them and added an automatic filter so previously-rejected ideas can no longer slip back into the queue.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-10",
+      "investigated": "Swept the full signal pipeline for tradeable candidates: NT 10-K, cybersecurity 8-K, SEO bought-deal, and activist 13D event scanners, plus a fresh EDGAR insider-cluster scan; verified the June 5 S&P 500 Q2 rebalance outcome; closed stale queue backlog; re-evaluated the proposed dead-end guard extension.",
+      "findings": "We checked every one of our trading signals today and found no new opportunities \u2014 mid-June is a quiet stretch between corporate reporting cycles. We confirmed our two S&P 500 index-addition trades (Marvell and Flex) are already in place, and cleaned up seven-week-old leftover tasks.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4500,21 +4506,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
-        "priority": 5,
-        "category": "insider_buying_cluster"
-      },
-      {
-        "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
-      },
-      {
-        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
-        "priority": 5,
-        "category": "insider_buying_cluster"
-      },
-      {
         "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
         "priority": 3,
         "category": "forward_stock_split_largecap_short"
@@ -4523,8 +4514,28 @@
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
+      },
+      {
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
-    "handoff": "\"Session 2026-06-10: closed 3 duplicate cointegration dead-end scan hits and deployed a structural guard so data_tasks.py cointegration refuses recorded dead-end pairs. Scanner.md cannot be edited (constitution), so enforcement lives in the code path the scanner reads.\""
+    "handoff": {
+      "session_date": "2026-06-10",
+      "summary": "Dry-pipeline session. Confirmed 0 GO candidates across all 6 signal scanners and that the June 5 S&P rebalance (MRVL+FLEX) is fully captured. Closed 6 stale queue items. Re-evaluated and rejected handoff #4 guard extension as redundant/risky.",
+      "open_positions": "FLEX (sp500 addition, ~-4.4%, eff June 22, trade_loop-managed)",
+      "next_action": "Re-run all daily scanners; pick up any GO candidate or non-cointegration scan hit."
+    }
   }
 }
