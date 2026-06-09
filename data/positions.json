@@ -1,5 +1,20 @@
 {
-  "active": [],
+  "active": [
+    {
+      "symbol": "MRVL",
+      "direction": "long",
+      "event_type": "sp500_index_addition",
+      "thesis": "Marvell Technology added to S&P 500 in Q2 2026 quarterly rebalance (announced 2026-06-05, effective 2026-06-22), replaci",
+      "opened_date": "2026-06-08"
+    },
+    {
+      "symbol": "FLEX",
+      "direction": "long",
+      "event_type": "sp500_index_addition",
+      "thesis": "Flex Ltd added to S&P 500 in Q2 2026 quarterly rebalance (announced 2026-06-05, effective 2026-06-22), replacing Campbel",
+      "opened_date": "2026-06-08"
+    }
+  ],
   "recent_closed": [
     {
       "symbol": "SPY",

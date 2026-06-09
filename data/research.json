@@ -1,8 +1,8 @@
 {
   "summary": {
     "total_hypotheses": 72,
-    "pending": 6,
-    "active": 0,
+    "pending": 4,
+    "active": 2,
     "completed": 10,
     "invalidated": 6,
     "direction_accuracy": "4/10",
@@ -4448,20 +4448,7 @@
         "symbol": "TBD"
       }
     ],
-    "pending_triggers": [
-      {
-        "symbol": "MRVL",
-        "direction": "long",
-        "trigger": "next_market_open",
-        "event_type": "sp500 index addition"
-      },
-      {
-        "symbol": "FLEX",
-        "direction": "long",
-        "trigger": "next_market_open",
-        "event_type": "sp500 index addition"
-      }
-    ],
+    "pending_triggers": [],
     "research_queue": [
       {
         "question": "[SCAN HIT] Cointegration BA-RTX (defense peers): p=0.0321, hedge_ratio=0.739, half-life=55.8d. OOS: SPREAD STATIONARITY CONFIRMED. Mean-reversion pair",
