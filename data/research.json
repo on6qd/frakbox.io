@@ -1565,10 +1565,22 @@
       {
         "name": "vix35_tlt_10d_threshold",
         "reason": "FALSE PASS (re-audit 2026-06-09). Scan hit d1bfcfc3/b36d3745 claimed VIX>35->TLT -1.80% 10d canonical PASSED both samples. Re-run with fixed code: raw still sig (-1.80% p=0.0371 n=16) BUT canonical_passes=False, fail_reason=recency_subset_fails_regime_dependent (pooled n=12, recent n=6). Treasury nonequity benchmark. RETIRED."
+      },
+      {
+        "name": "leadlag_dgs10_xlp_staples",
+        "reason": "DGS10->XLP lead-lag (scan hit p=0.0000 lag=4/8). Granger significant ONLY because of large-N on autocorrelated macro series: predictive corr=+0.02, R2=0.0004. Directional trade rule (yield-up 4d -> short XLP) earns +0.036%/trade ALL; combined long/short rule -0.036%/trade (NEGATIVE). Far below 0.5% direction threshold and round-trip costs. Statistically real, economically untradeable."
+      },
+      {
+        "name": "leadlag_dgs10_xlc_comms",
+        "reason": "DGS10->XLC lead-lag (scan hit p=0.0118 lag=1). Even weaker: corr=0.003, predictive beta sign FLIPS between IS(+0.0011) and OOS(-0.0024). Combined rule -0.010%/trade. Spurious. Untradeable."
+      },
+      {
+        "name": "RULE_granger_leadlag_macro_yield_requires_economic_filter",
+        "reason": "METHODOLOGY: Granger lead-lag scan hits where the driver is a slow autocorrelated macro series (FRED:DGS10, yields) routinely produce p=0.0000 purely from large-N. Two confirmed cases (DGS10->XLP, DGS10->XLC) both had predictive corr~0.02, R2<0.001, and directional trade rules at or below 0%/trade. RULE: before queueing a yield/macro lead-lag scan hit, require a tradeability check: directional rule (sign-consistent IS+OOS) must earn >0.5% abnormal/trade above SPY. p-value alone is meaningless here. Use tools/leadlag_dgs10_xlp.py (LL_TARGET/LL_HOLD env) as the harness."
       }
     ],
     "signal_count": 53,
-    "dead_end_count": 312,
+    "dead_end_count": 315,
     "literature_count": 25
   },
   "live_signals": [
@@ -1715,13 +1727,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 31824421,
+    "sessions_today": 10,
+    "tokens_today": 33466992,
     "sessions_by_day": [
       {
         "date": "2026-06-09",
-        "sessions": 9,
-        "tokens": 31824421
+        "sessions": 10,
+        "tokens": 33466992
       },
       {
         "date": "2026-06-08",
@@ -4388,6 +4400,12 @@
       "investigated": "60 statistical tests across 8 themes: lead-lag (6), cointegration pairs (15), calendar anomalies (8), regime screens (3), structural breaks (3), threshold screens (6), factor exposures (8), rate lead-lag (4)",
       "findings": "Screened 60 statistical tests across 8 themes. Found 5 scan hits with p<0.05. Rate lead-lag relationships show strongest signal with OOS validation.",
       "tag": "validation"
+    },
+    {
+      "date": "2026-06-09",
+      "investigated": "Two priority-8 scan hits: DGS10 (10Y yield) lead-lag predicting consumer staples (XLP, lag 4d) and communications (XLC, lag 1d), both with Granger p<0.05 and claimed OOS confirmation.",
+      "findings": "Tested whether moves in the 10-year Treasury yield reliably predict consumer-staples and communications stocks a few days later. The statistical link looked strong but turned out to be too tiny to trade \u2014 the predictable part was about 0.04%, smaller than trading costs. Marked as dead ends.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4476,16 +4494,6 @@
         "category": "scan_hit"
       },
       {
-        "question": "[SCAN HIT] Lead-lag FRED:DGS10 -> XLP (staples): p=0.0000, F=9.66, lag=4d, OOS confirmed. Yield increases precede staples underperformance.",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] Lead-lag FRED:DGS10 -> XLC (comms): p=0.0118, F=6.36, lag=1d, OOS confirmed. Rate changes lead comms sector.",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
         "question": "[SCAN HIT] Cointegration V-MA (fintech): p=0.033, hedge_ratio=0.533, half-life=19.5d. OOS: ADF p=0.439 (weak). Visa-Mastercard spread.",
         "priority": 7,
         "category": "scan_hit"
@@ -4494,8 +4502,28 @@
         "question": "[SCAN HIT] Cointegration TSLA-F (auto): p=0.0278, hedge_ratio=24.624, half-life=30.7d. OOS: ADF p=0.411 (weak). EV-legacy auto.",
         "priority": 7,
         "category": "scan_hit"
+      },
+      {
+        "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
+        "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
+        "priority": 5,
+        "category": "insider_buying_cluster"
       }
     ],
-    "handoff": "\"Re-audited all prior threshold scan-hit promotions for the start-date contamination bug. Re-ran with fixed code: VIX>30->TLT 5d collapsed to p=0.1075 (was claimed 0.0148) and VIX>35->TLT canonical now FAILS (recency_subset_fails) -- both retired (both treasury/nonequity benchmark, the contaminated cohort). DXY>100->XLB 20d SURVIVES (equity, canonical PASS) -- promote next. DGS10>4.5->XLU already disproven. Closed vix30tlt_activate P7 (would have placed a real $5k trade on next VIX>30). Audit lo"
+    "handoff": {
+      "last_session": "2026-06-09 investigation: DGS10->XLP and DGS10->XLC lead-lag scan hits (both pri-8)",
+      "result": "BOTH DEAD ENDS. Granger p<0.05 is large-N artifact; tradeable corr~0.02, R2<0.001, directional rules at/below 0%/trade vs SPY. Below 0.5% threshold + costs.",
+      "open_scan_hits": [
+        "5945d44f BA-RTX coint (half-life 55.8d, too slow?)",
+        "95bc7517 V-MA coint (weak OOS)",
+        "430aa2e3 TSLA-F coint (weak OOS)"
+      ],
+      "new_tool": "tools/leadlag_dgs10_xlp.py - parametrized tradeability harness for lead-lag hits",
+      "positions": "FLEX long -4.8%, S&P500 addition trade, deadline 2026-06-22"
+    }
   }
 }
