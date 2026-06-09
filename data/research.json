@@ -1683,13 +1683,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 12336318,
+    "sessions_today": 5,
+    "tokens_today": 17691156,
     "sessions_by_day": [
       {
         "date": "2026-06-09",
-        "sessions": 4,
-        "tokens": 12336318
+        "sessions": 5,
+        "tokens": 17691156
       },
       {
         "date": "2026-06-08",
@@ -4326,6 +4326,12 @@
       "investigated": "Top priority-8 scan hit XLE-CL=F (energy sector vs crude oil exposure). Ran full 6-step lead-lag investigation, then audited all factor-exposure scan hits.",
       "findings": "Reviewed two dozen 'opportunities' flagged by the screener \u2014 like energy stocks moving with oil prices, or banks moving with interest rates. All were real but untradeable, because the price reaction happens the same instant as the trigger, leaving no window to act. Closed them all and added a safeguard so the system stops mistaking same-day correlations for profit opportunities.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-09",
+      "investigated": "Ran the full daily event-scanner sweep for the 5 pending validated signals (NT 10-K/Q, cybersecurity 8-K, SEO bought-deal, delisting 8-K, insider cluster) and acted on the operational handoff item to harden the delisting-8K scanner.",
+      "findings": "Checked all the daily news-and-filings scanners for fresh trade ideas and found none worth acting on this time. Also fixed a flaw in the delisting detector so it now correctly ignores companies that are merely late filing a routine quarterly report rather than facing a real delisting.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4447,6 +4453,6 @@
         "category": "forward_stock_split_largecap_short"
       }
     ],
-    "handoff": "\"Session 2026-06-09 (00:02 ET, market CLOSED). Investigated top priority-8 scan hit XLE-CL=F (full 6-step). Lead-lag test confirmed it is purely CONTEMPORANEOUS (lag-0 xcorr +0.215, predictive lag +0.008) and a documented commodity_sector Granger artifact. Discovered the factor-exposure screen had queued 24 contemporaneous exposure betas as priority-8 'tradeable alpha' \\u2014 none tradeable by construction. Batch-closed all 24, recorded dead end + known-effect rule, and built a tradeability gate"
+    "handoff": "\"Session 2026-06-09 (01:33 ET, market CLOSED, opens ~8h). Top monitoring task (MRVL/FLEX index-addition fills) blocked until next open. Ran full daily scanner sweep: NO new GO candidates (NT=0, cyber=0, SEO=0 GO, delisting=DRVN-only=NO-GO). Insider scan timed out on EDGAR but irrelevant given VIX~19 gate. Acted on handoff priority 4: built+deployed periodic-filing-delinquency classifier in delisting scanner, verified live on DRVN and regression-tested forced/voluntary preserved. Committed.\""
   }
 }
