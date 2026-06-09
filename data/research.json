@@ -1549,10 +1549,14 @@
       {
         "name": "factor_exposure_contemporaneous_not_tradeable",
         "reason": "Contemporaneous factor-exposure betas (sector ETF ~ macro driver: oil, copper, gold, DGS rates, VIX) are statistically strong but NOT directly tradeable -- you cannot trade the target at the same close used to measure the factor. The predictive (lead-lag) and threshold conversions for the documented commodity->sector and DGS-rate->rate-sensitive-ETF families are confirmed systematic artifacts (mean abnormal returns <1%, fail OOS). The factor-exposure screen queued 24 such betas as priority-8 tradeable alpha on 2026-06-09; all closed as dead ends. Fix: data_tasks.py exposure path now tags every result with a tradeability caveat and hard-suppresses documented families. Only queue an exposure hit if a lead-lag OR threshold conversion is validated OOS first."
+      },
+      {
+        "name": "dgs10_above_4_5_xlu_threshold_mean_reversion",
+        "reason": "FRED:DGS10>4.5 -> XLU 5d mean-reversion long was a START-DATE ARTIFACT. Scanner ran raw test with start=2024-01-01: 5d=+1.27%, p=0.0255, n=12, canonical_passes=True. Full-history (2015+): 5d=+0.51%, p=0.62, n=15 -> NULL. Significance came purely from restricting to the 2024+ regime. After fixing the canonical-retest start contamination bug, the same scan (start=2024) now FAILS canonical (pooled_sample_fails, n=5). Consistent with prior tnx5_xlu_threshold (rates->XLU not tradeable) and macro_indicator_threshold_underpowered_canonical (slow FRED indicators have too few clustered crossings). NOT TRADEABLE."
       }
     ],
     "signal_count": 53,
-    "dead_end_count": 309,
+    "dead_end_count": 310,
     "literature_count": 25
   },
   "live_signals": [
@@ -1683,13 +1687,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 20976188,
+    "sessions_today": 7,
+    "tokens_today": 25007338,
     "sessions_by_day": [
       {
         "date": "2026-06-09",
-        "sessions": 6,
-        "tokens": 20976188
+        "sessions": 7,
+        "tokens": 25007338
       },
       {
         "date": "2026-06-08",
@@ -4338,6 +4342,12 @@
       "investigated": "Lead-lag (6 tests), cointegration pairs (12 tests), VIX/commodity thresholds (12 tests), regime screens (3 tests), calendar anomalies (9 tests), structural breaks (3 tests). Total: 45 tests.",
       "findings": "Screened 45 market combinations for predictive signals. Found 1 validated utility-sector effect: 10Y yields above 4.5% reliably trigger XLU mean-reversion (1.27% over 5 days). Passed rigorous canonical false-positive filter.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-09",
+      "investigated": "Priority-8 scan hit: FRED:DGS10>4.5 -> XLU 5d mean-reversion long (scanner claimed +1.27%, p=0.0255, canonical_passes=True, n=12).",
+      "findings": "We chased a promising-looking signal (utility stocks bouncing when 10-year Treasury yields rise above 4.5%) and found it was a mirage: it only looked real because the test was unintentionally limited to recent data. We also fixed a flaw in our validation system that had let this kind of mirage slip through.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4434,11 +4444,6 @@
     ],
     "research_queue": [
       {
-        "question": "[SCAN HIT] Threshold: FRED:DGS10 > 4.5 triggers XLU mean-reversion. Effect size=1.27% (5d), p=0.0255, canonical_passes=True (both pooled and recent sa",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
         "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
         "priority": 7,
         "category": "activation_watch"
@@ -4457,8 +4462,19 @@
         "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
         "priority": 5,
         "category": "insider_buying_cluster"
+      },
+      {
+        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
+        "priority": 3,
+        "category": "forward_stock_split_largecap_short"
       }
     ],
-    "handoff": "\"Session 2026-06-09 (01:33 ET, market CLOSED, opens ~8h). Top monitoring task (MRVL/FLEX index-addition fills) blocked until next open. Ran full daily scanner sweep: NO new GO candidates (NT=0, cyber=0, SEO=0 GO, delisting=DRVN-only=NO-GO). Insider scan timed out on EDGAR but irrelevant given VIX~19 gate. Acted on handoff priority 4: built+deployed periodic-filing-delinquency classifier in delisting scanner, verified live on DRVN and regression-tested forced/voluntary preserved. Committed.\""
+    "handoff": {
+      "attempted": "Investigate priority-8 scan hit: FRED:DGS10>4.5 -> XLU 5d mean-reversion (claimed +1.27%, p=0.0255, canonical_passes=True).",
+      "accomplished": "DISPROVEN as a start-date artifact. Found + FIXED a methodology bug in the canonical threshold retest. Recorded dead end + known effect, resolved scan hit, committed fix.",
+      "partial_results": "Full-history (2015+) DGS10>4.5->XLU 5d = +0.51%, p=0.62 (NULL). Scanner hit used start=2024-01-01 which both (a) selected the favorable 2024+ regime and (b) contaminated the canonical retest so pooled(2010+)==recent(2020+) (n_pooled=4==n_recent=4) -> false PASS. After fix, same start=2024 run gives canonical_passes=False (pooled_sample_fails, n=5).",
+      "blocked_by": "MRVL/FLEX fill verification blocked: market CLOSED this session (opens ~09:30 ET).",
+      "key_insight": "The canonical threshold retest must ALWAYS reach deep history (start<=2010) independent of the raw test window, or the recency-robustness guard is silently defeated. Bug fixed in data_tasks.py; prior recent-window threshold promotions should be re-audited."
+    }
   }
 }
