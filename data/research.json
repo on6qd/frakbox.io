@@ -1553,10 +1553,18 @@
       {
         "name": "dgs10_above_4_5_xlu_threshold_mean_reversion",
         "reason": "FRED:DGS10>4.5 -> XLU 5d mean-reversion long was a START-DATE ARTIFACT. Scanner ran raw test with start=2024-01-01: 5d=+1.27%, p=0.0255, n=12, canonical_passes=True. Full-history (2015+): 5d=+0.51%, p=0.62, n=15 -> NULL. Significance came purely from restricting to the 2024+ regime. After fixing the canonical-retest start contamination bug, the same scan (start=2024) now FAILS canonical (pooled_sample_fails, n=5). Consistent with prior tnx5_xlu_threshold (rates->XLU not tradeable) and macro_indicator_threshold_underpowered_canonical (slow FRED indicators have too few clustered crossings). NOT TRADEABLE."
+      },
+      {
+        "name": "vix30_tlt_short_5d_threshold",
+        "reason": "FALSE PASS (re-audit 2026-06-09 after start-date contamination fix). Original scan hit de77bdf9 claimed -1.30% p=0.0148 n=30 canonical PASS. Re-run with fixed code: raw -0.72% p=0.1075, NOT significant, canonical auto-skipped. Compounded: TLT nonequity benchmark invalid. RETIRED."
+      },
+      {
+        "name": "vix35_tlt_10d_threshold",
+        "reason": "FALSE PASS (re-audit 2026-06-09). Scan hit d1bfcfc3/b36d3745 claimed VIX>35->TLT -1.80% 10d canonical PASSED both samples. Re-run with fixed code: raw still sig (-1.80% p=0.0371 n=16) BUT canonical_passes=False, fail_reason=recency_subset_fails_regime_dependent (pooled n=12, recent n=6). Treasury nonequity benchmark. RETIRED."
       }
     ],
     "signal_count": 53,
-    "dead_end_count": 310,
+    "dead_end_count": 312,
     "literature_count": 25
   },
   "live_signals": [
@@ -1687,13 +1695,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 25007338,
+    "sessions_today": 8,
+    "tokens_today": 27880467,
     "sessions_by_day": [
       {
         "date": "2026-06-09",
-        "sessions": 7,
-        "tokens": 25007338
+        "sessions": 8,
+        "tokens": 27880467
       },
       {
         "date": "2026-06-08",
@@ -4348,6 +4356,12 @@
       "investigated": "Priority-8 scan hit: FRED:DGS10>4.5 -> XLU 5d mean-reversion long (scanner claimed +1.27%, p=0.0255, canonical_passes=True, n=12).",
       "findings": "We chased a promising-looking signal (utility stocks bouncing when 10-year Treasury yields rise above 4.5%) and found it was a mirage: it only looked real because the test was unintentionally limited to recent data. We also fixed a flaw in our validation system that had let this kind of mirage slip through.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-09",
+      "investigated": "Re-audited prior threshold scan-hit promotions for the start-date contamination bug (canonical retest pooled sample was collapsing to the recent window when scanners used post-2020 starts). Re-ran VIX>30->TLT 5d, VIX>35->TLT 10d, DXY>100->XLB 20d, with the fixed code.",
+      "findings": "We re-checked some of our market signals using a stricter, bug-fixed test. Two volatility-to-bond signals turned out to be false alarms and were dropped, while one dollar-strength-to-materials signal held up and will be studied further.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4444,11 +4458,6 @@
     ],
     "research_queue": [
       {
-        "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
-        "priority": 7,
-        "category": "activation_watch"
-      },
-      {
         "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
         "priority": 5,
         "category": "insider_buying_cluster"
@@ -4467,14 +4476,13 @@
         "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
         "priority": 3,
         "category": "forward_stock_split_largecap_short"
+      },
+      {
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": {
-      "attempted": "Investigate priority-8 scan hit: FRED:DGS10>4.5 -> XLU 5d mean-reversion (claimed +1.27%, p=0.0255, canonical_passes=True).",
-      "accomplished": "DISPROVEN as a start-date artifact. Found + FIXED a methodology bug in the canonical threshold retest. Recorded dead end + known effect, resolved scan hit, committed fix.",
-      "partial_results": "Full-history (2015+) DGS10>4.5->XLU 5d = +0.51%, p=0.62 (NULL). Scanner hit used start=2024-01-01 which both (a) selected the favorable 2024+ regime and (b) contaminated the canonical retest so pooled(2010+)==recent(2020+) (n_pooled=4==n_recent=4) -> false PASS. After fix, same start=2024 run gives canonical_passes=False (pooled_sample_fails, n=5).",
-      "blocked_by": "MRVL/FLEX fill verification blocked: market CLOSED this session (opens ~09:30 ET).",
-      "key_insight": "The canonical threshold retest must ALWAYS reach deep history (start<=2010) independent of the raw test window, or the recency-robustness guard is silently defeated. Bug fixed in data_tasks.py; prior recent-window threshold promotions should be re-audited."
-    }
+    "handoff": "\"Re-audited all prior threshold scan-hit promotions for the start-date contamination bug. Re-ran with fixed code: VIX>30->TLT 5d collapsed to p=0.1075 (was claimed 0.0148) and VIX>35->TLT canonical now FAILS (recency_subset_fails) -- both retired (both treasury/nonequity benchmark, the contaminated cohort). DXY>100->XLB 20d SURVIVES (equity, canonical PASS) -- promote next. DGS10>4.5->XLU already disproven. Closed vix30tlt_activate P7 (would have placed a real $5k trade on next VIX>30). Audit lo"
   }
 }
