@@ -1533,10 +1533,18 @@
       {
         "name": "vix_above_35_tlt_short_raw_confirmed",
         "reason": "VIX>35 -> TLT short is a DEAD END even under correct raw-return benchmark (the prior SPY-adjusted PASS was an artifact). Raw cluster-buffered: pooled 3d -1.15% p=0.015 (n=12) but recency subset (post-2020) fails canonical -> recency_subset_fails_regime_dependent. Not robust across samples. Verified after benchmark-class guard fix 2026-06-08, result_id T-0bb22676."
+      },
+      {
+        "name": "aapl_monday_dow_anomaly_canonical_retest_2026_06_09",
+        "reason": "AAPL Monday day-of-week scan hit (raw p=0.0001, Mon +0.284%) FAILS single_stock_calendar_anomaly_recency_rule. Abnormal(vs SPY) full-sample p<0.0001 Mon +0.245%, BUT recent>=2022 abnormal p=0.60 with Mon -0.005% (effect gone). SPY benchmark shows NO parallel DOW effect (p=0.81). Effect concentrated pre-2022, AAPL-idiosyncratic, not structural. Confirms prior aapl_monday_dow_anomaly dead end. NOT tradeable."
+      },
+      {
+        "name": "baba_dow_anomaly_canonical_retest_2026_06_09",
+        "reason": "BABA day-of-week scan hit (raw p=0.0423) FAILS single_stock_calendar_anomaly_recency_rule. Marginal IS abnormal p=0.030, BUT extreme day is UNSTABLE: Wed(+0.232) on raw flips to Fri(-0.209) on abnormal returns. Recent>=2022 abnormal p=0.32 (fails recency check). SPY benchmark p=0.81 no parallel effect. Inconsistent + no recent persistence. NOT tradeable."
       }
     ],
     "signal_count": 53,
-    "dead_end_count": 305,
+    "dead_end_count": 307,
     "literature_count": 25
   },
   "live_signals": [
@@ -1667,9 +1675,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 1,
+    "tokens_today": 2962734,
     "sessions_by_day": [
+      {
+        "date": "2026-06-09",
+        "sessions": 1,
+        "tokens": 2962734
+      },
       {
         "date": "2026-06-08",
         "sessions": 6,
@@ -4281,6 +4294,12 @@
       "investigated": "Calendar anomaly screen across 56 assets (sectors, ETFs, mega-caps, bonds, commodities, intl equities) with monthly, day-of-week, and turn-of-month patterns",
       "findings": "Scanned 56 calendar-anomaly tests. Found 2 hits: AAPL strong Monday effect (p=0.0001) and BABA Tue/Wed strength (p=0.0423). Both queued for investigation.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-09",
+      "investigated": "Two priority-8 scan hits: AAPL and BABA day-of-week anomalies. Applied single_stock_calendar_anomaly_recency_rule canonical retest (abnormal vs SPY + recency>=2022 + SPY parallel check) via new tool tools/dow_canonical_retest.py.",
+      "findings": "Tested two stock-market calendar quirks (Apple tends to rise on Mondays, Alibaba mid-week) and found both have faded in recent years and do not beat the overall market, so neither is tradeable.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4377,16 +4396,6 @@
     ],
     "research_queue": [
       {
-        "question": "[SCAN HIT] AAPL day-of-week anomaly: p=0.0001 (H=24.42), n=5389. Monday effect dominant (0.284% vs Tue/Wed/Thu ~0.07-0.18%). Investigate feasibility o",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] BABA day-of-week anomaly: p=0.0423 (H=9.89), n=2944. Tue/Wed effect (0.220-0.232%) vs Thu (-0.084%). Investigate for mean-reversion or regi",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
         "question": "MONITOR: Activate VIX>30 -> TLT short 5d trade (hypothesis 106c77c6) on next VIX close >30. Earliest eligible trigger ~2026-04-26 (30-day cluster buff",
         "priority": 7,
         "category": "activation_watch"
@@ -4400,8 +4409,18 @@
         "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
         "priority": 5,
         "category": "insider_buying_cluster"
+      },
+      {
+        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
+        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
+        "priority": 3,
+        "category": "forward_stock_split_largecap_short"
       }
     ],
-    "handoff": "\"Session 2026-06-08 (investigation): No scan hits pending; market closed so MRVL/FLEX fills cannot be verified until 06-09 open. Built the benchmark-class guard flagged as priority #4 in the prior handoff \\u2014 the recurring methodology bug that burned the last TWO sessions. tools/asset_class.py classifies targets; canonical_retest_threshold defaults benchmark=auto -> SPY for equities, None(raw) for non-equities; market_data.get_price_around_date supports benchmark=None (abnormal==raw); data_ta"
+    "handoff": "\"Session 2026-06-09 (investigation): Resolved the two priority-8 day-of-week scan hits (AAPL, BABA) \\u2014 both DEAD ENDS. AAPL Monday effect real historically (abnormal Mon +0.245%, p<0.0001) but vanished post-2021 (recent abnormal p=0.60); BABA marginal + unstable extreme day + recent p=0.32. SPY has no DOW effect (p=0.81). Built tools/dow_canonical_retest.py and recorded a concrete pre-queue gate. Queue scan_hits now empty. Market was closed (1am) so MRVL/FLEX fills could not be checked \\u201"
   }
 }
