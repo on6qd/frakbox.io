@@ -1727,9 +1727,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 0,
-    "tokens_today": 0,
+    "sessions_today": 1,
+    "tokens_today": 3197423,
     "sessions_by_day": [
+      {
+        "date": "2026-06-10",
+        "sessions": 1,
+        "tokens": 3197423
+      },
       {
         "date": "2026-06-09",
         "sessions": 10,
@@ -4406,6 +4411,12 @@
       "investigated": "Two priority-8 scan hits: DGS10 (10Y yield) lead-lag predicting consumer staples (XLP, lag 4d) and communications (XLC, lag 1d), both with Granger p<0.05 and claimed OOS confirmation.",
       "findings": "Tested whether moves in the 10-year Treasury yield reliably predict consumer-staples and communications stocks a few days later. The statistical link looked strong but turned out to be too tiny to trade \u2014 the predictable part was about 0.04%, smaller than trading costs. Marked as dead ends.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-10",
+      "investigated": "Top P8 scan hit (BA-RTX cointegration) plus V-MA and TSLA-F P7 hits.",
+      "findings": "Found that the research scanner had re-flagged three stock-pair trading ideas it had already proven worthless months ago. Closed them and added an automatic filter so previously-rejected ideas can no longer slip back into the queue.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4489,21 +4500,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] Cointegration BA-RTX (defense peers): p=0.0321, hedge_ratio=0.739, half-life=55.8d. OOS: SPREAD STATIONARITY CONFIRMED. Mean-reversion pair",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] Cointegration V-MA (fintech): p=0.033, hedge_ratio=0.533, half-life=19.5d. OOS: ADF p=0.439 (weak). Visa-Mastercard spread.",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] Cointegration TSLA-F (auto): p=0.0278, hedge_ratio=24.624, half-life=30.7d. OOS: ADF p=0.411 (weak). EV-legacy auto.",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
         "question": "AUTO-DETECTED insider cluster: ARXS (Arxis, Inc.). 7 insiders filed 2026-04-17. Total value: $5.6M. Price: $37.37 (-5.3% from 52W high). Market cap: $",
         "priority": 5,
         "category": "insider_buying_cluster"
@@ -4512,18 +4508,23 @@
         "question": "AUTO-DETECTED insider cluster: AVEX (AEVEX Corp.). 3 insiders filed 2026-04-16. Total value: $1.5M. Price: $32.06 (-24.3% from 52W high). Market cap: ",
         "priority": 5,
         "category": "insider_buying_cluster"
+      },
+      {
+        "question": "AUTO-DETECTED insider cluster: BMI (BADGER METER INC). 4 insiders filed 2026-04-21. Total value: $0.7M. Price: $122.64 (-52.1% from 52W high). Market ",
+        "priority": 5,
+        "category": "insider_buying_cluster"
+      },
+      {
+        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
+        "priority": 3,
+        "category": "forward_stock_split_largecap_short"
+      },
+      {
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       }
     ],
-    "handoff": {
-      "last_session": "2026-06-09 investigation: DGS10->XLP and DGS10->XLC lead-lag scan hits (both pri-8)",
-      "result": "BOTH DEAD ENDS. Granger p<0.05 is large-N artifact; tradeable corr~0.02, R2<0.001, directional rules at/below 0%/trade vs SPY. Below 0.5% threshold + costs.",
-      "open_scan_hits": [
-        "5945d44f BA-RTX coint (half-life 55.8d, too slow?)",
-        "95bc7517 V-MA coint (weak OOS)",
-        "430aa2e3 TSLA-F coint (weak OOS)"
-      ],
-      "new_tool": "tools/leadlag_dgs10_xlp.py - parametrized tradeability harness for lead-lag hits",
-      "positions": "FLEX long -4.8%, S&P500 addition trade, deadline 2026-06-22"
-    }
+    "handoff": "\"Session 2026-06-10: closed 3 duplicate cointegration dead-end scan hits and deployed a structural guard so data_tasks.py cointegration refuses recorded dead-end pairs. Scanner.md cannot be edited (constitution), so enforcement lives in the code path the scanner reads.\""
   }
 }
