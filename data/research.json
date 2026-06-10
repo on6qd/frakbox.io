@@ -315,6 +315,11 @@
         "name": "threshold_canonical_retest_nonequity_benchmark_invalid_rule_2026_06_08",
         "status": "strong",
         "magnitude_pct": 0.0
+      },
+      {
+        "name": "auditor_change_8k_item_401_short",
+        "status": "disproven",
+        "magnitude_pct": -1.65
       }
     ],
     "dead_ends": [
@@ -1581,10 +1586,18 @@
       {
         "name": "regime_is_only_no_oos_scan_hits",
         "reason": "Regime tests (VIX/oil/yield sensitivity varies by regime) IS-significant but NOT OOS-validated are dead ends (time-varying beta stylized fact, spread <1%/day). Do not queue. Closed 19 such scan hits 2026-06-10. data_tasks.py regime path now auto-emits queue_recommendation=DO_NOT_QUEUE for non-OOS-validated regime tests."
+      },
+      {
+        "name": "auditor_change_8k_item_401_all_short",
+        "reason": "Signal failed check(s): n_sufficient, direction_correct, abnormal_above_threshold, return_after_costs. n=0, best_horizon=None, avg_abnormal=0.000%, p=1.0000, neg_rate=0.0%, passes_mt=True."
+      },
+      {
+        "name": "auditor_change_8k_item_401_resignation_short",
+        "reason": "FREQUENCY DEAD END (2026-06-10). Isolating auditor RESIGNATIONS (high-conviction subset per Palmrose/literature) collapses the tradeable large-cap sample to ~0: only 3 large-cap resignations in 2022-2023 and ALL THREE were closed-end funds (Tekla HQL/THQ/HQH), zero operating equities; 0 tradeable large-cap resignations in OOS 2024-2025. The original preliminary signal n=83 derived entirely from routine DISMISSALS which carry no edge (pooled p=0.13-0.26, pos-rate ~47%). Resignations cluster in micro-cap/distressed names excluded by the liquidity filter (already covered by going_concern/delisting distress families). Untradeable: high-conviction subset never fires on tradeable names; frequent subset has no edge."
       }
     ],
-    "signal_count": 53,
-    "dead_end_count": 316,
+    "signal_count": 54,
+    "dead_end_count": 318,
     "literature_count": 25
   },
   "live_signals": [
@@ -1731,13 +1744,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 15804418,
+    "sessions_today": 5,
+    "tokens_today": 19541345,
     "sessions_by_day": [
       {
         "date": "2026-06-10",
-        "sessions": 4,
-        "tokens": 15804418
+        "sessions": 5,
+        "tokens": 19541345
       },
       {
         "date": "2026-06-09",
@@ -4439,6 +4452,12 @@
       "investigated": "Top 5 P8 scan hits were all VIX-regime tests. Investigated whether they were tradeable or duplicates.",
       "findings": "Cleared 19 false research leads that kept reappearing: they flagged the well-known fact that stocks get more volatile in turbulent markets, which is not a tradeable edge. Added an automatic filter so these stop cluttering the pipeline.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-10",
+      "investigated": "Closed out the lingering auditor-change 8-K Item 4.01 short signal. Tested the literature-backed refinement: isolate auditor RESIGNATIONS (high red-flag) from routine dismissals. Also verified the regime scan-hit duplicate-closure guard fix.",
+      "findings": "We tested whether a company announcing that its auditor quit is a reliable signal to bet the stock will fall. It turns out genuine auditor resignations almost never happen at large, tradeable companies \u2014 only a handful in four years, none of them ordinary operating firms \u2014 so there is no usable trade here. We also confirmed an earlier bug fix is working.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4547,6 +4566,6 @@
         "category": "sp500_index_addition"
       }
     ],
-    "handoff": "\"SESSION 2026-06-10 (orchestrator): Fixed the recurring regime scan-hit duplicate-closure bug (first seen 2026-04-24). ROOT CAUSE: scanner queues regime hits on raw IS significant flag, ignoring oos_significant=False. FIX: data_tasks.py cmd_regression regime path now emits queue_recommendation=DO_NOT_QUEUE + known_dead_end=True + queue_block_reason when a regime test is not OOS-validated (mirrors cointegration KNOWN_DEAD_END guard). Verified on SPY/^VIX. No validation gate changed. CLOSED 19 pen"
+    "handoff": "\"SESSION 2026-06-10 (orchestrator): (1) VERIFIED regime scan-hit guard fix works: data_tasks.py regime path now emits queue_recommendation=DO_NOT_QUEUE + known_dead_end=True for any IS-only (not OOS-validated) regime test. Confirmed on TSLA~^VIX. (2) CLOSED OUT auditor_change_8k_item_401_short (was lingering WEAK_SIGNAL_PRELIMINARY). Resignation-only refinement = FREQUENCY dead end: only 3 large-cap resignations in 2022-2023, all closed-end funds (Tekla HQL/THQ/HQH), 0 operating equities; 0 trad"
   }
 }
