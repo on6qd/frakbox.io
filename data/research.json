@@ -1594,10 +1594,14 @@
       {
         "name": "auditor_change_8k_item_401_resignation_short",
         "reason": "FREQUENCY DEAD END (2026-06-10). Isolating auditor RESIGNATIONS (high-conviction subset per Palmrose/literature) collapses the tradeable large-cap sample to ~0: only 3 large-cap resignations in 2022-2023 and ALL THREE were closed-end funds (Tekla HQL/THQ/HQH), zero operating equities; 0 tradeable large-cap resignations in OOS 2024-2025. The original preliminary signal n=83 derived entirely from routine DISMISSALS which carry no edge (pooled p=0.13-0.26, pos-rate ~47%). Resignations cluster in micro-cap/distressed names excluded by the liquidity filter (already covered by going_concern/delisting distress families). Untradeable: high-conviction subset never fires on tradeable names; frequent subset has no edge."
+      },
+      {
+        "name": "cl_f_xlu_leadlag_canonical_dead_end_2026_06_10",
+        "reason": "CL=F (oil) -> XLU (utilities) Granger lead-lag scan hit (IS lag-3 p=0.0064) is a spurious artifact, confirming the commodity_sector_granger_leadlag_systematic_dead_end_2026_04_20 family. Fixed-lag OOS retest (XLU ret ~ oil ret at lag, +SPY control): discovered lag-3 is significant IS (beta=+0.033, p=0.0008) but DIES OOS (beta=+0.0006, p=0.97). The scan-reported \"OOS confirmation at lag 1\" is lag-hopping: lag-1 is insignificant/wrong-sign IS (p=0.16) and only appears in the OOS window. Cross-correlation: lag-0 (contemporaneous)=0.107 dominates; lag-3=0.014 (negligible) -> relationship is contemporaneous exposure + vol clustering, not predictive. Tradeable test (oil 3d up -> long XLU vs down, abnormal vs SPY): IS spread t=-0.28 p=0.78; OOS t=1.38 p=0.17; mean abnormal returns <0.1%, far below 0.5%/day floor and transaction costs. FIX: added XLU to _COMMODITY_SENSITIVE_ETFS so the scanner guard now suppresses this pair (was a gap: utilities are commodity+rate sensitive but XLU was missing from the list). DEAD END, not tradeable."
       }
     ],
     "signal_count": 54,
-    "dead_end_count": 318,
+    "dead_end_count": 319,
     "literature_count": 25
   },
   "live_signals": [
@@ -1744,13 +1748,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 23046140,
+    "sessions_today": 7,
+    "tokens_today": 26117396,
     "sessions_by_day": [
       {
         "date": "2026-06-10",
-        "sessions": 6,
-        "tokens": 23046140
+        "sessions": 7,
+        "tokens": 26117396
       },
       {
         "date": "2026-06-09",
@@ -4464,6 +4468,12 @@
       "investigated": "Lead-lag + Cointegration + Threshold + Structural Break + Calendar + Factor Exposure screens: 58 tests total",
       "findings": "Screened 58 statistical relationships across 6 themes (lead-lag, cointegration, threshold, structural break, calendar, factor exposure). Found 1 OOS-validated lead-lag signal: oil futures leading utilities by 3 days (p=0.0047, OOS p<0.05 at lag 1). Queued for deeper investigation.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-10",
+      "investigated": "Investigated the top pending scan hit (p8): oil futures CL=F appearing to lead the utilities ETF XLU by 3 days (Granger IS p=0.0064, scanner labeled 'OOS-confirmed at lag 1'). Ran a fixed-lag falsification test: regressed XLU returns on lagged oil returns with an SPY control, split in-sample (2020-2023) vs out-of-sample (2024+), and built the actual tradeable oil-up/down -> long XLU signal.",
+      "findings": "Checked a promising-looking pattern where oil prices seemed to predict utility stocks three days ahead. It turned out to be a statistical mirage -- the effect vanished on fresh data and offered no real trading edge -- so I logged it as a dead end and patched the scanner so it won't flag this kind of false lead again.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4547,11 +4557,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] Oil futures (CL=F) lead utility sector (XLU) returns by 3 days. IS p=0.0047, OOS-confirmed at lag 1. Effect size: 3 lags. Lead-lag Granger ",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
         "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
         "priority": 3,
         "category": "forward_stock_split_largecap_short"
@@ -4570,8 +4575,13 @@
         "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
         "priority": 2,
         "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
-    "handoff": "\"SESSION 2026-06-10 (orchestrator): (1) VERIFIED regime scan-hit guard fix works: data_tasks.py regime path now emits queue_recommendation=DO_NOT_QUEUE + known_dead_end=True for any IS-only (not OOS-validated) regime test. Confirmed on TSLA~^VIX. (2) CLOSED OUT auditor_change_8k_item_401_short (was lingering WEAK_SIGNAL_PRELIMINARY). Resignation-only refinement = FREQUENCY dead end: only 3 large-cap resignations in 2022-2023, all closed-end funds (Tekla HQL/THQ/HQH), 0 operating equities; 0 trad"
+    "handoff": "\"Closed the only pending scan hit (CL=F->XLU lead-lag, p8) as a spurious-Granger dead end and patched the scanner gap (added XLU to _COMMODITY_SENSITIVE_ETFS). Methodology note: the lead-lag OOS validation in causal_tests.test_lead_lag independently re-picks the best lag in the OOS window, so 'OOS confirmed' can be lag-hopping rather than the discovered lag surviving. A future hardening would test the IS best_lag specifically in OOS rather than re-optimizing. For now the commodity->sector family"
   }
 }
