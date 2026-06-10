@@ -1577,10 +1577,14 @@
       {
         "name": "RULE_granger_leadlag_macro_yield_requires_economic_filter",
         "reason": "METHODOLOGY: Granger lead-lag scan hits where the driver is a slow autocorrelated macro series (FRED:DGS10, yields) routinely produce p=0.0000 purely from large-N. Two confirmed cases (DGS10->XLP, DGS10->XLC) both had predictive corr~0.02, R2<0.001, and directional trade rules at or below 0%/trade. RULE: before queueing a yield/macro lead-lag scan hit, require a tradeability check: directional rule (sign-consistent IS+OOS) must earn >0.5% abnormal/trade above SPY. p-value alone is meaningless here. Use tools/leadlag_dgs10_xlp.py (LL_TARGET/LL_HOLD env) as the harness."
+      },
+      {
+        "name": "regime_is_only_no_oos_scan_hits",
+        "reason": "Regime tests (VIX/oil/yield sensitivity varies by regime) IS-significant but NOT OOS-validated are dead ends (time-varying beta stylized fact, spread <1%/day). Do not queue. Closed 19 such scan hits 2026-06-10. data_tasks.py regime path now auto-emits queue_recommendation=DO_NOT_QUEUE for non-OOS-validated regime tests."
       }
     ],
     "signal_count": 53,
-    "dead_end_count": 315,
+    "dead_end_count": 316,
     "literature_count": 25
   },
   "live_signals": [
@@ -1727,13 +1731,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 11748498,
+    "sessions_today": 4,
+    "tokens_today": 15804418,
     "sessions_by_day": [
       {
         "date": "2026-06-10",
-        "sessions": 3,
-        "tokens": 11748498
+        "sessions": 4,
+        "tokens": 15804418
       },
       {
         "date": "2026-06-09",
@@ -4429,6 +4433,12 @@
       "investigated": "Regime screen: 50 tests across assets and macro factors",
       "findings": "Found 19 significant hits (p<0.05). Dominant pattern: VIX regime effects. Tech stocks (TSLA, COIN, NVDA, SNOW) show largest effect sizes. Energy (XOM-CL) OOS-confirmed.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-10",
+      "investigated": "Top 5 P8 scan hits were all VIX-regime tests. Investigated whether they were tradeable or duplicates.",
+      "findings": "Cleared 19 false research leads that kept reappearing: they flagged the well-known fact that stocks get more volatile in turbulent markets, which is not a tradeable edge. Added an automatic filter so these stop cluttering the pipeline.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4512,36 +4522,31 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] SPY regime test: VIX sensitivity varies by regime. p=0.0014, effect_size=0.347. Test regime shifts in market volatility sensitivity.",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
+        "priority": 3,
+        "category": "forward_stock_split_largecap_short"
       },
       {
-        "question": "[SCAN HIT] XLY (Discretionary) regime test: VIX sensitivity varies by regime. p=0.0033, effect_size=0.479. Consumer discretionary volatility regime sh",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] XLRE (Real Estate) regime test: VIX sensitivity varies by regime. p=0.0026, effect_size=0.381. REIT volatility regime shift.",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
+        "priority": 2,
+        "category": "signal_refinement"
       },
       {
-        "question": "[SCAN HIT] UUP (Dollar) regime test: 10Y yield sensitivity varies by regime. p=0.0151, effect_size=0.086. Dollar strength regime-dependent on rates.",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] AAPL regime test: VIX sensitivity varies by regime. p=0.0026, effect_size=0.457. Mega-cap tech volatility regime shift.",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
-    "handoff": {
-      "session_date": "2026-06-10",
-      "summary": "Dry-pipeline session. Confirmed 0 GO candidates across all 6 signal scanners and that the June 5 S&P rebalance (MRVL+FLEX) is fully captured. Closed 6 stale queue items. Re-evaluated and rejected handoff #4 guard extension as redundant/risky.",
-      "open_positions": "FLEX (sp500 addition, ~-4.4%, eff June 22, trade_loop-managed)",
-      "next_action": "Re-run all daily scanners; pick up any GO candidate or non-cointegration scan hit."
-    }
+    "handoff": "\"SESSION 2026-06-10 (orchestrator): Fixed the recurring regime scan-hit duplicate-closure bug (first seen 2026-04-24). ROOT CAUSE: scanner queues regime hits on raw IS significant flag, ignoring oos_significant=False. FIX: data_tasks.py cmd_regression regime path now emits queue_recommendation=DO_NOT_QUEUE + known_dead_end=True + queue_block_reason when a regime test is not OOS-validated (mirrors cointegration KNOWN_DEAD_END guard). Verified on SPY/^VIX. No validation gate changed. CLOSED 19 pen"
   }
 }
