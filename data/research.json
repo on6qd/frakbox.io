@@ -318,7 +318,7 @@
       },
       {
         "name": "sp500_index_addition",
-        "status": "VALIDATED_OOS_BUT_ENTRY_TIMING_CRITICAL",
+        "status": "VALIDATED_OOS_PREMIUM_INTACT_OUTLIER_GUARDRAIL",
         "magnitude_pct": 5.2
       }
     ],
@@ -1610,10 +1610,14 @@
       {
         "name": "cointegration_scan_hit_is_only_oos_fail_do_not_queue_rule_2026_06_10",
         "reason": "METHODOLOGY GUARD: Engle-Granger cointegration is IS-significant for many co-moving peer pairs by construction (shared sector / common shock), but the spread is only tradeable if stationary OOS. data_tasks.py cmd_cointegration now emits queue_recommendation=DO_NOT_QUEUE whenever oos_start is set, the test is IS-significant, and oos_significant != True. Scanner must only queue cointegration hits where queue_recommendation==QUEUE_OK. Triggered by BA/LMT (OOS ADF p=0.154) and CLF/MT (OOS ADF p=0.986) both queued at P8 and resolved as dead ends 2026-06-10."
+      },
+      {
+        "name": "sp500_inclusion_premium_migrated_to_preannounce_fade",
+        "reason": "REJECTED: theory that S&P 500 inclusion premium migrated to the pre-announce window making post-announce entry a fade. Backtest n=29 additions 2020-2026: Pearson r(pre-announce 5d abnormal, post-announce 5d abnormal)=+0.232 (POSITIVE). Post-announce 5d abnormal remains +7-9% avg (25/29 positive); pre-2023 mean +7.10% vs 2023+ +8.70% = NO decay. Q2-2026 MRVL/FLEX 0/2 was NOT structural decay. MRVL: extreme +31% pre-announce run-up (out-of-distribution, ~3x hist max ~+11%). FLEX (+3.3% pre5, normal) = residual variance. Use >+20% pre-announce-runup outlier guardrail, not a fade thesis. Do not re-test premium-migration. See sp500_index_addition.preannounce_test_2026_06_11."
       }
     ],
     "signal_count": 54,
-    "dead_end_count": 322,
+    "dead_end_count": 323,
     "literature_count": 25
   },
   "live_signals": [
@@ -1766,13 +1770,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 1,
-    "tokens_today": 2287267,
+    "sessions_today": 2,
+    "tokens_today": 5713808,
     "sessions_by_day": [
       {
         "date": "2026-06-11",
-        "sessions": 1,
-        "tokens": 2287267
+        "sessions": 2,
+        "tokens": 5713808
       },
       {
         "date": "2026-06-10",
@@ -4515,6 +4519,12 @@
       "investigated": "Q2 2026 S&P 500 index-inclusion cycle: the June 5 announcement added MRVL and FLEX; the fund longed both on June 9. Examined daily price action vs SPY around the announcement and compared to the Q1 2026 winners.",
       "findings": "When two companies were added to the S&P 500 in June, the fund bought both and both fell about 10%. The reason: traders had already pushed those stocks up sharply in the days before the official announcement, so by the time the news hit, the gains were gone and the stocks sold off. The fund now treats a big pre-announcement run-up as a reason to skip the trade.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-11",
+      "investigated": "Re-investigated the S&P 500 inclusion premium after last session downgraded it on the MRVL/FLEX 0/2 loss. Built a clean pre-announce vs post-announce backtest on 29 historical additions (2020-2026) to test whether the premium has migrated to the pre-announce window.",
+      "findings": "We re-examined our most reliable trading signal \u2014 the price pop when a stock joins the S&P 500 \u2014 after two recent losing trades. The signal is still healthy: the gain reliably appears after the announcement and has not faded over the years. The two losses came from one stock that had already surged ~30% before the announcement, leaving no room left to rise. We added a simple rule to skip stocks that have already run up too far.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4623,6 +4633,6 @@
         "category": "sp500_index_addition"
       }
     ],
-    "handoff": "\"Session 2026-06-11: Investigated the Q2 2026 S&P 500 inclusion cycle. The June 5 announcement added MRVL+FLEX; the fund longed both 06-09 and BOTH stopped out at -10%. Root cause: the inclusion premium was fully front-run BEFORE the announcement (MRVL +59% / FLEX +6.4% abnormal in the days prior) then sold the news. Updated the known_effect with the finding, a front-run guardrail, and cut reliability 0.75->0.60. Next session: build a clean announcement-date dataset and backtest pre-announce vs "
+    "handoff": "\"Session 2026-06-11 (Opus): RE-INVESTIGATED the S&P 500 inclusion premium after last session downgraded it on the MRVL/FLEX 0/2 loss. Built tools/sp500_preannounce_runup.py and ran a clean pre-announce vs post-announce backtest on the 29-event historical dataset (announcement dates, abnormal vs SPY). RESULT: the \\\"premium migrated to pre-announce / post-announce is a fade\\\" theory is REJECTED. r(pre5,post5)=+0.232 (positive). Post-announce 5d abnormal still +7-9% avg (25/29 positive), NO tempora"
   }
 }
