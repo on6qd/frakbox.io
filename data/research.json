@@ -1744,13 +1744,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 19541345,
+    "sessions_today": 6,
+    "tokens_today": 23046140,
     "sessions_by_day": [
       {
         "date": "2026-06-10",
-        "sessions": 5,
-        "tokens": 19541345
+        "sessions": 6,
+        "tokens": 23046140
       },
       {
         "date": "2026-06-09",
@@ -4458,6 +4458,12 @@
       "investigated": "Closed out the lingering auditor-change 8-K Item 4.01 short signal. Tested the literature-backed refinement: isolate auditor RESIGNATIONS (high red-flag) from routine dismissals. Also verified the regime scan-hit duplicate-closure guard fix.",
       "findings": "We tested whether a company announcing that its auditor quit is a reliable signal to bet the stock will fall. It turns out genuine auditor resignations almost never happen at large, tradeable companies \u2014 only a handful in four years, none of them ordinary operating firms \u2014 so there is no usable trade here. We also confirmed an earlier bug fix is working.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-10",
+      "investigated": "Lead-lag + Cointegration + Threshold + Structural Break + Calendar + Factor Exposure screens: 58 tests total",
+      "findings": "Screened 58 statistical relationships across 6 themes (lead-lag, cointegration, threshold, structural break, calendar, factor exposure). Found 1 OOS-validated lead-lag signal: oil futures leading utilities by 3 days (p=0.0047, OOS p<0.05 at lag 1). Queued for deeper investigation.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4541,6 +4547,11 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "[SCAN HIT] Oil futures (CL=F) lead utility sector (XLU) returns by 3 days. IS p=0.0047, OOS-confirmed at lag 1. Effect size: 3 lags. Lead-lag Granger ",
+        "priority": 8,
+        "category": "scan_hit"
+      },
+      {
         "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
         "priority": 3,
         "category": "forward_stock_split_largecap_short"
@@ -4559,11 +4570,6 @@
         "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
         "priority": 2,
         "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
       }
     ],
     "handoff": "\"SESSION 2026-06-10 (orchestrator): (1) VERIFIED regime scan-hit guard fix works: data_tasks.py regime path now emits queue_recommendation=DO_NOT_QUEUE + known_dead_end=True for any IS-only (not OOS-validated) regime test. Confirmed on TSLA~^VIX. (2) CLOSED OUT auditor_change_8k_item_401_short (was lingering WEAK_SIGNAL_PRELIMINARY). Resignation-only refinement = FREQUENCY dead end: only 3 large-cap resignations in 2022-2023, all closed-end funds (Tekla HQL/THQ/HQH), 0 operating equities; 0 trad"
