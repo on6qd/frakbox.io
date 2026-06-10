@@ -227,11 +227,6 @@
         "magnitude_pct": 8.89
       },
       {
-        "name": "sp500_index_addition",
-        "status": "VALIDATED_OOS_QUARTERLY_FOCUS",
-        "magnitude_pct": 5.2
-      },
-      {
         "name": "casy_sp500_interim_addition_oos_april2026",
         "status": "OOS_MISS_INTERIM_ADDITION",
         "magnitude_pct": -7.3
@@ -320,6 +315,11 @@
         "name": "auditor_change_8k_item_401_short",
         "status": "disproven",
         "magnitude_pct": -1.65
+      },
+      {
+        "name": "sp500_index_addition",
+        "status": "VALIDATED_OOS_BUT_ENTRY_TIMING_CRITICAL",
+        "magnitude_pct": 5.2
       }
     ],
     "dead_ends": [
@@ -1766,9 +1766,14 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 10,
-    "tokens_today": 31855879,
+    "sessions_today": 1,
+    "tokens_today": 2287267,
     "sessions_by_day": [
+      {
+        "date": "2026-06-11",
+        "sessions": 1,
+        "tokens": 2287267
+      },
       {
         "date": "2026-06-10",
         "sessions": 10,
@@ -4504,6 +4509,12 @@
       "investigated": "Investigated the two P8 cointegration scan hits: BA/LMT (defense) and CLF/MT (steel). Ran Engle-Granger cointegration with a 2024-01-01 OOS split.",
       "findings": "Tested whether two pairs of similar companies (Boeing/Lockheed and Cleveland-Cliffs/ArcelorMittal) move together tightly enough to trade the gap between them. They looked linked in older data but the relationship broke down in recent data, so neither is tradeable. Also added an automatic check so the system stops flagging these false leads in the future.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-11",
+      "investigated": "Q2 2026 S&P 500 index-inclusion cycle: the June 5 announcement added MRVL and FLEX; the fund longed both on June 9. Examined daily price action vs SPY around the announcement and compared to the Q1 2026 winners.",
+      "findings": "When two companies were added to the S&P 500 in June, the fund bought both and both fell about 10%. The reason: traders had already pushed those stocks up sharply in the days before the official announcement, so by the time the news hit, the gains were gone and the stocks sold off. The fund now treats a big pre-announcement run-up as a reason to skip the trade.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4612,6 +4623,6 @@
         "category": "sp500_index_addition"
       }
     ],
-    "handoff": "\"Session 2026-06-10: cleared both P8 cointegration scan hits as OOS-fail dead ends. Built a DO_NOT_QUEUE guard in cmd_cointegration so the scanner stops re-queuing IS-only/OOS-fail pairs (the same class of friction already guarded for threshold and regime). Next session: no urgent scan hits remain; advance a non-event exposure/lead-lag screen or wait for an event trigger on the 4 pending hypotheses.\""
+    "handoff": "\"Session 2026-06-11: Investigated the Q2 2026 S&P 500 inclusion cycle. The June 5 announcement added MRVL+FLEX; the fund longed both 06-09 and BOTH stopped out at -10%. Root cause: the inclusion premium was fully front-run BEFORE the announcement (MRVL +59% / FLEX +6.4% abnormal in the days prior) then sold the news. Updated the known_effect with the finding, a front-run guardrail, and cut reliability 0.75->0.60. Next session: build a clean announcement-date dataset and backtest pre-announce vs "
   }
 }
