@@ -1598,10 +1598,22 @@
       {
         "name": "cl_f_xlu_leadlag_canonical_dead_end_2026_06_10",
         "reason": "CL=F (oil) -> XLU (utilities) Granger lead-lag scan hit (IS lag-3 p=0.0064) is a spurious artifact, confirming the commodity_sector_granger_leadlag_systematic_dead_end_2026_04_20 family. Fixed-lag OOS retest (XLU ret ~ oil ret at lag, +SPY control): discovered lag-3 is significant IS (beta=+0.033, p=0.0008) but DIES OOS (beta=+0.0006, p=0.97). The scan-reported \"OOS confirmation at lag 1\" is lag-hopping: lag-1 is insignificant/wrong-sign IS (p=0.16) and only appears in the OOS window. Cross-correlation: lag-0 (contemporaneous)=0.107 dominates; lag-3=0.014 (negligible) -> relationship is contemporaneous exposure + vol clustering, not predictive. Tradeable test (oil 3d up -> long XLU vs down, abnormal vs SPY): IS spread t=-0.28 p=0.78; OOS t=1.38 p=0.17; mean abnormal returns <0.1%, far below 0.5%/day floor and transaction costs. FIX: added XLU to _COMMODITY_SENSITIVE_ETFS so the scanner guard now suppresses this pair (was a gap: utilities are commodity+rate sensitive but XLU was missing from the list). DEAD END, not tradeable."
+      },
+      {
+        "name": "cointegration_BA_LMT_pairs",
+        "reason": "IS Engle-Granger p=0.0158 but OOS ADF p=0.154 (spread not stationary post-2024). Hedge ratio -0.027 is near-zero and wrong-signed for two co-moving defense stocks, indicating in-sample artifact, not genuine long-run linkage. Not tradeable."
+      },
+      {
+        "name": "cointegration_CLF_MT_pairs",
+        "reason": "IS Engle-Granger p=0.0228 but OOS ADF p=0.986 (spread completely non-stationary post-2024). Steel peers show no out-of-sample mean-reversion. Not tradeable."
+      },
+      {
+        "name": "cointegration_scan_hit_is_only_oos_fail_do_not_queue_rule_2026_06_10",
+        "reason": "METHODOLOGY GUARD: Engle-Granger cointegration is IS-significant for many co-moving peer pairs by construction (shared sector / common shock), but the spread is only tradeable if stationary OOS. data_tasks.py cmd_cointegration now emits queue_recommendation=DO_NOT_QUEUE whenever oos_start is set, the test is IS-significant, and oos_significant != True. Scanner must only queue cointegration hits where queue_recommendation==QUEUE_OK. Triggered by BA/LMT (OOS ADF p=0.154) and CLF/MT (OOS ADF p=0.986) both queued at P8 and resolved as dead ends 2026-06-10."
       }
     ],
     "signal_count": 54,
-    "dead_end_count": 319,
+    "dead_end_count": 322,
     "literature_count": 25
   },
   "live_signals": [
@@ -1748,13 +1760,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 29922628,
+    "sessions_today": 10,
+    "tokens_today": 31855879,
     "sessions_by_day": [
       {
         "date": "2026-06-10",
-        "sessions": 9,
-        "tokens": 29922628
+        "sessions": 10,
+        "tokens": 31855879
       },
       {
         "date": "2026-06-09",
@@ -4480,6 +4492,12 @@
       "investigated": "Cointegration Pairs Screen: 32 within-sector rival pairs across 8 sectors",
       "findings": "Screened 32 cointegration pairs across 8 sectors. Identified 2 statistically significant relationships for mean-reversion trading.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-10",
+      "investigated": "Investigated the two P8 cointegration scan hits: BA/LMT (defense) and CLF/MT (steel). Ran Engle-Granger cointegration with a 2024-01-01 OOS split.",
+      "findings": "Tested whether two pairs of similar companies (Boeing/Lockheed and Cleveland-Cliffs/ArcelorMittal) move together tightly enough to trade the gap between them. They looked linked in older data but the relationship broke down in recent data, so neither is tradeable. Also added an automatic check so the system stops flagging these false leads in the future.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4563,16 +4581,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] Cointegration: BA/LMT (Defense/Aerospace peers). IS p=0.0158, hedge_ratio=-0.027, half-life=48.9d. OOS ADF p=0.154 (not confirmed). Investi",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
-        "question": "[SCAN HIT] Cointegration: CLF/MT (Steel peers). IS p=0.0228, hedge_ratio=0.855, half-life=27.1d (FASTEST). OOS ADF p=0.986 (not confirmed). Investigat",
-        "priority": 8,
-        "category": "scan_hit"
-      },
-      {
         "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
         "priority": 3,
         "category": "forward_stock_split_largecap_short"
@@ -4586,8 +4594,18 @@
         "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
         "priority": 2,
         "category": "signal_refinement"
+      },
+      {
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
-    "handoff": "\"Closed the only pending scan hit (CL=F->XLU lead-lag, p8) as a spurious-Granger dead end and patched the scanner gap (added XLU to _COMMODITY_SENSITIVE_ETFS). Methodology note: the lead-lag OOS validation in causal_tests.test_lead_lag independently re-picks the best lag in the OOS window, so 'OOS confirmed' can be lag-hopping rather than the discovered lag surviving. A future hardening would test the IS best_lag specifically in OOS rather than re-optimizing. For now the commodity->sector family"
+    "handoff": "\"Session 2026-06-10: cleared both P8 cointegration scan hits as OOS-fail dead ends. Built a DO_NOT_QUEUE guard in cmd_cointegration so the scanner stops re-queuing IS-only/OOS-fail pairs (the same class of friction already guarded for threshold and regime). Next session: no urgent scan hits remain; advance a non-event exposure/lead-lag screen or wait for an event trigger on the 4 pending hypotheses.\""
   }
 }
