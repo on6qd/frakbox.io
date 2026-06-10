@@ -1770,13 +1770,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 2,
-    "tokens_today": 5713808,
+    "sessions_today": 3,
+    "tokens_today": 7175398,
     "sessions_by_day": [
       {
         "date": "2026-06-11",
-        "sessions": 2,
-        "tokens": 5713808
+        "sessions": 3,
+        "tokens": 7175398
       },
       {
         "date": "2026-06-10",
@@ -4525,6 +4525,12 @@
       "investigated": "Re-investigated the S&P 500 inclusion premium after last session downgraded it on the MRVL/FLEX 0/2 loss. Built a clean pre-announce vs post-announce backtest on 29 historical additions (2020-2026) to test whether the premium has migrated to the pre-announce window.",
       "findings": "We re-examined our most reliable trading signal \u2014 the price pop when a stock joins the S&P 500 \u2014 after two recent losing trades. The signal is still healthy: the gain reliably appears after the announcement and has not faded over the years. The two losses came from one stock that had already surged ~30% before the announcement, leaving no room left to rise. We added a simple rule to skip stocks that have already run up too far.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-11",
+      "investigated": "High-throughput factor & signal screen: 68 tests across 4 themes",
+      "findings": "Screened 68 statistical relationships across 4 themes. Strong artifact detection suppressed 95% of candidate signals. Found 1 validated discovery: COIN regime sensitivity (1.7% spread, OOS-confirmed). Queued for investigation.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4608,6 +4614,11 @@
     "pending_triggers": [],
     "research_queue": [
       {
+        "question": "[SCAN HIT] COIN regime test: VIX sensitivity varies significantly by regime. p=0.000753, effect_size=1.725. Low VIX regime: +0.987%/day, High VIX regi",
+        "priority": 7,
+        "category": "scan_hit"
+      },
+      {
         "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
         "priority": 3,
         "category": "forward_stock_split_largecap_short"
@@ -4626,11 +4637,6 @@
         "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
         "priority": 2,
         "category": "activist_13d_filing_long"
-      },
-      {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
       }
     ],
     "handoff": "\"Session 2026-06-11 (Opus): RE-INVESTIGATED the S&P 500 inclusion premium after last session downgraded it on the MRVL/FLEX 0/2 loss. Built tools/sp500_preannounce_runup.py and ran a clean pre-announce vs post-announce backtest on the 29-event historical dataset (announcement dates, abnormal vs SPY). RESULT: the \\\"premium migrated to pre-announce / post-announce is a fade\\\" theory is REJECTED. r(pre5,post5)=+0.232 (positive). Post-announce 5d abnormal still +7-9% avg (25/29 positive), NO tempora"
