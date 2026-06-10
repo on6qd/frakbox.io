@@ -2,10 +2,10 @@
   "summary": {
     "total_hypotheses": 72,
     "pending": 4,
-    "active": 1,
-    "completed": 11,
+    "active": 0,
+    "completed": 12,
     "invalidated": 6,
-    "direction_accuracy": "4/11",
+    "direction_accuracy": "4/12",
     "patterns_discovered": 7,
     "reliable_patterns": [
       {
@@ -44,7 +44,7 @@
         "avg_confidence": 7.0
       },
       "sp500_index_addition": {
-        "accuracy": "0/1",
+        "accuracy": "0/2",
         "avg_confidence": 10.0
       }
     }
@@ -1740,22 +1740,28 @@
     {
       "event_type": "sp500_index_addition",
       "state": "EXPLORING",
-      "total_experiments": 1,
+      "total_experiments": 2,
       "effective_independent_n": 1,
       "effective_correct_n": 0,
-      "last_updated": "2026-06-09T17:30:06.932940",
+      "last_updated": "2026-06-10T22:51:23.164557",
       "experiments": [
         {
           "symbol": "MRVL",
           "correct": false,
           "return_pct": -9.66,
           "date": "2026-06-09"
+        },
+        {
+          "symbol": "FLEX",
+          "correct": false,
+          "return_pct": -9.47,
+          "date": "2026-06-10"
         }
       ]
     }
   ],
   "focus": {
-    "active_signal_types": 5,
+    "active_signal_types": 4,
     "max_signal_types": 20,
     "over_limit": false
   },

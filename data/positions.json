@@ -1,14 +1,17 @@
 {
-  "active": [
+  "active": [],
+  "recent_closed": [
     {
       "symbol": "FLEX",
       "direction": "long",
       "event_type": "sp500_index_addition",
+      "result_pct": -10.36,
+      "abnormal_pct": -9.47,
+      "exit_reason": "STOP-LOSS: FLEX down -10.4% (limit: -10.0%)",
+      "closed_date": "2026-06-10",
       "thesis": "Flex Ltd added to S&P 500 in Q2 2026 quarterly rebalance (announced 2026-06-05, effective 2026-06-22), replacing Campbel",
-      "opened_date": "2026-06-08"
-    }
-  ],
-  "recent_closed": [
+      "direction_correct": false
+    },
     {
       "symbol": "MRVL",
       "direction": "long",
