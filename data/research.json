@@ -1748,13 +1748,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 26117396,
+    "sessions_today": 8,
+    "tokens_today": 28504941,
     "sessions_by_day": [
       {
         "date": "2026-06-10",
-        "sessions": 7,
-        "tokens": 26117396
+        "sessions": 8,
+        "tokens": 28504941
       },
       {
         "date": "2026-06-09",
