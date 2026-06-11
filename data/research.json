@@ -1782,13 +1782,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 27278072,
+    "sessions_today": 9,
+    "tokens_today": 28599336,
     "sessions_by_day": [
       {
         "date": "2026-06-11",
-        "sessions": 8,
-        "tokens": 27278072
+        "sessions": 9,
+        "tokens": 28599336
       },
       {
         "date": "2026-06-10",
@@ -4573,6 +4573,12 @@
       "investigated": "Tested whether filing-time keyword AND-queries can isolate a tradeable acquisition-target subset from the noisy strategic-alternatives 8-K population (queue 664eed59). Built an EFTS phrase-AND scraper; treatment = strategic-alternatives 8-Ks also matching sale-of-company/unsolicited-proposal/go-private. 87 large-cap events, next-day-open entry (excludes announcement pop), SPY-adjusted, discovery/OOS split.",
       "findings": "We tested whether companies that publicly announce they are exploring a sale (using the specific language in their SEC filings) tend to drift higher afterward as takeover bait. They do not -- any premium is already baked into the first-day jump, and after that the stock is a coin flip. Another dead end, cleanly closed.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-11",
+      "investigated": "Structural break screen: 66 tests across 4 macro dates (2020-03-15, 2022-03-16, 2024-01-15, 2025-01-20)",
+      "findings": "Structural break scanner: 66 tests across macro dates. Found 23 significant shifts in sector-factor relationships, mostly COVID-driven (18 hits at 2020-03-15). Key finding: oil exposure in energy/materials collapsed post-pandemic. All queued for investigation.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4656,29 +4662,29 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
-        "priority": 2,
-        "category": "spinco_institutional_selling_short"
+        "question": "[SCAN HIT] XLE~FRED:DGS10 structural break at 2020-03-15: beta=-0.058, p=0.0005. Investigate for tradeable strategy.",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
-        "priority": 2,
-        "category": "activist_13d_filing_long"
+        "question": "[SCAN HIT] XLF~FRED:DGS10 structural break at 2020-03-15: beta=-0.047, p=0.0382. Investigate for tradeable strategy.",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
-        "priority": 1,
-        "category": "sp500_index_addition"
+        "question": "[SCAN HIT] XLE~CL=F structural break at 2020-03-15: beta=-0.708, p<0.0001, F=68.73. Investigate for tradeable strategy.",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
-        "priority": 1,
-        "category": "ceo_sudden_departure_short"
+        "question": "[SCAN HIT] XLE~CL=F structural break at 2022-03-16: beta=+0.341, p<0.0001, F=95.34. Investigate for tradeable strategy.",
+        "priority": 8,
+        "category": "scan_hit"
       },
       {
-        "question": "Run seo_realtime_scanner.py daily. When GO candidate detected, activate hypothesis 673aaa32 with the specific ticker. Short at next open, hold 5 days,",
-        "priority": 1,
-        "category": "seo_bought_deal_short"
+        "question": "[SCAN HIT] XLF~DX-Y.NYB structural break at 2020-03-15: beta=-4.218, p<0.0001, F=43.62. Investigate for tradeable strategy.",
+        "priority": 8,
+        "category": "scan_hit"
       }
     ],
     "handoff": "\"Session 2026-06-11 (Opus): Investigated queue 664eed59 (strategic-alternatives 8-K keyword refinement) -> DEAD END, queue closed. Built tools/strategic_alt_acquisition_scraper.py (EFTS phrase-AND classification, year-chunked + retry to dodge 500s). Treatment = strategic-alternatives 8-Ks ALSO matching 'sale of the Company'/'unsolicited proposal'/'go private'. 87 large-cap events, next-day-open entry (no announcement pop), SPY-adj. Discovery 5d +1.12% p=0.35; OOS 5d -0.13% p=0.89 sign-flip; dir "
