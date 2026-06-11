@@ -1774,13 +1774,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 5,
-    "tokens_today": 15083038,
+    "sessions_today": 6,
+    "tokens_today": 18792582,
     "sessions_by_day": [
       {
         "date": "2026-06-11",
-        "sessions": 5,
-        "tokens": 15083038
+        "sessions": 6,
+        "tokens": 18792582
       },
       {
         "date": "2026-06-10",
@@ -4547,6 +4547,12 @@
       "investigated": "The one pending scan hit: a COIN/VIX 'regime' signal claiming Coinbase returns are strongly conditional on the volatility regime (calm vs stressed markets), reported as out-of-sample validated.",
       "findings": "We found that a promising-looking 'volatility regime' trading signal for Coinbase was actually a statistical mirage: it depended on knowing the day's volatility before the day was over. Once we tested it the way you could actually trade it, the edge vanished. We fixed our research engine so this kind of look-ahead mistake gets caught automatically.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-11",
+      "investigated": "8 scan themes: Threshold (VIX/Oil/Rates/Copper on various targets), Calendar (monthly/dow on 6 assets), Lead-Lag (Granger causality 6 tests), Factor Exposure (sector-macro regressions 6 tests), Cointegration (6 pairs), Structural Break (5 key dates), Regime (5 tests). Total: 45+ tests.",
+      "findings": "Scanned 45+ tests across 8 themes. Found 5 structural breaks in sector/market relationships (2020-2024 regimes) but all in-sample. No scan-eligible findings for research queue; all threshold/calendar/lead-lag tests either null or suppressed as known dead ends.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
