@@ -1626,10 +1626,14 @@
       {
         "name": "strategic_alt_acquisition_keyword_subset_2026_06_11",
         "reason": "REFINEMENT FAILS. Tested whether filing-time keyword AND-queries on strategic-alternatives 8-Ks (base phrase 'strategic alternatives' plus one of 'sale of the Company' / 'unsolicited proposal' / 'go private') isolate a tradeable acquisition-target subset. EFTS phrase-AND classification at the search layer (no full-text fetch, sidesteps SEC rate limiting). 87 large-cap (>500M) treatment events; entry next-day OPEN (timing=after_hours) to exclude the announcement-day pop; SPY-adjusted. Discovery (pre-2024, n=39): 5d +1.12% p=0.35, dir 56%; nothing significant any horizon. OOS (2024-25, n=39): 5d -0.13% p=0.89 (SIGN FLIP), 3d -1.12% p=0.18, dir ~50% all horizons. The takeover-premium is fully priced in the announcement-day pop; by next-day open the subset is a coin flip (many strategic-review firms never actually get acquired). Survivorship note: acquired/delisted winners drop from yfinance, biasing AGAINST a long signal, yet still no edge. Confirms the prior look-ahead-bias finding for strategic_alternatives_announcement. Keyword refinement adds no tradeable edge. Resolves queue 664eed59."
+      },
+      {
+        "name": "structural_break_macro_sector_scan_hit",
+        "reason": "Structural-break scan hits on contemporaneous macro->sector regressions are NOT tradeable by construction. A Chow/structural break detects that a CONTEMPORANEOUS beta changed magnitude at a date; that beta is priced in real time, so the break is a risk-model fact, not a forward signal. Of 23 P8 structural-break scan hits, 17 sat on the COVID crash (2020-03-15) and 6 on the 2022 Fed-hike/Russia date (2022-03-16) \u2014 dates where every macro->sector beta breaks by construction. Conversion test: the cleanest pair that even passed a Granger lead-lag xcorr screen (FRED:DGS10->XLP, OOS-significant, no contemporaneous warning) had ~0 predictive correlation (-0.034..+0.021) when converted to past-yield-change -> forward abnormal XLP return, with slopes flipping sign IS vs OOS. CL=F->XLE lead-lag is a documented contemporaneous artifact (lag-0 xcorr 0.215 vs best-lag 0.008). Conclusion: Granger/structural-break significance != tradeable predictability. Guard added (structural_break_contemporaneous_not_tradeable_2026_06_11): data_tasks.py structural_break now tags every result contemporaneous-only and hard-suppresses crisis-date breaks. All 23 queue hits resolved as dead ends."
       }
     ],
     "signal_count": 54,
-    "dead_end_count": 326,
+    "dead_end_count": 327,
     "literature_count": 25
   },
   "live_signals": [
@@ -1782,13 +1786,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 9,
-    "tokens_today": 28599336,
+    "sessions_today": 10,
+    "tokens_today": 31949494,
     "sessions_by_day": [
       {
         "date": "2026-06-11",
-        "sessions": 9,
-        "tokens": 28599336
+        "sessions": 10,
+        "tokens": 31949494
       },
       {
         "date": "2026-06-10",
@@ -4579,6 +4583,12 @@
       "investigated": "Structural break screen: 66 tests across 4 macro dates (2020-03-15, 2022-03-16, 2024-01-15, 2025-01-20)",
       "findings": "Structural break scanner: 66 tests across macro dates. Found 23 significant shifts in sector-factor relationships, mostly COVID-driven (18 hits at 2020-03-15). Key finding: oil exposure in energy/materials collapsed post-pandemic. All queued for investigation.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-11",
+      "investigated": "The 23 highest-priority scan hits (P8 structural breaks in macro->sector regressions). Tested whether they represent tradeable strategies.",
+      "findings": "Looked into 23 top-ranked statistical signals where a market relationship appeared to shift on a date. All turned out to be artifacts of famous crisis days (the 2020 COVID crash, the 2022 rate shock) rather than anything you could trade ahead of. Added an automatic filter so the system stops flagging these going forward.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4662,31 +4672,31 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] XLE~FRED:DGS10 structural break at 2020-03-15: beta=-0.058, p=0.0005. Investigate for tradeable strategy.",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
+        "priority": 2,
+        "category": "spinco_institutional_selling_short"
       },
       {
-        "question": "[SCAN HIT] XLF~FRED:DGS10 structural break at 2020-03-15: beta=-0.047, p=0.0382. Investigate for tradeable strategy.",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
+        "priority": 2,
+        "category": "activist_13d_filing_long"
       },
       {
-        "question": "[SCAN HIT] XLE~CL=F structural break at 2020-03-15: beta=-0.708, p<0.0001, F=68.73. Investigate for tradeable strategy.",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       },
       {
-        "question": "[SCAN HIT] XLE~CL=F structural break at 2022-03-16: beta=+0.341, p<0.0001, F=95.34. Investigate for tradeable strategy.",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
       },
       {
-        "question": "[SCAN HIT] XLF~DX-Y.NYB structural break at 2020-03-15: beta=-4.218, p<0.0001, F=43.62. Investigate for tradeable strategy.",
-        "priority": 8,
-        "category": "scan_hit"
+        "question": "Run seo_realtime_scanner.py daily. When GO candidate detected, activate hypothesis 673aaa32 with the specific ticker. Short at next open, hold 5 days,",
+        "priority": 1,
+        "category": "seo_bought_deal_short"
       }
     ],
-    "handoff": "\"Session 2026-06-11 (Opus): Investigated queue 664eed59 (strategic-alternatives 8-K keyword refinement) -> DEAD END, queue closed. Built tools/strategic_alt_acquisition_scraper.py (EFTS phrase-AND classification, year-chunked + retry to dodge 500s). Treatment = strategic-alternatives 8-Ks ALSO matching 'sale of the Company'/'unsolicited proposal'/'go private'. 87 large-cap events, next-day-open entry (no announcement pop), SPY-adj. Discovery 5d +1.12% p=0.35; OOS 5d -0.13% p=0.89 sign-flip; dir "
+    "handoff": "\"Resolved the structural-break scan-hit batch: these detect changes in CONTEMPORANEOUS macro->sector betas (priced in real time), not forward signals; 17/23 sat on the COVID date alone. Added a universal guard to data_tasks.py structural_break that hard-suppresses crisis-date breaks and tags all others contemporaneous-only. Recorded dead-end structural_break_macro_sector_scan_hit. Scanner should no longer queue these. FLEX position still open at -7.2%.\""
   }
 }
