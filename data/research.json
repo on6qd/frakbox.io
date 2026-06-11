@@ -1782,13 +1782,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 7,
-    "tokens_today": 22413055,
+    "sessions_today": 8,
+    "tokens_today": 27278072,
     "sessions_by_day": [
       {
         "date": "2026-06-11",
-        "sessions": 7,
-        "tokens": 22413055
+        "sessions": 8,
+        "tokens": 27278072
       },
       {
         "date": "2026-06-10",
@@ -4567,6 +4567,12 @@
       "investigated": "Ran the 4 daily validated-signal scanners (NT 10-K/Q, SEO bought-deal, cybersecurity 8-K, activist 13D) for live GO candidates, then investigated the one pending standalone research item: forward_stock_split_largecap_short (P3).",
       "findings": "We tested whether large companies that split their stock tend to fall afterward. An earlier batch of cases (2014-2018) showed the opposite \u2014 stocks drifted slightly up \u2014 so the apparent edge only existed during the 2020 and 2024 market selloffs and is not a reliable strategy. We retired it.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-11",
+      "investigated": "Tested whether filing-time keyword AND-queries can isolate a tradeable acquisition-target subset from the noisy strategic-alternatives 8-K population (queue 664eed59). Built an EFTS phrase-AND scraper; treatment = strategic-alternatives 8-Ks also matching sale-of-company/unsolicited-proposal/go-private. 87 large-cap events, next-day-open entry (excludes announcement pop), SPY-adjusted, discovery/OOS split.",
+      "findings": "We tested whether companies that publicly announce they are exploring a sale (using the specific language in their SEC filings) tend to drift higher afterward as takeover bait. They do not -- any premium is already baked into the first-day jump, and after that the stock is a coin flip. Another dead end, cleanly closed.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4675,6 +4681,6 @@
         "category": "seo_bought_deal_short"
       }
     ],
-    "handoff": "\"Session 2026-06-11 (Opus): No pending scan hits >=P8. Ran all 4 daily validated-signal scanners \\u2014 0 GO candidates (SEO had 3 micro-caps below cap threshold; NT/cybersec/13D empty). S&P scanner only re-surfaced the already-traded June-5 MRVL+FLEX addition (cycle 0/2, deferred to Q3). Investigation: closed forward_stock_split_largecap_short (P3) as a regime-specific DEAD END via a backward temporal extension \\u2014 2014-2018 independent sample (N=35) gives 10d +0.23% (p=0.76, pos 51.4%) and "
+    "handoff": "\"Session 2026-06-11 (Opus): Investigated queue 664eed59 (strategic-alternatives 8-K keyword refinement) -> DEAD END, queue closed. Built tools/strategic_alt_acquisition_scraper.py (EFTS phrase-AND classification, year-chunked + retry to dodge 500s). Treatment = strategic-alternatives 8-Ks ALSO matching 'sale of the Company'/'unsolicited proposal'/'go private'. 87 large-cap events, next-day-open entry (no announcement pop), SPY-adj. Discovery 5d +1.12% p=0.35; OOS 5d -0.13% p=0.89 sign-flip; dir "
   }
 }
