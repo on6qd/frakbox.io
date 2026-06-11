@@ -1618,10 +1618,18 @@
       {
         "name": "coin_vix_regime_conditional_returns",
         "reason": "DEAD_END_LOOKAHEAD_ARTIFACT (scan hit 11073acb, COIN VIX regime, engine p=0.0008 'OOS-validated'). Root cause: regime engine classifies each day by SAME-DAY (contemporaneous) VIX level (data_tasks.py ~L1027, no .shift). VIX and same-day equity returns are mechanically negatively correlated (VIX spikes ON down days), so high-VIX days ARE down days by construction. Reproduced engine numbers with contemporaneous VIX (low +0.78%/d, high -0.68%/d, p=0.0001). With a TRADEABLE 1-day-lagged VIX tercile the effect VANISHES (Kruskal p=0.31, high-VIX flips to +0.27%/d). SPY-adjusted ABNORMAL COIN returns are also insignificant by regime (p=0.47, low-vs-high t p=0.81) \u2014 the raw effect is amplified market beta (COIN beta=2.65), not COIN alpha. SPY shows the same raw sign pattern. CRITICAL: OOS sign-preservation does NOT protect against this \u2014 the contemporaneous VIX<->return correlation exists in every period, so spurious regime effects 'validate' OOS automatically. NOT TRADEABLE. Member of risk-on/risk-off audited family + look-ahead bias."
+      },
+      {
+        "name": "forward_stock_split_largecap_short_regime_specific_2026_06_11",
+        "reason": "Falsified by independent earlier sample. 2014-2018 (N=35, same SP500 universe/method) 10d abnormal +0.23% (p=0.76, pos 51.4%), 5d +0.93% (p=0.16, pos 54%) \u2014 short signal VANISHES and flips slightly positive, consistent with textbook positive split drift (Ikenberry/Han) in a calm bull market. Original 2019-2024 negative effect (-2.34% 10d) was concentrated in 2020 (6/6 neg, -5.83%) and 2024 (6/8 neg, -4.81%), both high-vol/selloff regimes. Pooled significance was a regime artifact, not a stable mean-reversion edge. DO NOT TRADE. Success criterion (10d<-0.5% AND pos<45% in OOS) failed with wrong sign."
+      },
+      {
+        "name": "strategic_alt_acquisition_keyword_subset_2026_06_11",
+        "reason": "REFINEMENT FAILS. Tested whether filing-time keyword AND-queries on strategic-alternatives 8-Ks (base phrase 'strategic alternatives' plus one of 'sale of the Company' / 'unsolicited proposal' / 'go private') isolate a tradeable acquisition-target subset. EFTS phrase-AND classification at the search layer (no full-text fetch, sidesteps SEC rate limiting). 87 large-cap (>500M) treatment events; entry next-day OPEN (timing=after_hours) to exclude the announcement-day pop; SPY-adjusted. Discovery (pre-2024, n=39): 5d +1.12% p=0.35, dir 56%; nothing significant any horizon. OOS (2024-25, n=39): 5d -0.13% p=0.89 (SIGN FLIP), 3d -1.12% p=0.18, dir ~50% all horizons. The takeover-premium is fully priced in the announcement-day pop; by next-day open the subset is a coin flip (many strategic-review firms never actually get acquired). Survivorship note: acquired/delisted winners drop from yfinance, biasing AGAINST a long signal, yet still no edge. Confirms the prior look-ahead-bias finding for strategic_alternatives_announcement. Keyword refinement adds no tradeable edge. Resolves queue 664eed59."
       }
     ],
     "signal_count": 54,
-    "dead_end_count": 324,
+    "dead_end_count": 326,
     "literature_count": 25
   },
   "live_signals": [
@@ -1774,13 +1782,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 18792582,
+    "sessions_today": 7,
+    "tokens_today": 22413055,
     "sessions_by_day": [
       {
         "date": "2026-06-11",
-        "sessions": 6,
-        "tokens": 18792582
+        "sessions": 7,
+        "tokens": 22413055
       },
       {
         "date": "2026-06-10",
@@ -4553,6 +4561,12 @@
       "investigated": "8 scan themes: Threshold (VIX/Oil/Rates/Copper on various targets), Calendar (monthly/dow on 6 assets), Lead-Lag (Granger causality 6 tests), Factor Exposure (sector-macro regressions 6 tests), Cointegration (6 pairs), Structural Break (5 key dates), Regime (5 tests). Total: 45+ tests.",
       "findings": "Scanned 45+ tests across 8 themes. Found 5 structural breaks in sector/market relationships (2020-2024 regimes) but all in-sample. No scan-eligible findings for research queue; all threshold/calendar/lead-lag tests either null or suppressed as known dead ends.",
       "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-11",
+      "investigated": "Ran the 4 daily validated-signal scanners (NT 10-K/Q, SEO bought-deal, cybersecurity 8-K, activist 13D) for live GO candidates, then investigated the one pending standalone research item: forward_stock_split_largecap_short (P3).",
+      "findings": "We tested whether large companies that split their stock tend to fall afterward. An earlier batch of cases (2014-2018) showed the opposite \u2014 stocks drifted slightly up \u2014 so the apparent edge only existed during the 2020 and 2024 market selloffs and is not a reliable strategy. We retired it.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4636,19 +4650,9 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
-        "priority": 3,
-        "category": "forward_stock_split_largecap_short"
-      },
-      {
         "question": "Monitor upcoming SpinCo events for hypothesis 2d94ac68. Next known event: HONA (Honeywell Aerospace) expected Q3 2026. Action: (1) When HONA announces",
         "priority": 2,
         "category": "spinco_institutional_selling_short"
-      },
-      {
-        "question": "Can keyword analysis of 8-K text ('sale of the company', 'unsolicited proposal', 'take private') isolate a pure acquisition-target subset from strateg",
-        "priority": 2,
-        "category": "signal_refinement"
       },
       {
         "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
@@ -4659,8 +4663,18 @@
         "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
         "priority": 1,
         "category": "sp500_index_addition"
+      },
+      {
+        "question": "When next qualifying CEO departure fires, set trigger to 'after_hours_immediate' and place short via extended hours limit order. After-hours support n",
+        "priority": 1,
+        "category": "ceo_sudden_departure_short"
+      },
+      {
+        "question": "Run seo_realtime_scanner.py daily. When GO candidate detected, activate hypothesis 673aaa32 with the specific ticker. Short at next open, hold 5 days,",
+        "priority": 1,
+        "category": "seo_bought_deal_short"
       }
     ],
-    "handoff": "\"Session 2026-06-11 (Opus): Triaged the only pending scan hit \\u2014 priority-7 COIN/^VIX regime (11073acb), which claimed 'OOS-validated' (engine p=0.0008, low +0.99%/d vs high -0.74%/d). DISPROVED and closed as a DEAD END (look-ahead artifact). Root cause is an ENGINE DEFECT: the regime branch classified each day by that SAME-DAY (contemporaneous) factor level. VIX spikes ON down days, so high-VIX days ARE down days by construction. OOS sign-preservation cannot catch it (the contemporaneous co"
+    "handoff": "\"Session 2026-06-11 (Opus): No pending scan hits >=P8. Ran all 4 daily validated-signal scanners \\u2014 0 GO candidates (SEO had 3 micro-caps below cap threshold; NT/cybersec/13D empty). S&P scanner only re-surfaced the already-traded June-5 MRVL+FLEX addition (cycle 0/2, deferred to Q3). Investigation: closed forward_stock_split_largecap_short (P3) as a regime-specific DEAD END via a backward temporal extension \\u2014 2014-2018 independent sample (N=35) gives 10d +0.23% (p=0.76, pos 51.4%) and "
   }
 }
