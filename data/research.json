@@ -1770,13 +1770,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 7175398,
+    "sessions_today": 4,
+    "tokens_today": 11395189,
     "sessions_by_day": [
       {
         "date": "2026-06-11",
-        "sessions": 3,
-        "tokens": 7175398
+        "sessions": 4,
+        "tokens": 11395189
       },
       {
         "date": "2026-06-10",
@@ -4531,6 +4531,12 @@
       "investigated": "High-throughput factor & signal screen: 68 tests across 4 themes",
       "findings": "Screened 68 statistical relationships across 4 themes. Strong artifact detection suppressed 95% of candidate signals. Found 1 validated discovery: COIN regime sensitivity (1.7% spread, OOS-confirmed). Queued for investigation.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-11",
+      "investigated": "Ran the 4 daily EDGAR scanners for pending validated hypotheses (SEO bought-deal short, NT 10-K late-filing short, Starboard 13D long, cybersecurity 8-K short) to catch any live trigger.",
+      "findings": "Checked for new trading signals today and found none. While doing so, I discovered our automated filing scanners could silently fail when the SEC website hiccuped, making a temporary outage look like a quiet day \u2014 so I added automatic retries to make sure we never miss a real signal.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4639,6 +4645,6 @@
         "category": "activist_13d_filing_long"
       }
     ],
-    "handoff": "\"Session 2026-06-11 (Opus): RE-INVESTIGATED the S&P 500 inclusion premium after last session downgraded it on the MRVL/FLEX 0/2 loss. Built tools/sp500_preannounce_runup.py and ran a clean pre-announce vs post-announce backtest on the 29-event historical dataset (announcement dates, abnormal vs SPY). RESULT: the \\\"premium migrated to pre-announce / post-announce is a fade\\\" theory is REJECTED. r(pre5,post5)=+0.232 (positive). Post-announce 5d abnormal still +7-9% avg (25/29 positive), NO tempora"
+    "handoff": "\"Session 2026-06-11 (Opus): Ran all 4 daily scanners for pending validated hypotheses. Discovered 2 of 4 (cybersecurity 8-K, activist 13D) were hitting transient EFTS 500s and SILENTLY returning 0 events \\u2014 a missed-trigger risk. Built tools/edgar_efts.py (retry+backoff, raises EFTSFetchError vs masquerading as zero hits) and wired both scanners; Starboard fetch failures now raise. Re-ran: all scanners clean, genuinely 0 live triggers today. daily_scanner.py inherits fix via subprocess. No t"
   }
 }
