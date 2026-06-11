@@ -254,15 +254,15 @@
     },
     {
       "date": "2026-06-11",
-      "equity": 100333.89,
+      "equity": 100479.33,
       "cash": 95888.36,
       "position_count": 1
     }
   ],
   "current": {
-    "equity": 100333.89,
+    "equity": 100479.33,
     "cash": 95888.36,
-    "buying_power": 396000.92
+    "buying_power": 396408.16
   },
   "performance": {
     "total_trades": 10,
@@ -273,12 +273,12 @@
     "avg_loss_pct": -1.93,
     "direction_accuracy": "4/10",
     "research_only_completions": 2,
-    "total_return_pct": 0.33,
-    "max_drawdown_pct": 1.05,
-    "sharpe_estimate": 0.84
+    "total_return_pct": 0.48,
+    "max_drawdown_pct": 0.98,
+    "sharpe_estimate": 1.2
   },
   "risk": {
-    "drawdown_pct": 1.2,
+    "drawdown_pct": 1.0,
     "drawdown_limit_pct": 30.0,
     "safe_to_trade": true,
     "max_position_pct": 5.0,

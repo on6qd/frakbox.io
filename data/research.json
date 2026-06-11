@@ -1614,10 +1614,14 @@
       {
         "name": "sp500_inclusion_premium_migrated_to_preannounce_fade",
         "reason": "REJECTED: theory that S&P 500 inclusion premium migrated to the pre-announce window making post-announce entry a fade. Backtest n=29 additions 2020-2026: Pearson r(pre-announce 5d abnormal, post-announce 5d abnormal)=+0.232 (POSITIVE). Post-announce 5d abnormal remains +7-9% avg (25/29 positive); pre-2023 mean +7.10% vs 2023+ +8.70% = NO decay. Q2-2026 MRVL/FLEX 0/2 was NOT structural decay. MRVL: extreme +31% pre-announce run-up (out-of-distribution, ~3x hist max ~+11%). FLEX (+3.3% pre5, normal) = residual variance. Use >+20% pre-announce-runup outlier guardrail, not a fade thesis. Do not re-test premium-migration. See sp500_index_addition.preannounce_test_2026_06_11."
+      },
+      {
+        "name": "coin_vix_regime_conditional_returns",
+        "reason": "DEAD_END_LOOKAHEAD_ARTIFACT (scan hit 11073acb, COIN VIX regime, engine p=0.0008 'OOS-validated'). Root cause: regime engine classifies each day by SAME-DAY (contemporaneous) VIX level (data_tasks.py ~L1027, no .shift). VIX and same-day equity returns are mechanically negatively correlated (VIX spikes ON down days), so high-VIX days ARE down days by construction. Reproduced engine numbers with contemporaneous VIX (low +0.78%/d, high -0.68%/d, p=0.0001). With a TRADEABLE 1-day-lagged VIX tercile the effect VANISHES (Kruskal p=0.31, high-VIX flips to +0.27%/d). SPY-adjusted ABNORMAL COIN returns are also insignificant by regime (p=0.47, low-vs-high t p=0.81) \u2014 the raw effect is amplified market beta (COIN beta=2.65), not COIN alpha. SPY shows the same raw sign pattern. CRITICAL: OOS sign-preservation does NOT protect against this \u2014 the contemporaneous VIX<->return correlation exists in every period, so spurious regime effects 'validate' OOS automatically. NOT TRADEABLE. Member of risk-on/risk-off audited family + look-ahead bias."
       }
     ],
     "signal_count": 54,
-    "dead_end_count": 323,
+    "dead_end_count": 324,
     "literature_count": 25
   },
   "live_signals": [
@@ -1770,13 +1774,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 11395189,
+    "sessions_today": 5,
+    "tokens_today": 15083038,
     "sessions_by_day": [
       {
         "date": "2026-06-11",
-        "sessions": 4,
-        "tokens": 11395189
+        "sessions": 5,
+        "tokens": 15083038
       },
       {
         "date": "2026-06-10",
@@ -4537,6 +4541,12 @@
       "investigated": "Ran the 4 daily EDGAR scanners for pending validated hypotheses (SEO bought-deal short, NT 10-K late-filing short, Starboard 13D long, cybersecurity 8-K short) to catch any live trigger.",
       "findings": "Checked for new trading signals today and found none. While doing so, I discovered our automated filing scanners could silently fail when the SEC website hiccuped, making a temporary outage look like a quiet day \u2014 so I added automatic retries to make sure we never miss a real signal.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-11",
+      "investigated": "The one pending scan hit: a COIN/VIX 'regime' signal claiming Coinbase returns are strongly conditional on the volatility regime (calm vs stressed markets), reported as out-of-sample validated.",
+      "findings": "We found that a promising-looking 'volatility regime' trading signal for Coinbase was actually a statistical mirage: it depended on knowing the day's volatility before the day was over. Once we tested it the way you could actually trade it, the edge vanished. We fixed our research engine so this kind of look-ahead mistake gets caught automatically.",
+      "tag": "exploration"
     }
   ],
   "pipeline": {
@@ -4620,11 +4630,6 @@
     "pending_triggers": [],
     "research_queue": [
       {
-        "question": "[SCAN HIT] COIN regime test: VIX sensitivity varies significantly by regime. p=0.000753, effect_size=1.725. Low VIX regime: +0.987%/day, High VIX regi",
-        "priority": 7,
-        "category": "scan_hit"
-      },
-      {
         "question": "Forward stock split (>=2x, largecap) short signal \u2014 OOS accumulation needed. Preliminary: -2.34% 10d p=0.012 pooled 2019-2024 (n=33); IS p=0.155 at 10",
         "priority": 3,
         "category": "forward_stock_split_largecap_short"
@@ -4643,8 +4648,13 @@
         "question": "Run activist_13d_scanner.py --days 7 --evaluate weekly. Accumulate OOS observations. When Starboard (tier 1) files initial SC 13D for a large-cap targ",
         "priority": 2,
         "category": "activist_13d_filing_long"
+      },
+      {
+        "question": "MONITOR: S&P 500 Q2 2026 rebalance announcement expected June 5, 2026 (first Friday of June). Action: (1) On or before June 5, run tools/sp500_change_",
+        "priority": 1,
+        "category": "sp500_index_addition"
       }
     ],
-    "handoff": "\"Session 2026-06-11 (Opus): Ran all 4 daily scanners for pending validated hypotheses. Discovered 2 of 4 (cybersecurity 8-K, activist 13D) were hitting transient EFTS 500s and SILENTLY returning 0 events \\u2014 a missed-trigger risk. Built tools/edgar_efts.py (retry+backoff, raises EFTSFetchError vs masquerading as zero hits) and wired both scanners; Starboard fetch failures now raise. Re-ran: all scanners clean, genuinely 0 live triggers today. daily_scanner.py inherits fix via subprocess. No t"
+    "handoff": "\"Session 2026-06-11 (Opus): Triaged the only pending scan hit \\u2014 priority-7 COIN/^VIX regime (11073acb), which claimed 'OOS-validated' (engine p=0.0008, low +0.99%/d vs high -0.74%/d). DISPROVED and closed as a DEAD END (look-ahead artifact). Root cause is an ENGINE DEFECT: the regime branch classified each day by that SAME-DAY (contemporaneous) factor level. VIX spikes ON down days, so high-VIX days ARE down days by construction. OOS sign-preservation cannot catch it (the contemporaneous co"
   }
 }
