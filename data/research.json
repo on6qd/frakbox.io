@@ -1808,13 +1808,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 8,
-    "tokens_today": 28690712,
+    "sessions_today": 9,
+    "tokens_today": 29644879,
     "sessions_by_day": [
       {
         "date": "2026-06-12",
-        "sessions": 8,
-        "tokens": 28690712
+        "sessions": 9,
+        "tokens": 29644879
       },
       {
         "date": "2026-06-11",
@@ -4663,6 +4663,12 @@
       "date": "2026-06-12",
       "investigated": "Built a Treasury auction-date feed from TreasuryDirect and tested the Lou-Yan-Zhang (2013) auction concession cycle on TLT (128 long-end 10yr/20yr/30yr auctions, 2011-2026), the top academically-grounded untested frontier angle.",
       "findings": "We built a feed of U.S. Treasury auction dates and tested the classic idea that long-term bond prices dip before big auctions and bounce after. The dip was too weak and inconsistent to trade, and the post-auction bounce did not reliably show up \u2014 so this is a dead end.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-12",
+      "investigated": "Threshold/lead-lag/cointegration/calendar/regime/exposure screen: 63 tests",
+      "findings": "Found 12 raw p<0.05 threshold hits but ALL fail canonical_passes pooled validation. 5 lead-lag tests all scan_artifact_suppressed. 3/5 cointegration pairs known dead ends. 4/4 calendar tests not signi",
       "tag": "dead_end"
     }
   ],
