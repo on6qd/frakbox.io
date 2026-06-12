@@ -1796,13 +1796,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 3,
-    "tokens_today": 11213621,
+    "sessions_today": 4,
+    "tokens_today": 14522302,
     "sessions_by_day": [
       {
         "date": "2026-06-12",
-        "sessions": 3,
-        "tokens": 11213621
+        "sessions": 4,
+        "tokens": 14522302
       },
       {
         "date": "2026-06-11",
