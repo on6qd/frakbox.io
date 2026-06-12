@@ -1644,10 +1644,18 @@
       {
         "name": "poison_pill_rights_plan_adoption_long_2026_06_12",
         "reason": "Tested shareholder rights plan (\"poison pill\") adoption as a tradeable event for large-caps (>$2B, intersected with S&P500 universe). Pre-registered primary = entrenchment-SHORT (Malatesta&Walkling 1988); alternative = in-play-LONG. EFTS full-text 8-K scan 2015-2024 (phrases: shareholder/stockholder rights plan, tax benefit preservation plan; require item 3.03/1.01/8.01; first filing per ticker), intersected with current S&P500 = 77 events (COVID cluster 2020-02..05 excluded).\n\nSIGN FLIPPED to LONG, but NOT tradeable. With same-day CLOSE entry the signal looked strong: 5d +2.07pct, 62pct pos, p=0.0003, passes_MT=True. But that is LOOKAHEAD on after-hours 8-K filings. With realistic next-day-OPEN entry it HALVES and fails:\n - Full n=77: 5d +1.24pct, p=0.0136, pos 53.2pct, passes_MT=FALSE, median only +0.40pct (mean is outlier-driven).\n - Discovery <=2021 n=54: 5d +0.98pct, p=0.106 NOT SIGNIFICANT, pos 53.7pct.\n - Validation >=2022 n=23: 5d +1.86pct, p=0.044 but pos only 52.2pct.\nFails locked criteria (|5d|>1.5pct, p<0.05, passes_MT, OOS direction>55pct): every gate fails with open entry.\n\nCompounding flaws: (1) event set CONTAMINATED with spinoff rights plans (PYPL ex-eBay, KVUE ex-JNJ, GXO ex-XPO, HPE/HPQ split, GE Vernova) that pop for spinoff reasons not pill reasons; full-text search cannot isolate true defensive adoptions. (2) SURVIVORSHIP bias (current S&P500 only) biases toward winners, yet still null. (3) True large-cap defensive pill adoptions are rare (~handful/yr); poison pills are overwhelmingly a micro/small-cap phenomenon (1412 unique filers, mostly micro-cap). DEAD END. Result ids: T-aff633ae(close), T-ee7d8584(open full), T-951185c6(disc), T-3b8e6626(val)."
+      },
+      {
+        "name": "earnings_announcement_premium_largecap_2026_06_12",
+        "reason": "Frazzini & Lamont (2007) earnings announcement premium tested on 30 diversified large-caps, 786 quarterly earnings events 2020-2026. Abnormal return = stock - SPY over announcement window [announce-1 close -> announce+1 close]; AMC releases mapped to next session, BMO to same session (yfinance get_earnings_dates timestamp hour).\nLOCKED criteria: discovery mean>+0.3% p<0.05, OOS same-sign mean>+0.2% p<0.10.\nRESULT: Discovery 2020-2022 mean=-0.343% p=0.256 (NEGATIVE, insignificant). OOS 2023-2026 mean=+0.263% p=0.420 (positive but driven entirely by 2023 +1.01%; 2024 +0.19%, 2025 -0.26%, 2026 -0.07%). Pooled mean=-0.021% p=0.93. %positive ~49% throughout. announce-day-only window same story (pooled +0.08% p=0.70).\nCONCLUSION: No earnings-announcement premium in liquid large-caps. Sign flips between sub-periods, no significance, fails every locked criterion. Consistent with the premium being concentrated in small-caps/pre-2000 and arbitraged away in large-caps. Survivorship bias acknowledged (current large-cap universe) and would BIAS TOWARD finding a premium -> null is robust. DEAD END. Tool: tools/earnings_premium.py."
+      },
+      {
+        "name": "treasury_auction_cycle_tlt_2026_06_12",
+        "reason": "Lou-Yan-Zhang (2013) auction concession tested on TLT using TreasuryDirect 10yr/30yr/20yr auction dates (128 auctions 2011-2026). Pre-auction [-3,-1] window has predicted negative sign but FAILS significance in both discovery 2010-2019 (diff -0.080%/day, p=0.38) and OOS 2020-2026 (diff -0.136%/day, p=0.08); significant only via full-sample pooling (p=0.033) = pooling artifact. Post-auction [+1,+3] recovery leg (the tradeable half) is WRONG sign in discovery (-0.090%) and insignificant OOS \u2014 round-trip absent. Effect ~0.1%/day below TLT round-trip cost. Nuance: OOS pre-auction weakness (-0.39% cum 3d) stronger than discovery, consistent with post-2020 issuance/QT regime, but p=0.08 + no recovery = not tradeable. Auction-date feed now obtainable via tools/treasury_auction_cycle.py for future use."
       }
     ],
     "signal_count": 56,
-    "dead_end_count": 328,
+    "dead_end_count": 330,
     "literature_count": 25
   },
   "live_signals": [
@@ -1800,13 +1808,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 6,
-    "tokens_today": 24817306,
+    "sessions_today": 8,
+    "tokens_today": 28690712,
     "sessions_by_day": [
       {
         "date": "2026-06-12",
-        "sessions": 6,
-        "tokens": 24817306
+        "sessions": 8,
+        "tokens": 28690712
       },
       {
         "date": "2026-06-11",
@@ -4644,6 +4652,18 @@
       "investigated": "58 statistical tests across 8 scan themes: factor exposure (11 sectors \u00d7 8 macro drivers), lead-lag (commodities leading sectors), thresholds (VIX, commodity levels), cointegration (mega-cap/rival pairs), calendar anomalies, regime shifts, structural breaks at crisis dates, alternative assets (BTC, FX, bonds)",
       "findings": "Ran 58 rapid statistical tests across sectors, commodities, FX, crypto, and bonds. Zero tradeable signals \u2014 all significant results either failed OOS validation or were auto-filtered as contemporaneous-only exposures. System filtering working as designed.",
       "tag": "validation"
+    },
+    {
+      "date": "2026-06-12",
+      "investigated": "Tested the Frazzini-Lamont (2007) earnings announcement premium on 30 large-caps (786 quarterly earnings events, 2020-2026). Built tools/earnings_premium.py using yfinance get_earnings_dates, which cheaply yields ~24 quarters of history per ticker and encodes AMC-vs-BMO timing in the timestamp hour. Measured SPY-benchmarked abnormal return across the announcement window.",
+      "findings": "We tested whether large US stocks reliably rise around their quarterly earnings dates (a known textbook pattern). They do not \u2014 any historical edge has vanished in big, heavily-traded stocks, so we filed it as a dead end.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-12",
+      "investigated": "Built a Treasury auction-date feed from TreasuryDirect and tested the Lou-Yan-Zhang (2013) auction concession cycle on TLT (128 long-end 10yr/20yr/30yr auctions, 2011-2026), the top academically-grounded untested frontier angle.",
+      "findings": "We built a feed of U.S. Treasury auction dates and tested the classic idea that long-term bond prices dip before big auctions and bounce after. The dip was too weak and inconsistent to trade, and the post-auction bounce did not reliably show up \u2014 so this is a dead end.",
+      "tag": "dead_end"
     }
   ],
   "pipeline": {
@@ -4752,6 +4772,6 @@
         "category": "seo_bought_deal_short"
       }
     ],
-    "handoff": "\"Session 06-12 (Opus, investigation): Tested a genuinely novel event -- poison pill / shareholder-rights-plan adoption -- the first fresh event family in several sessions. Result: DEAD END but instructive. Entrenchment-SHORT disproven; signal flips LONG but the strong close-entry result (+2.07pct 5d, p=0.0003, passes_MT) was SAME-DAY LOOKAHEAD on after-hours 8-Ks. With next-day-open entry it halves to +1.24pct, p=0.014, passes_MT=False, ~53pct direction (outlier-driven, median +0.4pct), discover"
+    "handoff": "\"Session 06-12 (Opus investigation): Pursued the standing novel-angle frontier. Built a TreasuryDirect auction-date feed (tools/treasury_auction_cycle.py, fetches 10yr/20yr/30yr long-end auctions) and tested the Lou-Yan-Zhang (2013) auction concession cycle on TLT. RESULT: DEAD END. Pre-auction [-3,-1] window has correct negative sign but is insignificant in both discovery (p=0.38) and OOS (p=0.08), significant only via pooling. Post-auction recovery leg is wrong-signed in discovery, so no trade"
   }
 }
