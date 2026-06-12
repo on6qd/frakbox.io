@@ -1640,10 +1640,14 @@
       {
         "name": "structural_break_macro_sector_scan_hit",
         "reason": "Structural-break scan hits on contemporaneous macro->sector regressions are NOT tradeable by construction. A Chow/structural break detects that a CONTEMPORANEOUS beta changed magnitude at a date; that beta is priced in real time, so the break is a risk-model fact, not a forward signal. Of 23 P8 structural-break scan hits, 17 sat on the COVID crash (2020-03-15) and 6 on the 2022 Fed-hike/Russia date (2022-03-16) \u2014 dates where every macro->sector beta breaks by construction. Conversion test: the cleanest pair that even passed a Granger lead-lag xcorr screen (FRED:DGS10->XLP, OOS-significant, no contemporaneous warning) had ~0 predictive correlation (-0.034..+0.021) when converted to past-yield-change -> forward abnormal XLP return, with slopes flipping sign IS vs OOS. CL=F->XLE lead-lag is a documented contemporaneous artifact (lag-0 xcorr 0.215 vs best-lag 0.008). Conclusion: Granger/structural-break significance != tradeable predictability. Guard added (structural_break_contemporaneous_not_tradeable_2026_06_11): data_tasks.py structural_break now tags every result contemporaneous-only and hard-suppresses crisis-date breaks. All 23 queue hits resolved as dead ends."
+      },
+      {
+        "name": "poison_pill_rights_plan_adoption_long_2026_06_12",
+        "reason": "Tested shareholder rights plan (\"poison pill\") adoption as a tradeable event for large-caps (>$2B, intersected with S&P500 universe). Pre-registered primary = entrenchment-SHORT (Malatesta&Walkling 1988); alternative = in-play-LONG. EFTS full-text 8-K scan 2015-2024 (phrases: shareholder/stockholder rights plan, tax benefit preservation plan; require item 3.03/1.01/8.01; first filing per ticker), intersected with current S&P500 = 77 events (COVID cluster 2020-02..05 excluded).\n\nSIGN FLIPPED to LONG, but NOT tradeable. With same-day CLOSE entry the signal looked strong: 5d +2.07pct, 62pct pos, p=0.0003, passes_MT=True. But that is LOOKAHEAD on after-hours 8-K filings. With realistic next-day-OPEN entry it HALVES and fails:\n - Full n=77: 5d +1.24pct, p=0.0136, pos 53.2pct, passes_MT=FALSE, median only +0.40pct (mean is outlier-driven).\n - Discovery <=2021 n=54: 5d +0.98pct, p=0.106 NOT SIGNIFICANT, pos 53.7pct.\n - Validation >=2022 n=23: 5d +1.86pct, p=0.044 but pos only 52.2pct.\nFails locked criteria (|5d|>1.5pct, p<0.05, passes_MT, OOS direction>55pct): every gate fails with open entry.\n\nCompounding flaws: (1) event set CONTAMINATED with spinoff rights plans (PYPL ex-eBay, KVUE ex-JNJ, GXO ex-XPO, HPE/HPQ split, GE Vernova) that pop for spinoff reasons not pill reasons; full-text search cannot isolate true defensive adoptions. (2) SURVIVORSHIP bias (current S&P500 only) biases toward winners, yet still null. (3) True large-cap defensive pill adoptions are rare (~handful/yr); poison pills are overwhelmingly a micro/small-cap phenomenon (1412 unique filers, mostly micro-cap). DEAD END. Result ids: T-aff633ae(close), T-ee7d8584(open full), T-951185c6(disc), T-3b8e6626(val)."
       }
     ],
     "signal_count": 56,
-    "dead_end_count": 327,
+    "dead_end_count": 328,
     "literature_count": 25
   },
   "live_signals": [
@@ -1796,13 +1800,13 @@
     "over_limit": false
   },
   "activity": {
-    "sessions_today": 4,
-    "tokens_today": 14522302,
+    "sessions_today": 6,
+    "tokens_today": 24817306,
     "sessions_by_day": [
       {
         "date": "2026-06-12",
-        "sessions": 4,
-        "tokens": 14522302
+        "sessions": 6,
+        "tokens": 24817306
       },
       {
         "date": "2026-06-11",
@@ -4628,6 +4632,18 @@
       "investigated": "Maintenance sweep with no scan hits and no live triggers. Ran all four daily validated-signal scanners (NT 10-K, cybersecurity 8-K Item 1.05, activist 13D, insider clusters) and refreshed the out-of-sample tracker for the two open S&P-500-addition observations (MRVL, FLEX).",
       "findings": "A quiet maintenance day: none of our tracked trading signals flagged anything new. The one bright spot was confirming that our strongest signal \u2014 stocks being added to the S&P 500 \u2014 is actually performing well once we measure it cleanly; the recent paper losses came from a stop-loss execution glitch we have since fixed, not the idea itself.",
       "tag": "exploration"
+    },
+    {
+      "date": "2026-06-12",
+      "investigated": "Tested a genuinely novel event family per the standing request for fresh angles: shareholder rights plan (poison pill) adoptions as a large-cap trade. Scanned EDGAR 8-K full text 2015-2024, intersected with the S&P 500 to 77 large-cap events, pre-registered an entrenchment-SHORT primary, and ran a temporal out-of-sample split.",
+      "findings": "We tested whether companies adopting a takeover defense (a poison pill) make a good trade. They do not: an apparently strong result turned out to be a timing illusion that vanished once we entered at a realistic price, so we filed it as a dead end and tightened our testing rules.",
+      "tag": "dead_end"
+    },
+    {
+      "date": "2026-06-12",
+      "investigated": "58 statistical tests across 8 scan themes: factor exposure (11 sectors \u00d7 8 macro drivers), lead-lag (commodities leading sectors), thresholds (VIX, commodity levels), cointegration (mega-cap/rival pairs), calendar anomalies, regime shifts, structural breaks at crisis dates, alternative assets (BTC, FX, bonds)",
+      "findings": "Ran 58 rapid statistical tests across sectors, commodities, FX, crypto, and bonds. Zero tradeable signals \u2014 all significant results either failed OOS validation or were auto-filtered as contemporaneous-only exposures. System filtering working as designed.",
+      "tag": "validation"
     }
   ],
   "pipeline": {
@@ -4736,6 +4752,6 @@
         "category": "seo_bought_deal_short"
       }
     ],
-    "handoff": "\"Session 06-12 (Opus, light maintenance): No scan hits, no GO candidates anywhere. Ran all 4 daily validated-signal scanners + insider cluster scan \\u2014 ALL CLEAN. Refreshed OOS tracker: the S&P-500-addition signal is recovering close-to-close (MRVL +6.51pct abnormal day 4), corroborating the 06-12 execution-bug post-mortem (losses were intraday stop whipsaw, now fixed with 15pct wide stop). Logged friction: 7-day insider EFTS scan times out (use 3-day). No new investigation launched \\u2014 no"
+    "handoff": "\"Session 06-12 (Opus, investigation): Tested a genuinely novel event -- poison pill / shareholder-rights-plan adoption -- the first fresh event family in several sessions. Result: DEAD END but instructive. Entrenchment-SHORT disproven; signal flips LONG but the strong close-entry result (+2.07pct 5d, p=0.0003, passes_MT) was SAME-DAY LOOKAHEAD on after-hours 8-Ks. With next-day-open entry it halves to +1.24pct, p=0.014, passes_MT=False, ~53pct direction (outlier-driven, median +0.4pct), discover"
   }
 }
